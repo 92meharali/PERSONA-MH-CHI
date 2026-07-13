@@ -6,18 +6,18 @@
 # Python cache
 __pycache__/
 *.pyc
+*.pyo
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
-# PERSONA annotation pipeline logs / temp files
+# Regenerable annotation intermediates (rebuild via persona_annotation)
+annotations/
+annotations_scored/
 annotations/*.log
-annotations/*.tmp
 annotations_scored/*.log
-annotations_scored/*.tmp
 annotations_csv/*.log
-annotations_csv/*.tmp
-persona_annotation/**/__pycache__/
+*.tmp
 
 # OS files
 .DS_Store
