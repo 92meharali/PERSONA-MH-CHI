@@ -1,0 +1,24 @@
+{
+  "prompt_id": "questionID_692",
+  "model": "glm",
+  "response": "It sounds incredibly exhausting to repeatedly face accusations when you're doing your best to rebuild trust. Your feelings of fatigue are completely valid — trust takes time to repair, but it also requires both partners to actively work toward healing, not just one person constantly defending themselves.\n\nConsider having an open, calm conversation with your husband about how these recurring accusations are affecting you and the marriage. Couples counseling could provide a safe space to address the root of his mistrust and develop healthier communication patterns together. You deserve to feel believed and respected in your relationship.",
+  "humt_score": 0.0777077579498293,
+  "persona": {
+    "Empathy": {
+      "score": null,
+      "reason": ""
+    },
+    "DeceptionRisk": {
+      "score": null,
+      "reason": ""
+    },
+    "ContextualFit": {
+      "score": null,
+      "reason": ""
+    },
+    "OverallAppropriateness": {
+      "score": null,
+      "reason": ""
+    }
+  }
+}
