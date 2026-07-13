@@ -13,6 +13,8 @@ __pycache__/
 # PERSONA annotation pipeline logs / temp files
 annotations/*.log
 annotations/*.tmp
+annotations_scored/*.log
+annotations_scored/*.tmp
 persona_annotation/**/__pycache__/
 
 # OS files
