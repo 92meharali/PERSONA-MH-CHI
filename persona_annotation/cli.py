@@ -14,54 +14,58 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="persona_annotation",
         description=(
-            "Build blank PERSONA annotation JSON scaffolds from existing "
-            "model responses and HuMT scores. Does not modify source data."
+            "PERSONA annotation tools: scaffold blank JSON and/or apply the "
+            "rubric scorer. Never modifies upstream response/HuMT CSVs."
         ),
     )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=None,
-        help="Path to config YAML (default: persona_annotation/config.yaml).",
+    sub = parser.add_subparsers(dest="command")
+
+    scaffold = sub.add_parser(
+        "scaffold",
+        help="Build blank annotation JSON from responses + HuMT scores.",
     )
-    parser.add_argument(
-        "--batch-size",
-        type=int,
-        default=None,
-        help="Override processing.batch_size from config.",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=None,
-        help="Override paths.output_dir from config.",
-    )
-    parser.add_argument(
-        "--no-resume",
-        action="store_true",
-        help="Disable resume flag in config (existing files still skipped unless --overwrite).",
-    )
-    parser.add_argument(
+    scaffold.add_argument("--config", type=Path, default=None)
+    scaffold.add_argument("--batch-size", type=int, default=None)
+    scaffold.add_argument("--output-dir", type=Path, default=None)
+    scaffold.add_argument("--no-resume", action="store_true")
+    scaffold.add_argument(
         "--overwrite",
         action="store_true",
-        help="Allow replacing existing annotation JSON (not recommended).",
+        help="Allow replacing existing scaffold JSON (not recommended).",
     )
+
+    score = sub.add_parser(
+        "score",
+        help="Fill E/D/F/OA rubric scores into a new output directory.",
+    )
+    score.add_argument("--config", type=Path, default=None)
+    score.add_argument("--input-dir", type=Path, default=None)
+    score.add_argument("--output-dir", type=Path, default=None)
+    score.add_argument("--batch-size", type=int, default=50)
+    score.add_argument("--limit", type=int, default=None)
+    score.add_argument("--no-resume", action="store_true")
+
+    # Default command = scaffold for backward compatibility when no subcommand.
+    parser.add_argument("--config", type=Path, default=None)
+    parser.add_argument("--batch-size", type=int, default=None)
+    parser.add_argument("--output-dir", type=Path, default=None)
+    parser.add_argument("--no-resume", action="store_true")
+    parser.add_argument("--overwrite", action="store_true")
     return parser
 
 
-def main(argv: list[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
-    cfg = load_config(args.config)
-
-    # Apply CLI overrides via object reconstruction (frozen dataclasses).
+def _run_scaffold(args: argparse.Namespace) -> int:
     from dataclasses import replace
 
+    from .pipeline import run_pipeline
+
+    cfg = load_config(args.config)
     processing = cfg.processing
     if args.batch_size is not None:
         processing = replace(processing, batch_size=args.batch_size)
     if args.no_resume:
         processing = replace(processing, resume=False)
-    if args.overwrite:
+    if getattr(args, "overwrite", False):
         processing = replace(processing, overwrite=True)
 
     output_dir = cfg.output_dir
@@ -79,13 +83,38 @@ def main(argv: list[str] | None = None) -> int:
         manifest_path=manifest_path,
         log_path=log_path,
     )
-
     result = run_pipeline(cfg)
     print(
         f"PERSONA scaffolds ready: {result.written} written, "
         f"{result.skipped} skipped, {result.total_records} total → {result.output_dir}"
     )
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    if args.command == "score":
+        from .score_pipeline import main as score_main
+
+        score_argv: list[str] = []
+        if args.config:
+            score_argv.extend(["--config", str(args.config)])
+        if args.input_dir:
+            score_argv.extend(["--input-dir", str(args.input_dir)])
+        if args.output_dir:
+            score_argv.extend(["--output-dir", str(args.output_dir)])
+        if args.batch_size:
+            score_argv.extend(["--batch-size", str(args.batch_size)])
+        if args.limit is not None:
+            score_argv.extend(["--limit", str(args.limit)])
+        if args.no_resume:
+            score_argv.append("--no-resume")
+        return score_main(score_argv)
+
+    # scaffold (explicit or default)
+    return _run_scaffold(args)
 
 
 if __name__ == "__main__":

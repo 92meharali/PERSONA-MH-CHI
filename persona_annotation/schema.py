@@ -1,8 +1,4 @@
-"""PERSONA annotation JSON schema and helpers.
-
-Scores are intentionally left as ``null`` / empty strings so downstream
-human or automated annotators can fill them later without re-scaffolding.
-"""
+"""PERSONA annotation schema and helpers."""
 
 from __future__ import annotations
 
@@ -10,10 +6,11 @@ from typing import Any, Optional, TypedDict
 
 
 class PersonaDimension(TypedDict):
-    """Single PERSONA dimension: Likert score + free-text rationale."""
+    """Single PERSONA dimension with score, rationale, and evidence quotes."""
 
-    score: Optional[float]
+    score: Optional[int]
     reason: str
+    evidence: list[str]
 
 
 class PersonaScores(TypedDict):
@@ -38,7 +35,7 @@ class AnnotationRecord(TypedDict):
 def empty_dimension() -> PersonaDimension:
     """Return an unscored PERSONA dimension scaffold."""
 
-    return {"score": None, "reason": ""}
+    return {"score": None, "reason": "", "evidence": []}
 
 
 def empty_persona() -> PersonaScores:
@@ -58,27 +55,24 @@ def build_annotation(
     model: str,
     response: str,
     humt_score: Optional[float],
+    persona: Optional[PersonaScores] = None,
 ) -> AnnotationRecord:
-    """Build a complete annotation object with blank PERSONA scores.
-
-    Parameters
-    ----------
-    prompt_id:
-        Stable identifier for the source prompt (typically ``questionID``).
-    model:
-        Canonical model name (e.g. ``glm``, ``gemini``, ``claude_opus_4_8``).
-    response:
-        Model response text.
-    humt_score:
-        Existing HuMT human-likeness score, or ``None`` if unavailable.
-    """
+    """Build an annotation object (blank or pre-filled PERSONA block)."""
 
     return {
         "prompt_id": prompt_id,
         "model": model,
         "response": response,
         "humt_score": humt_score,
-        "persona": empty_persona(),
+        "persona": persona if persona is not None else empty_persona(),
+    }
+
+
+def dimension_to_dict(dim: PersonaDimension) -> dict[str, Any]:
+    return {
+        "score": dim["score"],
+        "reason": dim["reason"],
+        "evidence": list(dim["evidence"]),
     }
 
 
@@ -91,11 +85,17 @@ def annotation_to_dict(record: AnnotationRecord) -> dict[str, Any]:
         "response": record["response"],
         "humt_score": record["humt_score"],
         "persona": {
-            "Empathy": dict(record["persona"]["Empathy"]),
-            "DeceptionRisk": dict(record["persona"]["DeceptionRisk"]),
-            "ContextualFit": dict(record["persona"]["ContextualFit"]),
-            "OverallAppropriateness": dict(
+            "Empathy": dimension_to_dict(record["persona"]["Empathy"]),
+            "DeceptionRisk": dimension_to_dict(record["persona"]["DeceptionRisk"]),
+            "ContextualFit": dimension_to_dict(record["persona"]["ContextualFit"]),
+            "OverallAppropriateness": dimension_to_dict(
                 record["persona"]["OverallAppropriateness"]
             ),
         },
     }
+
+
+def validate_evidence_quotes(response: str, evidence: list[str]) -> list[str]:
+    """Keep only evidence strings that are exact substrings of ``response``."""
+
+    return [quote for quote in evidence if quote and quote in response]
