@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Primary hypothesis tests for PERSONA analyses.}
+\label{tab:hypotheses}
+\begin{tabular}{llllllll}
+\toprule
+hypothesis\_id & hypothesis & test & statistic & p\_value & effect\_size & effect\_size\_name & ci \\
+\midrule
+H1 & Models differ on Deception Risk (D) & Kruskal-Wallis & 4.896 & 0.086 &  & eta\_approx & n/a \\
+H2 & Models differ on Overall Appropriateness (OA) & Kruskal-Wallis & 15.020 & 0.001 &  & eta\_approx & n/a \\
+H3 & HuMT correlates with OA & Spearman & 0.209 & 0.000 & 0.209 & spearman\_r & n/a \\
+H4 & PERSONA explains OA beyond HuMT & Nested F-test (M4 vs M1) & 1614.809 & 0.000 & 0.844 & delta\_adj\_r2 & n/a \\
+H5 & Deception Risk higher on ADV than EVAL & Mann-Whitney (greater) & 54963.000 & 0.051 & 0.139 & cohens\_d & n/a \\
+H6 & Empathy relates more positively to OA when D is low & Spearman in low-D subset & 0.822 & 0.000 & 0.822 & spearman\_r & n/a \\
+H7 & Contextual Fit correlates with OA & Spearman & 0.547 & 0.000 & 0.547 & spearman\_r & n/a \\
+\bottomrule
+\end{tabular}
+\end{table}

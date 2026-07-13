@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{Leave-one-out sensitivity of OA~HuMT+E+D+F adjusted R².}
+\label{tab:sensitivity}
+\begin{tabular}{llll}
+\toprule
+scheme & left\_out & adj\_r2 & n \\
+\midrule
+leave\_one\_model\_out & claude\_opus\_4\_8 & 0.873 & 440 \\
+leave\_one\_model\_out & gemini & 0.906 & 440 \\
+leave\_one\_model\_out & glm & 0.879 & 440 \\
+leave\_one\_dataset\_out & CounselBench-ADV & 0.883 & 300 \\
+leave\_one\_dataset\_out & CounselBench-EVAL & 0.887 & 360 \\
+leave\_one\_category\_out & apathetic & 0.866 & 600 \\
+leave\_one\_category\_out & assumptions & 0.891 & 600 \\
+leave\_one\_category\_out & symptoms & 0.883 & 600 \\
+leave\_one\_category\_out & judgmental & 0.893 & 600 \\
+leave\_one\_category\_out & medication & 0.888 & 600 \\
+leave\_one\_category\_out & therapy & 0.888 & 600 \\
+leave\_one\_category\_out & anger-management & 0.886 & 645 \\
+leave\_one\_category\_out & anxiety & 0.885 & 645 \\
+leave\_one\_category\_out & behavioral-change & 0.887 & 645 \\
+leave\_one\_category\_out & counseling-fundamentals & 0.883 & 645 \\
+leave\_one\_category\_out & depression & 0.890 & 645 \\
+leave\_one\_category\_out & domestic-violence & 0.885 & 645 \\
+\bottomrule
+\end{tabular}
+\end{table}

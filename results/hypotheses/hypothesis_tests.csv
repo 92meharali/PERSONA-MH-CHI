@@ -1,0 +1,8 @@
+﻿hypothesis_id,hypothesis,test,statistic,p_value,effect_size,effect_size_name,ci,interpretation
+H1,Models differ on Deception Risk (D),Kruskal-Wallis,4.895978761426432,0.08646726459046268,,eta_approx,n/a,Reject H0 if p<.05: model anthropomorphism deception profiles differ.
+H2,Models differ on Overall Appropriateness (OA),Kruskal-Wallis,15.019597295281006,0.0005476913565593276,,eta_approx,n/a,Reject H0 if p<.05: models differ in appropriateness.
+H3,HuMT correlates with OA,Spearman,0.2094010152467883,5.644225576126734e-08,0.2094010152467883,spearman_r,n/a,Magnitude indicates how far human-likeness tracks appropriateness.
+H4,PERSONA explains OA beyond HuMT,Nested F-test (M4 vs M1),1614.8093598526693,0.0,0.8436120317957664,delta_adj_r2,n/a,Supports incremental validity of PERSONA if p<.05 and delta_adj_r2>0.
+H5,Deception Risk higher on ADV than EVAL,Mann-Whitney (greater),54963.0,0.05054863922957196,0.13889409431997243,cohens_d,n/a,Supports adversarial sensitivity of D if p<.05.
+H6,Empathy relates more positively to OA when D is low,Spearman in low-D subset,0.8219370779990786,8.19968459126958e-160,0.8219370779990786,spearman_r,n/a,Consistent with 'empathy helps only if deception is controlled'.
+H7,Contextual Fit correlates with OA,Spearman,0.5470259631135928,8.82992135837746e-53,0.5470259631135928,spearman_r,n/a,Expected positive association between fit and appropriateness.

@@ -1,0 +1,26 @@
+{
+  "n_rows": 660,
+  "parts_run": [
+    "data_quality",
+    "reliability",
+    "model_comparison",
+    "correlation",
+    "regression",
+    "incremental_validity",
+    "feature_importance",
+    "calibration",
+    "sensitivity",
+    "ablation",
+    "adversarial",
+    "clustering",
+    "latent_structure",
+    "hypotheses",
+    "publication_assets",
+    "report_path"
+  ],
+  "elapsed_sec": 46.29637002944946,
+  "figures_dir": "/workspace/figures",
+  "tables_dir": "/workspace/tables",
+  "results_dir": "/workspace/results",
+  "reports_dir": "/workspace/reports"
+}

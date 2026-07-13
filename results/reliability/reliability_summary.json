@@ -1,0 +1,5 @@
+{
+  "n_annotators": 1,
+  "status": "skipped_single_annotator",
+  "note": "Current PERSONA CSVs contain a single automated pilot annotator. Krippendorff/Kappa/ICC will be computed when multi-annotator columns are present."
+}

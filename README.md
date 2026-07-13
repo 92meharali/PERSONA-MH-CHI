@@ -108,15 +108,24 @@ GEMINI_MODEL=gemini-3.1-pro-preview
 
 ---
 
-## Pipeline
+## PERSONA statistical analysis
+
+Publication-oriented analyses live in `analysis/` and write to:
 
 ```text
-Prompts (CounselBench)
-    → Model responses (notebooks → persona_mh_outputs/)
-    → HuMT scores (compute_humt_sociot_colab.py → humt_results/)
-    → PERSONA annotation (persona_annotation/)
-    → Structured CSVs (annotations_csv/)
+figures/   # matplotlib publication figures
+tables/    # LaTeX tables
+results/   # CSV + JSON intermediates
+reports/   # analysis_report.md + run summary
 ```
+
+```bash
+pip install -r analysis/requirements.txt
+python -m analysis
+```
+
+The pipeline covers data quality, (multi-rater) reliability when available, model comparison, correlations, nested regression / incremental validity over HuMT, ML feature importance (+ SHAP when available), calibration, sensitivity, ablation, adversarial dataset contrasts, clustering, latent structure, hypothesis battery, and an auto-generated report. Raw annotation/response CSVs are never modified.
+
 
 ### 1) Rebuild prompts (optional)
 

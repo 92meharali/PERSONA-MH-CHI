@@ -1,0 +1,2 @@
+﻿comparison,base_adj_r2,full_adj_r2,delta_adj_r2,base_aic,full_aic,delta_aic,interpretation
+M4 vs M1,0.04173239389850292,0.8853444256942693,0.8436120317957664,1793.0326487956452,394.70831333091405,-1398.3243354647311,PERSONA dimensions add incremental validity beyond HuMT if delta_adj_r2 > 0 and nested F/LRT are significant.
