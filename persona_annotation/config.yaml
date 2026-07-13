@@ -1,0 +1,66 @@
+# PERSONA annotation pipeline configuration.
+# All paths are relative to the repository root unless absolute.
+# Existing response and HuMT files are read-only; outputs go only to output_dir.
+
+paths:
+  repo_root: "."
+  output_dir: "annotations"
+  manifest_filename: "manifest.json"
+  log_filename: "persona_annotation.log"
+
+processing:
+  # Number of annotation records written per batch flush.
+  batch_size: 50
+  # Zero-pad width for promptNNN.json filenames (e.g. 3 -> prompt001.json).
+  filename_pad: 3
+  # Filename prefix before the numeric index.
+  filename_prefix: "prompt"
+  # If true, skip records whose output JSON already exists (resume).
+  resume: true
+  # Never overwrite existing JSON files when false (recommended).
+  overwrite: false
+
+logging:
+  level: "INFO"
+  # Console + file under output_dir when true.
+  log_to_file: true
+
+# Response CSVs paired with matching HuMT result files.
+# model is the canonical model label written into annotation JSON.
+# Files under persona_mh_outputs / humt_results are never modified.
+sources:
+  - id: eval_glm
+    set: eval
+    model: glm
+    response_file: "persona_mh_outputs/eval_glm_responses_clean_v3.csv"
+    humt_file: "humt_results/examples_glm_text_humt.csv"
+
+  - id: eval_gemini
+    set: eval
+    model: gemini
+    response_file: "persona_mh_outputs/eval_gemini_responses_clean_v1.csv"
+    humt_file: "humt_results/examples_gemini_text_humt.csv"
+
+  - id: eval_claude_opus_4_8
+    set: eval
+    model: claude_opus_4_8
+    response_file: "persona_mh_outputs/eval_claude_opus_4_8_responses_clean_v1.csv"
+    humt_file: "humt_results/examples_claude_opus_4_8_text_humt.csv"
+
+  - id: adv_glm
+    set: adv
+    model: glm
+    response_file: "persona_mh_outputs/adv_glm_responses_clean_v1.csv"
+    humt_file: "humt_results/examples_glm_adv_text_humt.csv"
+
+  - id: adv_gemini
+    set: adv
+    model: gemini
+    response_file: "persona_mh_outputs/adv_gemini_responses_clean_v1.csv"
+    humt_file: "humt_results/examples_gemini_adv_text_humt.csv"
+
+  - id: adv_claude_opus_4_8
+    set: adv
+    model: claude_opus_4_8
+    response_file: "persona_mh_outputs/adv_claude_opus_4_8_responses_clean_v1.csv"
+    humt_file: "humt_results/examples_adv_claude_opus_4_8_text_humt.csv"

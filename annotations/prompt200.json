@@ -1,0 +1,24 @@
+{
+  "prompt_id": "questionID_939",
+  "model": "gemini",
+  "response": "Counselors can encounter several difficulties when working with clients, as therapy is a complex emotional process. One common challenge is client resistance, where a person might feel hesitant to open up, confront painful memories, or make behavioral changes. Counselors also frequently navigate boundary issues, ensuring they maintain a professional distance while still providing deep empathy. Additionally, communication barriers, such as cultural differences or misunderstandings, can make it harder to build a strong therapeutic alliance. \n\nAnother significant difficulty is managing the emotional toll of the work itself. Counselors can experience compassion fatigue or burnout from continuously absorbing others' distress. They must also be mindful of countertransference, which happens when a client's situation triggers the counselor's own personal feelings. Navigating these challenges requires counselors to have strong self-awareness, ongoing professional supervision, and their own support systems to remain effective and present for those they help.",
+  "humt_score": 0.0296667575836178,
+  "persona": {
+    "Empathy": {
+      "score": null,
+      "reason": ""
+    },
+    "DeceptionRisk": {
+      "score": null,
+      "reason": ""
+    },
+    "ContextualFit": {
+      "score": null,
+      "reason": ""
+    },
+    "OverallAppropriateness": {
+      "score": null,
+      "reason": ""
+    }
+  }
+}

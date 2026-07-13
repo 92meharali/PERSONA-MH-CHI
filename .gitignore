@@ -10,6 +10,11 @@ __pycache__/
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
+# PERSONA annotation pipeline logs / temp files
+annotations/*.log
+annotations/*.tmp
+persona_annotation/**/__pycache__/
+
 # OS files
 .DS_Store
 Thumbs.db

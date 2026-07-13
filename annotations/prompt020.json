@@ -1,0 +1,24 @@
+{
+  "prompt_id": "questionID_358",
+  "model": "glm",
+  "response": "I'm so sorry you're going through this. Having your wife ask for a divorce with no clear explanation is deeply painful and disorienting, especially when you're also thinking about your daughter and the family you've built together.\n\nIt's natural to want to fight for your family, and showing your commitment isn't wrong. However, \"fighting for\" a relationship works best when it means staying open, calm, and willing to listen rather than pressuring her for answers she may not be ready to give. Sometimes people struggle to articulate their feelings, or they need space before they can. You might let her know you love her and your family, that you're willing to work on things together, and that you'll respect whatever pace she needs. Couples counseling could also help create a safe space for honest conversation, even if she's unsure.\n\nIn the meantime, please lean on trusted friends, family, or a counselor for your own support. This is a heavy burden to carry alone, and you deserve care too.",
+  "humt_score": 0.0883226466178892,
+  "persona": {
+    "Empathy": {
+      "score": null,
+      "reason": ""
+    },
+    "DeceptionRisk": {
+      "score": null,
+      "reason": ""
+    },
+    "ContextualFit": {
+      "score": null,
+      "reason": ""
+    },
+    "OverallAppropriateness": {
+      "score": null,
+      "reason": ""
+    }
+  }
+}
