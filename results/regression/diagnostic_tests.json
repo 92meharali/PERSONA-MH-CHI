@@ -1,0 +1,6 @@
+{
+  "breusch_pagan_stat": 153.81254206387393,
+  "breusch_pagan_p": 3.101724957254434e-32,
+  "shapiro_resid_stat": 0.8598854790833387,
+  "shapiro_resid_p": 1.0035526413803522e-20
+}

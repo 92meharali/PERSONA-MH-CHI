@@ -1,0 +1,26 @@
+{
+  "variables": [
+    "E",
+    "D",
+    "F"
+  ],
+  "pca_variance": [
+    {
+      "component": "PC1",
+      "explained_variance_ratio": 0.36950499345137333,
+      "explained_variance": 1.1101970971680075
+    },
+    {
+      "component": "PC2",
+      "explained_variance_ratio": 0.3354630106479826,
+      "explained_variance": 1.0079161776676837
+    },
+    {
+      "component": "PC3",
+      "explained_variance_ratio": 0.29503199590064405,
+      "explained_variance": 0.8864390772128581
+    }
+  ],
+  "appear_distinct": false,
+  "note": "With only three PERSONA rating dimensions, CFA is weakly identified; EFA/PCA are reported as exploratory evidence of separable constructs."
+}

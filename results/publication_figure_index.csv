@@ -1,0 +1,12 @@
+﻿label,path,exists
+Figure 2,/workspace/figures/data_quality/fig_score_histograms.png,True
+Figure 3,/workspace/figures/model_comparison/fig_oa_model_ranking.png,True
+Figure 4,/workspace/figures/correlation/fig_corr_spearman.png,True
+Figure 5,/workspace/figures/regression/fig_regression_coefficients.png,True
+Figure 6,/workspace/figures/feature_importance/fig_permutation_importance_rf.png,True
+Figure 7,/workspace/figures/calibration/fig_calibration_curves.png,True
+Figure 8,/workspace/figures/sensitivity/fig_sensitivity.png,True
+Figure 9,/workspace/figures/ablation/fig_ablation_adjr2.png,True
+Figure 10,/workspace/figures/model_comparison/fig_model_radar.png,True
+Figure 11,/workspace/figures/adversarial/fig_adv_deception_means.png,True
+Figure 12,/workspace/figures/clustering/fig_clusters_pca.png,True

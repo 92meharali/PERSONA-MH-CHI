@@ -1,0 +1,8 @@
+{
+  "n_models": 3,
+  "models": [
+    "claude_opus_4_8",
+    "gemini",
+    "glm"
+  ]
+}

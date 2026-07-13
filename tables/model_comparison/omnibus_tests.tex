@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Omnibus model comparisons across PERSONA metrics and HuMT.}
+\label{tab:model_omnibus}
+\begin{tabular}{llllllllllllll}
+\toprule
+metric & primary\_test & primary\_stat & primary\_p & anova\_F & anova\_p & welch\_F & welch\_p & kruskal\_H & kruskal\_p & eta\_squared & omega\_squared & normality\_ok & equal\_variance\_ok \\
+\midrule
+HuMT & ANOVA & 3.594 & 0.028 & 3.594 & 0.028 & 3.669 & 0.026 & 8.050 & 0.018 & 0.011 & 0.008 & True & True \\
+E & KruskalWallis & 46.664 & 0.000 & 23.794 & 0.000 & 24.094 & 0.000 & 46.664 & 0.000 & 0.068 & 0.065 & False & True \\
+D & KruskalWallis & 4.896 & 0.086 & 3.069 & 0.047 & 2.048 & 0.130 & 4.896 & 0.086 & 0.009 & 0.006 & False & False \\
+F & KruskalWallis & 13.395 & 0.001 & 7.092 & 0.001 & 7.230 & 0.001 & 13.395 & 0.001 & 0.021 & 0.018 & False & False \\
+OA & KruskalWallis & 15.020 & 0.001 & 5.738 & 0.003 & 5.737 & 0.003 & 15.020 & 0.001 & 0.017 & 0.014 & False & True \\
+\bottomrule
+\end{tabular}
+\end{table}
