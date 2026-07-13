@@ -15,6 +15,8 @@ annotations/*.log
 annotations/*.tmp
 annotations_scored/*.log
 annotations_scored/*.tmp
+annotations_csv/*.log
+annotations_csv/*.tmp
 persona_annotation/**/__pycache__/
 
 # OS files

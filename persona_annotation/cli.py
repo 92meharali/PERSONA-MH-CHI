@@ -7,15 +7,14 @@ import sys
 from pathlib import Path
 
 from .config import load_config
-from .pipeline import run_pipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="persona_annotation",
         description=(
-            "PERSONA annotation tools: scaffold blank JSON and/or apply the "
-            "rubric scorer. Never modifies upstream response/HuMT CSVs."
+            "PERSONA annotation tools: scaffold, score, and export CSVs. "
+            "Never modifies upstream response/HuMT CSVs."
         ),
     )
     sub = parser.add_subparsers(dest="command")
@@ -44,6 +43,19 @@ def build_parser() -> argparse.ArgumentParser:
     score.add_argument("--batch-size", type=int, default=50)
     score.add_argument("--limit", type=int, default=None)
     score.add_argument("--no-resume", action="store_true")
+
+    export_csv = sub.add_parser(
+        "export-csv",
+        help="Convert scored JSON annotations into one structured CSV per model.",
+    )
+    export_csv.add_argument("--config", type=Path, default=None)
+    export_csv.add_argument("--input-dir", type=Path, default=None)
+    export_csv.add_argument("--output-dir", type=Path, default=None)
+    export_csv.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Replace existing CSV files in the output directory.",
+    )
 
     # Default command = scaffold for backward compatibility when no subcommand.
     parser.add_argument("--config", type=Path, default=None)
@@ -112,6 +124,20 @@ def main(argv: list[str] | None = None) -> int:
         if args.no_resume:
             score_argv.append("--no-resume")
         return score_main(score_argv)
+
+    if args.command == "export-csv":
+        from .export_csv import main as export_main
+
+        export_argv: list[str] = []
+        if args.config:
+            export_argv.extend(["--config", str(args.config)])
+        if args.input_dir:
+            export_argv.extend(["--input-dir", str(args.input_dir)])
+        if args.output_dir:
+            export_argv.extend(["--output-dir", str(args.output_dir)])
+        if args.overwrite:
+            export_argv.append("--overwrite")
+        return export_main(export_argv)
 
     # scaffold (explicit or default)
     return _run_scaffold(args)
