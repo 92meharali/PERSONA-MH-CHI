@@ -4,6 +4,8 @@
 
 paths:
   repo_root: "."
+  # Canonical committed outputs are CSVs under annotations_csv/.
+  # JSON scaffolds / scored JSON are regenerable intermediates.
   output_dir: "annotations"
   manifest_filename: "manifest.json"
   log_filename: "persona_annotation.log"
