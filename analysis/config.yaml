@@ -1,5 +1,5 @@
 # PERSONA analysis pipeline configuration.
-# Raw data under annotations_csv / persona_mh_outputs / humt_results is never modified.
+# Raw response/HuMT sources are never modified. Annotation CSVs are human-aggregated finals.
 
 paths:
   repo_root: "."

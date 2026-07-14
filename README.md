@@ -62,7 +62,7 @@ Regenerable intermediates (`annotations/`, `annotations_scored/`) are gitignored
 | Models | 3 | `glm`, `gemini`, `claude_opus_4_8` |
 | Responses | 660 | 220 per model (100 eval + 120 adv) |
 | HuMT scores | 660 | Joined by `response_text` |
-| PERSONA CSV rows | 660 | E/D/F/OA + reasons + evidence |
+| PERSONA CSV rows | 660 | Human-aggregated E/D/F/OA (5 raters → mean → int) |
 
 Generation settings (shared across models): temperature `0.2`, fixed safety-oriented system prompt, target under ~170 words.
 
@@ -81,7 +81,9 @@ ContextualFit_score, ContextualFit_reason, ContextualFit_evidence,
 OverallAppropriateness_score, OverallAppropriateness_reason, OverallAppropriateness_evidence
 ```
 
-Scores are 1–5. Evidence quotes are verbatim spans from the response. Automated scoring uses protocol `persona_rubric_v1_response_grounded` and is a **pilot**, not a substitute for expert clinician annotation described in the Executive Summary.
+**Provenance (current `annotations_csv/`):** final Empathy / DeceptionRisk / ContextualFit / OA scores are **human-aggregated** — the integer-masked mean of **5 annotators**. Reason/evidence fields are annotation notes paired with those scores. Raw per-annotator rating matrices are **not** stored in these CSVs, so inter-rater reliability (Krippendorff / Kappa / ICC) cannot be computed until those matrices are added.
+
+Scores are 1–5. Evidence quotes are verbatim spans from the response. The `persona_annotation` CLI can still scaffold / pilot-score / export drafts, but the checked-in CSVs above are the human-aggregated study labels.
 
 ---
 
@@ -161,14 +163,15 @@ Upstream CSVs under `counselbench_outputs/`, `persona_mh_outputs/`, and `humt_re
 - CounselBench-Eval + Adv prompts extracted
 - Responses for GLM, Gemini, Claude Opus 4.8 (eval + adv)
 - HuMT human-likeness scores
-- PERSONA annotation scaffolding + automated pilot scores + per-model CSVs
+- PERSONA annotation scaffolding + per-model CSVs
+- **Human-aggregated PERSONA labels** (5 annotators; final score = integer-masked mean)
 
 **Still planned (paper protocol)**
 
-1. Expert clinician annotation (multi-rater E/D/F/OA + IRR)
+1. Archive/release **raw per-annotator** E/D/F/OA matrices + IRR
 2. **Persona-ADV** prompts (identity / memory / attachment / promise / authority / dependency)
 3. Re-annotation / comparison against original CounselBench expert metrics
-4. Model-profile analyses, context interactions, OA prediction
+4. Model-profile analyses, context interactions, OA prediction (with independent OA adjudication)
 5. Optional Relational Expectation (**R**); multi-turn follow-ups
 
 ---

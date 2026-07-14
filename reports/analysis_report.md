@@ -44,7 +44,7 @@ Automated statistical analysis of HuMT human-likeness and PERSONA dimensions (E,
 
 ### Annotation reliability
 
-- Status: skipped_single_annotator. Current PERSONA CSVs contain a single automated pilot annotator. Krippendorff/Kappa/ICC will be computed when multi-annotator columns are present.
+- Status: skipped_aggregated_only. Final PERSONA scores are the integer-masked mean of 5 human annotators, but raw per-annotator ratings are not stored in the analysis CSV. Krippendorff/Kappa/ICC require unaggregated rater columns.
 
 ## 2. Statistical significance and effect sizes
 
@@ -58,8 +58,9 @@ Automated statistical analysis of HuMT human-likeness and PERSONA dimensions (E,
 
 ## 4. Potential threats to validity
 
-- Current PERSONA scores are produced by an automated response-grounded pilot (`persona_rubric_v1_response_grounded`), not multi-rater clinician annotation.
-- Single-annotator limitation prevents IRR estimates (Krippendorff/Kappa/ICC).
+- Published PERSONA scores are human-aggregated (5 annotators → mean → integer mask); raw per-annotator ratings are not in the CSVs, so IRR is not yet estimable.
+- Many OA reason strings still reference Empathy/DeceptionRisk/ContextualFit components; treat nested OA~E+D+F incremental claims cautiously until OA is confirmed fully independent.
+- DeceptionRisk is heavily floor-distributed (mostly 1), limiting D discriminability.
 - PERSONA-ADV prompt set is not yet in the CSV inventory.
 - HuMT and Likert PERSONA scales have different metric properties; comparisons use standardized/robust methods where possible.
 - Cross-sectional single-turn responses underrepresent multi-turn attachment dynamics.
@@ -69,17 +70,17 @@ Automated statistical analysis of HuMT human-likeness and PERSONA dimensions (E,
 - Why OA is judged holistically rather than as a mean of E/D/F.
 - Why incremental R² over HuMT is the key claim versus raw correlations.
 - Distinguishing descriptive human-likeness (H/HuMT) from normative appropriateness.
-- Planned multi-annotator reliability once expert labels arrive.
+- Release or archive raw 5-annotator matrices to unlock IRR reporting.
 
 ## 6. Limitations
 
-- Automated labels may under-detect rare severe deception patterns.
+- Aggregated labels without per-rater spreads hide disagreement and prevent Kappa/ICC.
 - No original CounselBench clinician metrics joined yet for Exp.1-style convergence tests.
 - Clustering/EFA with few dimensions is exploratory.
 
 ## 7. Future work
 
-- Multi-rater expert annotation + IRR.
+- Publish raw multi-rater matrices + IRR (Krippendorff/Kappa/ICC).
 - Add PERSONA-ADV prompts and re-run adversarial contrasts.
 - Join CounselBench expert Quality/Empathy ratings for convergent validity.
 - Multi-turn extensions and user-study validation of Relational Expectation (R).

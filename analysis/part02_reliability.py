@@ -78,12 +78,19 @@ def run_reliability(df: pd.DataFrame, cfg: AnalysisConfig) -> dict[str, Any]:
     out_tab = cfg.tables_dir / "reliability"
 
     n_annotators = df["annotator_id"].nunique(dropna=True)
+    protocol = (
+        str(df["annotation_protocol"].dropna().iloc[0])
+        if "annotation_protocol" in df.columns and df["annotation_protocol"].notna().any()
+        else "unknown"
+    )
     summary: dict[str, Any] = {
         "n_annotators": int(n_annotators),
-        "status": "skipped_single_annotator",
+        "annotation_protocol": protocol,
+        "status": "skipped_aggregated_only",
         "note": (
-            "Current PERSONA CSVs contain a single automated pilot annotator. "
-            "Krippendorff/Kappa/ICC will be computed when multi-annotator columns are present."
+            "Final PERSONA scores are the integer-masked mean of 5 human annotators, "
+            "but raw per-annotator ratings are not stored in the analysis CSV. "
+            "Krippendorff/Kappa/ICC require unaggregated rater columns."
         ),
     }
 
@@ -111,7 +118,11 @@ def run_reliability(df: pd.DataFrame, cfg: AnalysisConfig) -> dict[str, Any]:
             label="tab:reliability",
         )
         save_json(summary, out_res / "reliability_summary.json")
-        logger.warning("Part 2 reliability skipped: only %d annotator(s).", n_annotators)
+        logger.warning(
+            "Part 2 reliability skipped: aggregated labels only (protocol=%s, unique annotator_id=%d).",
+            protocol,
+            n_annotators,
+        )
         return summary
 
     # Multi-annotator path (future-proof).
