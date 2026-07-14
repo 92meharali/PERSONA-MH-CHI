@@ -23,7 +23,8 @@ def load_annotation_frame(cfg: AnalysisConfig) -> pd.DataFrame:
     if not cfg.data_csv.exists():
         raise FileNotFoundError(f"Annotation CSV not found: {cfg.data_csv}")
 
-    df = pd.read_csv(cfg.data_csv)
+    # Leading '# ...' provenance comments are allowed in annotation CSVs.
+    df = pd.read_csv(cfg.data_csv, comment="#")
     logger.info("Loaded %d rows from %s", len(df), cfg.data_csv)
 
     rename_map = {
@@ -58,7 +59,11 @@ def load_annotation_frame(cfg: AnalysisConfig) -> pd.DataFrame:
     # Normalize dataset labels for adversarial analyses.
     out["dataset_family"] = out["dataset"].map(_dataset_family)
 
-    out["annotator_id"] = "automated_pilot"
+    # Final published scores are aggregated across 5 human annotators
+    # (mean then integer-masked). Raw per-annotator columns are not present,
+    # so reliability modules still cannot compute IRR from this frame alone.
+    out["annotator_id"] = "human_aggregate_5rater"
+    out["annotation_protocol"] = "5rater_mean_integer_mask"
 
     logger.info(
         "Models=%s | datasets=%s",
