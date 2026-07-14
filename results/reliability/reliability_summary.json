@@ -1,5 +1,6 @@
 {
   "n_annotators": 1,
-  "status": "skipped_single_annotator",
-  "note": "Current PERSONA CSVs contain a single automated pilot annotator. Krippendorff/Kappa/ICC will be computed when multi-annotator columns are present."
+  "annotation_protocol": "5rater_mean_integer_mask",
+  "status": "skipped_aggregated_only",
+  "note": "Final PERSONA scores are the integer-masked mean of 5 human annotators, but raw per-annotator ratings are not stored in the analysis CSV. Krippendorff/Kappa/ICC require unaggregated rater columns."
 }
