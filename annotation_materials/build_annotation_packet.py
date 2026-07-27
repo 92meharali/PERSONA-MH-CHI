@@ -9,7 +9,9 @@ PERSONA scores and HuMT values are never included in annotator-facing files.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -30,6 +32,22 @@ OUTPUT_DIR = Path(__file__).resolve().parent
 PHASE1_SEED = 20260727
 PHASE2_SEED = 20260728
 PROTOCOL_ID = "persona_mh_human_v2"
+RUBRIC_VERSION = "2.0"
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _normalize_stimulus(value: str) -> str:
+    """Normalize line endings and trailing whitespace without rewriting text."""
+
+    text = str(value).replace("\r\n", "\n").replace("\r", "\n")
+    return "\n".join(line.rstrip() for line in text.split("\n")).strip()
 
 
 def _clean_markdown(text: str) -> str:
@@ -125,8 +143,13 @@ def build_rows() -> pd.DataFrame:
     source_rows = load_all_sources(cfg.sources)
     records = []
     for row in source_rows:
+        prompt = _normalize_stimulus(row.prompt)
+        response = _normalize_stimulus(row.response)
         digest = hashlib.sha256(
-            f"{row.prompt_id}\0{row.model}\0{row.response}".encode("utf-8")
+            (
+                f"{PROTOCOL_ID}\0{row.source_id}\0{row.prompt_id}\0"
+                f"{row.model}\0{prompt}\0{response}"
+            ).encode("utf-8")
         ).hexdigest()
         records.append(
             {
@@ -136,8 +159,8 @@ def build_rows() -> pd.DataFrame:
                 "source_set": row.source_set,
                 "topic": row.topic,
                 "failure_mode": row.failure_mode or "",
-                "prompt": row.prompt,
-                "response": row.response,
+                "prompt": prompt,
+                "response": response,
                 "response_file": str(Path(row.response_file).relative_to(REPO_ROOT)),
                 "source_row_index": row.row_index,
                 "content_sha256": digest,
@@ -166,7 +189,10 @@ def write_csvs(frame: pd.DataFrame) -> None:
     """Write two blinded rating sheets and a private re-identification key."""
 
     phase1 = frame[["annotation_item_id", "prompt", "response"]].copy()
-    phase1.insert(1, "annotator_id", "")
+    phase1.insert(1, "protocol_id", PROTOCOL_ID)
+    phase1.insert(2, "rubric_version", RUBRIC_VERSION)
+    phase1.insert(3, "presentation_order", range(1, len(phase1) + 1))
+    phase1.insert(4, "annotator_id", "")
     phase1["OA_score"] = ""
     phase1["OA_reason"] = ""
     phase1["OA_review_flag"] = ""
@@ -180,8 +206,11 @@ def write_csvs(frame: pd.DataFrame) -> None:
     # Use a separate deterministic order to reduce recall/order carryover.
     phase2 = frame[["annotation_item_id", "prompt", "response"]].sample(
         frac=1, random_state=PHASE2_SEED
-    )
-    phase2.insert(1, "annotator_id", "")
+    ).reset_index(drop=True)
+    phase2.insert(1, "protocol_id", PROTOCOL_ID)
+    phase2.insert(2, "rubric_version", RUBRIC_VERSION)
+    phase2.insert(3, "presentation_order", range(1, len(phase2) + 1))
+    phase2.insert(4, "annotator_id", "")
     for column in (
         "scenario_type",
         "E_score",
@@ -203,6 +232,11 @@ def write_csvs(frame: pd.DataFrame) -> None:
         encoding="utf-8-sig",
     )
 
+    phase1_order = dict(zip(phase1["annotation_item_id"], phase1["presentation_order"]))
+    phase2_order = dict(zip(phase2["annotation_item_id"], phase2["presentation_order"]))
+    frame = frame.copy()
+    frame["phase1_template_order"] = frame["annotation_item_id"].map(phase1_order)
+    frame["phase2_template_order"] = frame["annotation_item_id"].map(phase2_order)
     key_columns = [
         "annotation_item_id",
         "protocol_id",
@@ -215,6 +249,8 @@ def write_csvs(frame: pd.DataFrame) -> None:
         "response_file",
         "source_row_index",
         "content_sha256",
+        "phase1_template_order",
+        "phase2_template_order",
     ]
     frame[key_columns].to_csv(
         OUTPUT_DIR / "persona_mh_item_key_DO_NOT_SHARE_WITH_ANNOTATORS.csv",
@@ -222,8 +258,85 @@ def write_csvs(frame: pd.DataFrame) -> None:
         encoding="utf-8-sig",
     )
 
+    source_paths = sorted({REPO_ROOT / value for value in frame["response_file"]})
+    manifest = {
+        "protocol_id": PROTOCOL_ID,
+        "rubric_version": RUBRIC_VERSION,
+        "n_items": len(frame),
+        "phase1_seed": PHASE1_SEED,
+        "phase2_seed": PHASE2_SEED,
+        "config_file": "persona_annotation/config.yaml",
+        "config_sha256": _sha256_file(REPO_ROOT / "persona_annotation" / "config.yaml"),
+        "source_files": [
+            {
+                "path": str(path.relative_to(REPO_ROOT)),
+                "sha256": _sha256_file(path),
+            }
+            for path in source_paths
+        ],
+        "annotator_files_exclude": [
+            "model",
+            "humt_score",
+            "automated PERSONA scores",
+        ],
+    }
+    (OUTPUT_DIR / "persona_mh_build_manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+    )
+
+
+def make_annotator_copy(
+    *,
+    phase: str,
+    annotator_id: str,
+    order_seed: int,
+    output_path: Path,
+) -> None:
+    """Create one assigned, independently randomized annotator CSV."""
+
+    if not annotator_id.strip():
+        raise ValueError("annotator_id cannot be blank")
+    template_name = (
+        "persona_mh_phase1_oa_annotation.csv"
+        if phase == "phase1"
+        else "persona_mh_phase2_edf_annotation.csv"
+    )
+    template_path = OUTPUT_DIR / template_name
+    if not template_path.exists():
+        write_csvs(build_rows())
+    frame = pd.read_csv(template_path, keep_default_na=False)
+    frame = frame.sample(frac=1, random_state=order_seed).reset_index(drop=True)
+    frame["presentation_order"] = range(1, len(frame) + 1)
+    frame["annotator_id"] = annotator_id.strip()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(output_path, index=False, encoding="utf-8-sig")
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--make-copy", choices=("phase1", "phase2"))
+    parser.add_argument("--annotator-id")
+    parser.add_argument("--order-seed", type=int)
+    parser.add_argument("--output", type=Path)
+    return parser
+
 
 def main() -> None:
+    args = build_parser().parse_args()
+    if args.make_copy:
+        if args.annotator_id is None or args.order_seed is None or args.output is None:
+            raise SystemExit(
+                "--make-copy requires --annotator-id, --order-seed, and --output"
+            )
+        make_annotator_copy(
+            phase=args.make_copy,
+            annotator_id=args.annotator_id,
+            order_seed=args.order_seed,
+            output_path=args.output,
+        )
+        print(f"Built {args.make_copy} copy for {args.annotator_id} → {args.output}")
+        return
+
     frame = build_rows()
     write_csvs(frame)
     for markdown_path in (

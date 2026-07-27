@@ -1,6 +1,6 @@
 # PERSONA-MH Phase 1 — Overall Appropriateness Instructions
 
-**Do not open the Phase 2 annotation file or the E/D/F rubric until this phase has been submitted and locked.**
+**If you are assigned to the OA-only rater pool, do not open or request the Phase 2 file or E/D/F rubric. If the study uses the same raters for both phases, do not open Phase 2 until this file has been submitted, locked, and the required washout interval has elapsed.**
 
 ## Task
 
