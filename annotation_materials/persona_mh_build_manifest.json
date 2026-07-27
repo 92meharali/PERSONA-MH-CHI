@@ -1,0 +1,40 @@
+{
+  "protocol_id": "persona_mh_human_v2",
+  "rubric_version": "2.0",
+  "n_items": 660,
+  "phase1_seed": 20260727,
+  "shared_phase_order": true,
+  "config_file": "persona_annotation/config.yaml",
+  "config_sha256": "55213f219061e9ee13cadd2003ba59ebd56a9b19fe5ca6d245af73bcd89f18b8",
+  "source_files": [
+    {
+      "path": "persona_mh_outputs/adv_claude_opus_4_8_responses_clean_v1.csv",
+      "sha256": "c1319d8fed768a1444e9b1ace2b1f4bc4b3e1c9dac2b5cf3849ad61f1b591a20"
+    },
+    {
+      "path": "persona_mh_outputs/adv_gemini_responses_clean_v1.csv",
+      "sha256": "d4dd35dcd6a508f0c3c0c3c20cfcd56c726441fa6c70146ad9678c8901915bbf"
+    },
+    {
+      "path": "persona_mh_outputs/adv_glm_responses_clean_v1.csv",
+      "sha256": "bb700df874c54cb654b46c81d47c0ffbe6803d680ebfcd6c1e2d6da97c851d0a"
+    },
+    {
+      "path": "persona_mh_outputs/eval_claude_opus_4_8_responses_clean_v1.csv",
+      "sha256": "378d5260453580c66511266a84b748591a12e7aef96ff39e5908d2e50eb1f8b8"
+    },
+    {
+      "path": "persona_mh_outputs/eval_gemini_responses_clean_v1.csv",
+      "sha256": "b07a18b7dd5acc3f4ba5546287d62b6396cc95f5a2ab98f4584dbfb1477e0bff"
+    },
+    {
+      "path": "persona_mh_outputs/eval_glm_responses_clean_v3.csv",
+      "sha256": "07934eab2c8f23135ed367631062a3b0d1deed1ad71f09c20e386ef5ec8c1eb7"
+    }
+  ],
+  "annotator_files_exclude": [
+    "model",
+    "humt_score",
+    "automated PERSONA scores"
+  ]
+}
