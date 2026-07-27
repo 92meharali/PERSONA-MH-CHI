@@ -3,7 +3,7 @@
   "rubric_version": "2.0",
   "n_items": 660,
   "phase1_seed": 20260727,
-  "phase2_seed": 20260728,
+  "shared_phase_order": true,
   "config_file": "persona_annotation/config.yaml",
   "config_sha256": "55213f219061e9ee13cadd2003ba59ebd56a9b19fe5ca6d245af73bcd89f18b8",
   "source_files": [

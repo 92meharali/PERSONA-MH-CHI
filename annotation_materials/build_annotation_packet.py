@@ -30,7 +30,6 @@ from persona_annotation.loaders import load_all_sources
 
 OUTPUT_DIR = Path(__file__).resolve().parent
 PHASE1_SEED = 20260727
-PHASE2_SEED = 20260728
 PROTOCOL_ID = "persona_mh_human_v2"
 RUBRIC_VERSION = "2.0"
 
@@ -203,10 +202,9 @@ def write_csvs(frame: pd.DataFrame) -> None:
         encoding="utf-8-sig",
     )
 
-    # Use a separate deterministic order to reduce recall/order carryover.
-    phase2 = frame[["annotation_item_id", "prompt", "response"]].sample(
-        frac=1, random_state=PHASE2_SEED
-    ).reset_index(drop=True)
+    # Keep Phase 2 row-for-row aligned with Phase 1 for straightforward entry,
+    # review, and merging by annotation_item_id.
+    phase2 = frame[["annotation_item_id", "prompt", "response"]].copy()
     phase2.insert(1, "protocol_id", PROTOCOL_ID)
     phase2.insert(2, "rubric_version", RUBRIC_VERSION)
     phase2.insert(3, "presentation_order", range(1, len(phase2) + 1))
@@ -264,7 +262,7 @@ def write_csvs(frame: pd.DataFrame) -> None:
         "rubric_version": RUBRIC_VERSION,
         "n_items": len(frame),
         "phase1_seed": PHASE1_SEED,
-        "phase2_seed": PHASE2_SEED,
+        "shared_phase_order": True,
         "config_file": "persona_annotation/config.yaml",
         "config_sha256": _sha256_file(REPO_ROOT / "persona_annotation" / "config.yaml"),
         "source_files": [

@@ -26,7 +26,7 @@ Make one copy of each CSV per annotator. Require an `annotator_id` in every comp
 
 ## Why OA uses a separate phase
 
-OA must be independently elicited, not calculated from E, D, and F. Separate rater pools remove direct same-rater carryover. When separate pools are infeasible, separate files and a locked first pass prevent copying or averaging the component scores; Phase 2 also uses a different fixed row order.
+OA must be independently elicited, not calculated from E, D, and F. Separate rater pools remove direct same-rater carryover. When separate pools are infeasible, separate files and a locked first pass prevent copying or averaging the component scores. The two templates use the same row order and `annotation_item_id` sequence for straightforward review and merging.
 
 ## Rating fields
 
@@ -54,7 +54,7 @@ python annotation_materials/build_annotation_packet.py
 
 The builder uses fixed random seeds, validates all 660 configured responses, and regenerates the CSV and DOCX files deterministically apart from DOCX package metadata.
 
-Create a separately randomized, pre-assigned copy for each annotator by using a unique seed:
+You can create a randomized, pre-assigned copy for an annotator:
 
 ```bash
 python annotation_materials/build_annotation_packet.py \
@@ -64,7 +64,7 @@ python annotation_materials/build_annotation_packet.py \
   --output private_assignments/OA_RATER_01.csv
 ```
 
-Use `--make-copy phase2` for an E/D/F rater. Record every seed in the study log. Never reuse annotator IDs. Individually randomized orders reduce shared fatigue and comparison effects; `presentation_order` is retained for diagnostics.
+Use `--make-copy phase2` for an E/D/F rater. To keep a particular annotator's Phase 1 and Phase 2 files in the same order, use the same `--order-seed` for both. Record every seed in the study log and never reuse annotator IDs. `presentation_order` is retained for diagnostics.
 
 ## Collection safeguards
 
