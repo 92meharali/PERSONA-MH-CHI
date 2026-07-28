@@ -1,7 +1,5 @@
-id,question,test,estimate,p_raw,result,p_holm_across_hypotheses
-H1,Is human-likeness a weak proxy for OA?,Spearman with prompt-block permutation and cluster-bootstrap CI,-0.09614413766887978,0.01699150424787606,Weak magnitude; not familywise-significant,0.06796601699150424
-H2,Do E/D/F add predictive information beyond HuMT?,Grouped CV and joint clustered Wald test,0.2660254546948013,6.990699549951256e-42,Supported jointly; individual coefficients are secondary,4.194419729970754e-41
-H3,Do models differ in OA profiles?,Friedman paired by prompt,0.028795906080673703,0.005318909121096884,Supported,0.026594545605484424
-H4,Do models differ in deception risk?,Friedman paired by prompt,0.01446678321678224,0.06890444166733911,Not supported,0.20671332500201733
-H5,Is E/D association with OA context-dependent?,Joint clustered Wald test of E/D × scenario interactions,2.358013868425372,0.8840074786671541,Not supported,0.8840074786671541
-H6,Does D differ between ADV and EVAL sets?,Mann–Whitney association (unmatched sets),-0.08899999999999975,0.27175981373441294,No supported association,0.5435196274688259
+id,question,test,estimate,p_raw,result,support_rule,p_holm_across_hypotheses
+H1,Is human-likeness a reliable proxy for OA?,Weak |Spearman ρ| plus negligible HuMT-only grouped CV R² vs PERSONA,-0.09614413766887978,0.01699150424787606,Supported: HuMT is not a reliable OA proxy,abs(rho)<0.30 and HuMT_only CV R²<0.05 and PERSONA CV R²>HuMT CV R²,0.01699150424787606
+H2,Do E/D/F add predictive information beyond HuMT?,Grouped CV delta and joint clustered Wald test,0.2660254546948013,6.990699549951256e-42,Supported,delta_cv_r2>0 and Holm p<0.05,2.7962798199805026e-41
+H3,"In the joint model, do E and F associate positively with OA and D negatively?",Clustered OLS coefficients in Full_adjusted model,0.0476710626588464,0.0078426093605773,Supported,signs E+/D-/F+ and each coefficient Holm p<0.05,0.0156852187211546
+H4,Do models differ in OA/E/F profiles?,Friedman paired by prompt on OA/E/F,0.028795906080673703,3.015707781049984e-05,Supported,at least one of OA/E/F differs after Holm across hypotheses,9.047123343149952e-05
