@@ -1,0 +1,7 @@
+id,question,test,estimate,p_raw,result,p_holm_across_hypotheses
+H1,Is human-likeness a weak proxy for OA?,Spearman with prompt-block permutation and cluster-bootstrap CI,-0.09614413766887978,0.01699150424787606,Weak magnitude; not familywise-significant,0.06796601699150424
+H2,Do E/D/F add predictive information beyond HuMT?,Grouped CV and joint clustered Wald test,0.0872213601442623,4.160872877608122e-10,Supported jointly; individual coefficients are secondary,2.496523726564873e-09
+H3,Do models differ in OA profiles?,Friedman paired by prompt,0.028795906080673703,0.007091878828129179,Supported,0.035459394140645896
+H4,Do models differ in deception risk?,Friedman paired by prompt,0.01446678321678224,0.10335666250100867,Not supported,0.310069987503026
+H5,Is E/D association with OA context-dependent?,Joint clustered Wald test of E/D × scenario interactions,6.318692682627643,0.611580649548614,Not supported,0.611580649548614
+H6,Does D differ between ADV and EVAL sets?,Mann–Whitney association (unmatched sets),-0.08899999999999975,0.18832958481409967,No supported association,0.37665916962819934

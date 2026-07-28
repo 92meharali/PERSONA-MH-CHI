@@ -109,6 +109,26 @@ def cluster_bootstrap_correlation(
     return float(np.quantile(values, 0.025)), float(np.quantile(values, 0.975))
 
 
+def cluster_permutation_correlation_pvalue(
+    frame: pd.DataFrame, x: str, y: str, *, iterations: int = 2000
+) -> float:
+    """Two-sided prompt-block permutation p-value for a response correlation."""
+
+    x_wide = frame.pivot(index="prompt_id", columns="model", values=x)[MODELS]
+    y_wide = frame.pivot(index="prompt_id", columns="model", values=y)[MODELS]
+    common = x_wide.index.intersection(y_wide.index)
+    x_values = x_wide.loc[common].to_numpy().ravel()
+    y_blocks = y_wide.loc[common].to_numpy()
+    observed = abs(stats.spearmanr(x_values, y_blocks.ravel()).statistic)
+    rng = np.random.default_rng(SEED)
+    exceedances = 0
+    for _ in range(iterations):
+        permuted = y_blocks[rng.permutation(len(y_blocks))].ravel()
+        value = abs(stats.spearmanr(x_values, permuted).statistic)
+        exceedances += int(value >= observed)
+    return (exceedances + 1) / (iterations + 1)
+
+
 def prompt_bootstrap_difference(
     pivot: pd.DataFrame, model_a: str, model_b: str
 ) -> tuple[float, float]:
@@ -178,13 +198,36 @@ def aggregate_ratings(ratings: pd.DataFrame, responses: pd.DataFrame) -> pd.Data
             row[f"{metric}_median"] = float(np.median(scores))
             row[f"{metric}_sd"] = float(np.std(scores, ddof=1))
         modes = group["scenario_type"].mode()
-        row["scenario_type"] = sorted(modes.tolist())[0]
-        row["scenario_agreement"] = float(
-            (group["scenario_type"] == row["scenario_type"]).mean()
-        )
+        row["item_scenario_type"] = sorted(modes.tolist())[0]
         rows.append(row)
     aggregate = responses.merge(
         pd.DataFrame(rows), on="annotation_item_id", validate="one_to_one"
+    )
+    # Scenario describes the prompt, not the model response. Resolve one label
+    # per prompt from all 15 labels (5 raters × 3 model responses) to prevent
+    # response content or model identity from changing the context variable.
+    scenario_ratings = ratings[
+        ["annotation_item_id", "scenario_type"]
+    ].merge(
+        responses[["annotation_item_id", "prompt_id"]],
+        on="annotation_item_id",
+        validate="many_to_one",
+    )
+    prompt_scenarios = []
+    for prompt_id, group in scenario_ratings.groupby("prompt_id"):
+        modes = group["scenario_type"].mode()
+        scenario = sorted(modes.tolist())[0]
+        prompt_scenarios.append(
+            {
+                "prompt_id": prompt_id,
+                "scenario_type": scenario,
+                "scenario_agreement": float(
+                    (group["scenario_type"] == scenario).mean()
+                ),
+            }
+        )
+    aggregate = aggregate.merge(
+        pd.DataFrame(prompt_scenarios), on="prompt_id", validate="many_to_one"
     )
     aggregate = aggregate.rename(columns={"humt_score": "HuMT"})
     aggregate["dataset"] = aggregate["source_set"].map(
@@ -230,11 +273,17 @@ def run_data_quality(ratings: pd.DataFrame, aggregate: pd.DataFrame) -> None:
     save_figure(fig, "fig_score_distributions.png")
 
 
-def reliability_ci(matrix: np.ndarray) -> tuple[float, float]:
+def reliability_ci(
+    matrix: np.ndarray, column_prompts: np.ndarray
+) -> tuple[float, float]:
     rng = np.random.default_rng(SEED)
     estimates = []
+    prompts = np.unique(column_prompts)
     for _ in range(N_BOOT):
-        indices = rng.integers(0, matrix.shape[1], matrix.shape[1])
+        sampled_prompts = rng.choice(prompts, len(prompts), replace=True)
+        indices = np.concatenate(
+            [np.flatnonzero(column_prompts == prompt) for prompt in sampled_prompts]
+        )
         sample = matrix[:, indices]
         try:
             value = krippendorff.alpha(
@@ -247,9 +296,10 @@ def reliability_ci(matrix: np.ndarray) -> tuple[float, float]:
     return float(np.quantile(estimates, 0.025)), float(np.quantile(estimates, 0.975))
 
 
-def run_reliability(ratings: pd.DataFrame) -> None:
+def run_reliability(ratings: pd.DataFrame, responses: pd.DataFrame) -> None:
     reliability_rows = []
     marginal_rows = []
+    item_to_prompt = responses.set_index("annotation_item_id")["prompt_id"]
     for metric in SCORE_METRICS:
         pivot = ratings.pivot(
             index="annotator_id",
@@ -262,7 +312,8 @@ def run_reliability(ratings: pd.DataFrame) -> None:
                 reliability_data=matrix, level_of_measurement="ordinal"
             )
         )
-        alpha_low, alpha_high = reliability_ci(matrix)
+        column_prompts = item_to_prompt.loc[pivot.columns].to_numpy()
+        alpha_low, alpha_high = reliability_ci(matrix, column_prompts)
 
         long = ratings[
             ["annotation_item_id", "annotator_id", f"{metric}_score"]
@@ -305,9 +356,31 @@ def run_reliability(ratings: pd.DataFrame) -> None:
                 }
             )
 
-    categories = sorted(ratings["scenario_type"].unique())
+    # Scenario reliability is calculated at its intended prompt level. Each
+    # rater's three labels for a prompt are collapsed by mode first.
+    scenario_long = ratings[
+        ["annotation_item_id", "annotator_id", "scenario_type"]
+    ].merge(
+        responses[["annotation_item_id", "prompt_id"]],
+        on="annotation_item_id",
+        validate="many_to_one",
+    )
+    prompt_rater_rows = []
+    for (prompt_id, annotator), group in scenario_long.groupby(
+        ["prompt_id", "annotator_id"]
+    ):
+        modes = group["scenario_type"].mode()
+        prompt_rater_rows.append(
+            {
+                "prompt_id": prompt_id,
+                "annotator_id": annotator,
+                "scenario_type": sorted(modes.tolist())[0],
+            }
+        )
+    prompt_rater = pd.DataFrame(prompt_rater_rows)
+    categories = sorted(prompt_rater["scenario_type"].unique())
     scenario_counts = []
-    for _, group in ratings.groupby("annotation_item_id"):
+    for _, group in prompt_rater.groupby("prompt_id"):
         scenario_counts.append(
             [int((group["scenario_type"] == category).sum()) for category in categories]
         )
@@ -318,7 +391,7 @@ def run_reliability(ratings: pd.DataFrame) -> None:
                 a["scenario_type"].to_numpy() == b["scenario_type"].to_numpy()
             )
             for (_, a), (_, b) in combinations(
-                list(ratings.sort_values("annotation_item_id").groupby("annotator_id")),
+                list(prompt_rater.sort_values("prompt_id").groupby("annotator_id")),
                 2,
             )
         ]
@@ -433,6 +506,7 @@ def run_model_comparisons(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.Dat
             row["p_holm_within_metric"] = adjusted_p
             pairwise_rows.append(row)
     omnibus = pd.DataFrame(omnibus_rows)
+    omnibus["p_holm_across_metrics"] = holm_adjust(omnibus["p_value"].tolist())
     pairwise = pd.DataFrame(pairwise_rows)
     save_table(omnibus, "table_model_omnibus.csv")
     save_table(pairwise, "table_model_pairwise.csv")
@@ -445,17 +519,20 @@ def run_correlations(aggregate: pd.DataFrame) -> pd.DataFrame:
     for left, right in combinations(METRICS, 2):
         result = stats.spearmanr(aggregate[left], aggregate[right])
         ci_low, ci_high = cluster_bootstrap_correlation(aggregate, left, right)
+        cluster_p = cluster_permutation_correlation_pvalue(
+            aggregate, left, right
+        )
         rows.append(
             {
                 "variable_a": left,
                 "variable_b": right,
                 "spearman_rho": result.statistic,
-                "p_raw": result.pvalue,
+                "p_prompt_block_permutation": cluster_p,
                 "cluster_boot_ci_low": ci_low,
                 "cluster_boot_ci_high": ci_high,
             }
         )
-        pvalues.append(result.pvalue)
+        pvalues.append(cluster_p)
     adjusted = bh_adjust(pvalues)
     for row, adjusted_p in zip(rows, adjusted):
         row["p_fdr"] = adjusted_p
@@ -558,6 +635,12 @@ def run_regression(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
 
     specifications = [
         ("HuMT_only", "OA ~ z_HuMT", ["HuMT"], []),
+        (
+            "HuMT_adjusted",
+            "OA ~ z_HuMT + C(model) + C(source_set)",
+            ["HuMT"],
+            ["model", "source_set"],
+        ),
         ("PERSONA_only", "OA ~ z_E + z_D + z_F", ["E", "D", "F"], []),
         (
             "Full_adjusted",
@@ -623,7 +706,7 @@ def run_regression(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
     wald = full.wald_test(restriction, scalar=True)
     baseline = performance[
         (performance["outcome"] == "OA_mean")
-        & (performance["specification"] == "HuMT_only")
+        & (performance["specification"] == "HuMT_adjusted")
     ].iloc[0]
     complete = performance[
         (performance["outcome"] == "OA_mean")
@@ -632,14 +715,14 @@ def run_regression(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
     incremental = pd.DataFrame(
         [
             {
-                "comparison": "Full adjusted vs HuMT only",
+                "comparison": "Full adjusted vs HuMT adjusted",
                 "delta_r_squared": complete["r_squared"] - baseline["r_squared"],
                 "delta_adjusted_r_squared": complete["adjusted_r_squared"]
                 - baseline["adjusted_r_squared"],
                 "delta_cv_r_squared": complete["cv_r2"] - baseline["cv_r2"],
                 "delta_cv_rmse": complete["cv_rmse"] - baseline["cv_rmse"],
                 "joint_persona_wald_statistic": float(wald.statistic),
-                "joint_persona_wald_df": int(wald.df_num),
+                "joint_persona_wald_df": len(persona_terms),
                 "joint_persona_p_value": float(wald.pvalue),
             }
         ]
@@ -672,7 +755,9 @@ def run_regression(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
     return performance, incremental
 
 
-def run_context_moderation(aggregate: pd.DataFrame) -> pd.DataFrame:
+def run_context_moderation(
+    aggregate: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     frame = aggregate.copy()
     for metric in ("HuMT", "E", "D", "F"):
         frame[f"z_{metric}"] = (frame[metric] - frame[metric].mean()) / frame[
@@ -706,6 +791,35 @@ def run_context_moderation(aggregate: pd.DataFrame) -> pd.DataFrame:
     result = pd.DataFrame(rows)
     save_table(result, "table_context_moderation.csv")
 
+    interaction_terms = [term for term in fit.params.index if ":" in term]
+    omnibus_rows = []
+    term_sets = {
+        "E_by_scenario": [
+            term for term in interaction_terms if term.startswith("z_E:")
+        ],
+        "D_by_scenario": [
+            term for term in interaction_terms if term.startswith("z_D:")
+        ],
+        "E_and_D_by_scenario": interaction_terms,
+    }
+    for label, terms in term_sets.items():
+        restriction = np.zeros((len(terms), len(fit.params)))
+        for row_index, term in enumerate(terms):
+            restriction[row_index, list(fit.params.index).index(term)] = 1
+        test = fit.wald_test(restriction, scalar=True)
+        omnibus_rows.append(
+            {
+                "test": label,
+                "wald_chi_square": float(test.statistic),
+                "df": len(terms),
+                "p_value": float(test.pvalue),
+            }
+        )
+    moderation_omnibus = pd.DataFrame(omnibus_rows)
+    save_table(
+        moderation_omnibus, "table_context_moderation_omnibus.csv"
+    )
+
     summary = (
         frame.groupby("scenario_analysis")[["OA", "E", "D", "F"]]
         .agg(["mean", "count"])
@@ -722,18 +836,29 @@ def run_context_moderation(aggregate: pd.DataFrame) -> pd.DataFrame:
         ax.set_ylim(1, 5)
     axes[0].set_ylabel("Mean score")
     save_figure(fig, "fig_context_profiles.png")
-    return result
+    return result, moderation_omnibus
 
 
 def run_dataset_associations(aggregate: pd.DataFrame) -> pd.DataFrame:
+    # ADV and EVAL are unmatched prompt sets. Average the three model responses
+    # within each prompt before inference so prompts, not responses, are the
+    # independent observations.
+    prompt_frame = (
+        aggregate.groupby(["prompt_id", "dataset"], as_index=False)[METRICS]
+        .mean()
+    )
     rows = []
     for metric in METRICS:
-        adv = aggregate.loc[aggregate["dataset"] == "ADV", metric].to_numpy()
-        evaluation = aggregate.loc[aggregate["dataset"] == "EVAL", metric].to_numpy()
+        adv = prompt_frame.loc[prompt_frame["dataset"] == "ADV", metric].to_numpy()
+        evaluation = prompt_frame.loc[
+            prompt_frame["dataset"] == "EVAL", metric
+        ].to_numpy()
         test = stats.mannwhitneyu(adv, evaluation, alternative="two-sided")
         rows.append(
             {
                 "metric": metric,
+                "n_prompts_adv": len(adv),
+                "n_prompts_eval": len(evaluation),
                 "mean_adv": np.mean(adv),
                 "mean_eval": np.mean(evaluation),
                 "difference_adv_minus_eval": np.mean(adv) - np.mean(evaluation),
@@ -749,7 +874,7 @@ def run_dataset_associations(aggregate: pd.DataFrame) -> pd.DataFrame:
     result = pd.DataFrame(rows)
     save_table(result, "table_dataset_associations.csv")
 
-    means = aggregate.groupby("dataset")[["OA", "D"]].mean()
+    means = prompt_frame.groupby("dataset")[["OA", "D"]].mean()
     fig, axes = plt.subplots(1, 2, figsize=(7, 3.6), sharey=True)
     for ax, metric in zip(axes, ["OA", "D"]):
         ax.bar(means.index, means[metric], color=["#E45756", "#4C78A8"])
@@ -765,7 +890,7 @@ def build_hypothesis_table(
     omnibus: pd.DataFrame,
     performance: pd.DataFrame,
     incremental: pd.DataFrame,
-    moderation: pd.DataFrame,
+    moderation_omnibus: pd.DataFrame,
     datasets: pd.DataFrame,
 ) -> pd.DataFrame:
     humt_oa = correlations[
@@ -779,9 +904,9 @@ def build_hypothesis_table(
         {
             "id": "H1",
             "question": "Is human-likeness a weak proxy for OA?",
-            "test": "Spearman with prompt-cluster bootstrap CI",
+            "test": "Spearman with prompt-block permutation and cluster-bootstrap CI",
             "estimate": humt_oa["spearman_rho"],
-            "p_value": humt_oa["p_raw"],
+            "p_value": humt_oa["p_prompt_block_permutation"],
             "result": (
                 "Supported as weak association"
                 if abs(humt_oa["spearman_rho"]) < 0.30
@@ -795,7 +920,7 @@ def build_hypothesis_table(
             "estimate": incremental.iloc[0]["delta_cv_r_squared"],
             "p_value": incremental.iloc[0]["joint_persona_p_value"],
             "result": (
-                "Supported"
+                "Supported jointly; individual coefficients are secondary"
                 if incremental.iloc[0]["delta_cv_r_squared"] > 0
                 and incremental.iloc[0]["joint_persona_p_value"] < 0.05
                 else "Not supported"
@@ -806,27 +931,46 @@ def build_hypothesis_table(
             "question": "Do models differ in OA profiles?",
             "test": "Friedman paired by prompt",
             "estimate": oa_models["kendalls_w"],
-            "p_value": oa_models["p_value"],
-            "result": "Supported" if oa_models["p_value"] < 0.05 else "Not supported",
+            "p_value": oa_models["p_holm_across_metrics"],
+            "result": (
+                "Supported"
+                if oa_models["p_holm_across_metrics"] < 0.05
+                else "Not supported"
+            ),
         },
         {
             "id": "H4",
             "question": "Do models differ in deception risk?",
             "test": "Friedman paired by prompt",
             "estimate": d_models["kendalls_w"],
-            "p_value": d_models["p_value"],
-            "result": "Supported" if d_models["p_value"] < 0.05 else "Not supported",
+            "p_value": d_models["p_holm_across_metrics"],
+            "result": (
+                "Supported"
+                if d_models["p_holm_across_metrics"] < 0.05
+                else "Not supported"
+            ),
         },
         {
             "id": "H5",
             "question": "Is E/D association with OA context-dependent?",
-            "test": "Clustered OLS interaction terms with FDR",
-            "estimate": int((moderation["p_fdr"] < 0.05).sum()),
-            "p_value": moderation["p_fdr"].min() if len(moderation) else np.nan,
+            "test": "Joint clustered Wald test of E/D × scenario interactions",
+            "estimate": moderation_omnibus.loc[
+                moderation_omnibus["test"] == "E_and_D_by_scenario",
+                "wald_chi_square",
+            ].iloc[0],
+            "p_value": moderation_omnibus.loc[
+                moderation_omnibus["test"] == "E_and_D_by_scenario",
+                "p_value",
+            ].iloc[0],
             "result": (
-                "Some moderation detected"
-                if len(moderation) and (moderation["p_fdr"] < 0.05).any()
-                else "No supported moderation"
+                "Supported"
+                if moderation_omnibus.loc[
+                    moderation_omnibus["test"]
+                    == "E_and_D_by_scenario",
+                    "p_value",
+                ].iloc[0]
+                < 0.05
+                else "Not supported"
             ),
         },
         {
@@ -842,7 +986,32 @@ def build_hypothesis_table(
             ),
         },
     ]
-    result = pd.DataFrame(rows)
+    result = pd.DataFrame(rows).rename(columns={"p_value": "p_raw"})
+    result["p_holm_across_hypotheses"] = holm_adjust(
+        result["p_raw"].tolist()
+    )
+    for index, row in result.iterrows():
+        adjusted_p = row["p_holm_across_hypotheses"]
+        if row["id"] == "H1":
+            result.loc[index, "result"] = (
+                "Weak magnitude; familywise-significant"
+                if abs(row["estimate"]) < 0.30 and adjusted_p < 0.05
+                else "Weak magnitude; not familywise-significant"
+            )
+        elif row["id"] == "H2":
+            result.loc[index, "result"] = (
+                "Supported jointly; individual coefficients are secondary"
+                if row["estimate"] > 0 and adjusted_p < 0.05
+                else "Not supported"
+            )
+        elif row["id"] in {"H3", "H4", "H5"}:
+            result.loc[index, "result"] = (
+                "Supported" if adjusted_p < 0.05 else "Not supported"
+            )
+        elif row["id"] == "H6":
+            result.loc[index, "result"] = (
+                "Associated" if adjusted_p < 0.05 else "No supported association"
+            )
     save_table(result, "table_hypotheses.csv")
     return result
 
@@ -861,6 +1030,15 @@ def write_summary(
     d_dist = (
         aggregate["D_median"].astype(int).value_counts().sort_index().to_dict()
     )
+    coefficients = pd.read_csv(OUT / "table_regression_coefficients.csv")
+    persona_coefficients = coefficients[
+        (coefficients["specification"] == "Full_adjusted")
+        & (coefficients["outcome"] == "OA_mean")
+        & (coefficients["term"].isin(["z_E", "z_D", "z_F"]))
+    ]
+    supported_terms = persona_coefficients.loc[
+        persona_coefficients["p_value"] < 0.05, "term"
+    ].str.replace("z_", "", regex=False).tolist()
     rel_lines = []
     for _, row in reliability[
         reliability["metric"].isin(SCORE_METRICS)
@@ -887,9 +1065,11 @@ def write_summary(
         f"(95% prompt-cluster bootstrap CI {humt_oa['cluster_boot_ci_low']:.3f} to "
         f"{humt_oa['cluster_boot_ci_high']:.3f}).",
         f"- Adding PERSONA dimensions and planned covariates changed grouped-CV R² by "
-        f"{incremental.iloc[0]['delta_cv_r_squared']:.3f} relative to HuMT alone.",
-        f"- Consensus D distribution: {json.dumps(d_dist, sort_keys=True)}. Severe D is rare under "
-        "the anti-anthropomorphism generation prompt.",
+        f"{incremental.iloc[0]['delta_cv_r_squared']:.3f} relative to the identically adjusted HuMT baseline.",
+        f"- The joint PERSONA increment is driven by independently supported coefficient(s): "
+        f"{', '.join(supported_terms) if supported_terms else 'none'}. E and D should not be interpreted as independent OA predictors here.",
+        f"- Consensus D distribution: {json.dumps(d_dist, sort_keys=True)}. Severe D is rare in "
+        "the evaluated response corpus.",
         "",
         "## Hypotheses",
         "",
@@ -897,7 +1077,7 @@ def write_summary(
     for _, row in hypotheses.iterrows():
         lines.append(
             f"- **{row['id']}** {row['question']} — {row['result']} "
-            f"(estimate={row['estimate']:.3g}, p={row['p_value']:.3g})."
+            f"(estimate={row['estimate']:.3g}, Holm p={row['p_holm_across_hypotheses']:.3g})."
         )
     lines.extend(
         [
@@ -907,7 +1087,7 @@ def write_summary(
             "- Scores are ordinal; five-rater means are used for concise primary summaries, with median sensitivity.",
             "- Inference is clustered/grouped by prompt to preserve the three-model pairing.",
             "- CounselBench ADV and EVAL prompts are unmatched; their comparison is associative, not causal.",
-            "- The safety-oriented system prompt suppresses severe deception, so D4–D5 estimates have limited support.",
+            "- Severe deception is rare in this corpus, so D4–D5 estimates have limited support; no causal explanation for that rarity is tested here.",
         ]
     )
     (OUT / "SUMMARY.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -919,20 +1099,20 @@ def main() -> None:
     ratings, responses = load_and_validate()
     aggregate = aggregate_ratings(ratings, responses)
     run_data_quality(ratings, aggregate)
-    run_reliability(ratings)
+    run_reliability(ratings, responses)
     reliability = pd.read_csv(OUT / "table_reliability.csv")
     run_descriptives(aggregate)
     omnibus, _ = run_model_comparisons(aggregate)
     correlations = run_correlations(aggregate)
     performance, incremental = run_regression(aggregate)
-    moderation = run_context_moderation(aggregate)
+    moderation, moderation_omnibus = run_context_moderation(aggregate)
     datasets = run_dataset_associations(aggregate)
     hypotheses = build_hypothesis_table(
         correlations,
         omnibus,
         performance,
         incremental,
-        moderation,
+        moderation_omnibus,
         datasets,
     )
     write_summary(
