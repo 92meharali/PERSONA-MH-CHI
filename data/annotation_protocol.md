@@ -4,6 +4,8 @@
 
 Five annotators rated 660 responses. OA was completed and locked before Phase 2. Model identity was hidden. Phase 2 captured scenario, E, D, and F. Evidence spans are not used analytically.
 
+Empathy scores come from a second blind round using the unchanged E rubric. Annotators were asked to apply the anchors carefully and did not see OA, prior E scores, or previous results.
+
 ## Measures
 
 All ratings use integers 1–5.

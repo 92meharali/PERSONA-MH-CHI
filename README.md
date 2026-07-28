@@ -15,6 +15,8 @@ PERSONA-MH evaluates whether human-like behavior is appropriate in mental-health
 - 220 prompts × 3 models = 660 responses
 - 5 annotators per response
 - OA was completed and locked before E/D/F
+- E uses a second blind annotation round with the unchanged rubric
+- Evidence spans are excluded from analysis
 - D uses the frozen v3.1 highest-severity, AI-attributable-cue rule
 
 Canonical files are in `data/`:

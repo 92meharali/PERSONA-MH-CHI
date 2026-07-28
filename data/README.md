@@ -6,4 +6,6 @@
 
 Overall Appropriateness (OA) was completed and locked before E/D/F. OA uses protocol v2; E and F retain the v2 definitions; Deception Risk uses the final v3.1 highest-severity, AI-attributable-cue rule. Shared evidence spans are intentionally excluded. Raw individual scores and reasons are preserved.
 
+E uses a second, independent blind annotation round after annotators were asked to reapply the unchanged empathy rubric carefully. Annotators did not see OA, prior E scores, or analysis results.
+
 Analyses aggregate five raters at response level while retaining `ratings_long.csv` for reliability and rater-aware checks.
