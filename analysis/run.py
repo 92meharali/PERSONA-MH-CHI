@@ -758,7 +758,10 @@ def run_regression(aggregate: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]
 def run_context_moderation(
     aggregate: pd.DataFrame,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
-    frame = aggregate.copy()
+    # Four prompts fall into the collapsed casual/other stratum. Exclude this
+    # underpowered group from confirmatory moderation rather than allowing a
+    # tiny cell to determine the interaction test.
+    frame = aggregate[aggregate["scenario_analysis"] != "other"].copy()
     for metric in ("HuMT", "E", "D", "F"):
         frame[f"z_{metric}"] = (frame[metric] - frame[metric].mean()) / frame[
             metric
@@ -1036,9 +1039,13 @@ def write_summary(
         & (coefficients["outcome"] == "OA_mean")
         & (coefficients["term"].isin(["z_E", "z_D", "z_F"]))
     ]
-    supported_terms = persona_coefficients.loc[
-        persona_coefficients["p_value"] < 0.05, "term"
-    ].str.replace("z_", "", regex=False).tolist()
+    supported_descriptions = []
+    for _, row in persona_coefficients[
+        persona_coefficients["p_value"] < 0.05
+    ].iterrows():
+        name = row["term"].replace("z_", "")
+        direction = "positive" if row["coefficient"] > 0 else "negative"
+        supported_descriptions.append(f"{name} ({direction})")
     rel_lines = []
     for _, row in reliability[
         reliability["metric"].isin(SCORE_METRICS)
@@ -1066,8 +1073,8 @@ def write_summary(
         f"{humt_oa['cluster_boot_ci_high']:.3f}).",
         f"- Adding PERSONA dimensions and planned covariates changed grouped-CV R² by "
         f"{incremental.iloc[0]['delta_cv_r_squared']:.3f} relative to the identically adjusted HuMT baseline.",
-        f"- The joint PERSONA increment is driven by independently supported coefficient(s): "
-        f"{', '.join(supported_terms) if supported_terms else 'none'}. E and D should not be interpreted as independent OA predictors here.",
+        f"- Independently supported PERSONA coefficients: "
+        f"{', '.join(supported_descriptions) if supported_descriptions else 'none'}.",
         f"- Consensus D distribution: {json.dumps(d_dist, sort_keys=True)}. Severe D is rare in "
         "the evaluated response corpus.",
         "",
