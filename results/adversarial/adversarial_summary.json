@@ -1,7 +1,0 @@
-{
-  "families": [
-    "CounselBench-ADV",
-    "CounselBench-EVAL"
-  ],
-  "note": "PERSONA-ADV prompts are not yet present; comparisons use available dataset families."
-}

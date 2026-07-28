@@ -1,2 +1,0 @@
-﻿metric,dataset_a,dataset_b,mean_a,mean_b,u_stat,p,cohens_d,hedges_g,cliffs_delta
-D,CounselBench-ADV,CounselBench-EVAL,1.0333333333333334,1.01,54963.0,0.10109727845914392,0.13889409431997243,0.13873572021014352,0.017833333333333333
