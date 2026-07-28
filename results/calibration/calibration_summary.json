@@ -1,7 +1,0 @@
-{
-  "ece": 0.041637008306660304,
-  "mce": 0.3453098269481127,
-  "brier": 0.14863819833677125,
-  "pearson_humt_oa": 0.20781366108063623,
-  "note": "HuMT min-max scaled; OA linearly mapped to [0,1]. Binary reliability uses median OA split."
-}

@@ -11,12 +11,8 @@ __pycache__/
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
-# Regenerable annotation intermediates (rebuild via persona_annotation)
-annotations/
-annotations_scored/
-annotations/*.log
-annotations_scored/*.log
-annotations_csv/*.log
+# Local analysis scratch files
+analysis_outputs/*.tmp
 *.tmp
 
 # OS files

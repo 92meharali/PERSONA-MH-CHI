@@ -1,7 +1,0 @@
-﻿model,dataset_family,n,proportion
-claude_opus_4_8,CounselBench-ADV,120,0.18181818181818182
-claude_opus_4_8,CounselBench-EVAL,100,0.15151515151515152
-gemini,CounselBench-ADV,120,0.18181818181818182
-gemini,CounselBench-EVAL,100,0.15151515151515152
-glm,CounselBench-ADV,120,0.18181818181818182
-glm,CounselBench-EVAL,100,0.15151515151515152

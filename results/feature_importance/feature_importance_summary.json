@@ -1,7 +1,0 @@
-{
-  "models": [
-    "RandomForest",
-    "XGBoost",
-    "LightGBM"
-  ]
-}
