@@ -4,11 +4,13 @@ PERSONA-MH evaluates whether human-like behavior is appropriate in mental-health
 
 ## Measures
 
-- **H / HuMT:** automated human-likeness
+- **H / HuMT:** automated human-likeness (raw HuMT; also remapped to a 1–5 Likert value `H` for scoring)
 - **E:** empathic appropriateness
 - **D:** anthropomorphic deception risk (v3.1)
 - **F:** contextual fit
 - **OA:** independent overall appropriateness
+- **P = (H, E, D, F):** multidimensional profile
+- **S = (H + E − D + F) / 4:** secondary equal-weight ranking score (not a replacement for OA)
 
 ## Final dataset
 
@@ -29,14 +31,14 @@ Raw prompts, generated responses, and HuMT values remain in their source directo
 
 ## Focused analysis
 
-The analysis covers only the research questions required for the paper:
+Confirmatory hypotheses:
 
-1. annotation reliability;
-2. paired model comparisons;
-3. HuMT versus OA;
-4. incremental value of E/D/F beyond HuMT;
-5. context moderation;
-6. ADV versus EVAL dataset associations.
+1. HuMT is not a reliable proxy for OA
+2. E/D/F add information beyond HuMT
+3. Joint model directions: E↑/F↑ with OA, D↓ with OA
+4. Models differ in OA/E/F profiles
+
+Also reported: reliability, correlations, context/dataset associations (exploratory), and the full **S** validity / ablation / sensitivity / model-ranking block.
 
 Run:
 

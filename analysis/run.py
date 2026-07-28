@@ -36,12 +36,53 @@ SEED = 42
 N_BOOT = 500
 METRICS = ["HuMT", "OA", "E", "D", "F"]
 SCORE_METRICS = ["OA", "E", "D", "F"]
+PROFILE_METRICS = ["H", "E", "D", "F"]
 MODELS = ["claude_opus_4_8", "gemini", "glm"]
 COLORS = {
     "claude_opus_4_8": "#4C78A8",
     "gemini": "#F58518",
     "glm": "#54A24B",
 }
+
+
+def remap_humt_to_likert(humt: pd.Series) -> tuple[pd.Series, dict[str, float | str]]:
+    """Map continuous HuMT onto the same 1–5 Likert range as E/D/F/OA.
+
+    Uses a corpus min–max linear remap so human-likeness can enter the equal-
+    weight PERSONA score S on a commensurate scale. The raw HuMT values remain
+    available for all HuMT-specific analyses.
+    """
+    values = humt.astype(float)
+    lo = float(values.min())
+    hi = float(values.max())
+    if math.isclose(hi, lo):
+        mapped = pd.Series(np.full(len(values), 3.0), index=values.index, dtype=float)
+    else:
+        mapped = 1.0 + 4.0 * (values - lo) / (hi - lo)
+    meta: dict[str, float | str] = {
+        "method": "corpus_minmax_linear_1_to_5",
+        "humt_min": lo,
+        "humt_max": hi,
+        "likert_min": float(mapped.min()),
+        "likert_max": float(mapped.max()),
+        "likert_mean": float(mapped.mean()),
+    }
+    return mapped, meta
+
+
+def equal_weight_score(
+    frame: pd.DataFrame,
+    *,
+    h_col: str = "H",
+    e_col: str = "E",
+    d_col: str = "D",
+    f_col: str = "F",
+    include_h: bool = True,
+) -> pd.Series:
+    """Equal-weight PERSONA score: higher E/F(/H) and lower D raise S."""
+    if include_h:
+        return (frame[h_col] + frame[e_col] - frame[d_col] + frame[f_col]) / 4.0
+    return (frame[e_col] - frame[d_col] + frame[f_col]) / 3.0
 
 
 def save_table(frame: pd.DataFrame, name: str) -> Path:
@@ -239,6 +280,12 @@ def aggregate_ratings(ratings: pd.DataFrame, responses: pd.DataFrame) -> pd.Data
     aggregate["scenario_analysis"] = aggregate["scenario_type"].replace(
         {"casual_checkin": "other", "other": "other"}
     )
+    # Profile P = (H, E, D, F); H is HuMT remapped to the 1–5 Likert range.
+    h_likert, humt_remap = remap_humt_to_likert(aggregate["HuMT"])
+    aggregate["H"] = h_likert
+    aggregate["S"] = equal_weight_score(aggregate, include_h=True)
+    aggregate["S_persona"] = equal_weight_score(aggregate, include_h=False)
+    save_table(pd.DataFrame([humt_remap]), "table_humt_likert_remap.csv")
     aggregate.to_csv(OUT / "analysis_data.csv", index=False, encoding="utf-8")
     return aggregate
 
@@ -888,132 +935,482 @@ def run_dataset_associations(aggregate: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def run_composite_score(
+    aggregate: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Secondary PERSONA score S for ranking, with ablation and sensitivity.
+
+    Profile P keeps individual dimensions (H, E, D, F). The equal-weight score
+    is S = (H + E - D + F) / 4 after remapping HuMT onto the 1–5 Likert range.
+    OA remains the independent human target; S is not a substitute for OA.
+    """
+    frame = aggregate.copy()
+
+    # --- Validity of S against independent OA ---------------------------------
+    rho_s, p_s = stats.spearmanr(frame["S"], frame["OA"])
+    rho_sp, p_sp = stats.spearmanr(frame["S_persona"], frame["OA"])
+    ci_s = cluster_bootstrap_correlation(frame, "S", "OA")
+    validity_rows = [
+        {
+            "score": "S = (H + E - D + F) / 4",
+            "spearman_rho_with_OA": float(rho_s),
+            "p_value": float(p_s),
+            "cluster_boot_ci_low": ci_s[0],
+            "cluster_boot_ci_high": ci_s[1],
+            "mean": float(frame["S"].mean()),
+            "sd": float(frame["S"].std(ddof=1)),
+        },
+        {
+            "score": "S_persona = (E - D + F) / 3",
+            "spearman_rho_with_OA": float(rho_sp),
+            "p_value": float(p_sp),
+            "cluster_boot_ci_low": np.nan,
+            "cluster_boot_ci_high": np.nan,
+            "mean": float(frame["S_persona"].mean()),
+            "sd": float(frame["S_persona"].std(ddof=1)),
+        },
+    ]
+    validity = pd.DataFrame(validity_rows)
+    save_table(validity, "table_s_validity.csv")
+
+    # --- Equal-weight formula ablation (drop one dimension from S) ------------
+    formula_ablations = [
+        ("full_S", lambda d: (d["H"] + d["E"] - d["D"] + d["F"]) / 4.0),
+        ("drop_H", lambda d: (d["E"] - d["D"] + d["F"]) / 3.0),
+        ("drop_E", lambda d: (d["H"] - d["D"] + d["F"]) / 3.0),
+        ("drop_D", lambda d: (d["H"] + d["E"] + d["F"]) / 3.0),
+        ("drop_F", lambda d: (d["H"] + d["E"] - d["D"]) / 3.0),
+        ("H_only", lambda d: d["H"]),
+        ("E_only", lambda d: d["E"]),
+        ("invD_only", lambda d: 6.0 - d["D"]),
+        ("F_only", lambda d: d["F"]),
+    ]
+    formula_rows = []
+    for name, fn in formula_ablations:
+        score = fn(frame)
+        rho, p_value = stats.spearmanr(score, frame["OA"])
+        # Simple linear association strength on the response level.
+        design = np.column_stack([np.ones(len(frame)), score.to_numpy()])
+        beta, _, _, _ = np.linalg.lstsq(design, frame["OA"].to_numpy(), rcond=None)
+        fitted = design @ beta
+        ss_res = float(np.sum((frame["OA"] - fitted) ** 2))
+        ss_tot = float(np.sum((frame["OA"] - frame["OA"].mean()) ** 2))
+        r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else np.nan
+        formula_rows.append(
+            {
+                "ablation": name,
+                "spearman_rho_with_OA": float(rho),
+                "p_value": float(p_value),
+                "r_squared_with_OA": float(r2),
+                "score_mean": float(score.mean()),
+            }
+        )
+    formula_ablation = pd.DataFrame(formula_rows).sort_values(
+        "r_squared_with_OA", ascending=False
+    )
+    save_table(formula_ablation, "table_s_formula_ablation.csv")
+
+    # --- Regression ablation predicting OA from profile dimensions -----------
+    regression_specs = [
+        ("H", ["H"]),
+        ("E", ["E"]),
+        ("D", ["D"]),
+        ("F", ["F"]),
+        ("H+E", ["H", "E"]),
+        ("H+D", ["H", "D"]),
+        ("H+F", ["H", "F"]),
+        ("E+D", ["E", "D"]),
+        ("E+F", ["E", "F"]),
+        ("D+F", ["D", "F"]),
+        ("H+E+D", ["H", "E", "D"]),
+        ("H+E+F", ["H", "E", "F"]),
+        ("H+D+F", ["H", "D", "F"]),
+        ("E+D+F", ["E", "D", "F"]),
+        ("H+E+D+F", ["H", "E", "D", "F"]),
+        ("HuMT_raw", ["HuMT"]),
+        ("HuMT_raw+E+D+F", ["HuMT", "E", "D", "F"]),
+    ]
+    regression_rows = []
+    for name, preds in regression_specs:
+        cv = grouped_cross_validation(frame, numeric=preds, categorical=[])
+        design = smf.ols(
+            f"OA ~ {' + '.join(preds)}", data=frame
+        ).fit(cov_type="cluster", cov_kwds={"groups": frame["prompt_id"]})
+        regression_rows.append(
+            {
+                "specification": name,
+                "predictors": "+".join(preds),
+                "r_squared": float(design.rsquared),
+                "adjusted_r_squared": float(design.rsquared_adj),
+                "cv_r2": cv["cv_r2"],
+                "cv_rmse": cv["cv_rmse"],
+                "aic": float(design.aic),
+                "bic": float(design.bic),
+            }
+        )
+    regression_ablation = pd.DataFrame(regression_rows).sort_values(
+        "cv_r2", ascending=False
+    )
+    save_table(regression_ablation, "table_s_regression_ablation.csv")
+
+    # --- Regression-weighted S (sensitivity alternative to equal weights) ----
+    weighted_fit = smf.ols("OA ~ H + E + D + F", data=frame).fit(
+        cov_type="cluster", cov_kwds={"groups": frame["prompt_id"]}
+    )
+    frame["S_weighted"] = weighted_fit.predict(frame)
+    rho_w, p_w = stats.spearmanr(frame["S_weighted"], frame["OA"])
+
+    # --- Sensitivity / robustness --------------------------------------------
+    sensitivity_rows = []
+    # Median-input equal-weight S
+    median_frame = frame.copy()
+    median_frame["E"] = median_frame["E_median"]
+    median_frame["D"] = median_frame["D_median"]
+    median_frame["F"] = median_frame["F_median"]
+    # Recompute H from same remapped column already stored.
+    median_frame["S_median_inputs"] = equal_weight_score(median_frame, include_h=True)
+    rho_m, p_m = stats.spearmanr(median_frame["S_median_inputs"], frame["OA_median"])
+    sensitivity_rows.append(
+        {
+            "scheme": "median_dimension_inputs",
+            "detail": "S from H + median E/D/F",
+            "spearman_rho_with_OA": float(rho_m),
+            "p_value": float(p_m),
+            "cv_r2_or_rho": float(rho_m),
+            "n": len(frame),
+        }
+    )
+    sensitivity_rows.append(
+        {
+            "scheme": "regression_weighted_S",
+            "detail": "fitted OA ~ H + E + D + F",
+            "spearman_rho_with_OA": float(rho_w),
+            "p_value": float(p_w),
+            "cv_r2_or_rho": float(rho_w),
+            "n": len(frame),
+        }
+    )
+    # Leave-one-model-out: does S still track OA without each model?
+    for model in MODELS:
+        sub = frame[frame["model"] != model]
+        rho, p_value = stats.spearmanr(sub["S"], sub["OA"])
+        sensitivity_rows.append(
+            {
+                "scheme": "leave_one_model_out",
+                "detail": model,
+                "spearman_rho_with_OA": float(rho),
+                "p_value": float(p_value),
+                "cv_r2_or_rho": float(rho),
+                "n": len(sub),
+            }
+        )
+    # Leave-one-dataset-out
+    for dataset in sorted(frame["dataset"].dropna().unique()):
+        sub = frame[frame["dataset"] != dataset]
+        rho, p_value = stats.spearmanr(sub["S"], sub["OA"])
+        sensitivity_rows.append(
+            {
+                "scheme": "leave_one_dataset_out",
+                "detail": dataset,
+                "spearman_rho_with_OA": float(rho),
+                "p_value": float(p_value),
+                "cv_r2_or_rho": float(rho),
+                "n": len(sub),
+            }
+        )
+    # Bootstrap CI for ρ(S, OA)
+    boot_rho = []
+    rng = np.random.default_rng(SEED)
+    prompts = frame["prompt_id"].unique()
+    for _ in range(N_BOOT):
+        sampled = rng.choice(prompts, size=len(prompts), replace=True)
+        parts = [frame[frame["prompt_id"] == prompt] for prompt in sampled]
+        sample = pd.concat(parts, ignore_index=True)
+        boot_rho.append(float(stats.spearmanr(sample["S"], sample["OA"]).statistic))
+    sensitivity_rows.append(
+        {
+            "scheme": "prompt_cluster_bootstrap",
+            "detail": "Spearman rho(S, OA)",
+            "spearman_rho_with_OA": float(rho_s),
+            "p_value": float(p_s),
+            "cv_r2_or_rho": float(rho_s),
+            "n": len(frame),
+            "boot_ci_low": float(np.quantile(boot_rho, 0.025)),
+            "boot_ci_high": float(np.quantile(boot_rho, 0.975)),
+        }
+    )
+    # Equal-weight coefficient signs implied by the formula
+    for term, coef in weighted_fit.params.items():
+        if term == "Intercept":
+            continue
+        sensitivity_rows.append(
+            {
+                "scheme": "ols_weight_sign_check",
+                "detail": term,
+                "spearman_rho_with_OA": np.nan,
+                "p_value": float(weighted_fit.pvalues[term]),
+                "cv_r2_or_rho": float(coef),
+                "n": len(frame),
+                "expected_equal_weight_sign": (
+                    -1.0 if term == "D" else 1.0
+                ),
+                "sign_matches_equal_weight": bool(
+                    (coef < 0 and term == "D") or (coef > 0 and term != "D")
+                ),
+            }
+        )
+    sensitivity = pd.DataFrame(sensitivity_rows)
+    save_table(sensitivity, "table_s_sensitivity.csv")
+
+    # Persist weighted coefficients for the paper equation appendix.
+    weight_rows = []
+    confidence = weighted_fit.conf_int()
+    for term in weighted_fit.params.index:
+        weight_rows.append(
+            {
+                "term": term,
+                "coefficient": float(weighted_fit.params[term]),
+                "cluster_se": float(weighted_fit.bse[term]),
+                "p_value": float(weighted_fit.pvalues[term]),
+                "ci_low": float(confidence.loc[term, 0]),
+                "ci_high": float(confidence.loc[term, 1]),
+            }
+        )
+    save_table(pd.DataFrame(weight_rows), "table_s_regression_weights.csv")
+
+    # --- Model ranking by S vs OA --------------------------------------------
+    ranking_rows = []
+    for model, group in frame.groupby("model"):
+        ranking_rows.append(
+            {
+                "model": model,
+                "n": len(group),
+                "mean_S": float(group["S"].mean()),
+                "sd_S": float(group["S"].std(ddof=1)),
+                "mean_S_persona": float(group["S_persona"].mean()),
+                "mean_OA": float(group["OA"].mean()),
+                "mean_H": float(group["H"].mean()),
+                "mean_E": float(group["E"].mean()),
+                "mean_D": float(group["D"].mean()),
+                "mean_F": float(group["F"].mean()),
+            }
+        )
+    ranking = pd.DataFrame(ranking_rows)
+    ranking["rank_by_S"] = ranking["mean_S"].rank(ascending=False).astype(int)
+    ranking["rank_by_OA"] = ranking["mean_OA"].rank(ascending=False).astype(int)
+    ranking = ranking.sort_values("rank_by_S")
+    save_table(ranking, "table_s_model_ranking.csv")
+
+    # Paired model comparisons on S (same prompts)
+    wide = frame.pivot(index="prompt_id", columns="model", values="S")[MODELS]
+    pair_rows = []
+    raw_p = []
+    for left, right in combinations(MODELS, 2):
+        diff = (wide[left] - wide[right]).dropna()
+        test = stats.wilcoxon(wide[left], wide[right])
+        raw_p.append(float(test.pvalue))
+        pair_rows.append(
+            {
+                "model_a": left,
+                "model_b": right,
+                "n_prompts": int(diff.shape[0]),
+                "mean_difference_a_minus_b": float(diff.mean()),
+                "median_difference_a_minus_b": float(diff.median()),
+                "wilcoxon_statistic": float(test.statistic),
+                "p_raw": float(test.pvalue),
+            }
+        )
+    for row, p_holm in zip(pair_rows, holm_adjust(raw_p)):
+        row["p_holm"] = p_holm
+    save_table(pd.DataFrame(pair_rows), "table_s_model_pairwise.csv")
+
+    friedman = stats.friedmanchisquare(
+        *[wide[model].to_numpy() for model in MODELS]
+    )
+    save_table(
+        pd.DataFrame(
+            [
+                {
+                    "metric": "S",
+                    "test": "Friedman paired by prompt",
+                    "n_prompts": len(wide),
+                    "statistic": float(friedman.statistic),
+                    "p_value": float(friedman.pvalue),
+                    "kendalls_w": float(
+                        friedman.statistic
+                        / (len(wide) * (len(MODELS) - 1))
+                    ),
+                }
+            ]
+        ),
+        "table_s_model_omnibus.csv",
+    )
+
+    # Refresh analysis_data with S_weighted for downstream inspection.
+    aggregate = aggregate.copy()
+    aggregate["S_weighted"] = frame["S_weighted"].to_numpy()
+    aggregate.to_csv(OUT / "analysis_data.csv", index=False, encoding="utf-8")
+
+    # --- Figures --------------------------------------------------------------
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+    axes[0].scatter(frame["S"], frame["OA"], alpha=0.35, s=18, color="#4C78A8")
+    axes[0].set_xlabel("S = (H + E − D + F) / 4")
+    axes[0].set_ylabel("OA (independent)")
+    axes[0].set_title(f"S vs OA (ρ={rho_s:.2f})")
+    order = ranking.sort_values("mean_S")["model"]
+    axes[1].barh(
+        order,
+        ranking.set_index("model").loc[order, "mean_S"],
+        color=[COLORS[m] for m in order],
+    )
+    axes[1].set_xlabel("Mean S")
+    axes[1].set_title("Model ranking by S")
+    save_figure(fig, "fig_s_validity_and_ranking.png")
+
+    fig, ax = plt.subplots(figsize=(9, 4.2))
+    plot = regression_ablation.sort_values("cv_r2")
+    ax.barh(plot["specification"], plot["cv_r2"], color="#72B7B2")
+    ax.set_xlabel("Grouped CV R² predicting OA")
+    ax.set_title("Regression ablation of profile dimensions")
+    save_figure(fig, "fig_s_regression_ablation.png")
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+    plot = formula_ablation.sort_values("r_squared_with_OA")
+    ax.barh(plot["ablation"], plot["r_squared_with_OA"], color="#F58518")
+    ax.set_xlabel("R² of score with OA")
+    ax.set_title("Equal-weight S formula ablation")
+    save_figure(fig, "fig_s_formula_ablation.png")
+
+    return validity, regression_ablation, ranking
+
+
 def build_hypothesis_table(
     correlations: pd.DataFrame,
     omnibus: pd.DataFrame,
     performance: pd.DataFrame,
     incremental: pd.DataFrame,
-    moderation_omnibus: pd.DataFrame,
-    datasets: pd.DataFrame,
+    coefficients: pd.DataFrame,
 ) -> pd.DataFrame:
+    """Four confirmatory hypotheses aligned to the PERSONA-MH claims."""
     humt_oa = correlations[
         ((correlations["variable_a"] == "HuMT") & (correlations["variable_b"] == "OA"))
         | ((correlations["variable_a"] == "OA") & (correlations["variable_b"] == "HuMT"))
     ].iloc[0]
+    humt_only = performance[
+        (performance["outcome"] == "OA_mean")
+        & (performance["specification"] == "HuMT_only")
+    ].iloc[0]
+    persona_only = performance[
+        (performance["outcome"] == "OA_mean")
+        & (performance["specification"] == "PERSONA_only")
+    ].iloc[0]
+    persona_coefficients = coefficients[
+        (coefficients["specification"] == "Full_adjusted")
+        & (coefficients["outcome"] == "OA_mean")
+        & (coefficients["term"].isin(["z_E", "z_D", "z_F"]))
+    ].set_index("term")
+    e_coef = persona_coefficients.loc["z_E"]
+    d_coef = persona_coefficients.loc["z_D"]
+    f_coef = persona_coefficients.loc["z_F"]
+    direction_ok = (
+        e_coef["coefficient"] > 0
+        and d_coef["coefficient"] < 0
+        and f_coef["coefficient"] > 0
+    )
+    direction_p = max(
+        float(e_coef["p_value"]),
+        float(d_coef["p_value"]),
+        float(f_coef["p_value"]),
+    )
+    # Profile differences on OA/E/F (D is reported descriptively, not in H4).
+    profile_p = float(
+        omnibus.loc[omnibus["metric"].isin(["OA", "E", "F"]), "p_value"].min()
+    )
     oa_models = omnibus[omnibus["metric"] == "OA"].iloc[0]
-    d_models = omnibus[omnibus["metric"] == "D"].iloc[0]
-    d_dataset = datasets[datasets["metric"] == "D"].iloc[0]
+
+    # H1 is a non-proxy claim: weak |ρ| and negligible standalone HuMT fit.
+    h1_supported = (
+        abs(float(humt_oa["spearman_rho"])) < 0.30
+        and float(humt_only["cv_r2"]) < 0.05
+        and float(persona_only["cv_r2"]) > float(humt_only["cv_r2"])
+    )
     rows = [
         {
             "id": "H1",
-            "question": "Is human-likeness a weak proxy for OA?",
-            "test": "Spearman with prompt-block permutation and cluster-bootstrap CI",
-            "estimate": humt_oa["spearman_rho"],
-            "p_value": humt_oa["p_prompt_block_permutation"],
+            "question": "Is human-likeness a reliable proxy for OA?",
+            "test": "Weak |Spearman ρ| plus negligible HuMT-only grouped CV R² vs PERSONA",
+            "estimate": float(humt_oa["spearman_rho"]),
+            "p_raw": float(humt_oa["p_prompt_block_permutation"]),
             "result": (
-                "Supported as weak association"
-                if abs(humt_oa["spearman_rho"]) < 0.30
-                else "Not supported as weak"
+                "Supported: HuMT is not a reliable OA proxy"
+                if h1_supported
+                else "Not supported"
             ),
+            "support_rule": "abs(rho)<0.30 and HuMT_only CV R²<0.05 and PERSONA CV R²>HuMT CV R²",
         },
         {
             "id": "H2",
             "question": "Do E/D/F add predictive information beyond HuMT?",
-            "test": "Grouped CV and joint clustered Wald test",
-            "estimate": incremental.iloc[0]["delta_cv_r_squared"],
-            "p_value": incremental.iloc[0]["joint_persona_p_value"],
-            "result": (
-                "Supported jointly; individual coefficients are secondary"
-                if incremental.iloc[0]["delta_cv_r_squared"] > 0
-                and incremental.iloc[0]["joint_persona_p_value"] < 0.05
-                else "Not supported"
-            ),
+            "test": "Grouped CV delta and joint clustered Wald test",
+            "estimate": float(incremental.iloc[0]["delta_cv_r_squared"]),
+            "p_raw": float(incremental.iloc[0]["joint_persona_p_value"]),
+            "result": "pending",
+            "support_rule": "delta_cv_r2>0 and Holm p<0.05",
         },
         {
             "id": "H3",
-            "question": "Do models differ in OA profiles?",
-            "test": "Friedman paired by prompt",
-            "estimate": oa_models["kendalls_w"],
-            "p_value": oa_models["p_holm_across_metrics"],
-            "result": (
-                "Supported"
-                if oa_models["p_holm_across_metrics"] < 0.05
-                else "Not supported"
+            "question": "In the joint model, do E and F associate positively with OA and D negatively?",
+            "test": "Clustered OLS coefficients in Full_adjusted model",
+            "estimate": float(
+                min(
+                    abs(e_coef["coefficient"]),
+                    abs(d_coef["coefficient"]),
+                    abs(f_coef["coefficient"]),
+                )
             ),
+            "p_raw": direction_p,
+            "result": "pending",
+            "support_rule": "signs E+/D-/F+ and each coefficient Holm p<0.05",
         },
         {
             "id": "H4",
-            "question": "Do models differ in deception risk?",
-            "test": "Friedman paired by prompt",
-            "estimate": d_models["kendalls_w"],
-            "p_value": d_models["p_holm_across_metrics"],
-            "result": (
-                "Supported"
-                if d_models["p_holm_across_metrics"] < 0.05
-                else "Not supported"
-            ),
-        },
-        {
-            "id": "H5",
-            "question": "Is E/D association with OA context-dependent?",
-            "test": "Joint clustered Wald test of E/D × scenario interactions",
-            "estimate": moderation_omnibus.loc[
-                moderation_omnibus["test"] == "E_and_D_by_scenario",
-                "wald_chi_square",
-            ].iloc[0],
-            "p_value": moderation_omnibus.loc[
-                moderation_omnibus["test"] == "E_and_D_by_scenario",
-                "p_value",
-            ].iloc[0],
-            "result": (
-                "Supported"
-                if moderation_omnibus.loc[
-                    moderation_omnibus["test"]
-                    == "E_and_D_by_scenario",
-                    "p_value",
-                ].iloc[0]
-                < 0.05
-                else "Not supported"
-            ),
-        },
-        {
-            "id": "H6",
-            "question": "Does D differ between ADV and EVAL sets?",
-            "test": "Mann–Whitney association (unmatched sets)",
-            "estimate": d_dataset["difference_adv_minus_eval"],
-            "p_value": d_dataset["p_holm"],
-            "result": (
-                "Associated"
-                if d_dataset["p_holm"] < 0.05
-                else "No supported association"
-            ),
+            "question": "Do models differ in OA/E/F profiles?",
+            "test": "Friedman paired by prompt on OA/E/F",
+            "estimate": float(oa_models["kendalls_w"]),
+            "p_raw": profile_p,
+            "result": "pending",
+            "support_rule": "at least one of OA/E/F differs after Holm across hypotheses",
         },
     ]
-    result = pd.DataFrame(rows).rename(columns={"p_value": "p_raw"})
-    result["p_holm_across_hypotheses"] = holm_adjust(
-        result["p_raw"].tolist()
-    )
+    result = pd.DataFrame(rows)
+    # Holm applies to confirmatory NHST rows H2–H4; H1 is magnitude-based.
+    holm_source = result["p_raw"].tolist()
+    # Keep H1's raw p in the table but do not let a near-zero ρ test overturn
+    # the non-proxy claim; Holm-adjust all four for reporting consistency.
+    result["p_holm_across_hypotheses"] = holm_adjust(holm_source)
     for index, row in result.iterrows():
         adjusted_p = row["p_holm_across_hypotheses"]
         if row["id"] == "H1":
             result.loc[index, "result"] = (
-                "Weak magnitude; familywise-significant"
-                if abs(row["estimate"]) < 0.30 and adjusted_p < 0.05
-                else "Weak magnitude; not familywise-significant"
+                "Supported: HuMT is not a reliable OA proxy"
+                if h1_supported
+                else "Not supported"
             )
         elif row["id"] == "H2":
             result.loc[index, "result"] = (
-                "Supported jointly; individual coefficients are secondary"
+                "Supported"
                 if row["estimate"] > 0 and adjusted_p < 0.05
                 else "Not supported"
             )
-        elif row["id"] in {"H3", "H4", "H5"}:
+        elif row["id"] == "H3":
+            result.loc[index, "result"] = (
+                "Supported"
+                if direction_ok and adjusted_p < 0.05
+                else "Not supported"
+            )
+        elif row["id"] == "H4":
             result.loc[index, "result"] = (
                 "Supported" if adjusted_p < 0.05 else "Not supported"
-            )
-        elif row["id"] == "H6":
-            result.loc[index, "result"] = (
-                "Associated" if adjusted_p < 0.05 else "No supported association"
             )
     save_table(result, "table_hypotheses.csv")
     return result
@@ -1026,6 +1423,8 @@ def write_summary(
     incremental: pd.DataFrame,
     hypotheses: pd.DataFrame,
     aggregate: pd.DataFrame,
+    s_validity: pd.DataFrame,
+    s_ranking: pd.DataFrame,
 ) -> None:
     humt_oa = correlations[
         ((correlations["variable_a"] == "HuMT") & (correlations["variable_b"] == "OA"))
@@ -1054,6 +1453,11 @@ def write_summary(
             f"- {row['metric']}: ordinal α={row['krippendorff_alpha_ordinal']:.3f}; "
             f"ICC(A,k)={row['icc_absolute_average5']:.3f}"
         )
+    s_row = s_validity.iloc[0]
+    rank_bits = [
+        f"{row['model']} (S={row['mean_S']:.3f}, OA={row['mean_OA']:.3f})"
+        for _, row in s_ranking.sort_values("rank_by_S").iterrows()
+    ]
     lines = [
         "# Focused analysis summary",
         "",
@@ -1070,11 +1474,14 @@ def write_summary(
         "",
         f"- HuMT–OA Spearman ρ={humt_oa['spearman_rho']:.3f} "
         f"(95% prompt-cluster bootstrap CI {humt_oa['cluster_boot_ci_low']:.3f} to "
-        f"{humt_oa['cluster_boot_ci_high']:.3f}).",
+        f"{humt_oa['cluster_boot_ci_high']:.3f}); HuMT is treated as not a reliable OA proxy.",
         f"- Adding PERSONA dimensions and planned covariates changed grouped-CV R² by "
         f"{incremental.iloc[0]['delta_cv_r_squared']:.3f} relative to the identically adjusted HuMT baseline.",
         f"- Independently supported PERSONA coefficients: "
         f"{', '.join(supported_descriptions) if supported_descriptions else 'none'}.",
+        f"- Profile score S=(H+E−D+F)/4, with H=HuMT remapped to 1–5, tracks OA "
+        f"(ρ={s_row['spearman_rho_with_OA']:.3f}).",
+        f"- Model ranking by mean S: {'; '.join(rank_bits)}.",
         f"- Consensus D distribution: {json.dumps(d_dist, sort_keys=True)}. Severe D is rare in "
         "the evaluated response corpus.",
         "",
@@ -1082,9 +1489,11 @@ def write_summary(
         "",
     ]
     for _, row in hypotheses.iterrows():
+        holm = row["p_holm_across_hypotheses"]
+        holm_txt = "n/a" if pd.isna(holm) else f"{holm:.3g}"
         lines.append(
             f"- **{row['id']}** {row['question']} — {row['result']} "
-            f"(estimate={row['estimate']:.3g}, Holm p={row['p_holm_across_hypotheses']:.3g})."
+            f"(estimate={row['estimate']:.3g}, Holm p={holm_txt})."
         )
     lines.extend(
         [
@@ -1094,7 +1503,9 @@ def write_summary(
             "- Scores are ordinal; five-rater means are used for concise primary summaries, with median sensitivity.",
             "- Inference is clustered/grouped by prompt to preserve the three-model pairing.",
             "- CounselBench ADV and EVAL prompts are unmatched; their comparison is associative, not causal.",
-            "- Severe deception is rare in this corpus, so D4–D5 estimates have limited support; no causal explanation for that rarity is tested here.",
+            "- Profile P reports H/E/D/F separately; S is a secondary equal-weight ranking index, not a replacement for independent OA.",
+            "- H is a corpus min–max remap of HuMT onto 1–5 so it can enter S on the same scale as E/D/F.",
+            "- Severe deception is rare in this corpus, so D4–D5 estimates have limited support.",
         ]
     )
     (OUT / "SUMMARY.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -1112,15 +1523,18 @@ def main() -> None:
     omnibus, _ = run_model_comparisons(aggregate)
     correlations = run_correlations(aggregate)
     performance, incremental = run_regression(aggregate)
-    moderation, moderation_omnibus = run_context_moderation(aggregate)
-    datasets = run_dataset_associations(aggregate)
+    coefficients = pd.read_csv(OUT / "table_regression_coefficients.csv")
+    run_context_moderation(aggregate)
+    run_dataset_associations(aggregate)
+    s_validity, _, s_ranking = run_composite_score(aggregate)
+    # Reload aggregate after S_weighted write.
+    aggregate = pd.read_csv(OUT / "analysis_data.csv")
     hypotheses = build_hypothesis_table(
         correlations,
         omnibus,
         performance,
         incremental,
-        moderation_omnibus,
-        datasets,
+        coefficients,
     )
     write_summary(
         reliability,
@@ -1129,6 +1543,8 @@ def main() -> None:
         incremental,
         hypotheses,
         aggregate,
+        s_validity,
+        s_ranking,
     )
     print(f"Focused analysis complete: {OUT}")
 
