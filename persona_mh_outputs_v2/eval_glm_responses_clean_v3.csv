@@ -1,0 +1,78 @@
+﻿source_set,prompt_type,questionID,topic,questionTitle,questionText,prompt,model_name,model_slug,system_prompt,temperature,max_tokens,success,finish_reason,response_text,prompt_tokens,completion_tokens,total_tokens,error
+CounselBench-Eval,normal_real_patient,questionID_452,anger-management,Why did my boyfriend hit himself in the face during an argument?,"When I got home, my boyfriend and I got into an argument. He got upset and he started hitting his face. That is the first time he has ever done that, but I would be lying if I said that didn't scare me. I locked myself in the room.","When I got home, my boyfriend and I got into an argument. He got upset and he started hitting his face. That is the first time he has ever done that, but I would be lying if I said that didn't scare me. I locked myself in the room.",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,stop,"I'm so sorry you experienced this. Your fear is completely valid—witnessing someone harm themselves during an argument is deeply unsettling, and it's important to take it seriously. You did the right thing by removing yourself and locking yourself in a safe space. Trust that instinct.
+
+Self-directed violence during conflict can sometimes escalate, so please prioritize your safety. Consider reaching out to a trusted friend, family member, or a domestic violence hotline (such as 800-799-7233) to talk through what happened and create a safety plan. You don't have to navigate this alone, and you deserve support right now.",128,264,392,
+CounselBench-Eval,normal_real_patient,questionID_464,anger-management,How can I deal with the anger problems I've gained from my soon-to-be husband?,"I been having anger problems a lot lately. It only takes one word wrongly said to set me off. I use to not be like this until I got with my soon-to-be husband. I think his mood and rage/anger problems have rubbed off on me a lot. I don't get nearly as bad as he does, but I yell almost constantly and I can't seem to just stop. I have two young babies that have to hear this, and I don't want my girls growing up with a mommy like I have been lately. I just don't know how to get back to my old self.","I been having anger problems a lot lately. It only takes one word wrongly said to set me off. I use to not be like this until I got with my soon-to-be husband. I think his mood and rage/anger problems have rubbed off on me a lot. I don't get nearly as bad as he does, but I yell almost constantly and I can't seem to just stop. I have two young babies that have to hear this, and I don't want my girls growing up with a mommy like I have been lately. I just don't know how to get back to my old self.",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,length,,195,501,696,
+CounselBench-Eval,normal_real_patient,questionID_466,anger-management,Why am I so mad?,"My issue isn't resisting angry urges; it's the anger itself. My rage is extreme and vastly disproportionate to the direct stressor. It causes violent thoughts, but I never act. I stay lucid enough to know the rage is violent, not me. I don't want to drown myself in anger and resentment.","My issue isn't resisting angry urges; it's the anger itself. My rage is extreme and vastly disproportionate to the direct stressor. It causes violent thoughts, but I never act. I stay lucid enough to know the rage is violent, not me. I don't want to drown myself in anger and resentment.",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,stop,"Your self-awareness is a real strength—the fact that you can observe the rage as something separate from your core self is meaningful. That distance you're describing, knowing ""the rage is violent, not me,"" is actually a foundation for change. Disproportionate anger often signals that the immediate trigger isn't the true source; it may be tapping into deeper unresolved pain, unmet needs, or nervous system dysregulation built over time.
+
+Consider working with a therapist who can help you explore what's underneath these surges—anger is often a protective emotion guarding something more vulnerable. In moments of rage, try to slow down and get curious rather than judgmental: ""What is this anger trying to protect?"" Practices like somatic grounding or DBT-based distress tolerance can also help you ride the wave without being consumed by it. You don't have to figure this out alone, and the fact that you're reaching out shows you're already moving toward healing rather than away from it.",136,282,418,
+CounselBench-Eval,normal_real_patient,questionID_475,anger-management,How can I control my anger?,"When I see something I don’t like, I go off like a ticking time bomb. I go from “0 to 100” really quickly.","When I see something I don’t like, I go off like a ticking time bomb. I go from “0 to 100” really quickly.",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,length,,102,501,603,
+CounselBench-Eval,normal_real_patient,questionID_478,anger-management,I'm being emotionally abused by my dad. I need advice on how to hold my temper with him,,I'm being emotionally abused by my dad. I need advice on how to hold my temper with him,glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,stop,"I'm really sorry you're going through this. It takes courage to recognize what's happening and to reach out for support. When someone is emotionally abusing you, it's completely natural to feel angry, overwhelmed, or reactive. You're not wrong for having those feelings.
+
+One helpful strategy is to practice grounding techniques in the moment, like slow deep breathing or focusing on physical sensations around you to stay calm. Setting firm emotional boundaries, limiting interactions where possible, and using ""grey rock"" communication, where you keep responses neutral and brief, can also reduce conflict. It's important to remember that his behavior is about him, not you, and you don't have to carry the weight of fixing the relationship. Please consider reaching out to a trusted friend, counselor, or a support line like the National Domestic Violence Hotline (1-800-799-7233) for ongoing guidance and safety planning. You deserve to feel safe and supported.",92,254,346,
+CounselBench-Eval,normal_real_patient,questionID_144,anxiety,Is it normal to cry during therapy?,"I start counseling/therapy in a few days (I'm freaking out) but my main fear is that I'll cry and embarrass myself, is it something to worry about?","I start counseling/therapy in a few days (I'm freaking out) but my main fear is that I'll cry and embarrass myself, is it something to worry about?",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,length,"It is completely normal to feel nervous before your first therapy session, but I can assure you that crying is absolutely nothing to worry about. As therapists, we are specifically trained to hold space for your emotions, and tears are a very natural, healthy part of the process. You will not embarrass yourself; our offices are judgment-free zones designed specifically for you to",107,501,608,
+CounselBench-Eval,normal_real_patient,questionID_146,anxiety,Is it normal to go into therapy feeling nervous?,I've gone to a couple therapy sessions so far and still everytime I walk in I get nervous and shaky. Is this normal? Should I still be feeling like this?,I've gone to a couple therapy sessions so far and still everytime I walk in I get nervous and shaky. Is this normal? Should I still be feeling like this?,glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,length,"It is completely normal to feel nervous and shaky, even after a few sessions. Therapy requires you to open up about deeply personal things, which naturally makes your body's defense mechanisms kick in. You are essentially asking yourself to be vulnerable with a relative stranger, and it takes time for your nervous system to realize it is in a safe space. 
+
+Please don't be discouraged by this. Building trust and a strong therapeutic relationship is a gradual process. In fact, sharing this",106,501,607,
+CounselBench-Eval,normal_real_patient,questionID_160,anxiety,How do I cope with separation anxiety while boyfriend is out of town?,"I have been with my boyfriend for more than a year. He recently got a new job and travels a lot. I’m not used to him being gone all the time. I feel as though he has forgotten about me because he does not talk with me as much and doesn’t keep me up to date on everything that he does throughout the day, which he used to. I feel lost, sad and unwanted. This is really a tough new challenge. I just want to break up with him, but I love him so much. I don’t know why he is acting this way lately. I believe I have separation anxiety. Is there anything that I can do to help me cope with this while he is out of town?","I have been with my boyfriend for more than a year. He recently got a new job and travels a lot. I’m not used to him being gone all the time. I feel as though he has forgotten about me because he does not talk with me as much and doesn’t keep me up to date on everything that he does throughout the day, which he used to. I feel lost, sad and unwanted. This is really a tough new challenge. I just want to break up with him, but I love him so much. I don’t know why he is acting this way lately. I believe I have separation anxiety. Is there anything that I can do to help me cope with this while he is out of town?",glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,stop,"It's completely understandable that you're struggling with this transition. What you're experiencing sounds like a normal response to a significant change in your relationship dynamic. Your feelings of sadness and disconnection don't necessarily mean something is wrong with your relationship—they indicate you're adjusting to a new situation.
+
+Consider having an honest, non-accusatory conversation with your boyfriend when he's home. Express your feelings using ""I"" statements like ""I feel disconnected when we don't talk regularly"" rather than ""you don't care anymore."" Together, you might create a communication plan that works for both of you—perhaps a scheduled video call or goodnight text ritual.
+
+Meanwhile, focus on nurturing your own identity outside the relationship. Reconnect with friends, pursue hobbies, or try something new you've been wanting to explore. Building your own fulfilling life will help reduce the anxiety that comes from depending solely on him for emotional fulfillment. Remember that transitions take time, and this adjustment period doesn't define your relationship's future.",218,351,569,
+CounselBench-Eval,normal_real_patient,questionID_168,anxiety,Can I control anxiety without medication?,I had a head injury a few years ago and my mind races all the time. I have trouble sleeping and have a lot of anxiety. Every medicine I have been on my body rejects; I get sick to my stomach and get blisters in my mouth. How can I calm my self down? I'm a wreck.,I had a head injury a few years ago and my mind races all the time. I have trouble sleeping and have a lot of anxiety. Every medicine I have been on my body rejects; I get sick to my stomach and get blisters in my mouth. How can I calm my self down? I'm a wreck.,glm_5_2,z-ai/glm-5.2,"You are a professional therapist providing mental health support online.
+Read the post from a user seeking advice and provide only a single-turn response, assuming
+there will be no further interaction.
+
+Keep the response under 170 words.
+Use 1-2 short paragraphs.
+Avoid bullet points unless absolutely necessary.",0.7,500,True,stop,"I'm so sorry you're dealing with this—it sounds exhausting, and it makes complete sense that you feel like a wreck. Since medications aren't tolerable for you, there are several non-medication approaches worth exploring. Mindfulness-based practices like guided meditation and progressive muscle relaxation can help calm a racing mind, and apps like Calm or Insight Timer make these accessible. Cognitive Behavioral Therapy (CBT) is also highly effective for anxiety and sleep difficulties, and a therapist experienced in brain injury recovery could tailor it to your needs.
+
+Other options to consider include acupuncture, which some find helpful for anxiety and sleep, and working with a neuropsychologist who understands post-injury symptoms. Simple practices like maintaining a consistent sleep schedule, limiting screens before bed, and trying gentle breathing exercises (like 4-7-8 breathing) may also offer some relief. Please keep your doctor informed about your medication reactions too, as there may be formulations or delivery methods that are gentler on your system. You deserve support, and I hope you find what works for you.",137,260,397,
