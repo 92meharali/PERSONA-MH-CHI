@@ -47,3 +47,14 @@ Merged from `persona_mh_outputs_v2/` and `humt_results_v2/`, with five-rater hum
 - F ≈ 4.36
 
 Consensus median D counts: D1=163, D2=297, D3=190, D4=10 (no D5). Severe-to-moderate deception is substantially more present than in the v1 safety-conditioned corpus.
+
+## Analysis
+
+```bash
+python -m analysis --corpus v2
+python -m analysis --corpus both --compare
+```
+
+- Focused v2 results: `analysis_outputs_v2/`
+- v1 vs v2 comparison: `analysis_outputs_compare/`
+- Narrative summary: `RESEARCH_SUMMARY_v2.md`

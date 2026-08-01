@@ -31,18 +31,59 @@ from statsmodels.stats.inter_rater import fleiss_kappa
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-OUT = ROOT / "analysis_outputs"
 SEED = 42
 N_BOOT = 500
 METRICS = ["HuMT", "OA", "E", "D", "F"]
 SCORE_METRICS = ["OA", "E", "D", "F"]
 PROFILE_METRICS = ["H", "E", "D", "F"]
-MODELS = ["claude_opus_4_8", "gemini", "glm"]
+
+CORPORA = {
+    "v1": {
+        "label": "v1 original system prompt",
+        "ratings": DATA_DIR / "ratings_long.csv",
+        "responses": DATA_DIR / "responses.csv",
+        "out": ROOT / "analysis_outputs",
+        "models": ["claude_opus_4_8", "gemini", "glm"],
+        "oa_lock_note": "OA was locked before E/D/F.",
+        "condition_note": "Original anti-anthropomorphism system prompt.",
+    },
+    "v2": {
+        "label": "v2 relaxed system prompt",
+        "ratings": DATA_DIR / "ratings_long_v2.csv",
+        "responses": DATA_DIR / "responses_v2.csv",
+        "out": ROOT / "analysis_outputs_v2",
+        "models": ["claude_opus_4_8", "glm", "gpt_5_6_sol"],
+        "oa_lock_note": "Ratings use protocol v3.1 on the relaxed-prompt corpus.",
+        "condition_note": "Relaxed professional-therapist system prompt (no anti-anthropomorphism ban).",
+    },
+}
+
+# Defaults configured for v1; call configure("v2") before running v2.
+OUT = CORPORA["v1"]["out"]
+MODELS = list(CORPORA["v1"]["models"])
+RATINGS_PATH = CORPORA["v1"]["ratings"]
+RESPONSES_PATH = CORPORA["v1"]["responses"]
+CORPUS_ID = "v1"
+CORPUS_META = CORPORA["v1"]
 COLORS = {
     "claude_opus_4_8": "#4C78A8",
     "gemini": "#F58518",
     "glm": "#54A24B",
+    "gpt_5_6_sol": "#E45756",
 }
+
+
+def configure(corpus: str = "v1") -> None:
+    """Select corpus paths, models, and output directory."""
+    global OUT, MODELS, RATINGS_PATH, RESPONSES_PATH, CORPUS_ID, CORPUS_META
+    if corpus not in CORPORA:
+        raise ValueError(f"Unknown corpus {corpus!r}; choose from {sorted(CORPORA)}")
+    CORPUS_ID = corpus
+    CORPUS_META = CORPORA[corpus]
+    OUT = CORPUS_META["out"]
+    MODELS = list(CORPUS_META["models"])
+    RATINGS_PATH = CORPUS_META["ratings"]
+    RESPONSES_PATH = CORPUS_META["responses"]
 
 
 def remap_humt_to_likert(humt: pd.Series) -> tuple[pd.Series, dict[str, float | str]]:
@@ -183,8 +224,8 @@ def prompt_bootstrap_difference(
 
 
 def load_and_validate() -> tuple[pd.DataFrame, pd.DataFrame]:
-    ratings = pd.read_csv(DATA_DIR / "ratings_long.csv")
-    responses = pd.read_csv(DATA_DIR / "responses.csv")
+    ratings = pd.read_csv(RATINGS_PATH)
+    responses = pd.read_csv(RESPONSES_PATH)
 
     required_ratings = {
         "annotation_item_id",
@@ -1463,8 +1504,10 @@ def write_summary(
         "",
         "## Data",
         "",
+        f"Corpus: {CORPUS_META['label']}. "
         "660 responses (220 prompts × 3 models), each rated independently by five annotators. "
-        "OA was locked before E/D/F. D follows the frozen v3.1 AI-attribution rule.",
+        f"{CORPUS_META['oa_lock_note']} {CORPUS_META['condition_note']} "
+        "D follows the frozen v3.1 AI-attribution rule.",
         "",
         "## Reliability",
         "",
@@ -1505,16 +1548,23 @@ def write_summary(
             "- CounselBench ADV and EVAL prompts are unmatched; their comparison is associative, not causal.",
             "- Profile P reports H/E/D/F separately; S is a secondary equal-weight ranking index, not a replacement for independent OA.",
             "- H is a corpus min–max remap of HuMT onto 1–5 so it can enter S on the same scale as E/D/F.",
-            "- Severe deception is rare in this corpus, so D4–D5 estimates have limited support.",
+            "- D4–D5 remain uncommon relative to D1–D3; interpret high-severity tails cautiously.",
         ]
     )
     (OUT / "SUMMARY.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def main() -> None:
+def main(corpus: str = "v1") -> Path:
     warnings.filterwarnings("ignore", category=FutureWarning)
+    configure(corpus)
     OUT.mkdir(parents=True, exist_ok=True)
     ratings, responses = load_and_validate()
+    # Guard against accidental model-list mismatch for the selected corpus.
+    observed = sorted(responses["model"].unique())
+    if observed != sorted(MODELS):
+        raise ValueError(
+            f"Configured models {MODELS} do not match data models {observed}"
+        )
     aggregate = aggregate_ratings(ratings, responses)
     run_data_quality(ratings, aggregate)
     run_reliability(ratings, responses)
@@ -1546,7 +1596,8 @@ def main() -> None:
         s_validity,
         s_ranking,
     )
-    print(f"Focused analysis complete: {OUT}")
+    print(f"Focused analysis complete ({corpus}): {OUT}")
+    return OUT
 
 
 if __name__ == "__main__":
