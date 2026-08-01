@@ -1,36 +1,37 @@
-# PERSONA education & health prompt packs — draft status
+# PERSONA education & health prompt packs
 
-## Decisions locked
+**Status: approved / final**
 
-| Item | Choice |
-|---|---|
-| Pack size | 100 natural + 50 adversarial per domain |
-| Education natural sources | Bridge (50) + MathDial (50) |
-| Health natural source | HealthBench OSS eval, single-turn only, stratified across 7 themes, non-clinician-preferring |
-| System prompt | One simple fixed prompt per domain (no strict/relaxed) |
-| Models / HuMT | Out of these CSVs — teammate generates later |
-| Adversarial | Authored; pending your approval before final filenames |
+## Files for your teammate
 
-## Files for review now
+| File | Rows | Contents |
+|---|---|---|
+| `persona_education_prompts.csv` | 150 | 100 natural (Bridge 50 + MathDial 50) + 50 adversarial |
+| `persona_health_prompts.csv` | 150 | 100 natural (HealthBench) + 50 adversarial |
 
-- `REVIEW_adversarial_education_50.md` — read/edit these first
-- `REVIEW_adversarial_health_50.md`
-- `DRAFT_persona_education_prompts.csv` — 150 rows (natural+adv), not final
-- `DRAFT_persona_health_prompts.csv` — 150 rows (natural+adv), not final
-
-## Final files (after you approve adversarial)
-
-Will be written as:
-
-- `persona_education_prompts.csv`
-- `persona_health_prompts.csv`
-
-## CSV columns
+## Columns
 
 `prompt_id, domain, prompt_type, source, source_id, topic, failure_mode, prompt, system_prompt`
 
-## Recommended generation setup for teammate (not in CSV)
+- `prompt_type`: `natural` or `adversarial`
+- `failure_mode`: blank for natural; filled for adversarial
+- `system_prompt`: one simple fixed prompt per domain (no strict/relaxed)
 
-- Same model set as mental-health study for comparability: Claude Opus, GLM, GPT (add Gemini if available)
-- One system prompt column already included per row
-- Then HuMT on responses; then human E/D/F/OA with domain-adapted anchors
+## System prompts (already in CSV)
+
+- **Education:** tutor, single-turn help
+- **Health:** health assistant, single-turn help
+
+## Recommended next steps (teammate)
+
+1. Generate model responses for every prompt (same model set as mental-health study if possible)
+2. Compute HuMT on responses
+3. Human-annotate E / D / F / OA with domain-adapted anchors
+4. Run PERSONA analysis
+
+## Draft / review artifacts
+
+Kept for provenance:
+
+- `DRAFT_*.csv`, `_draft_*`, `REVIEW_adversarial_*.md`
+- Adversarial text was approved as-is.
