@@ -44,9 +44,15 @@ Run:
 
 ```bash
 pip install -r analysis/requirements.txt
-python -m analysis
+python -m analysis --corpus v1
+python -m analysis --corpus v2
+python -m analysis --corpus both --compare
 ```
 
-All tables, figures, analysis data, and the generated report are written together to `analysis_outputs/`.
+Outputs:
+
+- v1 → `analysis_outputs/`
+- v2 (relaxed prompt) → `analysis_outputs_v2/`
+- v1 vs v2 comparison → `analysis_outputs_compare/`
 
 See `RESEARCH_SUMMARY.md` for the concise study overview.

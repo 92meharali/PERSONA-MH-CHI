@@ -1,0 +1,2 @@
+metric,test,n_prompts,statistic,p_value,kendalls_w
+S,Friedman paired by prompt,220,40.0090909090909,2.0518060030205395e-09,0.09092975206611568
