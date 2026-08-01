@@ -1,0 +1,7 @@
+source_id,n,join_method,humt_mean,model,source_set
+adv_claude_opus_4_8,120,normalized_text_with_replacement_fix,0.049595709582169814,claude_opus_4_8,CounselBench-Adv
+adv_glm,120,normalized_text_with_replacement_fix,0.05080492242177325,glm,CounselBench-Adv
+adv_gpt_5_6_sol,120,normalized_text_with_replacement_fix,0.03696945770581563,gpt_5_6_sol,CounselBench-Adv
+eval_claude_opus_4_8,100,normalized_text_with_replacement_fix,0.0582379861116409,claude_opus_4_8,CounselBench-Eval
+eval_glm,100,normalized_text_with_replacement_fix,0.060759025216102526,glm,CounselBench-Eval
+eval_gpt_5_6_sol,100,normalized_text_with_replacement_fix,0.04484315991401663,gpt_5_6_sol,CounselBench-Eval
