@@ -1,58 +1,47 @@
-# PERSONA-MH
+# PERSONA
 
-PERSONA-MH evaluates whether human-like behavior is appropriate in mental-health AI responses.
+PERSONA evaluates when anthropomorphic AI behavior is appropriate in high-stakes human-support settings.
+
+Mental health counseling is the current primary instantiation. The framework is designed to extend to education and health care with the same core dimensions.
 
 ## Measures
 
-- **H / HuMT:** automated human-likeness (raw HuMT; also remapped to a 1–5 Likert value `H` for scoring)
+- **H / HuMT:** automated human-likeness (also remapped to 1–5 as `H` for scoring)
 - **E:** empathic appropriateness
 - **D:** anthropomorphic deception risk (v3.1)
 - **F:** contextual fit
 - **OA:** independent overall appropriateness
 - **P = (H, E, D, F):** multidimensional profile
-- **S = (H + E − D + F) / 4:** secondary equal-weight ranking score (not a replacement for OA)
+- **S = (H + E − D + F) / 4:** secondary ranking score (not a replacement for OA)
 
-## Final dataset
+## Active corpus (relaxed system prompt)
 
-- 220 prompts × 3 models = 660 responses
-- 5 annotators per response
-- OA was completed and locked before E/D/F
-- E uses a second blind annotation round with the unchanged rubric
-- Evidence spans are excluded from analysis
-- D uses the frozen v3.1 highest-severity, AI-attributable-cue rule
+- 220 CounselBench prompts × 3 models = 660 responses
+- Models: Claude Opus 4.8, GLM, GPT-5.6-Sol (Gemini pending)
+- 5 blinded annotators per response
+- Protocol: `persona_mh_human_v3_1`
+- Evidence spans excluded from analysis data
 
 Canonical files are in `data/`:
 
 - `responses.csv`
 - `ratings_long.csv`
 - `annotation_protocol.md`
+- `CORPUS.md`
 
-Raw prompts, generated responses, and HuMT values remain in their source directories.
+Raw generation/HuMT sources: `persona_mh_outputs/`, `humt_results/`, `counselbench_outputs/`.
 
-## Focused analysis
+Archived v1 materials live under `previous versions/`.
 
-Confirmatory hypotheses:
-
-1. HuMT is not a reliable proxy for OA
-2. E/D/F add information beyond HuMT
-3. Joint model directions: E↑/F↑ with OA, D↓ with OA
-4. Models differ in OA/E/F profiles
-
-Also reported: reliability, correlations, context/dataset associations (exploratory), and the full **S** validity / ablation / sensitivity / model-ranking block.
-
-Run:
+## Analysis
 
 ```bash
 pip install -r analysis/requirements.txt
-python -m analysis --corpus v1
-python -m analysis --corpus v2
-python -m analysis --corpus both --compare
+python -m analysis                 # primary relaxed-prompt corpus
+python -m analysis --corpus v1     # archived pilot only
+python -m analysis --compare       # optional archived v1 vs v2 contrast
 ```
 
-Outputs:
+Results are written to `analysis_outputs/`.
 
-- v1 → `analysis_outputs/`
-- v2 (relaxed prompt) → `analysis_outputs_v2/`
-- v1 vs v2 comparison → `analysis_outputs_compare/`
-
-See `RESEARCH_SUMMARY.md` for the concise study overview.
+See `RESEARCH_SUMMARY.md` for the full study narrative and `DOMAIN_DATASETS.md` for education/health extension candidates.

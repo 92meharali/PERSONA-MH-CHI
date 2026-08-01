@@ -1,0 +1,2 @@
+comparison,delta_r_squared,delta_adjusted_r_squared,delta_cv_r_squared,delta_cv_rmse,joint_persona_wald_statistic,joint_persona_wald_df,joint_persona_p_value
+Full adjusted vs HuMT adjusted,0.27053393308340346,0.2689425944938104,0.2660254546948013,-0.07307289639132519,194.35630907895012,3,6.990699549951256e-42
