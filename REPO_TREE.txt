@@ -1,0 +1,208 @@
+﻿Folder PATH listing for volume New Volume
+Volume serial number is 0000002E D06F:71E4
+D:.
+|   .env
+|   .env.example
+|   .gitignore
+|   compute_humt_sociot_colab.py
+|   dataset_generation.py
+|   DOMAIN_DATASETS.md
+|   README.md
+|   REPO_TREE.txt
+|   requirements.txt
+|   RESEARCH_SUMMARY.md
+|   
++---analysis
+|       compare_conditions.py
+|       requirements.txt
+|       run.py
+|       __init__.py
+|       __main__.py
+|       
++---analysis_outputs
+|       analysis_data.csv
+|       fig_context_profiles.png
+|       fig_dataset_associations.png
+|       fig_humt_persona_relationships.png
+|       fig_model_profiles.png
+|       fig_regression_coefficients.png
+|       fig_score_distributions.png
+|       fig_s_formula_ablation.png
+|       fig_s_regression_ablation.png
+|       fig_s_validity_and_ranking.png
+|       SUMMARY.md
+|       table_context_moderation.csv
+|       table_context_moderation_omnibus.csv
+|       table_correlations.csv
+|       table_dataset_associations.csv
+|       table_data_quality.csv
+|       table_humt_likert_remap.csv
+|       table_hypotheses.csv
+|       table_incremental_validity.csv
+|       table_model_descriptives.csv
+|       table_model_omnibus.csv
+|       table_model_pairwise.csv
+|       table_rater_distributions.csv
+|       table_regression_coefficients.csv
+|       table_regression_performance.csv
+|       table_reliability.csv
+|       table_s_formula_ablation.csv
+|       table_s_model_omnibus.csv
+|       table_s_model_pairwise.csv
+|       table_s_model_ranking.csv
+|       table_s_regression_ablation.csv
+|       table_s_regression_weights.csv
+|       table_s_sensitivity.csv
+|       table_s_validity.csv
+|       
++---counselbench_outputs
+|       counselbench_adv_120_prompts.csv
+|       counselbench_eval_100_prompts.csv
+|       
++---data
+|   |   annotation_key.csv
+|   |   annotation_protocol.md
+|   |   annotation_sheet.csv
+|   |   CORPUS.md
+|   |   ratings_long.csv
+|   |   README.md
+|   |   responses.csv
+|   |   responses_build_report.csv
+|   |   
+|   \---raw_annotations
+|           responses_v2_annotated_abrarahmed.csv
+|           responses_v2_annotated_emadsohail.csv
+|           responses_v2_annotated_meharali.csv
+|           responses_v2_annotated_nayabzahra.csv
+|           responses_v2_annotated_wahajaziz.csv
+|           
++---humt_results
+|       adv_claude_opus_4_8_text_humt.csv
+|       adv_glm_text_humt.csv
+|       adv_gpt_5_6_sol_text_humt.csv
+|       eval_claude_opus_4_8_text_humt.csv
+|       eval_glm_text_humt.csv
+|       eval_gpt_5_6_sol _text_humt.csv
+|       
++---persona_mh_outputs
+|       adv_claude_opus_4_8_annotation_sheet_clean_v1.csv
+|       adv_claude_opus_4_8_responses_clean_v1.csv
+|       adv_glm_annotation_sheet_clean_v1.csv
+|       adv_glm_responses_clean_v1.csv
+|       adv_gpt_5_6_sol_annotation_sheet_clean_v1.csv
+|       adv_gpt_5_6_sol_responses_clean_v1.csv
+|       eval_claude_opus_4_8_annotation_sheet_clean_v1.csv
+|       eval_claude_opus_4_8_responses_clean_v1.csv
+|       eval_glm_annotation_sheet_clean_v3.csv
+|       eval_glm_responses_clean_v3.csv
+|       eval_gpt_5_6_sol_annotation_sheet_clean_v1.csv
+|       eval_gpt_5_6_sol_responses_clean_v1.csv
+|       
++---presentations
+|       PERSONA_MH_Findings.pdf
+|       PERSONA_MH_Findings.pptx
+|       
++---previous versions
+|   |   README.md
+|   |   
+|   +---compare_v1_v2
+|   |   |   RESEARCH_SUMMARY_v2_short.md
+|   |   |   
+|   |   \---analysis_outputs_compare
+|   |           fig_condition_compare.png
+|   |           SUMMARY.md
+|   |           table_condition_associations.csv
+|   |           table_condition_descriptives.csv
+|   |           table_condition_d_distribution.csv
+|   |           table_condition_paired_shared_models.csv
+|   |           table_condition_prompt_level.csv
+|   |           
+|   +---generation_notebooks_v1
+|   |       persona_mh_adversarial_claude_opus_4_8_generation.ipynb
+|   |       persona_mh_adversarial_gemini_generation.ipynb
+|   |       persona_mh_adversarial_generation.ipynb
+|   |       persona_mh_adversarial_gpt_5_6_sol_openai.ipynb
+|   |       persona_mh_normal_claude_opus_4_8_generation.ipynb
+|   |       persona_mh_normal_gemini_generation.ipynb
+|   |       persona_mh_normal_glm.ipynb
+|   |       persona_mh_normal_gpt_5_6_sol_openai.ipynb
+|   |       
+|   +---misc_scratch
+|   |       abc
+|   |       council_bench_system_prompt.txt
+|   |       system_prompt.txt
+|   |       
+|   \---v1_original_prompt
+|       |   RESEARCH_SUMMARY.md
+|       |   
+|       +---analysis_outputs
+|       |       analysis_data.csv
+|       |       fig_context_profiles.png
+|       |       fig_dataset_associations.png
+|       |       fig_humt_persona_relationships.png
+|       |       fig_model_profiles.png
+|       |       fig_regression_coefficients.png
+|       |       fig_score_distributions.png
+|       |       fig_s_formula_ablation.png
+|       |       fig_s_regression_ablation.png
+|       |       fig_s_validity_and_ranking.png
+|       |       SUMMARY.md
+|       |       table_context_moderation.csv
+|       |       table_context_moderation_omnibus.csv
+|       |       table_correlations.csv
+|       |       table_dataset_associations.csv
+|       |       table_data_quality.csv
+|       |       table_humt_likert_remap.csv
+|       |       table_hypotheses.csv
+|       |       table_incremental_validity.csv
+|       |       table_model_descriptives.csv
+|       |       table_model_omnibus.csv
+|       |       table_model_pairwise.csv
+|       |       table_rater_distributions.csv
+|       |       table_regression_coefficients.csv
+|       |       table_regression_performance.csv
+|       |       table_reliability.csv
+|       |       table_s_formula_ablation.csv
+|       |       table_s_model_omnibus.csv
+|       |       table_s_model_pairwise.csv
+|       |       table_s_model_ranking.csv
+|       |       table_s_regression_ablation.csv
+|       |       table_s_regression_weights.csv
+|       |       table_s_sensitivity.csv
+|       |       table_s_validity.csv
+|       |       
+|       +---data
+|       |       ratings_long.csv
+|       |       responses.csv
+|       |       
+|       +---humt_results
+|       |       examples_adv_claude_opus_4_8_text_humt.csv
+|       |       examples_claude_opus_4_8_text_humt.csv
+|       |       examples_gemini_adv_text_humt.csv
+|       |       examples_gemini_text_humt.csv
+|       |       examples_glm_adv_text_humt.csv
+|       |       examples_glm_text_humt.csv
+|       |       
+|       \---persona_mh_outputs
+|               adv_claude_opus_4_8_responses_clean_v1.csv
+|               adv_gemini_responses_clean_v1.csv
+|               adv_glm_responses_clean_v1.csv
+|               eval_claude_opus_4_8_responses_clean_v1.csv
+|               eval_gemini_responses_clean_v1.csv
+|               eval_glm_responses_clean_v3.csv
+|               
+\---prompt_packs
+        DRAFT_persona_education_prompts.csv
+        DRAFT_persona_health_prompts.csv
+        persona_education_prompts.csv
+        persona_health_prompts.csv
+        README.md
+        REVIEW_adversarial_education_50.md
+        REVIEW_adversarial_health_50.md
+        _draft_adversarial_education_50.py
+        _draft_adversarial_health_50.py
+        _draft_education_adversarial_50.csv
+        _draft_education_natural_100.csv
+        _draft_health_adversarial_50.csv
+        _draft_health_natural_100.csv
+        

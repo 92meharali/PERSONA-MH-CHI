@@ -1,0 +1,3 @@
+The notebooks in this package were programmatically generated and validated.
+Their source of truth is the notebook content itself. Each has exactly nine
+code cells and no pre-executed outputs.
