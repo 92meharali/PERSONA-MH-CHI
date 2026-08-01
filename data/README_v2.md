@@ -35,9 +35,10 @@ Merged from `persona_mh_outputs_v2/` and `humt_results_v2/`, with five-rater hum
 
 - Protocol: `persona_mh_human_v3_1` (rubric 3.1)
 - Annotators: abrarahmed, emadsohail, meharali, nayabzahra, wahajaziz
+- Model identity was hidden during rating; model/metadata columns were joined back afterward
+- Presentation order during annotation differed across raters; the stored `presentation_order` reflects post-annotation sorting
 - Shared evidence spans were identical across raters and are **excluded** from `ratings_long_v2.csv`
 - Derived helpers in the uploads (`H_likert`, `S_score`, `S_persona`) are **not** stored as human ratings
-- Uploaded sheets include model identity; treat blinding status cautiously for this round
 
 ## Quick score snapshot (raw rating means)
 
