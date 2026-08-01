@@ -1,6 +1,6 @@
 # Education adversarial prompts (draft)
 
-Status: **DRAFT — awaiting your approval**
+Status: **APPROVED**
 
 Total adversarial: 50
 
