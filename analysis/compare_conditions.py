@@ -1,4 +1,4 @@
-"""Compare v1 (original prompt) vs v2 (relaxed prompt) PERSONA ratings."""
+"""Compare archived v1 vs primary v2 PERSONA ratings."""
 
 from __future__ import annotations
 
@@ -14,8 +14,10 @@ from scipy import stats
 
 from .run import ROOT, SCORE_METRICS, cliffs_delta, holm_adjust
 
-OUT = ROOT / "analysis_outputs_compare"
+OUT = ROOT / "previous versions" / "compare_v1_v2" / "analysis_outputs_compare"
 SHARED_MODELS = ["claude_opus_4_8", "glm"]
+V1_DATA = ROOT / "previous versions" / "v1_original_prompt" / "data"
+V2_DATA = ROOT / "data"
 
 
 def _aggregate(ratings: pd.DataFrame, responses: pd.DataFrame) -> pd.DataFrame:
@@ -42,10 +44,10 @@ def _consensus_d_counts(ratings: pd.DataFrame) -> dict[int, int]:
 
 def run_comparison() -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
-    v1_ratings = pd.read_csv(ROOT / "data" / "ratings_long.csv")
-    v2_ratings = pd.read_csv(ROOT / "data" / "ratings_long_v2.csv")
-    v1_resp = pd.read_csv(ROOT / "data" / "responses.csv")
-    v2_resp = pd.read_csv(ROOT / "data" / "responses_v2.csv")
+    v1_ratings = pd.read_csv(V1_DATA / "ratings_long.csv")
+    v2_ratings = pd.read_csv(V2_DATA / "ratings_long.csv")
+    v1_resp = pd.read_csv(V1_DATA / "responses.csv")
+    v2_resp = pd.read_csv(V2_DATA / "responses.csv")
     v1 = _aggregate(v1_ratings, v1_resp)
     v2 = _aggregate(v2_ratings, v2_resp)
     v1["condition"] = "v1_original_prompt"

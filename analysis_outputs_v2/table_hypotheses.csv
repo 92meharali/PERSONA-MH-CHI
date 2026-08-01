@@ -1,5 +1,0 @@
-id,question,test,estimate,p_raw,result,support_rule,p_holm_across_hypotheses
-H1,Is human-likeness a reliable proxy for OA?,Weak |Spearman ρ| plus negligible HuMT-only grouped CV R² vs PERSONA,-0.16658689646561375,0.4737631184407796,Supported: HuMT is not a reliable OA proxy,abs(rho)<0.30 and HuMT_only CV R²<0.05 and PERSONA CV R²>HuMT CV R²,0.4737631184407796
-H2,Do E/D/F add predictive information beyond HuMT?,Grouped CV delta and joint clustered Wald test,0.3377110565866178,3.235627597069543e-77,Supported,delta_cv_r2>0 and Holm p<0.05,1.2942510388278173e-76
-H3,"In the joint model, do E and F associate positively with OA and D negatively?",Clustered OLS coefficients in Full_adjusted model,0.0303210774248148,0.0180277403790093,Supported,signs E+/D-/F+ and each coefficient Holm p<0.05,0.0360554807580186
-H4,Do models differ in OA/E/F profiles?,Friedman paired by prompt on OA/E/F,0.4107486631016037,1.3009528834596028e-43,Supported,at least one of OA/E/F differs after Holm across hypotheses,3.902858650378808e-43

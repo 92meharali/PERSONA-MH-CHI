@@ -38,33 +38,33 @@ SCORE_METRICS = ["OA", "E", "D", "F"]
 PROFILE_METRICS = ["H", "E", "D", "F"]
 
 CORPORA = {
-    "v1": {
-        "label": "v1 original system prompt",
+    "v2": {
+        "label": "relaxed system prompt (primary)",
         "ratings": DATA_DIR / "ratings_long.csv",
         "responses": DATA_DIR / "responses.csv",
         "out": ROOT / "analysis_outputs",
+        "models": ["claude_opus_4_8", "glm", "gpt_5_6_sol"],
+        "oa_lock_note": "Ratings use protocol v3.1; model identity was hidden during annotation.",
+        "condition_note": "Relaxed professional-therapist system prompt (no anti-anthropomorphism ban).",
+    },
+    "v1": {
+        "label": "v1 original system prompt (archived)",
+        "ratings": ROOT / "previous versions" / "v1_original_prompt" / "data" / "ratings_long.csv",
+        "responses": ROOT / "previous versions" / "v1_original_prompt" / "data" / "responses.csv",
+        "out": ROOT / "previous versions" / "v1_original_prompt" / "analysis_outputs",
         "models": ["claude_opus_4_8", "gemini", "glm"],
         "oa_lock_note": "OA was locked before E/D/F.",
-        "condition_note": "Original anti-anthropomorphism system prompt.",
-    },
-    "v2": {
-        "label": "v2 relaxed system prompt",
-        "ratings": DATA_DIR / "ratings_long_v2.csv",
-        "responses": DATA_DIR / "responses_v2.csv",
-        "out": ROOT / "analysis_outputs_v2",
-        "models": ["claude_opus_4_8", "glm", "gpt_5_6_sol"],
-        "oa_lock_note": "Ratings use protocol v3.1 on the relaxed-prompt corpus.",
-        "condition_note": "Relaxed professional-therapist system prompt (no anti-anthropomorphism ban).",
+        "condition_note": "Original anti-anthropomorphism system prompt (archived pilot).",
     },
 }
 
-# Defaults configured for v1; call configure("v2") before running v2.
-OUT = CORPORA["v1"]["out"]
-MODELS = list(CORPORA["v1"]["models"])
-RATINGS_PATH = CORPORA["v1"]["ratings"]
-RESPONSES_PATH = CORPORA["v1"]["responses"]
-CORPUS_ID = "v1"
-CORPUS_META = CORPORA["v1"]
+# Defaults configured for the primary relaxed-prompt corpus.
+OUT = CORPORA["v2"]["out"]
+MODELS = list(CORPORA["v2"]["models"])
+RATINGS_PATH = CORPORA["v2"]["ratings"]
+RESPONSES_PATH = CORPORA["v2"]["responses"]
+CORPUS_ID = "v2"
+CORPUS_META = CORPORA["v2"]
 COLORS = {
     "claude_opus_4_8": "#4C78A8",
     "gemini": "#F58518",
@@ -1554,7 +1554,7 @@ def write_summary(
     (OUT / "SUMMARY.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def main(corpus: str = "v1") -> Path:
+def main(corpus: str = "v2") -> Path:
     warnings.filterwarnings("ignore", category=FutureWarning)
     configure(corpus)
     OUT.mkdir(parents=True, exist_ok=True)

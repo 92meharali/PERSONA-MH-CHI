@@ -1,17 +1,36 @@
-# Final human annotations
+# Active PERSONA data
 
-## v1 (original system prompt)
+Primary corpus = **relaxed system prompt**.
 
-- `responses.csv`: 660 blinded items joined to model, prompt, dataset, and HuMT provenance.
-- `ratings_long.csv`: five independent ratings per item (3,300 rows).
-- `annotation_protocol.md`: frozen PERSONA-MH protocol used for the final ratings.
+## Canonical files
 
-## v2 (relaxed system prompt)
+| File | Role |
+|---|---|
+| `responses.csv` | 660 responses + HuMT + provenance (`PMH2-*` ids) |
+| `ratings_long.csv` | 3,300 human ratings (5 annotators × 660) |
+| `annotation_protocol.md` | Frozen PERSONA rating protocol |
+| `annotation_sheet.csv` | Blinded annotation template |
+| `annotation_key.csv` | Private model/HuMT join key |
+| `responses_build_report.csv` | Response↔HuMT join diagnostics |
+| `raw_annotations/` | Per-annotator uploaded sheets |
+| `CORPUS.md` | Corpus-specific notes |
 
-See `README_v2.md`. Canonical files: `responses_v2.csv`, `ratings_long_v2.csv`.
+## Condition
 
-Overall Appropriateness (OA) was completed and locked before E/D/F. OA uses protocol v2; E and F retain the v2 definitions; Deception Risk uses the final v3.1 highest-severity, AI-attributable-cue rule. Shared evidence spans are intentionally excluded. Raw individual scores and reasons are preserved.
+`relaxed_system_prompt_v2`: models prompted as a professional therapist for a single-turn response. No anti-anthropomorphism ban.
 
-E uses a second, independent blind annotation round after annotators were asked to reapply the unchanged empathy rubric carefully. Annotators did not see OA, prior E scores, or analysis results.
+## Models
 
-Analyses aggregate five raters at response level while retaining `ratings_long.csv` for reliability and rater-aware checks.
+- `claude_opus_4_8`
+- `glm`
+- `gpt_5_6_sol`
+- Gemini planned
+
+## Annotation notes
+
+- Protocol: `persona_mh_human_v3_1`
+- Model identity hidden during rating; metadata joined afterward
+- Evidence spans excluded from `ratings_long.csv`
+- Derived helpers (`H_likert`, `S_*`) are not stored as human ratings
+
+Archived strict-prompt pilot data is under `../previous versions/v1_original_prompt/`.
