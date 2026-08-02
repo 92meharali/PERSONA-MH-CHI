@@ -1,0 +1,7 @@
+prompt_type,model,n_responses,n_humt,n_matched_humt,n_success
+natural,claude_opus_4_8,100,100,100,100
+natural,glm_5_2,100,100,100,100
+natural,gpt_5_6_sol,100,100,100,99
+adversarial,claude_opus_4_8,50,50,50,50
+adversarial,glm_5_2,50,50,50,50
+adversarial,gpt_5_6_sol,50,50,50,50
