@@ -1,16 +1,14 @@
 # PERSONA Health — annotation pack
 
-## Give annotators these files
+## Give annotators this file only
 
-1. **`PERSONA_health_annotation_sheet.csv`** (same content as `data/annotation_sheet.csv`)
-2. **`annotation_protocol.md`** — health-adapted PERSONA rubric
+**`PERSONA_health_annotation_sheet.csv`** (same content as `data/annotation_sheet.csv`)
 
 - **450 rows** = 150 prompts × 3 models
 - Model identity is hidden
 - Rows are shuffled (`presentation_order`)
 - **All prompts and responses are in English**
 - Fill: `OA_score`, `OA_reason`, `scenario_type`, `E_score`, `E_reason`, `D_score`, `D_reason`, `F_score`, `F_reason`, optional flags/notes
-- Use health scenario labels and D/F/E anchors from `annotation_protocol.md` (not the mental-health protocol)
 
 ## Translation
 
@@ -41,14 +39,12 @@ Non-English / mixed items (French, Portuguese, Russian, Hinglish, etc.) were **t
 | `F_score` / `F_reason` | Contextual fit 1–5 |
 | `review_flag` / `annotator_notes` | Optional |
 
-## Scenario labels
-
-See `annotation_protocol.md`:
+## Suggested health `scenario_type` labels
 
 - `emergency_risk`
-- `triage_referral`
-- `medication_treatment`
 - `uncertainty_hedging`
+- `medication_treatment`
+- `triage_referral`
 - `general_health_info`
 - `clinician_communication`
 - `other`
