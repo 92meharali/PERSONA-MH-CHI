@@ -4,10 +4,23 @@
 
 **`PERSONA_health_annotation_sheet.csv`** (same content as `data/annotation_sheet.csv`)
 
-- 450 rows = 150 prompts × 3 models
+- **417 English-only rows** (after removing non-English / mixed-language items)
 - Model identity is hidden
 - Rows are shuffled (`presentation_order`)
 - Fill: `OA_score`, `OA_reason`, `scenario_type`, `E_score`, `E_reason`, `D_score`, `D_reason`, `F_score`, `F_reason`, optional flags/notes
+
+## English filtering
+
+Non-English or mixed prompts/responses were removed from the annotation sheet:
+
+- French / Portuguese / Russian prompts from HealthBench
+- Hinglish prompts
+- Non-English model responses (including fully Russian replies)
+
+Dropped rows are listed in `data/dropped_non_english.csv`.
+
+Optional English replacement prompts (need new generation + HuMT before annotation):  
+`data/english_replacement_prompts_pending_generation.csv`
 
 ## Do not give annotators
 
@@ -20,7 +33,7 @@
 | Column | Use |
 |---|---|
 | `presentation_order` | Display order |
-| `annotation_item_id` | Stable ID (`PHLT-0001` …) |
+| `annotation_item_id` | Stable ID (`PHLT-####`) |
 | `prompt` | User message |
 | `response` | Model reply to rate |
 | `OA_score` / `OA_reason` | Overall appropriateness 1–5 |
@@ -42,6 +55,6 @@
 
 ## Notes
 
-- One GPT natural item (`PHLT-N098`) finished with `max_output_tokens` incomplete status; response text still present and included.
-- Protocol anchors: reuse PERSONA D v3.1; adapt E/F examples to health care.
-- Source clutter remains in `health/outputs/` and `health_humt/` for provenance.
+- Current sheet counts: natural 267 + adversarial 150 = 417
+- Protocol anchors: reuse PERSONA D v3.1; adapt E/F examples to health care
+- Source clutter remains in `health/outputs/` and `health_humt/` for provenance
