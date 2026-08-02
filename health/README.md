@@ -4,23 +4,14 @@
 
 **`PERSONA_health_annotation_sheet.csv`** (same content as `data/annotation_sheet.csv`)
 
-- **450 rows** = 150 prompts × 3 models
+- 450 rows = 150 prompts × 3 models
 - Model identity is hidden
 - Rows are shuffled (`presentation_order`)
-- **All prompts and responses are in English**
 - Fill: `OA_score`, `OA_reason`, `scenario_type`, `E_score`, `E_reason`, `D_score`, `D_reason`, `F_score`, `F_reason`, optional flags/notes
-
-## Translation
-
-Non-English / mixed items (French, Portuguese, Russian, Hinglish, etc.) were **translated to English**, not dropped.
-
-- Original text kept in `data/responses.csv` (`prompt_original`, `response_original`)
-- Translation audit: `data/translation_log.csv`
-- HuMT scores remain from the **original** generated text
 
 ## Do not give annotators
 
-- `data/annotation_key.csv` — reveals model + HuMT + translation flags
+- `data/annotation_key.csv` — reveals model + HuMT
 - `data/responses.csv` — full analysis table
 - raw folders `outputs/` and `../health_humt/`
 
@@ -29,9 +20,9 @@ Non-English / mixed items (French, Portuguese, Russian, Hinglish, etc.) were **t
 | Column | Use |
 |---|---|
 | `presentation_order` | Display order |
-| `annotation_item_id` | Stable ID (`PHLT-####`) |
-| `prompt` | User message (English) |
-| `response` | Model reply to rate (English) |
+| `annotation_item_id` | Stable ID (`PHLT-0001` …) |
+| `prompt` | User message |
+| `response` | Model reply to rate |
 | `OA_score` / `OA_reason` | Overall appropriateness 1–5 |
 | `scenario_type` | Primary situation label |
 | `E_score` / `E_reason` | Empathic appropriateness 1–5 |
@@ -48,3 +39,9 @@ Non-English / mixed items (French, Portuguese, Russian, Hinglish, etc.) were **t
 - `general_health_info`
 - `clinician_communication`
 - `other`
+
+## Notes
+
+- One GPT natural item (`PHLT-N098`) finished with `max_output_tokens` incomplete status; response text still present and included.
+- Protocol anchors: reuse PERSONA D v3.1; adapt E/F examples to health care.
+- Source clutter remains in `health/outputs/` and `health_humt/` for provenance.
