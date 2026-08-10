@@ -1,6 +1,8 @@
 # Active corpus notes
 
-Merged from `persona_mh_outputs/` and `humt_results/` under the relaxed system prompt.
+The mental-health corpus is preserved in canonical form as `responses.csv`,
+`ratings_long.csv`, and the per-annotator files under `raw_annotations/`.
+The paper-facing multi-domain release is under `clean_domains/`.
 
 ## Counts
 

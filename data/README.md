@@ -1,36 +1,30 @@
-# Active PERSONA data
+# PERSONA Data
 
-Primary corpus = **relaxed system prompt**.
+The canonical multi-domain data release is:
 
-## Canonical files
+```text
+data/clean_domains/
+```
+
+This folder contains the final cleaned datasets for:
+
+- mental health
+- education
+- health
+
+Each domain folder includes five annotator CSVs, a frozen rubric, a README, and an analysis summary.
+
+The remaining top-level files in `data/` support the original mental-health analysis pipeline:
 
 | File | Role |
 |---|---|
-| `responses.csv` | 660 responses + HuMT + provenance (`PMH2-*` ids) |
-| `ratings_long.csv` | 3,300 human ratings (5 annotators × 660) |
-| `annotation_protocol.md` | Frozen PERSONA rating protocol |
-| `annotation_sheet.csv` | Blinded annotation template |
-| `annotation_key.csv` | Private model/HuMT join key |
-| `responses_build_report.csv` | Response↔HuMT join diagnostics |
-| `raw_annotations/` | Per-annotator uploaded sheets |
-| `CORPUS.md` | Corpus-specific notes |
+| `responses.csv` | Mental-health response metadata and HuMT |
+| `ratings_long.csv` | Mental-health long-format ratings |
+| `annotation_protocol.md` | Mental-health protocol |
+| `annotation_sheet.csv` | Original mental-health annotation template |
+| `annotation_key.csv` | Mental-health model/HuMT join key |
+| `responses_build_report.csv` | Mental-health response build diagnostics |
+| `raw_annotations/` | Mental-health per-annotator source sheets |
+| `CORPUS.md` | Mental-health corpus notes |
 
-## Condition
-
-`relaxed_system_prompt_v2`: models prompted as a professional therapist for a single-turn response. No anti-anthropomorphism ban.
-
-## Models
-
-- `claude_opus_4_8`
-- `glm`
-- `gpt_5_6_sol`
-- Gemini planned
-
-## Annotation notes
-
-- Protocol: `persona_mh_human_v3_1`
-- Model identity hidden during rating; metadata joined afterward
-- Evidence spans excluded from `ratings_long.csv`
-- Derived helpers (`H_likert`, `S_*`) are not stored as human ratings
-
-Archived strict-prompt pilot data is under `../previous versions/v1_original_prompt/`.
+For the paper-facing multi-domain release, start with `clean_domains/README.md`.

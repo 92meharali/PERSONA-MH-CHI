@@ -1,47 +1,81 @@
 # PERSONA
 
-PERSONA evaluates when anthropomorphic AI behavior is appropriate in high-stakes human-support settings.
+PERSONA evaluates when human-like AI behavior is appropriate in high-stakes human-support settings.
 
-Mental health counseling is the current primary instantiation. The framework is designed to extend to education and health care with the same core dimensions.
+The project argues that human-likeness is not a sufficient measure of appropriateness. A response can sound warm or human while being unsafe, misleading, or poorly matched to the user's situation. PERSONA therefore separates human-likeness from normative dimensions of interaction quality.
 
-## Measures
+## Framework
 
-- **H / HuMT:** automated human-likeness (also remapped to 1–5 as `H` for scoring)
-- **E:** empathic appropriateness
-- **D:** anthropomorphic deception risk (v3.1)
-- **F:** contextual fit
-- **OA:** independent overall appropriateness
-- **P = (H, E, D, F):** multidimensional profile
-- **S = (H + E − D + F) / 4:** secondary ranking score (not a replacement for OA)
+```text
+P = (H, E, D, F)
+```
 
-## Active corpus (relaxed system prompt)
+| Dimension | Meaning |
+|---|---|
+| `H` / HuMT | automated human-likeness |
+| `E` | empathic appropriateness |
+| `D` | anthropomorphic deception risk |
+| `F` | contextual fit |
+| `OA` | independent overall appropriateness target |
 
-- 220 CounselBench prompts × 3 models = 660 responses
-- Models: Claude Opus 4.8, GLM, GPT-5.6-Sol (Gemini pending)
-- 5 blinded annotators per response
-- Protocol: `persona_mh_human_v3_1`
-- Evidence spans excluded from analysis data
+`OA` is rated independently. It is not computed from `E`, `D`, or `F`.
 
-Canonical files are in `data/`:
+The optional secondary score is:
 
-- `responses.csv`
-- `ratings_long.csv`
-- `annotation_protocol.md`
-- `CORPUS.md`
+```text
+S = (H + E - D + F) / 4
+```
 
-Raw generation/HuMT sources: `persona_mh_outputs/`, `humt_results/`, `counselbench_outputs/`.
+`S` is useful for transparent ranking, but the paper treats `OA` as the target judgment.
 
-Archived v1 materials live under `previous versions/`.
+## Canonical Data
+
+The final cleaned multi-domain release is in:
+
+```text
+data/clean_domains/
+```
+
+| Domain | Folder | Responses | Rating rows | HuMT |
+|---|---|---:|---:|---|
+| Mental health | `data/clean_domains/mental_health/` | 660 | 3,300 | embedded |
+| Education | `data/clean_domains/education/` | 450 | 2,250 | `humt_education.csv` |
+| Health | `data/clean_domains/health/` | 450 | 2,250 oversight/adjudication rows | `humt_health.csv` |
+
+Each domain folder contains:
+
+- five annotator CSVs
+- `rubric.md`
+- `README.md`
+- `analysis.md`
+
+## Key Result
+
+Across domains, HuMT is weakly or negatively related to overall appropriateness:
+
+| Domain | HuMT-OA Spearman rho | PERSONA gain over HuMT-only CV R2 |
+|---|---:|---:|
+| Mental health | -0.167 | +0.648 |
+| Education | -0.072 | +0.472 |
+| Health | -0.046 | +0.245 |
+
+Mental health is the strongest validation domain. Education and health support cross-domain transfer, with domain-specific interpretation.
 
 ## Analysis
 
+The current detailed mental-health analysis pipeline remains in `analysis/` and writes outputs to `analysis_outputs/`.
+
 ```bash
 pip install -r analysis/requirements.txt
-python -m analysis                 # primary relaxed-prompt corpus
-python -m analysis --corpus v1     # archived pilot only
-python -m analysis --compare       # optional archived v1 vs v2 contrast
+python -m analysis
 ```
 
-Results are written to `analysis_outputs/`.
+The per-domain summaries in `data/clean_domains/*/analysis.md` provide compact multi-domain checks for data quality, reliability, score distributions, HuMT/OA relationships, and model profiles.
 
-See `RESEARCH_SUMMARY.md` for the full study narrative and `DOMAIN_DATASETS.md` for education/health extension candidates.
+## Paper Direction
+
+The strongest CHI framing is:
+
+> Human-likeness is the wrong proxy for appropriateness. AI behavior in human-support settings should be evaluated as a contextual profile balancing empathy, deception risk, and fit.
+
+Mental health provides the primary empirical validation. Education and health show that the profile transfers, but the meaning of "appropriate" changes by domain.

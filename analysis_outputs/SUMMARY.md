@@ -14,7 +14,7 @@ Corpus: relaxed system prompt (primary). 660 responses (220 prompts × 3 models)
 ## Core findings
 
 - HuMT–OA Spearman ρ=-0.167 (95% prompt-cluster bootstrap CI -0.243 to -0.082); HuMT is treated as not a reliable OA proxy.
-- Adding PERSONA dimensions and planned covariates changed grouped-CV R² by 0.338 relative to the identically adjusted HuMT baseline.
+- Adding PERSONA dimensions and planned covariates changed grouped-CV R² by 0.333 relative to the identically adjusted HuMT baseline.
 - Independently supported PERSONA coefficients: E (positive), D (negative), F (positive).
 - Profile score S=(H+E−D+F)/4, with H=HuMT remapped to 1–5, tracks OA (ρ=0.429).
 - Model ranking by mean S: gpt_5_6_sol (S=2.313, OA=4.720); claude_opus_4_8 (S=2.190, OA=4.133); glm (S=2.152, OA=4.098).
@@ -23,7 +23,7 @@ Corpus: relaxed system prompt (primary). 660 responses (220 prompts × 3 models)
 ## Hypotheses
 
 - **H1** Is human-likeness a reliable proxy for OA? — Supported: HuMT is not a reliable OA proxy (estimate=-0.167, Holm p=0.474).
-- **H2** Do E/D/F add predictive information beyond HuMT? — Supported (estimate=0.338, Holm p=1.29e-76).
+- **H2** Do E/D/F add predictive information beyond HuMT? — Supported (estimate=0.333, Holm p=1.29e-76).
 - **H3** In the joint model, do E and F associate positively with OA and D negatively? — Supported (estimate=0.0303, Holm p=0.0361).
 - **H4** Do models differ in OA/E/F profiles? — Supported (estimate=0.411, Holm p=3.9e-43).
 

@@ -46,16 +46,7 @@ CORPORA = {
         "models": ["claude_opus_4_8", "glm", "gpt_5_6_sol"],
         "oa_lock_note": "Ratings use protocol v3.1; model identity was hidden during annotation.",
         "condition_note": "Relaxed professional-therapist system prompt (no anti-anthropomorphism ban).",
-    },
-    "v1": {
-        "label": "v1 original system prompt (archived)",
-        "ratings": ROOT / "previous versions" / "v1_original_prompt" / "data" / "ratings_long.csv",
-        "responses": ROOT / "previous versions" / "v1_original_prompt" / "data" / "responses.csv",
-        "out": ROOT / "previous versions" / "v1_original_prompt" / "analysis_outputs",
-        "models": ["claude_opus_4_8", "gemini", "glm"],
-        "oa_lock_note": "OA was locked before E/D/F.",
-        "condition_note": "Original anti-anthropomorphism system prompt (archived pilot).",
-    },
+    }
 }
 
 # Defaults configured for the primary relaxed-prompt corpus.
@@ -73,7 +64,7 @@ COLORS = {
 }
 
 
-def configure(corpus: str = "v1") -> None:
+def configure(corpus: str = "v2") -> None:
     """Select corpus paths, models, and output directory."""
     global OUT, MODELS, RATINGS_PATH, RESPONSES_PATH, CORPUS_ID, CORPUS_META
     if corpus not in CORPORA:
@@ -138,6 +129,14 @@ def save_figure(fig: plt.Figure, name: str) -> Path:
     fig.savefig(path, dpi=240, bbox_inches="tight")
     plt.close(fig)
     return path
+
+
+def icc_value(icc: pd.DataFrame, *labels: str) -> float:
+    """Read ICC values across Pingouin label variants."""
+    for label in labels:
+        if label in icc.index:
+            return float(icc.loc[label, "ICC"])
+    raise KeyError(f"None of the ICC labels were found: {labels}")
 
 
 def holm_adjust(pvalues: list[float]) -> list[float]:
@@ -424,8 +423,8 @@ def run_reliability(ratings: pd.DataFrame, responses: pd.DataFrame) -> None:
                 "krippendorff_alpha_ordinal": alpha,
                 "alpha_ci_low": alpha_low,
                 "alpha_ci_high": alpha_high,
-                "icc_absolute_single": float(icc.loc["ICC(A,1)", "ICC"]),
-                "icc_absolute_average5": float(icc.loc["ICC(A,k)", "ICC"]),
+                "icc_absolute_single": icc_value(icc, "ICC(A,1)", "ICC2"),
+                "icc_absolute_average5": icc_value(icc, "ICC(A,k)", "ICC2k"),
                 "mean_pair_exact_agreement": float(exact),
             }
         )
