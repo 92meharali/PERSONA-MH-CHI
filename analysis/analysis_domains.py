@@ -151,7 +151,7 @@ def analyze_domain(domain: str) -> str:
         lines.append(f"- HuMT+E/D/F CV R2: {group_cv_r2(x_edf, y, groups):.3f}")
         lines.append("")
 
-    out = folder / "analysis_generated.md"
+    out = folder / "analysis.md"
     out.write_text("\n".join(lines), encoding="utf-8")
     return str(out)
 
