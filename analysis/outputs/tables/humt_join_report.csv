@@ -1,0 +1,4 @@
+domain,responses,humt_rows_available,matched_full,matched_prefix_300,matched_prefix_200,matched_prefix_120,matched_prefix_80,matched_fuzzy,matched_embedded,matched_total,unmatched,ambiguous_keys_rejected,model_recovered_by_elimination,model_unknown
+mental_health,660,0,0,0,0,0,0,0,660,660,0,0,0,0
+education,450,450,382,13,19,13,13,7,0,447,3,0,0,3
+health,450,450,416,2,0,0,1,0,0,419,31,0,4,27
