@@ -1,0 +1,21 @@
+{
+  "environment": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "statsmodels": "0.14.6",
+    "matplotlib": "3.10.8",
+    "pingouin": "0.6.1",
+    "krippendorff": "installed",
+    "python": "3.12.3"
+  },
+  "phase_seconds": {
+    "1 - dataset build and audit": 2.3,
+    "2 - annotation reliability": 7.66,
+    "3 - descriptives and separability": 30.04,
+    "4 - cross-validation, ablation, incremental validity": 6.48
+  },
+  "processed_dir": "/home/claude/PERSONA-MH-CHI/analysis/processed",
+  "outputs_dir": "/home/claude/PERSONA-MH-CHI/analysis/outputs"
+}
