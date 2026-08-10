@@ -1,8 +1,11 @@
-numpy
-pandas
-scipy
-statsmodels
-scikit-learn
-matplotlib
-pingouin
-krippendorff
+# Pinned so that cross-validation and bootstrap results are reproducible.
+# The previously committed CV numbers could not be regenerated because the
+# grouping heuristic in scikit-learn changed between releases.
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.17.1
+scikit-learn==1.8.0
+statsmodels==0.14.6
+matplotlib==3.10.8
+pingouin==0.6.1
+krippendorff>=0.6

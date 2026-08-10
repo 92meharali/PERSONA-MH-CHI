@@ -1,0 +1,13 @@
+domain,dimension,n,r_squared_on_others,vif
+mental_health,H,660,0.1207,1.137
+mental_health,E,660,0.2238,1.288
+mental_health,D,660,0.2564,1.345
+mental_health,F,660,0.1007,1.112
+education,H,447,0.1277,1.146
+education,E,447,0.2602,1.352
+education,D,447,0.2765,1.382
+education,F,447,0.1623,1.194
+health,H,419,0.1427,1.166
+health,E,419,0.3288,1.49
+health,D,419,0.2594,1.35
+health,F,419,0.0559,1.059
