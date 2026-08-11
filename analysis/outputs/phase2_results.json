@@ -14,7 +14,7 @@
       "icc_ak": 0.8512300650515908,
       "icc_ak_ci_low": 0.8295551772908607,
       "icc_ak_ci_high": 0.8703214271147514,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -30,7 +30,7 @@
       "icc_ak": 0.9484821288971736,
       "icc_ak_ci_low": 0.9391893317376104,
       "icc_ak_ci_high": 0.9556807599438195,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -46,7 +46,7 @@
       "icc_ak": 0.9594741480996666,
       "icc_ak_ci_low": 0.9537858519038515,
       "icc_ak_ci_high": 0.9648505203796903,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -62,7 +62,7 @@
       "icc_ak": 0.8638852892358531,
       "icc_ak_ci_low": 0.8393686060727803,
       "icc_ak_ci_high": 0.8851795849435552,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -78,7 +78,7 @@
       "icc_ak": 0.9192900366370735,
       "icc_ak_ci_low": 0.8864592966705093,
       "icc_ak_ci_high": 0.9380558122389637,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -94,7 +94,7 @@
       "icc_ak": 0.9965667402001078,
       "icc_ak_ci_low": 0.9946135051783305,
       "icc_ak_ci_high": 0.9983218749332414,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -110,7 +110,7 @@
       "icc_ak": 0.9636435336836149,
       "icc_ak_ci_low": 0.9344348925700359,
       "icc_ak_ci_high": 0.980703337253717,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -126,7 +126,7 @@
       "icc_ak": 0.9537647695542433,
       "icc_ak_ci_low": 0.9288239252700402,
       "icc_ak_ci_high": 0.9679597117460239,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -142,7 +142,7 @@
       "icc_ak": 0.9002648640152554,
       "icc_ak_ci_low": 0.7931050356108816,
       "icc_ak_ci_high": 0.9384494409044198,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -158,7 +158,7 @@
       "icc_ak": 0.9374373091875938,
       "icc_ak_ci_low": 0.9260137859253557,
       "icc_ak_ci_high": 0.9468592870649497,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -174,7 +174,7 @@
       "icc_ak": 0.9351964712190917,
       "icc_ak_ci_low": 0.9017732344319809,
       "icc_ak_ci_high": 0.9537717860748669,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -190,7 +190,7 @@
       "icc_ak": 0.9183371806247618,
       "icc_ak_ci_low": 0.9044085254562273,
       "icc_ak_ci_high": 0.929939031341085,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     }
   ],
   "reliability_by_scenario": [
@@ -209,7 +209,7 @@
       "icc_ak": 0.8885424785658611,
       "icc_ak_ci_low": 0.8420425672223185,
       "icc_ak_ci_high": 0.9206168874914501,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -226,7 +226,7 @@
       "icc_ak": 0.9642635075432797,
       "icc_ak_ci_low": 0.9481725607598888,
       "icc_ak_ci_high": 0.9772813004443256,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -243,7 +243,7 @@
       "icc_ak": 0.9784244366706406,
       "icc_ak_ci_low": 0.9685094531543376,
       "icc_ak_ci_high": 0.9841302051358394,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -260,7 +260,7 @@
       "icc_ak": 0.9257192145720229,
       "icc_ak_ci_low": 0.8785854938474904,
       "icc_ak_ci_high": 0.9509383070222396,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -277,7 +277,7 @@
       "icc_ak": 0.8602617918084499,
       "icc_ak_ci_low": 0.7870228334459739,
       "icc_ak_ci_high": 0.905351691392936,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -294,7 +294,7 @@
       "icc_ak": 0.9600340480726359,
       "icc_ak_ci_low": 0.9294651120133276,
       "icc_ak_ci_high": 0.9777989343601877,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -311,7 +311,7 @@
       "icc_ak": 0.9564487416369266,
       "icc_ak_ci_low": 0.9401105679532636,
       "icc_ak_ci_high": 0.9733232739046118,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -328,7 +328,7 @@
       "icc_ak": 0.917628467985518,
       "icc_ak_ci_low": 0.8751387060637539,
       "icc_ak_ci_high": 0.9505932604690311,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -345,7 +345,7 @@
       "icc_ak": 0.838297545219801,
       "icc_ak_ci_low": 0.7978339604091247,
       "icc_ak_ci_high": 0.8679037157438431,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -362,7 +362,7 @@
       "icc_ak": 0.8892792567656961,
       "icc_ak_ci_low": 0.8431275692216536,
       "icc_ak_ci_high": 0.9186496938378228,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -379,7 +379,7 @@
       "icc_ak": 0.9473777899665619,
       "icc_ak_ci_low": 0.9361487645532668,
       "icc_ak_ci_high": 0.9566375065433398,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -396,7 +396,7 @@
       "icc_ak": 0.8256090564068568,
       "icc_ak_ci_low": 0.7836967608885543,
       "icc_ak_ci_high": 0.8545018203657682,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -413,7 +413,7 @@
       "icc_ak": 0.7908335092640069,
       "icc_ak_ci_low": 0.6969024630908557,
       "icc_ak_ci_high": 0.8346668720096945,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "mental_health",
@@ -430,7 +430,7 @@
       "icc_ak": 0.9649405289659901,
       "icc_ak_ci_low": 0.9528924147467045,
       "icc_ak_ci_high": 0.9752082772098306,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -447,7 +447,7 @@
       "icc_ak": 0.9488575477215722,
       "icc_ak_ci_low": 0.9317915874504866,
       "icc_ak_ci_high": 0.9613694825595124,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "mental_health",
@@ -464,7 +464,7 @@
       "icc_ak": 0.7909505062467326,
       "icc_ak_ci_low": 0.7041415233745876,
       "icc_ak_ci_high": 0.8519427511338632,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "education",
@@ -481,7 +481,7 @@
       "icc_ak": 0.7702107147775786,
       "icc_ak_ci_low": 0.6927374341609935,
       "icc_ak_ci_high": 0.8345829368594725,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "education",
@@ -498,7 +498,7 @@
       "icc_ak": 1.0,
       "icc_ak_ci_low": 1.0,
       "icc_ak_ci_high": 1.0,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -515,7 +515,7 @@
       "icc_ak": 0.8289493092089091,
       "icc_ak_ci_low": 0.7046127753716057,
       "icc_ak_ci_high": 0.8951290882957875,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -532,7 +532,7 @@
       "icc_ak": NaN,
       "icc_ak_ci_low": NaN,
       "icc_ak_ci_high": NaN,
-      "interpretation": "not estimable"
+      "primary_interpretation": "not estimable"
     },
     {
       "domain": "education",
@@ -549,7 +549,7 @@
       "icc_ak": 0.9798912448450786,
       "icc_ak_ci_low": 0.9224982868876542,
       "icc_ak_ci_high": 0.9939913172275968,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -566,7 +566,7 @@
       "icc_ak": 0.9917771966856748,
       "icc_ak_ci_low": 0.9824332084918926,
       "icc_ak_ci_high": 0.9982904956747362,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -583,7 +583,7 @@
       "icc_ak": 0.9822579587912689,
       "icc_ak_ci_low": 0.9487857436066712,
       "icc_ak_ci_high": 0.9964609087435387,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -600,7 +600,7 @@
       "icc_ak": 0.9908430691506159,
       "icc_ak_ci_low": 0.9450990526536167,
       "icc_ak_ci_high": 1.0,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -617,7 +617,7 @@
       "icc_ak": 0.6582104787935531,
       "icc_ak_ci_low": 0.5931832232159949,
       "icc_ak_ci_high": 0.7128398062265412,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "education",
@@ -634,7 +634,7 @@
       "icc_ak": 0.9964473344377177,
       "icc_ak_ci_low": 0.9933307605847038,
       "icc_ak_ci_high": 0.9989901774399985,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -651,7 +651,7 @@
       "icc_ak": 1.0,
       "icc_ak_ci_low": 1.0,
       "icc_ak_ci_high": 1.0,
-      "interpretation": "strong agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "education",
@@ -668,7 +668,7 @@
       "icc_ak": 0.7234708356560081,
       "icc_ak_ci_low": 0.6272638762502902,
       "icc_ak_ci_high": 0.7963775650858578,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "health",
@@ -685,7 +685,7 @@
       "icc_ak": -0.37845477386934306,
       "icc_ak_ci_low": -0.6729423821223841,
       "icc_ak_ci_high": -0.04013287024029972,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -702,7 +702,7 @@
       "icc_ak": -0.03671970624234971,
       "icc_ak_ci_low": -0.43631540362636934,
       "icc_ak_ci_high": 0.22691663166433204,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -719,7 +719,7 @@
       "icc_ak": -0.3112582781456964,
       "icc_ak_ci_low": -0.7038904542892429,
       "icc_ak_ci_high": 0.022271332948500228,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -736,7 +736,7 @@
       "icc_ak": -0.1818015713502625,
       "icc_ak_ci_low": -0.4808999176276743,
       "icc_ak_ci_high": 0.059531075177530514,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -753,7 +753,7 @@
       "icc_ak": 0.9474589224302636,
       "icc_ak_ci_low": 0.709045355348873,
       "icc_ak_ci_high": 0.9724896068404991,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -770,7 +770,7 @@
       "icc_ak": 0.93361132448151,
       "icc_ak_ci_low": 0.9098693676841255,
       "icc_ak_ci_high": 0.9515878651847492,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -787,7 +787,7 @@
       "icc_ak": 0.9600391772771792,
       "icc_ak_ci_low": 0.9413717658625014,
       "icc_ak_ci_high": 0.9723534704286821,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -804,7 +804,7 @@
       "icc_ak": 0.9395635142697257,
       "icc_ak_ci_low": 0.7633833788292389,
       "icc_ak_ci_high": 0.9675054041241633,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -821,7 +821,7 @@
       "icc_ak": -0.10623229461756094,
       "icc_ak_ci_low": -0.457466568719718,
       "icc_ak_ci_high": 0.16602390705103656,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -838,7 +838,7 @@
       "icc_ak": 0.8672421102981942,
       "icc_ak_ci_low": 0.7540669815449926,
       "icc_ak_ci_high": 0.9162511780259667,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -855,7 +855,7 @@
       "icc_ak": 0.5423045930701047,
       "icc_ak_ci_low": -0.02637881525362208,
       "icc_ak_ci_high": 0.7573721174979948,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -872,7 +872,7 @@
       "icc_ak": -0.15219583753552618,
       "icc_ak_ci_low": -0.7157243756737306,
       "icc_ak_ci_high": 0.19326221055779802,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -889,7 +889,7 @@
       "icc_ak": 0.7853712596970818,
       "icc_ak_ci_low": 0.6662032782176719,
       "icc_ak_ci_high": 0.870647369709502,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "health",
@@ -906,7 +906,7 @@
       "icc_ak": 0.9129628801319994,
       "icc_ak_ci_low": 0.8802513063927105,
       "icc_ak_ci_high": 0.9345146349749147,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -923,7 +923,7 @@
       "icc_ak": 0.8777802510145025,
       "icc_ak_ci_low": 0.6315198494944407,
       "icc_ak_ci_high": 0.9428596384819719,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -940,7 +940,7 @@
       "icc_ak": 0.8886167678733183,
       "icc_ak_ci_low": 0.8443977578195658,
       "icc_ak_ci_high": 0.9164094858227644,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -957,7 +957,7 @@
       "icc_ak": 0.9842931937172773,
       "icc_ak_ci_low": 0.9416883206745424,
       "icc_ak_ci_high": 0.9937903439399022,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -974,7 +974,7 @@
       "icc_ak": 0.9334975369458127,
       "icc_ak_ci_low": 0.8981498104243049,
       "icc_ak_ci_high": 0.949713568350391,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -991,7 +991,7 @@
       "icc_ak": 0.9847383720930234,
       "icc_ak_ci_low": 0.9648010616413674,
       "icc_ak_ci_high": 0.9910375042917458,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -1008,7 +1008,7 @@
       "icc_ak": 0.9565081421582862,
       "icc_ak_ci_low": 0.905871050724428,
       "icc_ak_ci_high": 0.9770519094499212,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -1025,7 +1025,7 @@
       "icc_ak": 0.07907279029462835,
       "icc_ak_ci_low": -0.37601270125028446,
       "icc_ak_ci_high": 0.33298052923458293,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -1042,7 +1042,7 @@
       "icc_ak": 0.9243108509717656,
       "icc_ak_ci_low": 0.8945016919884443,
       "icc_ak_ci_high": 0.9413833395844786,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -1059,7 +1059,7 @@
       "icc_ak": 0.682508464449313,
       "icc_ak_ci_low": 0.28306963798070284,
       "icc_ak_ci_high": 0.7952677454481241,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "health",
@@ -1076,7 +1076,7 @@
       "icc_ak": 0.7911569638909358,
       "icc_ak_ci_low": 0.6882080765494356,
       "icc_ak_ci_high": 0.8462832865433938,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "moderate; below the conventional publication threshold"
     },
     {
       "domain": "health",
@@ -1093,7 +1093,7 @@
       "icc_ak": 0.07142857142857426,
       "icc_ak_ci_low": -0.4562367864693423,
       "icc_ak_ci_high": 0.4608454608454623,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -1110,7 +1110,7 @@
       "icc_ak": 0.9240015509887555,
       "icc_ak_ci_low": 0.5795129354863088,
       "icc_ak_ci_high": 0.9561370189375604,
-      "interpretation": "moderate; below the conventional publication threshold"
+      "primary_interpretation": "strong agreement"
     },
     {
       "domain": "health",
@@ -1127,7 +1127,7 @@
       "icc_ak": 0.10280373831775659,
       "icc_ak_ci_low": -0.31267719072165057,
       "icc_ak_ci_high": 0.35210365004179406,
-      "interpretation": "weak agreement"
+      "primary_interpretation": "weak agreement"
     },
     {
       "domain": "health",
@@ -1144,7 +1144,7 @@
       "icc_ak": 0.961490163248221,
       "icc_ak_ci_low": 0.8834505944018306,
       "icc_ak_ci_high": 0.9804975345490757,
-      "interpretation": "tentative agreement (Krippendorff's lower bound)"
+      "primary_interpretation": "strong agreement"
     }
   ]
 }

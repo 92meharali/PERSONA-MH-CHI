@@ -1,0 +1,156 @@
+{
+  "model_fit": [
+    {
+      "n": 1526,
+      "domains": 3,
+      "prompt_clusters": 510,
+      "r_squared": 0.6468091339370771,
+      "adj_r_squared": 0.6435366838213386,
+      "condition_number": 9.81031697778398,
+      "covariance": "cluster-robust by domain::prompt_id",
+      "reference_domain": "mental_health"
+    }
+  ],
+  "coefficients": [
+    {
+      "term": "const",
+      "term_type": "main_or_control",
+      "estimate": 4.175303141126382,
+      "std_error_cluster_prompt": 0.02427839322331746,
+      "ci_low": 4.127718364806179,
+      "ci_high": 4.222887917446585,
+      "p_value": 0.0
+    },
+    {
+      "term": "z_H",
+      "term_type": "main_or_control",
+      "estimate": -0.027239674204330704,
+      "std_error_cluster_prompt": 0.014005497821389632,
+      "ci_low": -0.054689945519808575,
+      "ci_high": 0.00021059711114716426,
+      "p_value": 0.05178373616604156
+    },
+    {
+      "term": "z_E",
+      "term_type": "main_or_control",
+      "estimate": 0.08866971878129959,
+      "std_error_cluster_prompt": 0.02651012571473582,
+      "ci_low": 0.03671082715478822,
+      "ci_high": 0.14062861040781097,
+      "p_value": 0.0008235704007830211
+    },
+    {
+      "term": "z_D",
+      "term_type": "main_or_control",
+      "estimate": -0.04026249480719842,
+      "std_error_cluster_prompt": 0.013844723413071495,
+      "ci_low": -0.06739765407273701,
+      "ci_high": -0.013127335541659839,
+      "p_value": 0.0036357705701384616
+    },
+    {
+      "term": "z_F",
+      "term_type": "main_or_control",
+      "estimate": 0.43472794098082096,
+      "std_error_cluster_prompt": 0.016949813976687524,
+      "ci_low": 0.4015069160418598,
+      "ci_high": 0.46794896591978213,
+      "p_value": 4.456932138843246e-145
+    },
+    {
+      "term": "domain_education",
+      "term_type": "main_or_control",
+      "estimate": 0.2545079987187129,
+      "std_error_cluster_prompt": 0.04071068430166844,
+      "ci_low": 0.17471652370146257,
+      "ci_high": 0.3342994737359632,
+      "p_value": 4.061995144359372e-10
+    },
+    {
+      "term": "domain_health",
+      "term_type": "main_or_control",
+      "estimate": 0.5768932259589437,
+      "std_error_cluster_prompt": 0.048184862445413305,
+      "ci_low": 0.48245263096591695,
+      "ci_high": 0.6713338209519704,
+      "p_value": 4.9514351459383816e-33
+    },
+    {
+      "term": "z_H:x:domain_education",
+      "term_type": "interaction",
+      "estimate": -0.01538363347909422,
+      "std_error_cluster_prompt": 0.022424113524914465,
+      "ci_low": -0.05933408837316409,
+      "ci_high": 0.028566821414975654,
+      "p_value": 0.4926936598567563
+    },
+    {
+      "term": "z_H:x:domain_health",
+      "term_type": "interaction",
+      "estimate": 0.04276130299056935,
+      "std_error_cluster_prompt": 0.023071954431756334,
+      "ci_low": -0.0024588967486223537,
+      "ci_high": 0.08798150272976105,
+      "p_value": 0.0638266449426725
+    },
+    {
+      "term": "z_E:x:domain_education",
+      "term_type": "interaction",
+      "estimate": -0.09977003795983391,
+      "std_error_cluster_prompt": 0.041315101064176525,
+      "ci_low": -0.18074614806325234,
+      "ci_high": -0.018793927856415468,
+      "p_value": 0.015741412534616306
+    },
+    {
+      "term": "z_E:x:domain_health",
+      "term_type": "interaction",
+      "estimate": -0.10539231313092867,
+      "std_error_cluster_prompt": 0.03666416158215392,
+      "ci_low": -0.17725274935530744,
+      "ci_high": -0.03353187690654989,
+      "p_value": 0.00404626506133804
+    },
+    {
+      "term": "z_D:x:domain_education",
+      "term_type": "interaction",
+      "estimate": -0.0037147433658752996,
+      "std_error_cluster_prompt": 0.041424936367753476,
+      "ci_low": -0.08490612670853559,
+      "ci_high": 0.077476639976785,
+      "p_value": 0.9285462081917422
+    },
+    {
+      "term": "z_D:x:domain_health",
+      "term_type": "interaction",
+      "estimate": -0.21317643795150729,
+      "std_error_cluster_prompt": 0.061455482978120556,
+      "ci_low": -0.33362697124113794,
+      "ci_high": -0.09272590466187665,
+      "p_value": 0.0005227992902832513
+    },
+    {
+      "term": "z_F:x:domain_education",
+      "term_type": "interaction",
+      "estimate": 0.043421823279104085,
+      "std_error_cluster_prompt": 0.04215233006999015,
+      "ci_low": -0.039195225522521346,
+      "ci_high": 0.1260388720807295,
+      "p_value": 0.30295518068753635
+    },
+    {
+      "term": "z_F:x:domain_health",
+      "term_type": "interaction",
+      "estimate": -0.3748170018170017,
+      "std_error_cluster_prompt": 0.029660212447956604,
+      "ci_low": -0.43294994998880326,
+      "ci_high": -0.3166840536452002,
+      "p_value": 1.3194395126472714e-36
+    }
+  ],
+  "method": {
+    "model": "OLS: OA ~ z(H,E,D,F) * domain",
+    "uncertainty": "cluster-robust standard errors by domain::prompt_id",
+    "reference_domain": "mental_health"
+  }
+}

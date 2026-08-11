@@ -1,21 +1,23 @@
 {
   "environment": {
-    "numpy": "2.4.4",
-    "pandas": "3.0.2",
-    "scipy": "1.17.1",
-    "sklearn": "1.8.0",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.6.1",
     "statsmodels": "0.14.6",
-    "matplotlib": "3.10.8",
-    "pingouin": "0.6.1",
+    "matplotlib": "3.9.4",
+    "pingouin": "0.5.5",
     "krippendorff": "installed",
-    "python": "3.12.3"
+    "python": "3.9.6"
   },
   "phase_seconds": {
-    "1 - dataset build and audit": 2.3,
-    "2 - annotation reliability": 7.66,
-    "3 - descriptives and separability": 30.04,
-    "4 - cross-validation, ablation, incremental validity": 6.48
+    "1 - dataset build and audit": 1.44,
+    "1b - HuMT provenance audit": 0.13,
+    "2 - annotation reliability": 4.44,
+    "3 - descriptives and separability": 21.61,
+    "4 - cross-validation, ablation, incremental validity": 4.47,
+    "5 - domain interactions": 0.03
   },
-  "processed_dir": "/home/claude/PERSONA-MH-CHI/analysis/processed",
-  "outputs_dir": "/home/claude/PERSONA-MH-CHI/analysis/outputs"
+  "processed_dir": "/private/tmp/PERSONA-MH-CHI/analysis/processed",
+  "outputs_dir": "/private/tmp/PERSONA-MH-CHI/analysis/outputs"
 }

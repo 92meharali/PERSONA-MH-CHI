@@ -4,7 +4,7 @@ Two pipelines live in this folder.
 
 | Pipeline | Entry point | Scope | Status |
 |---|---|---|---|
-| Phase pipeline (current) | `python -m analysis.run_phases` | All three domains, Phases 1-4 | Active |
+| Phase pipeline (current) | `python -m analysis.run_phases` | All three domains, Phases 1-5 | Active |
 | Mental-health pipeline (legacy) | `python -m analysis` | Mental health only, writes `analysis_outputs/` | Kept for the existing manuscript, superseded for anything multi-domain |
 | Quick domain runner | `analysis/analysis_domains.py` | Education and health `analysis.md` | **Retired.** See "Why the quick runner was retired" |
 
@@ -24,16 +24,19 @@ Individual phases can be run alone, in order:
 
 ```bash
 python -m analysis.build_dataset   # Phase 1
+python -m analysis.humt_provenance_audit # Phase 1b
 python -m analysis.reliability     # Phase 2
 python -m analysis.descriptives    # Phase 3
 python -m analysis.predictive      # Phase 4
+python -m analysis.domain_interactions # Phase 5
 ```
 
-Phases 2-4 read `analysis/processed/persona_all.csv`, so Phase 1 must run first.
+Phases 1b-5 read `analysis/processed/persona_all.csv`, so Phase 1 must run first.
 
 ## What each phase does
 
-**Phase 1 - `build_dataset.py`.** Reads the five annotator CSVs per domain and
+**Phase 1 - `build_dataset.py`.** Reads the Group A `oa_group_a.csv` file and
+the five anonymous Group B E/D/F annotator CSVs per domain and
 emits one rating-level file and one response-level file, plus a full data audit.
 It repairs two structural gaps in the education and health exports, both
 deterministically and both reported:
@@ -52,11 +55,17 @@ margin of 0.05 over the runner-up. A candidate is accepted only when it
 identifies exactly one response and exactly one HuMT row. Nothing is dropped:
 unmatched rows are carried with explicit missing values and counted.
 
-**Phase 2 - `reliability.py`.** Krippendorff ordinal alpha plus two-way random
-absolute-agreement ICC(A,1) and ICC(A,k), with percentile bootstrap intervals
-over responses, reported per domain and per dimension and additionally by
-scenario type. The ICC routine is computed from ANOVA mean squares and matches
-`pingouin.intraclass_corr` to within 1e-8.
+**Phase 1b - `humt_provenance_audit.py`.** Produces a read-only HuMT provenance
+audit checking response-text uniqueness, HuMT-text duplication, stable-ID
+availability, unmatched rows, and false-match risk. It does not recover missing
+HuMT values.
+
+**Phase 2 - `reliability.py`.** Primary reliability is two-way mixed-effects,
+absolute-agreement, average-measures ICC(A,k), with percentile bootstrap
+intervals over responses, reported per domain and per criterion/dimension and
+additionally by scenario type. ICC(A,1) and Krippendorff's ordinal alpha are
+reported as supplementary diagnostics. The ICC routine is computed from ANOVA
+mean squares and matches `pingouin.intraclass_corr` to within 1e-8.
 
 **Phase 3 - `descriptives.py`.** Distributions by domain and by model, explicit
 ceiling and floor diagnostics, pairwise Spearman and Pearson associations with
@@ -71,6 +80,11 @@ intervals come from 1000 prompt-cluster bootstrap resamples of the out-of-fold
 predictions, and every comparison between specifications reuses the same
 resamples so the differences are paired.
 
+**Phase 5 - `domain_interactions.py`.** A targeted OLS audit tests whether the
+association between each profile dimension and `OA` differs by domain:
+`OA ~ z(H,E,D,F) * domain`. Uncertainty uses cluster-robust standard errors by
+`domain::prompt_id`. This phase is interpretive, not causal.
+
 ## Outputs
 
 ```
@@ -79,9 +93,12 @@ analysis/processed/persona_all.csv            one row per response, consensus sc
 analysis/outputs/tables/*.csv                 all paper-facing tables
 analysis/outputs/figures/*.png                all figures
 analysis/outputs/reports/*.md                 readable versions of each phase
-analysis/outputs/phase{1,2,3,4}_results.json  machine-readable results
+analysis/outputs/phase{1,2,3,4,5}_results.json machine-readable results
 analysis/outputs/run_manifest.json            environment and timings
 ```
+
+The targeted final audit is recorded in
+`analysis/outputs/reports/final_validation_audit.md`.
 
 `cv_fold_assignments.csv` records the fold each response fell into on the first
 repeat, and `cv_folds.csv` records every fold of every repeat, so any reported

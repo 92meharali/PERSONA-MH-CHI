@@ -12,6 +12,7 @@ Outputs:
   analysis/outputs/tables/ceiling_floor.csv
   analysis/outputs/tables/correlations.csv
   analysis/outputs/tables/collinearity_vif.csv
+  analysis/outputs/tables/collinearity_condition.csv
   analysis/outputs/figures/fig_distributions_by_domain.png
   analysis/outputs/figures/fig_correlation_matrix.png
   analysis/outputs/figures/fig_h_vs_oa.png
@@ -179,6 +180,20 @@ def run_vif(data: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def run_condition_number(data: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for domain in DOMAINS:
+        block = data[data["domain"] == domain][PROFILE].dropna()
+        x = block.to_numpy(dtype=float)
+        if len(block) < 2:
+            condition = np.nan
+        else:
+            scaled = (x - x.mean(axis=0)) / x.std(axis=0, ddof=1)
+            condition = float(np.linalg.cond(scaled))
+        rows.append({"domain": domain, "n": len(block), "condition_number": condition})
+    return pd.DataFrame(rows)
+
+
 # --------------------------------------------------------------------------
 # Figures
 # --------------------------------------------------------------------------
@@ -256,28 +271,31 @@ def main(n_boot: int = N_BOOT) -> None:
     ceiling = run_ceiling_floor(data)
     correlations = run_correlations(data, rng, n_boot)
     vif = run_vif(data)
+    condition = run_condition_number(data)
 
     save_table(by_domain, "descriptives_by_domain")
     save_table(by_model, "descriptives_by_model")
     save_table(ceiling, "ceiling_floor")
     save_table(correlations, "correlations")
     save_table(vif, "collinearity_vif")
+    save_table(condition, "collinearity_condition")
 
     figure_distributions(data)
     figure_correlation_matrix(data)
     figure_scatter(data, "H", "fig_h_vs_oa.png", "Human-likeness against independently rated appropriateness")
     figure_scatter(data, "F", "fig_f_vs_oa.png", "Contextual fit against independently rated appropriateness")
 
-    save_markdown(render(by_domain, by_model, ceiling, correlations, vif), "descriptives")
+    save_markdown(render(by_domain, by_model, ceiling, correlations, vif, condition), "descriptives")
     save_json({"descriptives_by_domain": by_domain.to_dict(orient="records"),
                "descriptives_by_model": by_model.to_dict(orient="records"),
                "ceiling_floor": ceiling.to_dict(orient="records"),
                "correlations": correlations.to_dict(orient="records"),
-               "vif": vif.to_dict(orient="records")}, "phase3_results")
+               "vif": vif.to_dict(orient="records"),
+               "condition_number": condition.to_dict(orient="records")}, "phase3_results")
     print("Phase 3 complete: descriptives, separability, 4 figures")
 
 
-def render(by_domain, by_model, ceiling, correlations, vif) -> str:
+def render(by_domain, by_model, ceiling, correlations, vif, condition) -> str:
     lines = ["# Descriptive statistics and dimension separability (Phase 3)", ""]
 
     lines += ["## Consensus score distributions by domain", "",
@@ -319,6 +337,13 @@ def render(by_domain, by_model, ceiling, correlations, vif) -> str:
               "| Domain | Dimension | N | R2 on the other three | VIF |", "|---|---|---:|---:|---:|"]
     for _, r in vif.iterrows():
         lines.append(f"| {r['domain']} | {r['dimension']} | {int(r['n'])} | {r['r_squared_on_others']} | {r['vif']} |")
+
+    lines += ["", "## Condition number", "",
+              "Condition numbers are computed on z-scored `H`, `E`, `D`, and `F` within each domain. "
+              "They are reported as a diagnostic, not as a pass/fail threshold.", "",
+              "| Domain | N | Condition number |", "|---|---:|---:|"]
+    for _, r in condition.iterrows():
+        lines.append(f"| {r['domain']} | {int(r['n'])} | {r['condition_number']:.3f} |")
 
     lines += ["", "## Figures", "",
               "- `fig_distributions_by_domain.png` - consensus distributions for OA/E/D/F/H",

@@ -40,7 +40,7 @@ profile.
 ## Why This File Changed
 
 Earlier versions of this summary contained manually transcribed analysis numbers.
-The Phase 1-4 pipeline now makes generated outputs canonical, so results should
+The Phase 1-5 pipeline now makes generated outputs canonical, so results should
 be read directly from `analysis/outputs/` rather than duplicated here.
 
 This avoids stale figures and keeps the repository easier to audit for CHI-style

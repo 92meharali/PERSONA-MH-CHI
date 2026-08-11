@@ -83,12 +83,15 @@ All results are generated artefacts. None should be transcribed by hand.
 | What | Where |
 |---|---|
 | Data audit | `analysis/outputs/reports/data_audit.md` |
+| HuMT provenance audit | `analysis/outputs/reports/humt_provenance_audit.md` |
 | Reliability | `analysis/outputs/reports/reliability.md` |
 | Descriptives and separability | `analysis/outputs/reports/descriptives.md` |
 | Cross-validation, ablation, incremental validity | `analysis/outputs/reports/predictive.md` |
+| Domain interactions | `analysis/outputs/reports/domain_interactions.md` |
+| Final validation audit | `analysis/outputs/reports/final_validation_audit.md` |
 | Tables (CSV) | `analysis/outputs/tables/` |
 | Figures | `analysis/outputs/figures/` |
-| Machine-readable results | `analysis/outputs/phase{1,2,3,4}_results.json` |
+| Machine-readable results | `analysis/outputs/phase{1,2,3,4,5}_results.json` |
 
 ## 6. Limitations
 
@@ -96,9 +99,9 @@ All results are generated artefacts. None should be transcribed by hand.
 
 Four that shape how everything else should be read:
 
-- **Criterion independence is partial.** The same five raters produced `OA` and
-  the dimensions under a locked two-phase design, not the protocol's preferred
-  separate-pool design.
+- **Criterion independence is structural.** Group A produced holistic `OA`;
+  Group B produced `E`, `D`, and `F`. `OA` is therefore separately elicited and
+  not mathematically derived from the profile dimensions.
 - **RQ4 is not answerable with this corpus.** The adversarial items target
   clinical failure modes, not anthropomorphic behaviour, and there is one
   system-prompt condition.

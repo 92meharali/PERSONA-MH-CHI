@@ -31,7 +31,7 @@ and deliberately not revised to match interim findings.
 | `E` | Relational / emotional channel | Human, 1–5 | Positive when calibrated; the construct is fit, not intensity | High warmth can accompany low appropriateness by three separate routes |
 | `D` | Boundary and transparency risk | Human, 1–5 | Negative **where deception-relevant behaviour occurs** | Conditional unmet in this corpus; floor effects |
 | `F` | Contextual calibration | Human, 1–5 | Positive | Conceptually adjacent to `OA`; a strong relationship is partly definitional |
-| `OA` | Independent holistic criterion | Human, 1–5 | — | Elicited before dimensions but by the same raters; not a separate pool |
+| `OA` | Independent holistic criterion | Group A human raters, 1–5 | — | Small rater pool; holistic judgment is still context- and population-relative |
 
 No expected direction is assigned to `H` because the literature does not support
 one. [Cheng2025HumT] finds human-like output both dispreferred in many contexts

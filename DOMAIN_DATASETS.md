@@ -102,6 +102,6 @@ If we want a multi-domain claim without exploding annotation cost:
 - 50 education prompts (Bridge/MathDial)
 - 50 health prompts (HealthBench)
 - same 3–4 models + relaxed vs strict prompt
-- same 5 raters, domain-adapted D/F cheat sheets
+- same Group A / Group B rater structure, domain-adapted D/F cheat sheets
 
 That is enough for a CHI “framework generality” pilot beside the deep mental-health study.

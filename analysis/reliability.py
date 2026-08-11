@@ -7,9 +7,9 @@ internal-consistency coefficient, not an agreement coefficient, so the two were
 never comparable even though the summary documents tabulated them side by side.
 This module standardises on the mental-health method.
 
-Both single-rater and average-of-k reliability are reported, because ICC(A,k)
-is substantially larger than ICC(A,1) by construction and quoting it alone
-overstates how much individual raters agreed.
+ICC(A,k) is the primary statistic because the analysis uses averaged ratings
+from multiple raters who scored the same responses. ICC(A,1) and Krippendorff's
+ordinal alpha are retained as supplementary diagnostics.
 
 Outputs:
   analysis/outputs/tables/reliability.csv
@@ -56,7 +56,7 @@ def ordinal_alpha(matrix: np.ndarray) -> float:
 
 
 def icc_absolute(matrix: np.ndarray) -> tuple[float, float]:
-    """ICC(A,1) and ICC(A,k): two-way random effects, absolute agreement.
+    """ICC(A,1) and ICC(A,k): two-way mixed-effects, absolute agreement.
 
     Computed from the ANOVA mean squares directly rather than through pingouin
     so that thousands of bootstrap replicates stay cheap. Validated against
@@ -88,14 +88,12 @@ def icc_absolute(matrix: np.ndarray) -> tuple[float, float]:
     return float(single), float(average)
 
 
-def interpret(alpha: float) -> str:
-    if np.isnan(alpha):
+def interpret_icc(value: float) -> str:
+    if np.isnan(value):
         return "not estimable"
-    if alpha >= 0.80:
+    if value >= 0.80:
         return "strong agreement"
-    if alpha >= 0.667:
-        return "tentative agreement (Krippendorff's lower bound)"
-    if alpha >= 0.40:
+    if value >= 0.60:
         return "moderate; below the conventional publication threshold"
     return "weak agreement"
 
@@ -132,11 +130,12 @@ def estimate(matrix: np.ndarray, rng: np.random.Generator, n_boot: int) -> dict:
         "icc_ak": icck,
         "icc_ak_ci_low": icck_ci[0],
         "icc_ak_ci_high": icck_ci[1],
-        "interpretation": interpret(alpha),
+        "primary_interpretation": interpret_icc(icck),
     }
 
 
 def rater_matrix(frame: pd.DataFrame, dimension: str) -> np.ndarray:
+    frame = frame.dropna(subset=[f"{dimension}_score"])
     pivot = frame.pivot_table(
         index="annotator_id", columns="annotation_item_id", values=f"{dimension}_score", aggfunc="first"
     )
@@ -183,41 +182,44 @@ def main(n_boot: int = N_BOOT) -> None:
 
 def render(table: pd.DataFrame, scenario: pd.DataFrame) -> str:
     lines = ["# Annotation reliability (Phase 2)", "",
-             "Krippendorff's ordinal alpha and two-way random absolute-agreement ICC, computed "
-             "identically for all three domains. Confidence intervals are 95 per cent percentile "
-             "intervals from a bootstrap that resamples responses.", "",
-             "`alpha` and `ICC(A,1)` describe how well a *single* rater reproduces the panel. "
-             "`ICC(A,k)` describes the reliability of the five-rater mean, which is the quantity "
-             "the analysis actually uses, and is always the larger number. Both are reported so "
-             "that neither is quoted out of context.", "",
-             "| Domain | Dimension | N | Raters | alpha (ordinal) | 95% CI | ICC(A,1) | 95% CI | ICC(A,k) | 95% CI | Interpretation |",
+             "The primary reliability statistic is `ICC(A,k)`: a two-way mixed-effects, "
+             "absolute-agreement, average-measures intraclass correlation. This matches the "
+             "annotation structure because multiple raters in the relevant pool scored the same "
+             "responses and the analysis uses their averaged score. Confidence intervals are 95 "
+             "per cent percentile intervals from a response-level bootstrap.", "",
+             "`ICC(A,1)` is reported as the single-rater counterpart. Krippendorff's ordinal "
+             "alpha is retained as a supplementary ordinal diagnostic, not as the primary "
+             "inter-rater reliability statistic.", "",
+             "| Domain | Dimension | N | Raters | Primary ICC(A,k) | 95% CI | ICC(A,1) | 95% CI | Supplementary alpha | 95% CI | Interpretation |",
              "|---|---|---:|---:|---:|---|---:|---|---:|---|---|"]
     for _, r in table.iterrows():
         lines.append(
             f"| {r['domain']} | {r['dimension']} | {r['n_responses']} | {r['n_raters']} | "
-            f"{r['krippendorff_alpha_ordinal']:.3f} | [{r['alpha_ci_low']:.3f}, {r['alpha_ci_high']:.3f}] | "
+            f"{r['icc_ak']:.3f} | [{r['icc_ak_ci_low']:.3f}, {r['icc_ak_ci_high']:.3f}] | "
             f"{r['icc_a1']:.3f} | [{r['icc_a1_ci_low']:.3f}, {r['icc_a1_ci_high']:.3f}] | "
-            f"{r['icc_ak']:.3f} | [{r['icc_ak_ci_low']:.3f}, {r['icc_ak_ci_high']:.3f}] | {r['interpretation']} |"
+            f"{r['krippendorff_alpha_ordinal']:.3f} | [{r['alpha_ci_low']:.3f}, {r['alpha_ci_high']:.3f}] | "
+            f"{r['primary_interpretation']} |"
         )
 
     lines += ["", "## Scenario-level reliability", "",
-              "Reported for scenario types with at least 20 responses.", "",
-              "| Domain | Scenario | Dimension | N | alpha | 95% CI |", "|---|---|---|---:|---:|---|"]
+              "Reported for scenario types with at least 20 responses. ICC(A,k) remains the primary "
+              "statistic; alpha is supplementary.", "",
+              "| Domain | Scenario | Dimension | N | ICC(A,k) | 95% CI | alpha | 95% CI |",
+              "|---|---|---|---:|---:|---|---:|---|"]
     for _, r in scenario.iterrows():
         lines.append(
             f"| {r['domain']} | {r['scenario_type']} | {r['dimension']} | {r['n_responses']} | "
+            f"{r['icc_ak']:.3f} | [{r['icc_ak_ci_low']:.3f}, {r['icc_ak_ci_high']:.3f}] | "
             f"{r['krippendorff_alpha_ordinal']:.3f} | [{r['alpha_ci_low']:.3f}, {r['alpha_ci_high']:.3f}] |"
         )
 
-    lines += ["", "## Provenance caveat", "",
-              "The Phase 1 audit shows that within every domain the rate at which all five raters "
-              "recorded the same rationale text is exactly equal to the rate at which they recorded "
-              "the same score. Rationales are therefore a deterministic function of the score and "
-              "provide no independent evidence that the five rating passes were produced "
-              "independently. The health folder is documented in its own README as oversight and "
-              "adjudication passes rather than independent annotation. Until the annotation process "
-              "is audited, these coefficients should be described as consistency of the released "
-              "rating set, not as independent inter-rater reliability.", ""]
+    lines += ["", "## Method check", "",
+              "- `OA` reliability is estimated from the Group A OA pool.",
+              "- `E`, `D`, and `F` reliability are estimated from the Group B dimension pool.",
+              "- The ICC formula is absolute-agreement average-measures ICC, so systematic rater "
+              "level differences count against reliability rather than being ignored.",
+              "- The number of raters is read from each domain x dimension matrix after filtering "
+              "to rows where that score is present.", ""]
     return "\n".join(lines)
 
 

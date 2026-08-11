@@ -256,13 +256,13 @@ If the criterion is computed from the predictors, testing whether the predictors
 explain the criterion is arithmetic, not evidence. A framework evaluated that way
 can report a large R² and demonstrate nothing beyond its own algebra.
 
-PERSONA avoids this by eliciting `OA` as a separate holistic judgment, made
-before the dimensions are seen. Any statistical relationship between `P` and `OA`
-is then an empirical finding about human judgment rather than a restatement of a
-definition.
+PERSONA avoids this by eliciting `OA` as a separate holistic judgment from Group
+A, while Group B supplies `E`, `D`, and `F`. Any statistical relationship between
+`P` and `OA` is then an empirical finding about human judgment rather than a
+restatement of a definition.
 
-This is the design commitment. How completely it was realised in the current data
-release is a separate question, addressed honestly in `ANNOTATION_THEORY.md` §4.
+This is the design commitment realised in the current clean release. See
+`ANNOTATION_THEORY.md` §4.
 
 ### Why OA should be holistic
 

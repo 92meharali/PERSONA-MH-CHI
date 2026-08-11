@@ -110,6 +110,16 @@ Spearman rho with 95 per cent prompt-cluster bootstrap intervals and Benjamini-H
 | health | D | 419 | 0.2594 | 1.35 |
 | health | F | 419 | 0.0559 | 1.059 |
 
+## Condition number
+
+Condition numbers are computed on z-scored `H`, `E`, `D`, and `F` within each domain. They are reported as a diagnostic, not as a pass/fail threshold.
+
+| Domain | N | Condition number |
+|---|---:|---:|
+| mental_health | 660 | 1.838 |
+| education | 447 | 1.821 |
+| health | 419 | 1.964 |
+
 ## Figures
 
 - `fig_distributions_by_domain.png` - consensus distributions for OA/E/D/F/H

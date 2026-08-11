@@ -58,14 +58,13 @@ These are evaluated against a separate quantity:
 
 | Symbol | Construct | Source |
 |---|---|---|
-| `OA` | Overall appropriateness | Independent holistic human judgment |
+| `OA` | Overall appropriateness | Group A independent holistic human judgment |
 
-**`OA` is not computed from `E`, `D`, or `F`.** It is elicited separately and
-serves as the criterion against which the profile is examined. This is the
-central methodological commitment of the framework and the reason it is not
-circular. See `ANNOTATION_THEORY.md` for how this is operationalised and for an
-honest account of how completely the separation was achieved in the current
-release.
+**`OA` is not computed from `E`, `D`, or `F`.** It is elicited from Group A and
+serves as the criterion against which the Group B profile dimensions are
+examined. This is the central methodological commitment of the framework and the
+reason it is not circular. See `ANNOTATION_THEORY.md` for how this is
+operationalised in the current release.
 
 Full definitions are in `CONSTRUCT_DEFINITIONS.md`. The pairwise conceptual
 separations the framework depends on are in `DISTINCTIONS.md`.

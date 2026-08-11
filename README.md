@@ -59,7 +59,8 @@ data/clean_domains/
 
 Each domain folder contains:
 
-- five annotator CSVs
+- `oa_group_a.csv` with Group A holistic `OA` ratings
+- five anonymous Group B annotator CSVs with `E`, `D`, and `F` ratings
 - `rubric.md`
 - `README.md`
 - `analysis.md`
@@ -75,16 +76,18 @@ python -m analysis.run_phases
 ```
 
 The legacy mental-health-only pipeline is retained for continuity, but the
-Phase 1-4 pipeline is the canonical multi-domain analysis.
+Phase 1-5 pipeline is the canonical multi-domain analysis.
 
 Generated reports:
 
 | Report | Location |
 |---|---|
 | Data audit | `analysis/outputs/reports/data_audit.md` |
+| HuMT provenance audit | `analysis/outputs/reports/humt_provenance_audit.md` |
 | Reliability | `analysis/outputs/reports/reliability.md` |
 | Descriptives and separability | `analysis/outputs/reports/descriptives.md` |
 | Predictive analysis | `analysis/outputs/reports/predictive.md` |
+| Domain interaction audit | `analysis/outputs/reports/domain_interactions.md` |
 
 ## Paper Direction
 

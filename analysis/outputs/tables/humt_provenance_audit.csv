@@ -1,0 +1,4 @@
+domain,responses,humt_rows,matched,unmatched,ambiguous_accepted,response_duplicate_normalized_texts,humt_duplicate_normalized_texts,repository_response_id_available,humt_stable_response_id_available,humt_columns,fuzzy_matches,unmatched_item_ids,decision
+mental_health,660,0,660,0,0,0,0,True,False,,0,,embedded_humt
+education,450,450,447,3,0,2,2,True,False,source_file;text;text_trunc;humt_text;std_humt_text,7,PEDU-0070;PEDU-0071;PEDU-0072,keep_text_join_documented
+health,450,450,419,31,0,0,0,True,False,source_file;text;text_trunc;humt_text;std_humt_text,0,PHLT-0186;PHLT-0193;PHLT-0194;PHLT-0195;PHLT-0214;PHLT-0215;PHLT-0216;PHLT-0249;PHLT-0256;PHLT-0257;PHLT-0258;PHLT-0268;PHLT-0269;PHLT-0270;PHLT-0292;PHLT-0293;PHLT-0294;PHLT-0295;PHLT-0296;PHLT-0297;PHLT-0397;PHLT-0398;PHLT-0399;PHLT-0411;PHLT-0415;PHLT-0416;PHLT-0417;PHLT-0444;PHLT-0448;PHLT-0449;PHLT-0450,keep_text_join_documented
