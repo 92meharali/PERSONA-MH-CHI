@@ -46,8 +46,8 @@ attribution rule.
 | Domain | Location | Responses | Prompts | Raters |
 |---|---|---|---|---|
 | Mental health | `data/clean_domains/mental_health/` | 660 | 220 | 5 |
-| Education | `data/clean_domains/education/` | 450 | 150 | 5 |
-| Health | `data/clean_domains/health/` | 450 | 150 | 5 |
+| Education | `data/clean_domains/education/` | 415 | 139 | 5 |
+| Health | `data/clean_domains/health/` | 415 | 140 | 5 |
 
 Mental-health prompts derive from CounselBench. Dataset provenance for the other
 domains is in `DOMAIN_DATASETS.md`.

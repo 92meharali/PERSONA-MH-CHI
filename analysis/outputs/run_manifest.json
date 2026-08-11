@@ -11,11 +11,11 @@
     "python": "3.9.6"
   },
   "phase_seconds": {
-    "1 - dataset build and audit": 1.44,
-    "1b - HuMT provenance audit": 0.13,
-    "2 - annotation reliability": 4.44,
-    "3 - descriptives and separability": 21.61,
-    "4 - cross-validation, ablation, incremental validity": 4.47,
+    "1 - dataset build and audit": 1.12,
+    "1b - HuMT provenance audit": 0.11,
+    "2 - annotation reliability": 4.13,
+    "3 - descriptives and separability": 20.33,
+    "4 - cross-validation, ablation, incremental validity": 3.97,
     "5 - domain interactions": 0.03
   },
   "processed_dir": "/private/tmp/PERSONA-MH-CHI/analysis/processed",

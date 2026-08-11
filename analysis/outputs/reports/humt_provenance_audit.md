@@ -7,8 +7,8 @@ This audit checks whether the current HuMT joins can be kept without changing sc
 | Domain | Responses | HuMT rows | Matched | Unmatched | Duplicate response texts | Duplicate HuMT texts | Stable ID in HuMT | Fuzzy matches | Decision |
 |---|---:|---:|---:|---:|---:|---:|---|---:|---|
 | mental_health | 660 | 0 | 660 | 0 | 0 | 0 | no | 0 | embedded_humt |
-| education | 450 | 450 | 447 | 3 | 2 | 2 | no | 7 | keep_text_join_documented |
-| health | 450 | 450 | 419 | 31 | 0 | 0 | no | 0 | keep_text_join_documented |
+| education | 415 | 450 | 415 | 0 | 0 | 2 | no | 7 | keep_text_join_documented |
+| health | 415 | 450 | 415 | 0 | 0 | 0 | no | 0 | keep_text_join_documented |
 
 ## Findings
 
@@ -23,8 +23,8 @@ This audit checks whether the current HuMT joins can be kept without changing sc
 | Domain | Unmatched annotation_item_id values |
 |---|---|
 | mental_health | - |
-| education | PEDU-0070;PEDU-0071;PEDU-0072 |
-| health | PHLT-0186;PHLT-0193;PHLT-0194;PHLT-0195;PHLT-0214;PHLT-0215;PHLT-0216;PHLT-0249;PHLT-0256;PHLT-0257;PHLT-0258;PHLT-0268;PHLT-0269;PHLT-0270;PHLT-0292;PHLT-0293;PHLT-0294;PHLT-0295;PHLT-0296;PHLT-0297;PHLT-0397;PHLT-0398;PHLT-0399;PHLT-0411;PHLT-0415;PHLT-0416;PHLT-0417;PHLT-0444;PHLT-0448;PHLT-0449;PHLT-0450 |
+| education | - |
+| health | - |
 
 ## False-match risk
 

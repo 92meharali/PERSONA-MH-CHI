@@ -54,8 +54,8 @@ data/clean_domains/
 | Domain | Folder | Responses | Rating rows | HuMT |
 |---|---|---:|---:|---|
 | Mental health | `data/clean_domains/mental_health/` | 660 | 3,300 | embedded |
-| Education | `data/clean_domains/education/` | 450 | 2,250 | `humt_education.csv` |
-| Health | `data/clean_domains/health/` | 450 | 2,250 oversight/adjudication rows | `humt_health.csv` |
+| Education | `data/clean_domains/education/` | 415 | 2,075 | `humt_education.csv` |
+| Health | `data/clean_domains/health/` | 415 | 2,075 oversight/adjudication rows | `humt_health.csv` |
 
 Each domain folder contains:
 

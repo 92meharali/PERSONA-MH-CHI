@@ -159,7 +159,7 @@ def render(coefs: pd.DataFrame, model_fit: pd.DataFrame) -> str:
         "## Reading guidance",
         "",
         "- R² differences across domain-specific CV models are descriptive unless the interaction terms support slope differences.",
-        "- Health remains constrained by its ceiling effect and missing HuMT rows; interaction estimates should be interpreted with that limitation.",
+        "- Health remains constrained by its ceiling effect; interaction estimates should be interpreted with that limitation.",
         "- Significant interactions are associations, not evidence that a dimension causes appropriateness.",
         "",
     ]

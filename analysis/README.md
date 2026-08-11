@@ -128,10 +128,13 @@ sourced from the old runner should be regenerated before submission.
 
 ## Known gaps
 
-- HuMT coverage is 660/660 for mental health and 447/450 for education, but only
-  419/450 for health: 31 health responses have no corresponding row in the
-  committed HuMT export, and near-duplicate search finds no close candidate.
-  This needs a re-export keyed on response id.
+- The active education and health releases are filtered to 415 HuMT-complete
+  responses each. Their committed HuMT exports still contain 450 provenance rows
+  and still lack stable response IDs, so future exports should include
+  `annotation_item_id`.
+- Because 415 is not divisible by three, the filtered education and health
+  releases contain a small number of prompt groups with fewer than three
+  responses. Grouped cross-validation still groups by `prompt_id`.
 - The corpus contains a single system-prompt condition, so the paired
   contrast of the same context under different anthropomorphic behaviour
   cannot be run. This is recorded as **NOT AVAILABLE - requires additional

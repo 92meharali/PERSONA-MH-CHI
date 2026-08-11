@@ -1,12 +1,12 @@
 {
   "model_fit": [
     {
-      "n": 1526,
+      "n": 1490,
       "domains": 3,
-      "prompt_clusters": 510,
-      "r_squared": 0.6468091339370771,
-      "adj_r_squared": 0.6435366838213386,
-      "condition_number": 9.81031697778398,
+      "prompt_clusters": 499,
+      "r_squared": 0.6509682598099553,
+      "adj_r_squared": 0.6476554161742532,
+      "condition_number": 9.680196418416704,
       "covariance": "cluster-robust by domain::prompt_id",
       "reference_domain": "mental_health"
     }
@@ -15,137 +15,137 @@
     {
       "term": "const",
       "term_type": "main_or_control",
-      "estimate": 4.175303141126382,
-      "std_error_cluster_prompt": 0.02427839322331746,
-      "ci_low": 4.127718364806179,
-      "ci_high": 4.222887917446585,
+      "estimate": 4.177203828308002,
+      "std_error_cluster_prompt": 0.023874181183799432,
+      "ci_low": 4.130411293027372,
+      "ci_high": 4.223996363588633,
       "p_value": 0.0
     },
     {
       "term": "z_H",
       "term_type": "main_or_control",
-      "estimate": -0.027239674204330704,
-      "std_error_cluster_prompt": 0.014005497821389632,
-      "ci_low": -0.054689945519808575,
-      "ci_high": 0.00021059711114716426,
-      "p_value": 0.05178373616604156
+      "estimate": -0.027262769855284082,
+      "std_error_cluster_prompt": 0.01401924651069065,
+      "ci_low": -0.05473998810662658,
+      "ci_high": 0.00021444839605841426,
+      "p_value": 0.051815037081444824
     },
     {
       "term": "z_E",
       "term_type": "main_or_control",
-      "estimate": 0.08866971878129959,
-      "std_error_cluster_prompt": 0.02651012571473582,
-      "ci_low": 0.03671082715478822,
-      "ci_high": 0.14062861040781097,
-      "p_value": 0.0008235704007830211
+      "estimate": 0.08880883863450187,
+      "std_error_cluster_prompt": 0.02655526871881128,
+      "ci_low": 0.036761468345848654,
+      "ci_high": 0.1408562089231551,
+      "p_value": 0.0008248988431947365
     },
     {
       "term": "z_D",
       "term_type": "main_or_control",
-      "estimate": -0.04026249480719842,
-      "std_error_cluster_prompt": 0.013844723413071495,
-      "ci_low": -0.06739765407273701,
-      "ci_high": -0.013127335541659839,
-      "p_value": 0.0036357705701384616
+      "estimate": -0.040479988170070674,
+      "std_error_cluster_prompt": 0.013921371807503823,
+      "ci_low": -0.06776537552816944,
+      "ci_high": -0.013194600811971907,
+      "p_value": 0.0036402926050292444
     },
     {
       "term": "z_F",
       "term_type": "main_or_control",
-      "estimate": 0.43472794098082096,
-      "std_error_cluster_prompt": 0.016949813976687524,
-      "ci_low": 0.4015069160418598,
-      "ci_high": 0.46794896591978213,
-      "p_value": 4.456932138843246e-145
+      "estimate": 0.4385807256651407,
+      "std_error_cluster_prompt": 0.017102317998308605,
+      "ci_low": 0.4050607983363047,
+      "ci_high": 0.47210065299397674,
+      "p_value": 4.8671804968804024e-145
     },
     {
       "term": "domain_education",
       "term_type": "main_or_control",
-      "estimate": 0.2545079987187129,
-      "std_error_cluster_prompt": 0.04071068430166844,
-      "ci_low": 0.17471652370146257,
-      "ci_high": 0.3342994737359632,
-      "p_value": 4.061995144359372e-10
+      "estimate": 0.2632104314649283,
+      "std_error_cluster_prompt": 0.041476136715986045,
+      "ci_low": 0.18191869728373625,
+      "ci_high": 0.34450216564612035,
+      "p_value": 2.208859874228785e-10
     },
     {
       "term": "domain_health",
       "term_type": "main_or_control",
-      "estimate": 0.5768932259589437,
-      "std_error_cluster_prompt": 0.048184862445413305,
-      "ci_low": 0.48245263096591695,
-      "ci_high": 0.6713338209519704,
-      "p_value": 4.9514351459383816e-33
+      "estimate": 0.570450189988545,
+      "std_error_cluster_prompt": 0.04895267750987504,
+      "ci_low": 0.4745047051223861,
+      "ci_high": 0.666395674854704,
+      "p_value": 2.2127426781083927e-31
     },
     {
       "term": "z_H:x:domain_education",
       "term_type": "interaction",
-      "estimate": -0.01538363347909422,
-      "std_error_cluster_prompt": 0.022424113524914465,
-      "ci_low": -0.05933408837316409,
-      "ci_high": 0.028566821414975654,
-      "p_value": 0.4926936598567563
+      "estimate": -0.015307729350876067,
+      "std_error_cluster_prompt": 0.022630817688652216,
+      "ci_low": -0.0596633169613264,
+      "ci_high": 0.029047858259574264,
+      "p_value": 0.4987798662703279
     },
     {
       "term": "z_H:x:domain_health",
       "term_type": "interaction",
-      "estimate": 0.04276130299056935,
-      "std_error_cluster_prompt": 0.023071954431756334,
-      "ci_low": -0.0024588967486223537,
-      "ci_high": 0.08798150272976105,
-      "p_value": 0.0638266449426725
+      "estimate": 0.04281053620510933,
+      "std_error_cluster_prompt": 0.02310767603732655,
+      "ci_low": -0.0024796765944699387,
+      "ci_high": 0.08810074900468859,
+      "p_value": 0.063931919030786
     },
     {
       "term": "z_E:x:domain_education",
       "term_type": "interaction",
-      "estimate": -0.09977003795983391,
-      "std_error_cluster_prompt": 0.041315101064176525,
-      "ci_low": -0.18074614806325234,
-      "ci_high": -0.018793927856415468,
-      "p_value": 0.015741412534616306
+      "estimate": -0.10005389662603961,
+      "std_error_cluster_prompt": 0.04219198452541544,
+      "ci_low": -0.18274866673212517,
+      "ci_high": -0.017359126519954055,
+      "p_value": 0.017721040727742797
     },
     {
       "term": "z_E:x:domain_health",
       "term_type": "interaction",
-      "estimate": -0.10539231313092867,
-      "std_error_cluster_prompt": 0.03666416158215392,
-      "ci_low": -0.17725274935530744,
-      "ci_high": -0.03353187690654989,
-      "p_value": 0.00404626506133804
+      "estimate": -0.10547744701492046,
+      "std_error_cluster_prompt": 0.03678859039286177,
+      "ci_low": -0.17758175922692576,
+      "ci_high": -0.03337313480291515,
+      "p_value": 0.004142208033838861
     },
     {
       "term": "z_D:x:domain_education",
       "term_type": "interaction",
-      "estimate": -0.0037147433658752996,
-      "std_error_cluster_prompt": 0.041424936367753476,
-      "ci_low": -0.08490612670853559,
-      "ci_high": 0.077476639976785,
-      "p_value": 0.9285462081917422
+      "estimate": -0.006685639255236179,
+      "std_error_cluster_prompt": 0.041307124442139534,
+      "ci_low": -0.08764611546674383,
+      "ci_high": 0.07427483695627149,
+      "p_value": 0.8714224304103233
     },
     {
       "term": "z_D:x:domain_health",
       "term_type": "interaction",
-      "estimate": -0.21317643795150729,
-      "std_error_cluster_prompt": 0.061455482978120556,
-      "ci_low": -0.33362697124113794,
-      "ci_high": -0.09272590466187665,
-      "p_value": 0.0005227992902832513
+      "estimate": -0.21470570156790414,
+      "std_error_cluster_prompt": 0.061859878842098454,
+      "ci_low": -0.3359488361864284,
+      "ci_high": -0.09346256694937986,
+      "p_value": 0.0005188343061266202
     },
     {
       "term": "z_F:x:domain_education",
       "term_type": "interaction",
-      "estimate": 0.043421823279104085,
-      "std_error_cluster_prompt": 0.04215233006999015,
-      "ci_low": -0.039195225522521346,
-      "ci_high": 0.1260388720807295,
-      "p_value": 0.30295518068753635
+      "estimate": 0.05156900894750578,
+      "std_error_cluster_prompt": 0.042610074698487634,
+      "ci_low": -0.03194520284009138,
+      "ci_high": 0.13508322073510293,
+      "p_value": 0.22618148248758185
     },
     {
       "term": "z_F:x:domain_health",
       "term_type": "interaction",
-      "estimate": -0.3748170018170017,
-      "std_error_cluster_prompt": 0.029660212447956604,
-      "ci_low": -0.43294994998880326,
-      "ci_high": -0.3166840536452002,
-      "p_value": 1.3194395126472714e-36
+      "estimate": -0.3778214328563253,
+      "std_error_cluster_prompt": 0.030031729483251925,
+      "ci_low": -0.43668254103694876,
+      "ci_high": -0.31896032467570185,
+      "p_value": 2.6948755629488324e-36
     }
   ],
   "method": {
