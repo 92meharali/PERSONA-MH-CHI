@@ -1,0 +1,2 @@
+n,domains,prompt_clusters,r_squared,adj_r_squared,condition_number,covariance,reference_domain
+1490,3,499,0.6509682598099553,0.6476554161742532,9.680196418416704,cluster-robust by domain::prompt_id,mental_health

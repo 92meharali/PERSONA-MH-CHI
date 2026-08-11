@@ -1,21 +1,29 @@
 domain,check,value,detail
 mental_health,responses,660,
-mental_health,rating_rows,3300,
+mental_health,dimension_rating_rows,3300,
+mental_health,oa_rating_rows,3300,
+mental_health,rating_rows,6600,
+mental_health,dimension_annotators_group_b,5,
+mental_health,oa_annotators_group_a,5,
 mental_health,annotators,5,
 mental_health,duplicate_response_ids,0,
 mental_health,missing_response_ids,0,
 mental_health,duplicate_annotations,0,
+mental_health,duplicate_oa_annotations,0,
 mental_health,raters_per_response_min,5,
 mental_health,raters_per_response_max,5,
 mental_health,responses_with_incomplete_raters,0,
-mental_health,missing_OA,0,
-mental_health,invalid_OA,0,outside integer 1-5
+mental_health,oa_raters_per_response_min,5,
+mental_health,oa_raters_per_response_max,5,
+mental_health,responses_with_incomplete_oa_raters,0,
 mental_health,missing_E,0,
 mental_health,invalid_E,0,outside integer 1-5
 mental_health,missing_D,0,
 mental_health,invalid_D,0,outside integer 1-5
 mental_health,missing_F,0,
 mental_health,invalid_F,0,outside integer 1-5
+mental_health,missing_OA,0,
+mental_health,invalid_OA,0,outside integer 1-5
 mental_health,missing_humt,0,
 mental_health,humt_match_rate,1.0,
 mental_health,prompt_id_source,native_column,
@@ -33,100 +41,116 @@ mental_health,responses_condition_natural,300,
 mental_health,distinct_conditions,2,
 mental_health,scenario_types,6,
 mental_health,duplicate_response_text,0,
-mental_health,unanimous_score_rate_OA,0.3682,
-mental_health,identical_rationale_rate_OA,0.3682,equal to the unanimity rate implies rationale is determined by score
 mental_health,unanimous_score_rate_E,0.6136,
 mental_health,identical_rationale_rate_E,0.6136,equal to the unanimity rate implies rationale is determined by score
 mental_health,unanimous_score_rate_D,0.5348,
 mental_health,identical_rationale_rate_D,0.5348,equal to the unanimity rate implies rationale is determined by score
 mental_health,unanimous_score_rate_F,0.397,
 mental_health,identical_rationale_rate_F,0.397,equal to the unanimity rate implies rationale is determined by score
-education,responses,450,
-education,rating_rows,2250,
+mental_health,unanimous_score_rate_OA,0.3682,
+mental_health,identical_rationale_rate_OA,0.3682,equal to the unanimity rate implies rationale is determined by score
+education,responses,415,
+education,dimension_rating_rows,2075,
+education,oa_rating_rows,2075,
+education,rating_rows,4150,
+education,dimension_annotators_group_b,5,
+education,oa_annotators_group_a,5,
 education,annotators,5,
 education,duplicate_response_ids,0,
 education,missing_response_ids,0,
 education,duplicate_annotations,0,
+education,duplicate_oa_annotations,0,
 education,raters_per_response_min,5,
 education,raters_per_response_max,5,
 education,responses_with_incomplete_raters,0,
-education,missing_OA,0,
-education,invalid_OA,0,outside integer 1-5
+education,oa_raters_per_response_min,5,
+education,oa_raters_per_response_max,5,
+education,responses_with_incomplete_oa_raters,0,
 education,missing_E,0,
 education,invalid_E,0,outside integer 1-5
 education,missing_D,0,
 education,invalid_D,0,outside integer 1-5
 education,missing_F,0,
 education,invalid_F,0,outside integer 1-5
-education,missing_humt,3,
-education,humt_match_rate,0.9933,
+education,missing_OA,0,
+education,invalid_OA,0,outside integer 1-5
+education,missing_humt,0,
+education,humt_match_rate,1.0,
 education,prompt_id_source,reconstructed_from_prompt_text,
-education,prompt_groups,150,
-education,responses_per_prompt_min,3,
+education,prompt_groups,139,
+education,responses_per_prompt_min,1,
 education,responses_per_prompt_max,3,
-education,prompt_groups_not_size_3,0,
+education,prompt_groups_not_size_3,1,
 education,distinct_models,3,
-education,model_unknown,3,
-education,responses_model_claude_opus_4_8,149,
-education,responses_model_glm,149,
-education,responses_model_gpt_5_6,149,
-education,responses_condition_natural,300,
+education,model_unknown,0,
+education,responses_model_claude_opus_4_8,139,
+education,responses_model_glm,138,
+education,responses_model_gpt_5_6,138,
+education,responses_condition_natural,268,
 education,responses_condition_adversarial,147,
 education,distinct_conditions,2,
 education,scenario_types,7,
-education,duplicate_response_text,2,
-education,unanimous_score_rate_OA,0.4022,
-education,identical_rationale_rate_OA,0.4022,equal to the unanimity rate implies rationale is determined by score
-education,unanimous_score_rate_E,0.9711,
-education,identical_rationale_rate_E,0.9711,equal to the unanimity rate implies rationale is determined by score
-education,unanimous_score_rate_D,0.9511,
-education,identical_rationale_rate_D,0.9511,equal to the unanimity rate implies rationale is determined by score
-education,unanimous_score_rate_F,0.76,
-education,identical_rationale_rate_F,0.76,equal to the unanimity rate implies rationale is determined by score
-health,responses,450,
-health,rating_rows,2250,
+education,duplicate_response_text,0,
+education,unanimous_score_rate_E,0.9735,
+education,identical_rationale_rate_E,0.9735,equal to the unanimity rate implies rationale is determined by score
+education,unanimous_score_rate_D,0.947,
+education,identical_rationale_rate_D,0.947,equal to the unanimity rate implies rationale is determined by score
+education,unanimous_score_rate_F,0.7783,
+education,identical_rationale_rate_F,0.7783,equal to the unanimity rate implies rationale is determined by score
+education,unanimous_score_rate_OA,0.4096,
+education,identical_rationale_rate_OA,0.4096,equal to the unanimity rate implies rationale is determined by score
+health,responses,415,
+health,dimension_rating_rows,2075,
+health,oa_rating_rows,2075,
+health,rating_rows,4150,
+health,dimension_annotators_group_b,5,
+health,oa_annotators_group_a,5,
 health,annotators,5,
 health,duplicate_response_ids,0,
 health,missing_response_ids,0,
 health,duplicate_annotations,0,
+health,duplicate_oa_annotations,0,
 health,raters_per_response_min,5,
 health,raters_per_response_max,5,
 health,responses_with_incomplete_raters,0,
-health,missing_OA,0,
-health,invalid_OA,0,outside integer 1-5
+health,oa_raters_per_response_min,5,
+health,oa_raters_per_response_max,5,
+health,responses_with_incomplete_oa_raters,0,
 health,missing_E,0,
 health,invalid_E,0,outside integer 1-5
 health,missing_D,0,
 health,invalid_D,0,outside integer 1-5
 health,missing_F,0,
 health,invalid_F,0,outside integer 1-5
-health,missing_humt,31,
-health,humt_match_rate,0.9311,
+health,missing_OA,0,
+health,invalid_OA,0,outside integer 1-5
+health,missing_humt,0,
+health,humt_match_rate,1.0,
 health,prompt_id_source,reconstructed_from_prompt_text,
-health,prompt_groups,150,
-health,responses_per_prompt_min,3,
+health,prompt_groups,140,
+health,responses_per_prompt_min,1,
 health,responses_per_prompt_max,3,
-health,prompt_groups_not_size_3,0,
+health,prompt_groups_not_size_3,4,
 health,distinct_models,3,
-health,model_unknown,27,
-health,responses_model_claude_opus_4_8,141,
-health,responses_model_glm,141,
-health,responses_model_gpt_5_6,141,
-health,responses_condition_natural,273,
+health,model_unknown,0,
+health,responses_model_claude_opus_4_8,140,
+health,responses_model_glm,139,
+health,responses_model_gpt_5_6,136,
+health,responses_condition_natural,265,
 health,responses_condition_adversarial,150,
 health,distinct_conditions,2,
 health,scenario_types,7,
 health,duplicate_response_text,0,
-health,unanimous_score_rate_OA,0.6511,
-health,identical_rationale_rate_OA,0.6511,equal to the unanimity rate implies rationale is determined by score
 health,unanimous_score_rate_E,0.2289,
 health,identical_rationale_rate_E,0.2289,equal to the unanimity rate implies rationale is determined by score
-health,unanimous_score_rate_D,0.4933,
-health,identical_rationale_rate_D,0.4933,equal to the unanimity rate implies rationale is determined by score
-health,unanimous_score_rate_F,0.36,
-health,identical_rationale_rate_F,0.36,equal to the unanimity rate implies rationale is determined by score
-ALL,responses,1560,
-ALL,rating_rows,7800,
-ALL,complete_cases_HEDF_OA,1526,
+health,unanimous_score_rate_D,0.5157,
+health,identical_rationale_rate_D,0.5157,equal to the unanimity rate implies rationale is determined by score
+health,unanimous_score_rate_F,0.3687,
+health,identical_rationale_rate_F,0.3687,equal to the unanimity rate implies rationale is determined by score
+health,unanimous_score_rate_OA,0.6554,
+health,identical_rationale_rate_OA,0.6554,equal to the unanimity rate implies rationale is determined by score
+ALL,responses,1490,
+ALL,rating_rows,14900,
+ALL,complete_cases_HEDF_OA,1490,
 ALL,domain_label_values,3,"education, health, mental_health"
 ALL,model_label_values,3,"claude_opus_4_8, glm, gpt_5_6"

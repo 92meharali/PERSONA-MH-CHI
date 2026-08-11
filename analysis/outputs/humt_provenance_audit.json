@@ -1,0 +1,52 @@
+{
+  "humt_provenance_audit": [
+    {
+      "domain": "mental_health",
+      "responses": 660,
+      "humt_rows": 0,
+      "matched": 660,
+      "unmatched": 0,
+      "ambiguous_accepted": 0,
+      "response_duplicate_normalized_texts": 0,
+      "humt_duplicate_normalized_texts": 0,
+      "repository_response_id_available": true,
+      "humt_stable_response_id_available": false,
+      "humt_columns": "",
+      "fuzzy_matches": 0,
+      "unmatched_item_ids": "",
+      "decision": "embedded_humt"
+    },
+    {
+      "domain": "education",
+      "responses": 415,
+      "humt_rows": 450,
+      "matched": 415,
+      "unmatched": 0,
+      "ambiguous_accepted": 0,
+      "response_duplicate_normalized_texts": 0,
+      "humt_duplicate_normalized_texts": 2,
+      "repository_response_id_available": true,
+      "humt_stable_response_id_available": false,
+      "humt_columns": "source_file;text;text_trunc;humt_text;std_humt_text",
+      "fuzzy_matches": 7,
+      "unmatched_item_ids": "",
+      "decision": "keep_text_join_documented"
+    },
+    {
+      "domain": "health",
+      "responses": 415,
+      "humt_rows": 450,
+      "matched": 415,
+      "unmatched": 0,
+      "ambiguous_accepted": 0,
+      "response_duplicate_normalized_texts": 0,
+      "humt_duplicate_normalized_texts": 0,
+      "repository_response_id_available": true,
+      "humt_stable_response_id_available": false,
+      "humt_columns": "source_file;text;text_trunc;humt_text;std_humt_text",
+      "fuzzy_matches": 0,
+      "unmatched_item_ids": "",
+      "decision": "keep_text_join_documented"
+    }
+  ]
+}

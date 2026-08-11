@@ -1,48 +1,37 @@
 # Education Analysis
 
-## Summary
+This domain-level summary is a pointer to the canonical Phase 1-5 pipeline.
+Paper-facing numbers should be read from `analysis/outputs/`, not typed here by
+hand.
 
-Education extends PERSONA into tutoring and teaching-assistant support. It supports the same central claim as mental health: human-likeness is not enough to explain appropriateness, and contextual fit matters a great deal.
-
-## Data Quality
+## Current Release
 
 | Check | Result |
 |---|---:|
-| Responses | 450 |
-| Rating rows | 2,250 |
-| HuMT matched responses | 385 |
+| Responses | 415 |
+| Group A OA rows | 2,075 |
+| Group B E/D/F rows | 2,075 |
+| HuMT matched responses | 415 |
+| Prompt groups | 139 |
 
-HuMT joins are by normalized response text in this quick runner; a stable response ID join would be preferable in a final pass.
+The education release is filtered to HuMT-complete rows. The committed HuMT
+export still contains 450 provenance rows and lacks stable response IDs, so the
+pipeline uses documented text matching and reports the join tiers.
 
-## Reliability
+## Canonical Outputs
 
-| Measure | Reliability estimate |
-|---|---:|
-| OA | 0.947 |
-| E | 0.997 |
-| D | 0.965 |
-| F | 0.960 |
-
-Agreement is very high. The paper should describe this as strong consensus and avoid overclaiming independence without an annotation-process audit.
-
-## Correlations
-
-| Relationship | Spearman rho |
-|---|---:|
-| HuMT with OA | -0.072 |
-| E with OA | -0.030 |
-| D with OA | -0.028 |
-| F with OA | 0.229 |
-
-HuMT remains weak. Contextual fit is the most interpretable appropriateness dimension because tutoring quality depends on scaffolding, academic boundaries, and fit to the learner's need.
-
-## Predictive Check
-
-| Model | Cross-validated R2 |
-|---|---:|
-| HuMT only | 0.139 |
-| HuMT + E + D + F | 0.577 |
+| Topic | File |
+|---|---|
+| Data audit | `analysis/outputs/reports/data_audit.md` |
+| HuMT provenance | `analysis/outputs/reports/humt_provenance_audit.md` |
+| Reliability | `analysis/outputs/reports/reliability.md` |
+| Separability and descriptives | `analysis/outputs/reports/descriptives.md` |
+| Predictive analysis | `analysis/outputs/reports/predictive.md` |
+| Domain interactions | `analysis/outputs/reports/domain_interactions.md` |
 
 ## Interpretation
 
-Education is a useful transfer domain. It shows that a response can be appropriate with relatively modest empathy if it is pedagogically clear, bounded, and fit to the learner's situation.
+Education remains the main transfer domain. In the regenerated analysis, the
+full profile improves out-of-sample prediction over `H` alone, and contextual
+fit carries most of the predictive signal. This should be described as
+association, not causality.

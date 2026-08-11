@@ -1,14 +1,14 @@
 {
   "environment": {
-    "numpy": "2.4.4",
-    "pandas": "3.0.2",
-    "scipy": "1.17.1",
-    "sklearn": "1.8.0",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "sklearn": "1.6.1",
     "statsmodels": "0.14.6",
-    "matplotlib": "3.10.8",
-    "pingouin": "0.6.1",
+    "matplotlib": "3.9.4",
+    "pingouin": "0.5.5",
     "krippendorff": "installed",
-    "python": "3.12.3"
+    "python": "3.9.6"
   },
   "audit": [
     {
@@ -19,8 +19,32 @@
     },
     {
       "domain": "mental_health",
-      "check": "rating_rows",
+      "check": "dimension_rating_rows",
       "value": 3300,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "oa_rating_rows",
+      "value": 3300,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "rating_rows",
+      "value": 6600,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "dimension_annotators_group_b",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "oa_annotators_group_a",
+      "value": 5,
       "detail": ""
     },
     {
@@ -49,6 +73,12 @@
     },
     {
       "domain": "mental_health",
+      "check": "duplicate_oa_annotations",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
       "check": "raters_per_response_min",
       "value": 5,
       "detail": ""
@@ -67,15 +97,21 @@
     },
     {
       "domain": "mental_health",
-      "check": "missing_OA",
-      "value": 0,
+      "check": "oa_raters_per_response_min",
+      "value": 5,
       "detail": ""
     },
     {
       "domain": "mental_health",
-      "check": "invalid_OA",
+      "check": "oa_raters_per_response_max",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "responses_with_incomplete_oa_raters",
       "value": 0,
-      "detail": "outside integer 1-5"
+      "detail": ""
     },
     {
       "domain": "mental_health",
@@ -110,6 +146,18 @@
     {
       "domain": "mental_health",
       "check": "invalid_F",
+      "value": 0,
+      "detail": "outside integer 1-5"
+    },
+    {
+      "domain": "mental_health",
+      "check": "missing_OA",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "invalid_OA",
       "value": 0,
       "detail": "outside integer 1-5"
     },
@@ -217,18 +265,6 @@
     },
     {
       "domain": "mental_health",
-      "check": "unanimous_score_rate_OA",
-      "value": 0.3682,
-      "detail": ""
-    },
-    {
-      "domain": "mental_health",
-      "check": "identical_rationale_rate_OA",
-      "value": 0.3682,
-      "detail": "equal to the unanimity rate implies rationale is determined by score"
-    },
-    {
-      "domain": "mental_health",
       "check": "unanimous_score_rate_E",
       "value": 0.6136,
       "detail": ""
@@ -264,15 +300,51 @@
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
+      "domain": "mental_health",
+      "check": "unanimous_score_rate_OA",
+      "value": 0.3682,
+      "detail": ""
+    },
+    {
+      "domain": "mental_health",
+      "check": "identical_rationale_rate_OA",
+      "value": 0.3682,
+      "detail": "equal to the unanimity rate implies rationale is determined by score"
+    },
+    {
       "domain": "education",
       "check": "responses",
-      "value": 450,
+      "value": 415,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "dimension_rating_rows",
+      "value": 2075,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "oa_rating_rows",
+      "value": 2075,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "rating_rows",
-      "value": 2250,
+      "value": 4150,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "dimension_annotators_group_b",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "oa_annotators_group_a",
+      "value": 5,
       "detail": ""
     },
     {
@@ -301,6 +373,12 @@
     },
     {
       "domain": "education",
+      "check": "duplicate_oa_annotations",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "education",
       "check": "raters_per_response_min",
       "value": 5,
       "detail": ""
@@ -319,15 +397,21 @@
     },
     {
       "domain": "education",
-      "check": "missing_OA",
-      "value": 0,
+      "check": "oa_raters_per_response_min",
+      "value": 5,
       "detail": ""
     },
     {
       "domain": "education",
-      "check": "invalid_OA",
+      "check": "oa_raters_per_response_max",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "responses_with_incomplete_oa_raters",
       "value": 0,
-      "detail": "outside integer 1-5"
+      "detail": ""
     },
     {
       "domain": "education",
@@ -367,14 +451,26 @@
     },
     {
       "domain": "education",
+      "check": "missing_OA",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "invalid_OA",
+      "value": 0,
+      "detail": "outside integer 1-5"
+    },
+    {
+      "domain": "education",
       "check": "missing_humt",
-      "value": 3,
+      "value": 0,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "humt_match_rate",
-      "value": 0.9933,
+      "value": 1.0,
       "detail": ""
     },
     {
@@ -386,13 +482,13 @@
     {
       "domain": "education",
       "check": "prompt_groups",
-      "value": 150,
+      "value": 139,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "responses_per_prompt_min",
-      "value": 3,
+      "value": 1,
       "detail": ""
     },
     {
@@ -404,7 +500,7 @@
     {
       "domain": "education",
       "check": "prompt_groups_not_size_3",
-      "value": 0,
+      "value": 1,
       "detail": ""
     },
     {
@@ -416,31 +512,31 @@
     {
       "domain": "education",
       "check": "model_unknown",
-      "value": 3,
+      "value": 0,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "responses_model_claude_opus_4_8",
-      "value": 149,
+      "value": 139,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "responses_model_glm",
-      "value": 149,
+      "value": 138,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "responses_model_gpt_5_6",
-      "value": 149,
+      "value": 138,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "responses_condition_natural",
-      "value": 300,
+      "value": 268,
       "detail": ""
     },
     {
@@ -464,67 +560,91 @@
     {
       "domain": "education",
       "check": "duplicate_response_text",
-      "value": 2,
+      "value": 0,
       "detail": ""
-    },
-    {
-      "domain": "education",
-      "check": "unanimous_score_rate_OA",
-      "value": 0.4022,
-      "detail": ""
-    },
-    {
-      "domain": "education",
-      "check": "identical_rationale_rate_OA",
-      "value": 0.4022,
-      "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "education",
       "check": "unanimous_score_rate_E",
-      "value": 0.9711,
+      "value": 0.9735,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "identical_rationale_rate_E",
-      "value": 0.9711,
+      "value": 0.9735,
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "education",
       "check": "unanimous_score_rate_D",
-      "value": 0.9511,
+      "value": 0.947,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "identical_rationale_rate_D",
-      "value": 0.9511,
+      "value": 0.947,
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "education",
       "check": "unanimous_score_rate_F",
-      "value": 0.76,
+      "value": 0.7783,
       "detail": ""
     },
     {
       "domain": "education",
       "check": "identical_rationale_rate_F",
-      "value": 0.76,
+      "value": 0.7783,
+      "detail": "equal to the unanimity rate implies rationale is determined by score"
+    },
+    {
+      "domain": "education",
+      "check": "unanimous_score_rate_OA",
+      "value": 0.4096,
+      "detail": ""
+    },
+    {
+      "domain": "education",
+      "check": "identical_rationale_rate_OA",
+      "value": 0.4096,
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "health",
       "check": "responses",
-      "value": 450,
+      "value": 415,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "dimension_rating_rows",
+      "value": 2075,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "oa_rating_rows",
+      "value": 2075,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "rating_rows",
-      "value": 2250,
+      "value": 4150,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "dimension_annotators_group_b",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "oa_annotators_group_a",
+      "value": 5,
       "detail": ""
     },
     {
@@ -553,6 +673,12 @@
     },
     {
       "domain": "health",
+      "check": "duplicate_oa_annotations",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "health",
       "check": "raters_per_response_min",
       "value": 5,
       "detail": ""
@@ -571,15 +697,21 @@
     },
     {
       "domain": "health",
-      "check": "missing_OA",
-      "value": 0,
+      "check": "oa_raters_per_response_min",
+      "value": 5,
       "detail": ""
     },
     {
       "domain": "health",
-      "check": "invalid_OA",
+      "check": "oa_raters_per_response_max",
+      "value": 5,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "responses_with_incomplete_oa_raters",
       "value": 0,
-      "detail": "outside integer 1-5"
+      "detail": ""
     },
     {
       "domain": "health",
@@ -619,14 +751,26 @@
     },
     {
       "domain": "health",
+      "check": "missing_OA",
+      "value": 0,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "invalid_OA",
+      "value": 0,
+      "detail": "outside integer 1-5"
+    },
+    {
+      "domain": "health",
       "check": "missing_humt",
-      "value": 31,
+      "value": 0,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "humt_match_rate",
-      "value": 0.9311,
+      "value": 1.0,
       "detail": ""
     },
     {
@@ -638,13 +782,13 @@
     {
       "domain": "health",
       "check": "prompt_groups",
-      "value": 150,
+      "value": 140,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "responses_per_prompt_min",
-      "value": 3,
+      "value": 1,
       "detail": ""
     },
     {
@@ -656,7 +800,7 @@
     {
       "domain": "health",
       "check": "prompt_groups_not_size_3",
-      "value": 0,
+      "value": 4,
       "detail": ""
     },
     {
@@ -668,31 +812,31 @@
     {
       "domain": "health",
       "check": "model_unknown",
-      "value": 27,
+      "value": 0,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "responses_model_claude_opus_4_8",
-      "value": 141,
+      "value": 140,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "responses_model_glm",
-      "value": 141,
+      "value": 139,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "responses_model_gpt_5_6",
-      "value": 141,
+      "value": 136,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "responses_condition_natural",
-      "value": 273,
+      "value": 265,
       "detail": ""
     },
     {
@@ -721,18 +865,6 @@
     },
     {
       "domain": "health",
-      "check": "unanimous_score_rate_OA",
-      "value": 0.6511,
-      "detail": ""
-    },
-    {
-      "domain": "health",
-      "check": "identical_rationale_rate_OA",
-      "value": 0.6511,
-      "detail": "equal to the unanimity rate implies rationale is determined by score"
-    },
-    {
-      "domain": "health",
       "check": "unanimous_score_rate_E",
       "value": 0.2289,
       "detail": ""
@@ -746,43 +878,55 @@
     {
       "domain": "health",
       "check": "unanimous_score_rate_D",
-      "value": 0.4933,
+      "value": 0.5157,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "identical_rationale_rate_D",
-      "value": 0.4933,
+      "value": 0.5157,
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "health",
       "check": "unanimous_score_rate_F",
-      "value": 0.36,
+      "value": 0.3687,
       "detail": ""
     },
     {
       "domain": "health",
       "check": "identical_rationale_rate_F",
-      "value": 0.36,
+      "value": 0.3687,
+      "detail": "equal to the unanimity rate implies rationale is determined by score"
+    },
+    {
+      "domain": "health",
+      "check": "unanimous_score_rate_OA",
+      "value": 0.6554,
+      "detail": ""
+    },
+    {
+      "domain": "health",
+      "check": "identical_rationale_rate_OA",
+      "value": 0.6554,
       "detail": "equal to the unanimity rate implies rationale is determined by score"
     },
     {
       "domain": "ALL",
       "check": "responses",
-      "value": 1560,
+      "value": 1490,
       "detail": ""
     },
     {
       "domain": "ALL",
       "check": "rating_rows",
-      "value": 7800,
+      "value": 14900,
       "detail": ""
     },
     {
       "domain": "ALL",
       "check": "complete_cases_HEDF_OA",
-      "value": 1526,
+      "value": 1490,
       "detail": ""
     },
     {
@@ -818,37 +962,37 @@
     },
     {
       "domain": "education",
-      "responses": 450,
+      "responses": 415,
       "humt_rows_available": 450,
-      "matched_full": 382,
-      "matched_prefix_300": 13,
-      "matched_prefix_200": 19,
-      "matched_prefix_120": 13,
-      "matched_prefix_80": 13,
+      "matched_full": 359,
+      "matched_prefix_300": 10,
+      "matched_prefix_200": 16,
+      "matched_prefix_120": 12,
+      "matched_prefix_80": 11,
       "matched_fuzzy": 7,
       "matched_embedded": 0,
-      "matched_total": 447,
-      "unmatched": 3,
+      "matched_total": 415,
+      "unmatched": 0,
       "ambiguous_keys_rejected": 0,
       "model_recovered_by_elimination": 0,
-      "model_unknown": 3
+      "model_unknown": 0
     },
     {
       "domain": "health",
-      "responses": 450,
+      "responses": 415,
       "humt_rows_available": 450,
-      "matched_full": 416,
+      "matched_full": 412,
       "matched_prefix_300": 2,
       "matched_prefix_200": 0,
       "matched_prefix_120": 0,
       "matched_prefix_80": 1,
       "matched_fuzzy": 0,
       "matched_embedded": 0,
-      "matched_total": 419,
-      "unmatched": 31,
+      "matched_total": 415,
+      "unmatched": 0,
       "ambiguous_keys_rejected": 0,
-      "model_recovered_by_elimination": 4,
-      "model_unknown": 27
+      "model_recovered_by_elimination": 0,
+      "model_unknown": 0
     }
   ]
 }

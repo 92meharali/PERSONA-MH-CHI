@@ -1,0 +1,4 @@
+domain,responses,humt_rows,matched,unmatched,ambiguous_accepted,response_duplicate_normalized_texts,humt_duplicate_normalized_texts,repository_response_id_available,humt_stable_response_id_available,humt_columns,fuzzy_matches,unmatched_item_ids,decision
+mental_health,660,0,660,0,0,0,0,True,False,,0,,embedded_humt
+education,415,450,415,0,0,0,2,True,False,source_file;text;text_trunc;humt_text;std_humt_text,7,,keep_text_join_documented
+health,415,450,415,0,0,0,0,True,False,source_file;text;text_trunc;humt_text;std_humt_text,0,,keep_text_join_documented

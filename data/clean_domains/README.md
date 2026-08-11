@@ -18,15 +18,17 @@ P = (H, E, D, F)
 
 | Folder | Domain | Rating files | HuMT file | Rubric |
 |---|---|---:|---|---|
-| `mental_health/` | online mental-health support | 5 | embedded in annotator files | `rubric.md` |
-| `education/` | tutoring and learning support | 5 | `humt_education.csv` | `rubric.md` |
-| `health/` | casual health assistance | 5 oversight/adjudication files | `humt_health.csv` | `rubric.md` |
+| `mental_health/` | online mental-health support | 1 OA file + 5 E/D/F files | embedded in Group B files | `rubric.md` |
+| `education/` | tutoring and learning support | 1 OA file + 5 E/D/F files | `humt_education.csv` | `rubric.md` |
+| `health/` | casual health assistance | 1 OA file + 5 E/D/F oversight/adjudication files | `humt_health.csv` | `rubric.md` |
 
-Each annotator CSV contains one row per model response. Education and health combine Phase 1 `OA` ratings with Phase 2 `E/D/F` ratings by `annotation_item_id` and `presentation_order`.
+`oa_group_a.csv` contains holistic Group A `OA` ratings. The anonymous
+annotator CSVs contain Group B `E`, `D`, and `F` ratings only.
 
 ## File Conventions
 
-- Annotator files are named by annotator id.
+- Group B annotator files are anonymized as `anonymous_annotator_1.csv` through
+  `anonymous_annotator_5.csv`.
 - Domain rubrics are frozen with each dataset.
 - HuMT files retain `source_file` so rows remain traceable to their model and condition export.
 - Human scores are 1-5 integers.

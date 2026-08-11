@@ -10,14 +10,16 @@ from __future__ import annotations
 
 import time
 
-from . import build_dataset, descriptives, predictive, reliability
+from . import build_dataset, descriptives, domain_interactions, humt_provenance_audit, predictive, reliability
 from .persona_common import OUT_DIR, PROCESSED_DIR, env_versions, save_json
 
 PHASES = [
     ("1 - dataset build and audit", build_dataset.main),
+    ("1b - HuMT provenance audit", humt_provenance_audit.main),
     ("2 - annotation reliability", reliability.main),
     ("3 - descriptives and separability", descriptives.main),
     ("4 - cross-validation, ablation, incremental validity", predictive.main),
+    ("5 - domain interactions", domain_interactions.main),
 ]
 
 

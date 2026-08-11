@@ -30,19 +30,16 @@ for adjacent constructs; the contrast should be stated rather than avoided.
 Neither clinical expertise nor lived experience of the situations in the prompts
 is represented in the rating pool.
 
-## §independence — Criterion independence was partial
+## §independence — Criterion independence
 
-The protocol's preferred design (separate rater pools) was not used. The same
-five raters produced `OA` and the dimensions under a locked two-phase design. The
-protocol itself requires this be reported as a limitation. See
-`ANNOTATION_THEORY.md` §4, which also documents that rationale text is a
-deterministic function of score in the released files, and that the health
-domain's files are described as oversight and adjudication passes.
+The released data uses separate rater pools. Group A produced holistic `OA`;
+Group B produced `E`, `D`, and `F`. This is the core anti-circularity control:
+`OA` is separately elicited and not mathematically constructed from the profile
+dimensions. See `ANNOTATION_THEORY.md` §4.
 
-**Consequence:** any observed relationship between `P` and `OA` may be partly
-attributable to same-rater consistency. This does not void the results, but it
-does mean the framework's core anti-circularity claim is *partially*, not fully,
-realised in this release.
+**Consequence:** a relationship between `P` and `OA` is not a formula artifact.
+It remains a judgment-based empirical relationship and inherits the limitations
+of small rater pools, domain expertise, rubric design, and response sampling.
 
 ## §variance — Restricted variance
 
@@ -158,13 +155,15 @@ never in the abstract's contribution statement.
 
 ## Claim ledger
 
-| Claim | Status |
-|---|---|
-| PERSONA is a coherent framework separating four properties | Argued conceptually; empirical separability pending |
-| `OA` is elicited independently of the dimensions | **Partially** — locked two-phase, same raters |
-| Human-likeness is insufficient for appropriateness | Supported in prior literature [Cheng2025HumT]; being tested here |
-| The profile adds information beyond `H` | Pending analysis |
-| The profile is genuinely multidimensional | Pending ablation; must be reported separately from the above |
-| Relationships differ by domain | Pending formal interaction test |
-| PERSONA distinguishes appropriate from misleading anthropomorphism under elicitation | **NOT AVAILABLE — requires additional data** |
-| PERSONA is validated | **No** |
+| Claim | Category | Current status | Boundary |
+|---|---|---|---|
+| PERSONA is a coherent framework separating four properties | Supported by literature/theory | Argued conceptually in `PERSONA_THEORY.md`, `CONSTRUCT_DEFINITIONS.md`, and `DISTINCTIONS.md` | Conceptual separability is not construct validation |
+| `OA` is elicited independently of the dimensions | Supported by repository design | Group A rated `OA`; Group B rated `E/D/F` | Still limited by small rater pools and project-team annotators |
+| Human-likeness alone is insufficient to explain holistic appropriateness | Supported by current data and literature | `H_only` is weak by domain; full profile outperforms `H` in mental health and education | Do not claim all forms of human-likeness are useless |
+| The multidimensional profile adds information beyond `H` | Supported by current data | Strong in mental health and education; pooled improvement positive | Health improvement is weaker and its interval crosses zero |
+| `F` appears to be a major contributor in some domains | Supported by current data | Ablation and `F_only` models show `F` carries much of the mental-health and education signal | Do not claim `F` causes appropriateness |
+| The profile dimensions are not redundant copies | Supported by current diagnostics | Pairwise correlations, VIF, and condition numbers do not show obvious redundancy | This supports separability, not full construct validity |
+| Relationships differ by domain | Supported by formal audit | Domain interaction model estimates slope differences with uncertainty | R² differences alone are not evidence of interaction |
+| Health provides equal-strength validation | Not supported / should not be claimed | Ceiling effects and uncertainty limit the health result even after filtering to HuMT-complete rows | Treat as transfer/ceiling-case evidence |
+| PERSONA distinguishes appropriate from misleading anthropomorphism under elicitation | Requires additional data | RQ4 is not answerable with the current corpus | Needs anthropomorphic elicitation or paired conditions |
+| PERSONA is validated | Not supported / should not be claimed | The current archive supports a first empirical evaluation | Avoid final validation language until stronger external evidence exists |

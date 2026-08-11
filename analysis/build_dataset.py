@@ -1,9 +1,10 @@
 """Phase 1 - build one canonical multi-domain PERSONA dataset and audit it.
 
-Reads the five annotator CSVs in each ``data/clean_domains/<domain>/`` folder and
+Reads the Group A OA file and the five Group B dimension CSVs in each
+``data/clean_domains/<domain>/`` folder and
 produces:
 
-  analysis/processed/persona_ratings_long.csv   one row per (domain, item, rater)
+  analysis/processed/persona_ratings_long.csv   one row per (domain, item, rater pool, rater)
   analysis/processed/persona_all.csv            one row per response (consensus)
   analysis/outputs/tables/data_audit.csv        machine-readable audit
   analysis/outputs/tables/humt_join_report.csv  per-tier join provenance
@@ -53,6 +54,20 @@ from .persona_common import (
 )
 
 ID_PREFIX = {"mental_health": "MH", "education": "EDU", "health": "HLT"}
+RATER_POOLS = {
+    "oa": {
+        "label": "Group A",
+        "file": "oa_group_a.csv",
+        "id_column": "oa_annotator_id",
+        "dimensions": ["OA"],
+    },
+    "profile": {
+        "label": "Group B",
+        "file_glob": "anonymous_annotator_*.csv",
+        "id_column": "annotator_id",
+        "dimensions": ["E", "D", "F"],
+    },
+}
 # Cascading join tiers: full normalised text first, then shrinking prefixes.
 JOIN_TIERS = [("full", None), ("prefix_300", 300), ("prefix_200", 200), ("prefix_120", 120), ("prefix_80", 80)]
 FUZZY_WINDOW = 400   # characters compared in the final near-duplicate tier
@@ -65,7 +80,11 @@ FUZZY_MARGIN = 0.05  # required gap over the runner-up candidate
 # --------------------------------------------------------------------------
 def annotator_files(domain: str) -> list[Path]:
     folder = CLEAN_DIR / domain
-    return sorted(f for f in folder.glob("*.csv") if not f.name.startswith("humt_"))
+    return sorted(folder.glob(RATER_POOLS["profile"]["file_glob"]))
+
+
+def oa_file(domain: str) -> Path:
+    return CLEAN_DIR / domain / RATER_POOLS["oa"]["file"]
 
 
 def humt_file(domain: str) -> Path | None:
@@ -83,7 +102,20 @@ def load_domain_ratings(domain: str) -> pd.DataFrame:
         frames.append(frame)
     combined = pd.concat(frames, ignore_index=True)
     combined["domain"] = domain
+    combined["rater_group"] = RATER_POOLS["profile"]["label"]
     return combined
+
+
+def load_domain_oa(domain: str) -> pd.DataFrame:
+    path = oa_file(domain)
+    if not path.exists():
+        raise FileNotFoundError(f"{path} missing; Group A OA ratings are required")
+    frame = pd.read_csv(path, encoding="utf-8-sig")
+    if "oa_annotator_id" not in frame.columns:
+        raise ValueError(f"{path} must contain oa_annotator_id")
+    frame["domain"] = domain
+    frame["rater_group"] = RATER_POOLS["oa"]["label"]
+    return frame
 
 
 # --------------------------------------------------------------------------
@@ -202,6 +234,7 @@ def join_humt(responses: pd.Series, humt: pd.DataFrame) -> pd.DataFrame:
 # --------------------------------------------------------------------------
 def build_domain(domain: str, audit: list[dict], join_rows: list[dict]) -> tuple[pd.DataFrame, pd.DataFrame]:
     ratings = load_domain_ratings(domain)
+    oa = load_domain_oa(domain)
     prefix = ID_PREFIX[domain]
 
     # ---- one row per response, carrying the shared metadata -------------
@@ -291,13 +324,23 @@ def build_domain(domain: str, audit: list[dict], join_rows: list[dict]) -> tuple
     )
 
     # ---- consensus ------------------------------------------------------
-    stats = ratings.groupby("annotation_item_id")[[f"{d}_score" for d in DIMENSIONS]].agg(
+    profile_dimensions = RATER_POOLS["profile"]["dimensions"]
+    stats = ratings.groupby("annotation_item_id")[[f"{d}_score" for d in profile_dimensions]].agg(
         ["mean", "median", "std", "count"]
     )
     stats.columns = [f"{c[0].replace('_score', '')}_{c[1]}" for c in stats.columns]
-    stats = stats.rename(columns={f"{d}_mean": d for d in DIMENSIONS})
+    stats = stats.rename(columns={f"{d}_mean": d for d in profile_dimensions})
+
+    oa_stats = oa.groupby("annotation_item_id")[["OA_score"]].agg(["mean", "median", "std", "count"])
+    oa_stats.columns = ["OA", "OA_median", "OA_std", "OA_count"]
+
     consensus = items.merge(stats, left_on="annotation_item_id", right_index=True, how="left")
-    consensus["n_raters"] = ratings.groupby("annotation_item_id").size().reindex(consensus["annotation_item_id"]).to_numpy()
+    consensus = consensus.merge(oa_stats, left_on="annotation_item_id", right_index=True, how="left")
+    consensus["n_dimension_raters"] = (
+        ratings.groupby("annotation_item_id").size().reindex(consensus["annotation_item_id"]).to_numpy()
+    )
+    consensus["n_oa_raters"] = oa.groupby("annotation_item_id").size().reindex(consensus["annotation_item_id"]).to_numpy()
+    consensus["n_raters"] = consensus["n_dimension_raters"]
     consensus["H"] = consensus["humt"]
 
     # ---- audit rows -----------------------------------------------------
@@ -305,20 +348,33 @@ def build_domain(domain: str, audit: list[dict], join_rows: list[dict]) -> tuple
         audit.append({"domain": domain, "check": check, "value": value, "detail": detail})
 
     add("responses", len(items))
-    add("rating_rows", len(ratings))
+    add("dimension_rating_rows", len(ratings))
+    add("oa_rating_rows", len(oa))
+    add("rating_rows", len(ratings) + len(oa))
+    add("dimension_annotators_group_b", ratings["annotator_id"].nunique())
+    add("oa_annotators_group_a", oa["oa_annotator_id"].nunique())
     add("annotators", ratings["annotator_id"].nunique())
     add("duplicate_response_ids", int(items["annotation_item_id"].duplicated().sum()))
     add("missing_response_ids", int(items["annotation_item_id"].isna().sum()))
     add("duplicate_annotations", int(ratings.duplicated(["annotation_item_id", "annotator_id"]).sum()))
+    add("duplicate_oa_annotations", int(oa.duplicated(["annotation_item_id", "oa_annotator_id"]).sum()))
     counts = ratings.groupby("annotation_item_id").size()
+    oa_counts = oa.groupby("annotation_item_id").size()
     add("raters_per_response_min", int(counts.min()))
     add("raters_per_response_max", int(counts.max()))
     add("responses_with_incomplete_raters", int((counts != counts.max()).sum()))
-    for dim in DIMENSIONS:
+    add("oa_raters_per_response_min", int(oa_counts.min()))
+    add("oa_raters_per_response_max", int(oa_counts.max()))
+    add("responses_with_incomplete_oa_raters", int((oa_counts != oa_counts.max()).sum()))
+    for dim in profile_dimensions:
         column = ratings[f"{dim}_score"]
         add(f"missing_{dim}", int(column.isna().sum()))
         invalid = (~column.isna()) & (~column.isin(range(RATING_MIN, RATING_MAX + 1)))
         add(f"invalid_{dim}", int(invalid.sum()), f"outside integer {RATING_MIN}-{RATING_MAX}")
+    column = oa["OA_score"]
+    add("missing_OA", int(column.isna().sum()))
+    invalid = (~column.isna()) & (~column.isin(range(RATING_MIN, RATING_MAX + 1)))
+    add("invalid_OA", int(invalid.sum()), f"outside integer {RATING_MIN}-{RATING_MAX}")
     add("missing_humt", int(consensus["humt"].isna().sum()))
     add("humt_match_rate", round(float(consensus["humt"].notna().mean()), 4))
     add("prompt_id_source", items["prompt_id_source"].iloc[0])
@@ -339,7 +395,7 @@ def build_domain(domain: str, audit: list[dict], join_rows: list[dict]) -> tuple
 
     # rater-independence provenance check: does the rationale text vary
     # independently of the score, or is it a deterministic function of it?
-    for dim in DIMENSIONS:
+    for dim in profile_dimensions:
         reason_col = f"{dim}_reason"
         if reason_col in ratings.columns:
             grouped = ratings.groupby("annotation_item_id")
@@ -348,11 +404,22 @@ def build_domain(domain: str, audit: list[dict], join_rows: list[dict]) -> tuple
             add(f"unanimous_score_rate_{dim}", round(float(same_score), 4))
             add(f"identical_rationale_rate_{dim}", round(float(same_reason), 4),
                 "equal to the unanimity rate implies rationale is determined by score")
+    if "OA_reason" in oa.columns:
+        grouped = oa.groupby("annotation_item_id")
+        same_score = grouped["OA_score"].nunique().eq(1).mean()
+        same_reason = grouped["OA_reason"].nunique().eq(1).mean()
+        add("unanimous_score_rate_OA", round(float(same_score), 4))
+        add("identical_rationale_rate_OA", round(float(same_reason), 4),
+            "equal to the unanimity rate implies rationale is determined by score")
 
-    keep_ratings = ["domain", "annotation_item_id", "annotator_id", "scenario_type"] + [
-        f"{d}_score" for d in DIMENSIONS
+    keep_ratings = ["domain", "annotation_item_id", "annotator_id", "rater_group", "scenario_type"] + [
+        f"{d}_score" for d in profile_dimensions
     ]
-    long = ratings[[c for c in keep_ratings if c in ratings.columns]].copy()
+    edf_long = ratings[[c for c in keep_ratings if c in ratings.columns]].copy()
+    oa_long_cols = ["domain", "annotation_item_id", "oa_annotator_id", "rater_group", "scenario_type", "OA_score"]
+    oa_long = oa[[c for c in oa_long_cols if c in oa.columns]].copy()
+    oa_long = oa_long.rename(columns={"oa_annotator_id": "annotator_id"})
+    long = pd.concat([oa_long, edf_long], ignore_index=True, sort=False)
     long = long.merge(
         items[["annotation_item_id", "prompt_id", "model", "condition"]],
         on="annotation_item_id",
@@ -380,6 +447,7 @@ def main() -> None:
     keep = [
         "domain", "annotation_item_id", "prompt_id", "prompt_id_source", "model",
         "model_raw", "model_source", "condition", "scenario_type", "n_raters",
+        "n_oa_raters", "n_dimension_raters",
         "H", "humt", "humt_std", "humt_join_tier", "humt_source_file",
         "OA", "OA_median", "OA_std", "E", "E_median", "E_std",
         "D", "D_median", "D_std", "F", "F_median", "F_std",
@@ -418,13 +486,15 @@ def render_audit(audit: pd.DataFrame, join: pd.DataFrame, consensus: pd.DataFram
              "Generated by `python -m analysis.build_dataset`. Nothing is dropped; "
              "unmatched and ambiguous records are carried with explicit missing values.", ""]
 
-    lines += ["## Coverage", "", "| Domain | Responses | Rating rows | Raters | Prompt groups | HuMT matched | Model known |",
-              "|---|---:|---:|---:|---:|---:|---:|"]
+    lines += ["## Coverage", "",
+              "| Domain | Responses | OA rows | E/D/F rows | Group A raters | Group B raters | Prompt groups | HuMT matched | Model known |",
+              "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for domain in DOMAINS:
         block = audit[audit["domain"] == domain].set_index("check")["value"]
         matched = int(join.loc[join["domain"] == domain, "matched_total"].iloc[0])
         lines.append(
-            f"| {domain} | {block['responses']} | {block['rating_rows']} | {block['annotators']} | "
+            f"| {domain} | {block['responses']} | {block['oa_rating_rows']} | {block['dimension_rating_rows']} | "
+            f"{block['oa_annotators_group_a']} | {block['dimension_annotators_group_b']} | "
             f"{block['prompt_groups']} | {matched} | {int(block['responses']) - int(block['model_unknown'])} |"
         )
 
@@ -465,7 +535,7 @@ def render_audit(audit: pd.DataFrame, join: pd.DataFrame, consensus: pd.DataFram
         )
 
     lines += ["", "## Rating provenance flag", "",
-              "For each dimension the table compares how often all raters gave the same score with how often "
+              "For each criterion/dimension the table compares how often all raters in that pool gave the same score with how often "
               "all raters wrote the same rationale. When the two rates coincide, the rationale field is a "
               "deterministic function of the score and therefore cannot be treated as independent evidence "
               "that the ratings were produced independently.", "",

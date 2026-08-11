@@ -6,25 +6,29 @@ Education adapts PERSONA to tutoring and teaching-assistant contexts. It tests w
 
 | File | Rows | Description |
 |---|---:|---|
-| `abrarahmed.csv` | 450 | Phase 1 OA and Phase 2 E/D/F merged by item |
-| `emadsohail.csv` | 450 | Phase 1 OA and Phase 2 E/D/F merged by item |
-| `meharali.csv` | 450 | Phase 1 OA and Phase 2 E/D/F merged by item |
-| `nayabzahra.csv` | 450 | Phase 1 OA and Phase 2 E/D/F merged by item |
-| `wahajaziz.csv` | 450 | Phase 1 OA and Phase 2 E/D/F merged by item |
-| `humt_education.csv` | 450 | Combined HuMT outputs for the education responses |
+| `oa_group_a.csv` | 2,075 | Group A holistic OA ratings |
+| `anonymous_annotator_1.csv` | 415 | Group B E/D/F ratings |
+| `anonymous_annotator_2.csv` | 415 | Group B E/D/F ratings |
+| `anonymous_annotator_3.csv` | 415 | Group B E/D/F ratings |
+| `anonymous_annotator_4.csv` | 415 | Group B E/D/F ratings |
+| `anonymous_annotator_5.csv` | 415 | Group B E/D/F ratings |
+| `humt_education.csv` | 450 | Combined HuMT export; 415 rows are used in the filtered release |
 | `rubric.md` | - | PERSONA-Education annotation protocol |
 | `analysis.md` | - | Domain analysis summary |
 
 ## Design
 
-- 450 responses.
-- 5 annotators per response.
-- Phase 1 scored independent `OA`.
-- Phase 2 scored `scenario_type`, `E`, `D`, and `F`.
+- 415 HuMT-complete responses.
+- 5 Group A OA ratings per response.
+- 5 Group B E/D/F ratings per response.
+- Group A scored independent holistic `OA`.
+- Group B scored `scenario_type`, `E`, `D`, and `F`.
 - HuMT is stored separately and can be joined through response text with `humt_education.csv`.
 
 ## Columns
 
-Core score columns: `OA_score`, `E_score`, `D_score`, `F_score`.
+Group A score columns: `OA_score`.
+
+Group B score columns: `E_score`, `D_score`, `F_score`.
 
 Key metadata columns: `presentation_order`, `annotator_id`, `annotation_item_id`, `prompt`, `response`, `scenario_type`.

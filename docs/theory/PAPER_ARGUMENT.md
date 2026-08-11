@@ -57,14 +57,12 @@ captures a channel the others do not (`CONSTRUCT_DEFINITIONS.md`;
 
 Evaluate the profile against **independently elicited overall appropriateness**.
 
-`OA` is a holistic human judgment collected before the dimensions are rated, and
-is never computed from them. This matters because a framework whose criterion is
-derived from its own predictors cannot be tested — a high R² would be arithmetic.
-Separating them makes the relationship an empirical finding.
-
-The paper must state precisely how completely the separation was achieved: a
-locked two-phase design with the same raters, which is a real control and is not
-the same as separate rater pools (`ANNOTATION_THEORY.md` §4).
+`OA` is a holistic human judgment collected from Group A, while `E`, `D`, and
+`F` are collected from a separate Group B. `OA` is never computed from the
+profile dimensions. This matters because a framework whose criterion is derived
+from its own predictors cannot be tested — a high R² would be arithmetic.
+Separate pools make the relationship an empirical finding rather than a scoring
+identity (`ANNOTATION_THEORY.md` §4).
 
 ## Empirical questions
 
@@ -85,7 +83,7 @@ appropriateness of anthropomorphic behaviour**, together with:
 - construct definitions and an annotation protocol that separate the four
   channels operationally, including a `D` rubric with an explicit negative list
   marking its boundary against `F` and `OA`
-- a criterion elicited independently of the predictors
+- a criterion elicited from a separate OA annotator pool
 - a multi-domain corpus with per-domain reliability
 - a reproducible analysis pipeline
 

@@ -1,8 +1,7 @@
 # Annotation theory
 
-Documents why the annotation is split into two groups, what the repository's
-protocol actually specifies, and — separately and honestly — what the current
-data release implemented. All protocol details below are taken from
+Documents why the annotation is split into two groups and what the repository's
+protocol actually specifies. All protocol details below are taken from
 `data/clean_domains/*/rubric.md`. Nothing here is invented.
 
 ---
@@ -38,7 +37,7 @@ seen both is less likely to produce them.
 ## 3. What the protocol specifies
 
 The repository's protocol (`PERSONA-MH Human Annotation Protocol v3.1`) defines
-two designs:
+the preferred design and a fallback design:
 
 **Preferred design — separate rater pools.** The OA pool receives only the Phase
 1 file and Phase 1 instructions and never receives the E/D/F rubric. The E/D/F
@@ -61,43 +60,30 @@ carryover. If used, report this limitation."
 
 ## 4. What the current release implemented — read this before writing the paper
 
-**The released data does not exhibit the Group A / Group B separation.**
+**The released data implements the Group A / Group B separation.**
 
-In every domain, the released annotator files carry `OA_score`, `E_score`,
-`D_score`, and `F_score` on the **same row, from the same `annotator_id`**. The
-same five raters supplied both the criterion and the predictors. The preferred
-design was not used; the resource-constrained design was.
+The cleaned data is organized accordingly:
 
-Three consequences, all of which must appear in the paper:
+- `oa_group_a.csv` contains holistic `OA` ratings from Group A.
+- `anonymous_annotator_1.csv` through `anonymous_annotator_5.csv` contain
+  Group B `E`, `D`, and `F` ratings.
 
-1. **`OA` is independently *elicited* but not independently *sourced*.** It was
-   collected before the dimensions under a locking protocol, which is a real
-   methodological control and is materially better than deriving `OA` by formula.
-   It is not the same as an independent rater pool, and the paper must not
-   describe it as one.
+The methodological consequence is important: `OA` is a separately elicited
+holistic criterion and is not mathematically constructed from `E`, `D`, or `F`.
+The central predictive analysis can therefore ask whether automated `H` and the
+Group B profile dimensions explain a Group A criterion.
 
-2. **The washout interval must be reported or its absence acknowledged.** The
-   protocol requires a pre-specified interval be reported. If it was not recorded
-   during collection, say so; do not report a value that was not logged.
+The paper should phrase this precisely:
 
-3. **Residual carryover is a named limitation, not an oversight to be
-   minimised.** The protocol itself anticipates it and requires it be reported.
-   Following the repository's own instruction here is the strongest available
-   position: the design acknowledged the risk in advance and disclosed it.
+> Group A rated overall appropriateness (`OA`) as a holistic criterion. Group B
+> separately rated empathic appropriateness (`E`), anthropomorphic deception
+> risk (`D`), and contextual fit (`F`). `OA` was not calculated from the profile
+> dimensions.
 
-**Additional provenance issue.** The Phase 1 data audit found that within each
-domain, the rate at which all five raters recorded an identical rationale string
-is *exactly equal* to the rate at which they recorded an identical score, for all
-four dimensions. Rationale text is therefore a deterministic function of the
-score. Whatever process produced the released files, the free-text field is not
-independent evidence that five people rated independently. Separately, the health
-domain's own README describes its files as oversight and adjudication passes
-rather than independently verified annotator exports.
-
-Until the collection process is audited, reliability coefficients should be
-described as **consistency of the released rating set**, not as independent
-inter-rater reliability. See `analysis/outputs/reports/data_audit.md` and
-`analysis/outputs/reports/reliability.md`.
+**Provenance note.** The current clean release anonymizes the Group B files. The
+data audit verifies score validity, duplicate annotations, rater counts per pool,
+and HuMT join provenance. Rationale text should still be treated as rubric-coded
+supporting text rather than independent qualitative evidence.
 
 ## 5. Why the dimension raters need a detailed rubric
 
@@ -135,11 +121,11 @@ dimension is necessary because reliability is a property of a construct in a
 context, not a global property of a study — a rubric can work well for one
 dimension and poorly for another.
 
-The project reports Krippendorff's ordinal alpha with bootstrap intervals plus
-ICC(A,1) and ICC(A,k), applied identically across all three domains. Both
-single-rater and average-of-k figures are reported because ICC(A,k) is
-substantially larger by construction, and quoting only the average-of-five
-overstates how much individual raters agreed.
+The project uses ICC(A,k) as the primary inter-rater reliability statistic:
+two-way mixed-effects, absolute-agreement, average-measures ICC. This matches the
+annotation structure because multiple raters in each pool scored the same
+responses and the analysis uses the averaged pool score. ICC(A,1) and
+Krippendorff's ordinal alpha are reported as supplementary diagnostics.
 
 **Comparison point.** [CounselBench2025], annotating adjacent constructs with 100
 mental health professionals, reports Krippendorff's alpha at or above 0.7. That is
