@@ -2,7 +2,9 @@
 
 PERSONA evaluates when human-like AI behavior is appropriate in high-stakes human-support settings.
 
-The project argues that human-likeness is not a sufficient measure of appropriateness. A response can sound warm or human while being unsafe, misleading, or poorly matched to the user's situation. PERSONA therefore separates human-likeness from normative dimensions of interaction quality.
+The project argues that human-likeness is not a sufficient measure of appropriateness. A response can sound warm or human while being misleading, overconfident, or poorly matched to the user's situation. PERSONA therefore separates human-likeness from contextual, relational, and boundary-related properties.
+
+For the full research archive, start with [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md).
 
 ## Framework
 
@@ -18,7 +20,8 @@ P = (H, E, D, F)
 | `F` | contextual fit |
 | `OA` | independent overall appropriateness target |
 
-`OA` is rated independently. It is not computed from `E`, `D`, or `F`.
+`OA` is elicited as a holistic target judgment. It is not computed from `E`,
+`D`, or `F`.
 
 The optional secondary score is:
 
@@ -26,7 +29,19 @@ The optional secondary score is:
 S = (H + E - D + F) / 4
 ```
 
-`S` is useful for transparent ranking, but the paper treats `OA` as the target judgment.
+`S` is useful only as a transparent secondary projection. The multidimensional
+profile `P` remains the contribution.
+
+## Research Documentation
+
+| Area | Canonical location |
+|---|---|
+| Research index | [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md) |
+| Theory and construct definitions | [`docs/theory/`](docs/theory/README.md) |
+| Literature map and citation status | [`docs/theory/LITERATURE_MAP.md`](docs/theory/LITERATURE_MAP.md), [`docs/theory/CITATION_MATRIX.md`](docs/theory/CITATION_MATRIX.md) |
+| Research questions and hypotheses | [`docs/theory/RESEARCH_QUESTIONS.md`](docs/theory/RESEARCH_QUESTIONS.md), [`docs/theory/HYPOTHESES.md`](docs/theory/HYPOTHESES.md) |
+| Claim boundaries and limitations | [`docs/theory/CLAIMS_AND_BOUNDARIES.md`](docs/theory/CLAIMS_AND_BOUNDARIES.md) |
+| Analysis reproduction | [`analysis/README.md`](analysis/README.md) |
 
 ## Canonical Data
 
@@ -49,33 +64,34 @@ Each domain folder contains:
 - `README.md`
 - `analysis.md`
 
-## Key Result
-
-Across domains, HuMT is weakly or negatively related to overall appropriateness:
-
-| Domain | HuMT-OA Spearman rho | PERSONA gain over HuMT-only CV R2 |
-|---|---:|---:|
-| Mental health | -0.167 | +0.648 |
-| Education | -0.072 | +0.472 |
-| Health | -0.046 | +0.245 |
-
-Mental health is the strongest validation domain. Education and health support cross-domain transfer, with domain-specific interpretation.
-
 ## Analysis
 
-The current detailed mental-health analysis pipeline remains in `analysis/` and writes outputs to `analysis_outputs/`.
+The current multi-domain analysis pipeline is in `analysis/` and writes
+generated outputs to `analysis/outputs/`.
 
 ```bash
 pip install -r analysis/requirements.txt
-python -m analysis
+python -m analysis.run_phases
 ```
 
-The per-domain summaries in `data/clean_domains/*/analysis.md` provide compact multi-domain checks for data quality, reliability, score distributions, HuMT/OA relationships, and model profiles.
+The legacy mental-health-only pipeline is retained for continuity, but the
+Phase 1-4 pipeline is the canonical multi-domain analysis.
+
+Generated reports:
+
+| Report | Location |
+|---|---|
+| Data audit | `analysis/outputs/reports/data_audit.md` |
+| Reliability | `analysis/outputs/reports/reliability.md` |
+| Descriptives and separability | `analysis/outputs/reports/descriptives.md` |
+| Predictive analysis | `analysis/outputs/reports/predictive.md` |
 
 ## Paper Direction
 
 The strongest CHI framing is:
 
-> Human-likeness is the wrong proxy for appropriateness. AI behavior in human-support settings should be evaluated as a contextual profile balancing empathy, deception risk, and fit.
+> Human-likeness alone is insufficient for judging appropriateness. AI behavior in human-support settings should be evaluated as a contextual profile balancing empathy, deception risk, and fit.
 
-Mental health provides the primary empirical validation. Education and health show that the profile transfers, but the meaning of "appropriate" changes by domain.
+Mental health is the strongest empirical domain in the current archive. Education
+and health are domain-transfer evidence and should be interpreted with the
+limitations documented in [`docs/theory/CLAIMS_AND_BOUNDARIES.md`](docs/theory/CLAIMS_AND_BOUNDARIES.md).
