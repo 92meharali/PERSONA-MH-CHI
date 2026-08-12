@@ -1,0 +1,274 @@
+\documentclass[manuscript,review,anonymous]{acmart}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{Bib\TeX}}}
+
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+\title{Beyond Human-Likeness: A Context-Aware Framework for Evaluating Appropriateness in Anthropomorphic AI Responses}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Anonymous Institution}
+  \country{}}
+
+\begin{abstract}
+Human-like language is increasingly treated as a measurable property of AI responses, but human-likeness alone does not determine whether an anthropomorphic response is appropriate. A response can be warm, fluent, and human-like while implying unsupported capacities such as feeling, memory, authority, or relationship; conversely, a less human-like response can be more appropriate when it preserves boundaries and fits the situation. We present PERSONA, a context-aware evaluation framework that represents each response as a profile $P=(H,E,D,F)$: automated human-likeness, empathic appropriateness, anthropomorphic deception risk, and contextual fit. Unlike prior formulations that derived appropriateness from the same dimensions used as predictors, PERSONA evaluates this profile against independently elicited overall appropriateness judgments. Across 1,490 AI responses in mental health, education, and health contexts, five Group A raters scored overall appropriateness and five separate Group B raters scored $E$, $D$, and $F$; $H$ was measured with HumT. Reliability was strong for averaged ratings across domains. In grouped repeated cross-validation, human-likeness alone weakly predicted overall appropriateness, while the full profile substantially improved prediction in mental health and education and remained directionally positive in health. The results support a calibration view of anthropomorphic AI evaluation: human-likeness is not wrong, but it is not enough.
+\end{abstract}
+
+\keywords{anthropomorphism, human-likeness, conversational AI, appropriateness, empathy, deception, contextual fit, evaluation}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Anthropomorphic language is now part of everyday interaction with generative AI systems. Assistants say ``I can help,'' offer reassurance, explain uncertainty, apologize, encourage, and sometimes imply care, memory, personal experience, or expertise. These linguistic choices matter because they shape how people understand what an AI system is, what it can do, and what kind of relationship is being enacted in the interaction.
+
+Recent work has made human-likeness itself more measurable. HumT provides an automated measure of human-like tone in LLM outputs \cite{Cheng2025HumT}; DeVrio et al. provide a taxonomy of linguistic expressions that contribute to anthropomorphism in language technologies \cite{DeVrio2025Taxonomy}; and prior work documents personification cues and their potential harms in dialogue systems \cite{Abercrombie2023Mirages}. This is an important foundation. However, a central evaluation question remains unresolved: when is anthropomorphic language appropriate for the context?
+
+Our answer is not that human-likeness is incorrect or should be minimized. Human-like language can make systems more understandable, supportive, and usable. The problem is that human-likeness is a descriptive signal, not an appropriateness criterion. It does not by itself say whether warmth was calibrated, whether a response implied capacities the system does not possess, or whether the response matched the user's situation. In a crisis prompt, appropriateness may require urgent safety guidance rather than elaborate reassurance. In an educational prompt, approachable language may help, but false intimacy or overconfident authority may still be inappropriate. In a health prompt, uncertainty and referral boundaries can matter more than a conversational style.
+
+We introduce PERSONA, a framework for evaluating contextual appropriateness in anthropomorphic AI responses. PERSONA represents each response as a profile:
+\[
+P = (H, E, D, F)
+\]
+where $H$ is human-likeness, $E$ is empathic appropriateness, $D$ is anthropomorphic deception risk, and $F$ is contextual fit. The framework is intentionally multidimensional. It treats human-likeness as one useful signal while separating it from empathy, deception risk, and contextual fit.
+
+The empirical design addresses a major weakness of our earlier formulation: circularity. Overall appropriateness ($OA$) is not computed from the same dimensions used to predict it. Instead, we collect holistic $OA$ judgments from one rater group and $E$, $D$, and $F$ judgments from a separate rater group. This makes the relationship between the profile and appropriateness an empirical question rather than a scoring identity.
+
+We evaluate PERSONA on 1,490 AI responses across three domains: mental health ($n=660$), education ($n=415$), and health ($n=415$). The mental health domain is the primary validation setting because it has the strongest prompt structure and full coverage. Education and health test transfer, with health interpreted cautiously because overall appropriateness is ceiling-heavy. We ask whether human-likeness alone predicts overall appropriateness, whether the full profile adds information beyond human-likeness, and whether the profile behaves similarly across domains.
+
+This paper contributes:
+\begin{itemize}
+  \item a context-aware construct model for anthropomorphic AI evaluation that distinguishes human-likeness, empathic appropriateness, deception risk, and contextual fit;
+  \item an annotation design that separates holistic appropriateness judgments from predictor-dimension judgments;
+  \item a multi-domain dataset and reproducible analysis pipeline for evaluating the relationship between anthropomorphic signals and appropriateness;
+  \item empirical evidence that human-likeness alone is insufficient for predicting appropriateness, especially in mental health and education contexts.
+\end{itemize}
+
+The practical motivation is straightforward. If an evaluation system only asks whether a response is human-like, it cannot distinguish at least four cases that matter for design: appropriately warm support, excessive intimacy, misleading claims of human capacity, and contextually wrong but fluent advice. These cases may look similar under a single human-likeness score. PERSONA is designed to make them separable.
+
+\section{Related Work}
+\subsection{Anthropomorphism as Linguistic Signalling}
+Anthropomorphism is often understood as the attribution of human-like qualities to non-human entities \cite{Epley2007Anthropomorphism}. In AI systems, this attribution is shaped by both user-side factors and system-side cues. People differ in their tendency to anthropomorphize \cite{Waytz2010WhoSeesHuman}, and motivational conditions can make human-like interpretation more likely \cite{Epley2008NeedHuman}. At the same time, system outputs supply concrete cues that invite or discourage such interpretation.
+
+For text-based systems, those cues are linguistic. DeVrio et al.'s taxonomy is especially important for PERSONA because it gives a vocabulary for the textual properties through which language technologies become anthropomorphic \cite{DeVrio2025Taxonomy}. Rather than treating anthropomorphism as a single impression, the taxonomy foregrounds different kinds of expressions that can carry human-like implications. PERSONA builds on this insight but asks a different question: once anthropomorphic cues are present, are they appropriate in the context?
+
+HumT operationalizes one part of this space by measuring human-like language in LLM outputs \cite{Cheng2025HumT}. This makes $H$ scalable and independent from human ratings. However, HumT measures textual human-likeness, not whether a response is appropriate, truthful about system capacities, or fitted to the user's needs. PERSONA therefore uses HumT as one profile dimension rather than as the target variable.
+
+\subsection{Empathy, Deception, and Fit}
+Empathy in text-based support can be decomposed into distinguishable communicative mechanisms, including emotional reactions, interpretations, and explorations \cite{Sharma2020Empathy}. PERSONA adopts the view that empathy is linguistically observable, but changes the evaluation target from amount of empathy to appropriateness of empathy. A response can contain empathic language while still being mismatched, generic, excessive, or action-displacing.
+
+Deception risk captures a different problem. Work on dishonest anthropomorphism argues that human-like cues can mislead users when they imply capacities or relationships a system does not actually have \cite{Leong2019Dishonest}. PERSONA operationalizes this as $D$: the degree to which the response implies human experience, feeling, memory, identity, authority, continuity, or dependency. This is connected to, but not identical with, human-likeness. A response can be conversational without being deceptive, and a formal response can still make misleading claims of authority.
+
+Contextual fit captures whether the response is the right kind of response for the user's situation. This construct is necessary because appropriateness is not a generic quality judgment. The same tone, certainty, or level of detail can be suitable in one setting and unsuitable in another. This is why PERSONA evaluates $F$ alongside $H$, $E$, and $D$.
+
+\subsection{From Human-Likeness to Contextual Appropriateness}
+The central claim is a calibration claim. Human-likeness can be valuable, but its value depends on what the interaction calls for and what the language implies. Existing work motivates this shift: anthropomorphic cues have varied forms \cite{DeVrio2025Taxonomy}, measurable surface properties \cite{Cheng2025HumT}, and potential transparency and reliance risks \cite{Abercrombie2023Mirages,Leong2019Dishonest}. PERSONA contributes a measurement framework that puts these channels into one empirical profile and tests them against independent appropriateness judgments.
+
+This distinction is also important for regulation and governance. Disclosure requirements, such as those in the European Union's AI Act, address whether people are informed that they are interacting with an AI system \cite{EUAIAct2024}. Disclosure is necessary, but it is not the same as turn-level appropriateness. A system can disclose that it is an AI and still repeatedly imply personal feeling, memory, authority, or relationship through its wording. PERSONA is not a legal compliance tool, but it provides a way to measure the response-level linguistic behaviors that make these concerns concrete.
+
+\section{The PERSONA Framework}
+\subsection{Constructs}
+PERSONA defines four response-level dimensions.
+
+\textbf{$H$: Human-likeness.} $H$ is the degree to which the response exhibits linguistic features conventionally associated with human speakers, such as conversational register, first-person framing, personal stance, and informal discourse cues. In this study, $H$ is measured automatically with HumT \cite{Cheng2025HumT}. $H$ is descriptive, not evaluative.
+
+\textbf{$E$: Empathic appropriateness.} $E$ is the degree to which the response provides calibrated warmth, emotional recognition, and validation that are useful for the user's situation. It is not simply the amount of empathy. A factual education prompt may require little emotional language; a mental health prompt may require affective recognition but not excessive intimacy.
+
+\textbf{$D$: Anthropomorphic deception risk.} $D$ is the degree to which the response implies unsupported human capacities or relationships. Examples include claims of feeling, memory, personal care, permanent commitment, exclusivity, or professional authority. Functional first-person language alone is not treated as deception.
+
+\textbf{$F$: Contextual fit.} $F$ is the degree to which the response's content, action, tone, certainty, and role boundaries match the primary situation. It is not generic response quality. It asks whether this is the right response posture for this prompt.
+
+\subsection{Using DeVrio et al.'s Taxonomy}
+DeVrio et al.'s taxonomy helps ground PERSONA at the linguistic level \cite{DeVrio2025Taxonomy}. It shows that anthropomorphism is not a vague overall feeling but is produced through identifiable textual expressions. PERSONA uses that insight in three ways.
+
+First, $E$ focuses on the empathic subset of linguistic behavior: emotional recognition, validation, and support. These expressions may increase human-likeness, but PERSONA asks whether they are calibrated to the situation. Second, $D$ focuses on expressions whose human-like implications can become misleading: claims of feeling, personal experience, memory, authority, relationship, or dependency. Third, $F$ evaluates whether the same linguistic posture fits the interactional context. A taxonomy of anthropomorphic expressions tells us what kinds of cues are present; PERSONA asks how those cues function in context.
+
+\subsection{Overall Appropriateness as an Independent Criterion}
+The target variable, $OA$, is a holistic judgment of whether the response is appropriate overall. PERSONA does not define $OA$ as a weighted sum of $H$, $E$, $D$, and $F$. Instead, $OA$ is collected separately. This is the methodological difference that allows the framework to be tested. If $OA$ were derived from the profile, high predictive performance would be circular; because $OA$ is independently elicited, predictive performance estimates whether the profile captures information that human raters treat as relevant to appropriateness.
+
+\subsection{Research Questions}
+The study is organized around three empirical questions:
+
+\textbf{RQ1:} How well does human-likeness alone predict overall appropriateness? This tests whether $H$ can serve as a sufficient proxy for appropriateness.
+
+\textbf{RQ2:} Does the full PERSONA profile improve prediction beyond $H$ alone? This tests the framework's incremental validity.
+
+\textbf{RQ3:} Do the relationships between PERSONA dimensions and $OA$ transfer across domains? This tests whether the profile behaves as a general framework while allowing domain-specific weighting.
+
+We also prepared an adversarial elicitation question during theory development, but the present corpus does not isolate anthropomorphic elicitation while holding response content constant. We therefore do not present adversarial effects as a confirmatory result in this manuscript.
+
+\section{Data and Annotation}
+\subsection{Domains and Responses}
+The dataset contains 1,490 complete responses across three domains: 660 mental health responses, 415 education responses, and 415 health responses. Each response has a model label, condition label, scenario type, response text, automated $H$ score, averaged Group A $OA$ score, and averaged Group B $E$, $D$, and $F$ scores.
+
+\begin{table}
+\caption{Dataset coverage after HuMT-complete filtering.}
+\label{tab:dataset}
+\begin{tabular}{lrrrr}
+\toprule
+Domain & Responses & Prompt groups & OA rows & E/D/F rows \\
+\midrule
+Mental health & 660 & 220 & 3,300 & 3,300 \\
+Education & 415 & 139 & 2,075 & 2,075 \\
+Health & 415 & 140 & 2,075 & 2,075 \\
+\midrule
+Total & 1,490 & 499 & 7,450 & 7,450 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Mental health is the primary validation domain. It contains three responses per prompt group and full HumT coverage. Education and health are transfer domains filtered to HuMT-complete rows so that all models use the same complete cases. The health domain is treated as secondary evidence because $OA$ is strongly ceiling-heavy.
+
+The mental health prompts were derived from clinically motivated counselling and mental-health question-answering settings, including general distress, crisis risk, psychoeducation, and boundary/authority cases. Education prompts cover learning support situations such as worked examples, conceptual explanations, and relationship-boundary cases. Health prompts cover general health information, emergency risk, clinician communication, medication/treatment, triage/referral, and uncertainty-hedging cases. The domains were chosen because they vary in the stakes and norms governing anthropomorphic language. Mental health often makes empathy and safety response posture salient; education makes explanation style and pedagogical fit salient; health makes uncertainty, authority, and referral boundaries salient.
+
+\subsection{Rater Groups}
+For each domain, five Group A raters scored overall appropriateness. A separate five-rater Group B scored $E$, $D$, and $F$. This separation reduces criterion contamination: the holistic outcome is not supplied by the same judgments used as predictors. All dimensions use five-point ordinal scales and are analyzed as averaged response-level scores.
+
+The annotation protocol instructed raters to score the construct assigned to them rather than infer a global quality judgment. For example, Group B raters scoring $D$ were instructed not to raise deception risk merely because advice was inaccurate, cold, or imperfectly fitted to the scenario. Those issues belong to $F$ or $OA$. Similarly, raters scoring $E$ were instructed to evaluate calibrated empathic support rather than simply rewarding more warmth. This design supports construct separability: each dimension encodes a different failure mode or success condition.
+
+\subsection{Why Separate Group A and Group B?}
+The separation between Group A and Group B is central. If the same raters supplied $OA$ and the component dimensions, strong prediction might reflect shared rater habits rather than response properties. If $OA$ were computed directly from $E$, $D$, and $F$, prediction would be tautological. PERSONA avoids both problems by treating $OA$ as an independently elicited criterion and the profile dimensions as predictors.
+
+\subsection{HuMT Coverage and Filtering}
+HumT values were deterministically joined to response text. The active analysis uses only complete cases with matched HuMT values: 660/660 mental health responses, 415/415 education responses, and 415/415 health responses. This avoids mixing response sets across specifications and ensures that performance differences reflect predictors rather than missingness.
+
+\section{Analysis Plan}
+We first audit dataset integrity and coverage. We then estimate annotation reliability using ICC(A,k), a two-way mixed-effects absolute-agreement average-measures intraclass correlation, because the analysis uses averaged ratings from multiple raters. ICC(A,1) and ordinal alpha are retained as supplementary diagnostics.
+
+For predictive validity, we compare $H$-only models to models using $H+E+D+F$. We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt do not appear in both training and test folds. Confidence intervals use prompt-cluster bootstrap resampling of out-of-fold predictions. We also evaluate ablations and incremental validity to identify which dimensions carry predictive information.
+
+The main performance metric is cross-validated $R^2$. We also inspect Spearman correlation, Pearson correlation, mean absolute error, and root mean squared error. The substantive test is not whether the full profile has high in-sample fit, but whether it predicts held-out responses better than $H$ alone under prompt-grouped validation.
+
+\subsection{Model Specifications}
+The baseline specification uses only $H$. The full specification uses $H+E+D+F$. Ablation specifications include single-dimension models, $H$ paired with each human-rated dimension, three-dimension combinations, and $E+D+F$ without $H$. Comparing $E+D+F$ to $H+E+D+F$ tests whether automated human-likeness adds information after human-rated appropriateness dimensions are included. Comparing $F$ alone to the full profile tests whether the framework's predictive gain is concentrated in contextual fit or distributed across dimensions.
+
+\subsection{Interpretation Standard}
+We interpret a result as clear when the paired bootstrap interval for an incremental comparison excludes zero. When the point estimate is positive but the interval crosses zero, we treat the result as suggestive rather than confirmatory. This matters most in health, where ceiling effects reduce available variation in $OA$.
+
+\section{Results}
+\subsection{Reliability}
+Averaged ratings showed strong agreement across the main domain-by-dimension cells (Table~\ref{tab:reliability}). Mental health reliability ranged from ICC(A,k)=0.851 for $OA$ to 0.959 for $D$. Education reliability ranged from 0.916 for $OA$ to 0.997 for $E$. Health reliability ranged from 0.907 for $OA$ to 0.942 for $D$. These values support using averaged ratings as stable response-level variables.
+
+\begin{table}
+\caption{Primary reliability: ICC(A,k), 95\% CI in parentheses.}
+\label{tab:reliability}
+\begin{tabular}{lrrrr}
+\toprule
+Domain & OA & E & D & F \\
+\midrule
+Mental health & .851 (.830,.870) & .948 (.939,.956) & .959 (.954,.965) & .864 (.839,.885) \\
+Education & .916 (.878,.938) & .997 (.995,.999) & .963 (.934,.981) & .954 (.928,.969) \\
+Health & .907 (.804,.945) & .939 (.928,.948) & .942 (.912,.959) & .922 (.908,.934) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Human-Likeness Alone Is Weak}
+Human-likeness alone had limited predictive value. In mental health, $H$-only cross-validated $R^2$ was 0.026, with a 95\% interval overlapping zero. In education, $H$-only $R^2$ was 0.099, but uncertainty was wide. In health, $H$-only $R^2$ was -0.007. In the pooled dataset, $H$-only improved to 0.221, but this remained well below the full profile.
+
+The relationship between HumT and $OA$ was also weak in rank terms: Spearman correlations were -0.167 in mental health, -0.040 in education, and -0.054 in health. These values support the central claim that human-likeness is not enough to evaluate appropriateness.
+
+This does not mean that $H$ is useless. It means that $H$ should be interpreted as a surface anthropomorphic signal rather than a normative target. The same level of human-likeness may be received differently depending on whether it carries calibrated empathy, misleading implications, or appropriate role boundaries.
+
+\subsection{The Full Profile Improves Prediction}
+The full profile substantially improved prediction in mental health and education (Table~\ref{tab:cv}). In mental health, $H+E+D+F$ achieved cross-validated $R^2=0.659$, a gain of 0.632 over $H$ alone. In education, the full profile achieved $R^2=0.562$, a gain of 0.462. In health, the full profile achieved $R^2=0.256$, a positive point estimate but with a confidence interval that crossed zero for the gain over $H$ alone. Pooled across domains, the full profile achieved $R^2=0.499$, a gain of 0.278 over $H$ alone.
+
+\begin{table}
+\caption{Cross-validated prediction of overall appropriateness.}
+\label{tab:cv}
+\begin{tabular}{lrrrr}
+\toprule
+Domain & $H$-only $R^2$ & Full $R^2$ & Gain & 95\% CI for gain \\
+\midrule
+Mental health & .026 & .659 & .632 & [.567,.686] \\
+Education & .099 & .562 & .462 & [.278,.598] \\
+Health & -.007 & .256 & .264 & [-.053,.400] \\
+Pooled & .221 & .499 & .278 & [.204,.339] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/fig_cv_model_comparison.png}
+  \caption{Grouped repeated cross-validation shows that the full PERSONA profile improves over $H$ alone, especially in mental health and education.}
+  \label{fig:cv}
+\end{figure}
+
+\subsection{Which Dimensions Carry the Gain?}
+Ablation results show that contextual fit is the dominant channel in mental health and education. In mental health, $F$ alone achieved $R^2=0.651$, close to the full profile's 0.659. In education, $F$ alone achieved $R^2=0.562$, effectively matching the full profile. This does not make the other dimensions irrelevant; instead, it shows that in these two domains, raters' holistic appropriateness judgments were especially aligned with whether the response posture fit the situation.
+
+Health behaved differently. $F$ alone achieved only $R^2=0.027$, while $D$ alone achieved $R^2=0.241$ and the full profile achieved $R^2=0.256$. This suggests that in the health transfer data, deception-risk cues carried more of the available appropriateness signal than contextual fit. However, health $OA$ was ceiling-heavy: 63.86\% of responses were at the maximum $OA$ score, which constrains predictive variation.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/fig_ablation.png}
+  \caption{Ablation results indicate that contextual fit carries most of the mental health and education gain, while health is more influenced by deception-risk variation and constrained by ceiling effects.}
+  \label{fig:ablation}
+\end{figure}
+
+The pooled ablation is also informative. In pooled data, $F$ alone achieved $R^2=0.471$, while the full profile achieved $R^2=0.499$. The gain over $F$ alone was 0.028 with a 95\% interval of [0.010, 0.046], indicating that the remaining dimensions add a small but reliable increment when domains are analyzed together. This pattern fits the theoretical account: contextual fit often carries the main appropriateness signal, while empathy, deception risk, and human-likeness help characterize the particular way in which a response is appropriate or inappropriate.
+
+\subsection{Domain Differences}
+A pooled interaction audit found that associations between profile dimensions and $OA$ vary by domain. The model explained substantial variance ($R^2=0.651$, 499 prompt clusters). Compared with mental health, $E$ had weaker slopes in education and health, $D$ had a weaker slope in health, and $F$ had a much weaker slope in health. Human-likeness slopes did not clearly differ across domains. This supports treating mental health as the primary validation result, education as transfer evidence, and health as secondary evidence rather than equal-strength validation.
+
+\begin{table}
+\caption{Selected domain interaction terms from $OA \sim z(H,E,D,F) * domain$. Mental health is the reference domain.}
+\label{tab:interactions}
+\begin{tabular}{lrrr}
+\toprule
+Interaction & Estimate & 95\% CI & p \\
+\midrule
+$H \times$ Education & -.015 & [-.060,.029] & .499 \\
+$H \times$ Health & .043 & [-.002,.088] & .064 \\
+$E \times$ Education & -.100 & [-.183,-.017] & .018 \\
+$E \times$ Health & -.105 & [-.178,-.033] & .004 \\
+$D \times$ Education & -.007 & [-.088,.074] & .871 \\
+$D \times$ Health & -.215 & [-.336,-.093] & .001 \\
+$F \times$ Education & .052 & [-.032,.135] & .226 \\
+$F \times$ Health & -.378 & [-.437,-.319] & $<.001$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+\subsection{Human-Likeness Is Useful but Insufficient}
+The findings support a precise version of the paper's core claim. Human-likeness is not wrong, and it should not be treated as a property to remove by default. It is a measurable dimension of AI language and can be useful for design and evaluation. But it is not sufficient for appropriateness. Across the strongest validation domains, the full PERSONA profile captured appropriateness-relevant information that $H$ alone missed.
+
+This matters for both research and design. A system can be less human-like yet more appropriate if it gives direct, bounded help. A system can be human-like and appropriate if warmth is calibrated and no misleading capacities are implied. A system can be human-like and inappropriate if warmth substitutes for action, authority is overstated, or the response posture does not match the situation. PERSONA is designed to distinguish these cases.
+
+The result also reframes how to use automated human-likeness metrics. They are useful for monitoring linguistic style, comparing systems, or testing interventions that make text more or less human-like. They should not be used alone to decide whether an anthropomorphic response is acceptable in context. PERSONA keeps the automated benefit of $H$ while embedding it in a broader human-evaluated profile.
+
+\subsection{Why Contextual Fit Dominated in Mental Health and Education}
+The dominance of $F$ in mental health and education is theoretically meaningful. Appropriateness judgments in these domains appear to depend heavily on whether the response performs the right kind of action for the situation. In mental health, crisis risk, boundary management, and psychoeducation require different response postures. In education, a worked example, conceptual explanation, or relationship-boundary prompt also requires different interactional behavior. Contextual fit captures this situational matching directly.
+
+This does not collapse PERSONA into a single $F$ score. First, $D$ carried distinctive signal in health. Second, the construct framework is intended not only to maximize prediction but also to diagnose why a response succeeds or fails. A high-$F$ response with high deception risk is a different design problem from a low-$F$ response with appropriate empathy.
+
+For CHI, this diagnostic value is part of the contribution. Designers and evaluators often need to know not only whether one response is better than another, but why. If a response fails because it is too intimate, the design action differs from a response that fails because it omits urgent safety guidance. If a response fails because it implies authority, the fix differs from a response that merely needs clearer explanation. PERSONA's dimensions map evaluation to actionable revision paths.
+
+\subsection{Deception Risk as a Boundary Construct}
+The health transfer result suggests that deception-risk cues may matter most when a domain requires careful boundaries around expertise, certainty, and authority. This aligns with the theory of dishonest anthropomorphism \cite{Leong2019Dishonest} and with DeVrio et al.'s argument that anthropomorphic linguistic expressions need more precise vocabulary \cite{DeVrio2025Taxonomy}. In PERSONA, $D$ is the construct that tracks when such expressions shift from conversational convention into misleading implication.
+
+This distinction is especially important because not all anthropomorphic convention is harmful. Functional first-person language can be benign and efficient. The concern is not the word ``I'' by itself; the concern is the implied claim. ``I can summarize this'' is different from ``I know exactly how you feel'' or ``I will always be here for you.'' DeVrio et al.'s taxonomy helps locate these as linguistic phenomena; PERSONA adds a context-sensitive judgment of when they create deception risk.
+
+\subsection{Implications for Evaluation}
+PERSONA offers a middle path between optimizing for human-likeness and suppressing anthropomorphic language entirely. The framework lets evaluators ask: is the language human-like, is the empathy calibrated, does the response imply unsupported capacities, and does the response fit the situation? These questions are separable. That separability is useful for model evaluation, interface policy, and dataset design.
+
+For benchmark construction, the results argue against single-score anthropomorphism evaluation when the target is appropriateness. A dataset can include an automated $H$ score, but appropriateness-sensitive evaluation should also include human judgments of empathy calibration, deception risk, and context fit. For system governance, the framework can support audits that identify which response behaviors create risk in which domains. For design, it can guide targeted rewriting: lower misleading implication without removing useful warmth, or improve contextual fit without making the response colder.
+
+\subsection{Response to Prior Empirical Weaknesses}
+The current design directly addresses three methodological problems that often arise in appropriateness evaluation. First, the criterion is independent: $OA$ is not calculated from the predictors. Second, validation is out-of-sample and grouped by prompt, reducing leakage from near-identical prompt contexts. Third, uncertainty is reported for performance differences, so gains are not interpreted only from point estimates. These choices make the empirical claim narrower but stronger: PERSONA is not a universal theory of all user outcomes, but it is a testable framework for response-level appropriateness.
+
+\section{Scope and Boundaries}
+The present evidence is strongest for mental health and education. Health provides useful transfer evidence but is constrained by ceiling effects in $OA$. The study is response-level and text-only; it does not measure long-term user perception, dependency, or multi-turn relationship formation. The framework should therefore be read as an evaluation of linguistic appropriateness signals, not as a complete theory of user outcomes.
+
+\section{Conclusion}
+Human-likeness is an important property of AI language, but it is not enough to determine whether anthropomorphic behavior is appropriate. PERSONA evaluates anthropomorphic responses as a profile of human-likeness, empathic appropriateness, deception risk, and contextual fit, and tests that profile against independently elicited overall appropriateness. Across 1,490 responses, the full profile strongly outperformed human-likeness alone in the primary mental health domain and transferred to education, with health offering more cautious secondary evidence. The result is a calibration framework: not less human-like AI by default, but more contextually appropriate anthropomorphic behavior.
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{persona_chi2027}
+\end{document}
