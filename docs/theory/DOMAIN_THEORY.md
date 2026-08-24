@@ -39,6 +39,10 @@ tutoring, sustained encouragement is pedagogically motivated and relational
 continuity is closer to a design goal than a risk. If `E` and `D` relate to
 appropriateness identically in both, the contextual thesis is weakened.
 
+Authority calibration and unsupported expertise belong primarily to `F` or
+`OA`. Under the final D scope clarification, professional language enters `D`
+only when it enacts false human identity, relationship, or continuity.
+
 **Health versus mental health** is a narrower contrast: similar authority stakes,
 different emotional load. It functions as a partial control on the clinical-domain
 properties.

@@ -1,4 +1,4 @@
-"""Run PERSONA analysis phases 1-4 end to end.
+"""Run the complete PERSONA analysis pipeline end to end.
 
     python -m analysis.run_phases
 
@@ -10,7 +10,15 @@ from __future__ import annotations
 
 import time
 
-from . import build_dataset, descriptives, domain_interactions, humt_provenance_audit, predictive, reliability
+from . import (
+    build_dataset,
+    d_scope_audit,
+    descriptives,
+    domain_interactions,
+    humt_provenance_audit,
+    predictive,
+    reliability,
+)
 from .persona_common import OUT_DIR, PROCESSED_DIR, env_versions, save_json
 
 PHASES = [
@@ -20,6 +28,7 @@ PHASES = [
     ("3 - descriptives and separability", descriptives.main),
     ("4 - cross-validation, ablation, incremental validity", predictive.main),
     ("5 - domain interactions", domain_interactions.main),
+    ("5b - D scope sensitivity audit", d_scope_audit.main),
 ]
 
 

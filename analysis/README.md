@@ -29,6 +29,7 @@ python -m analysis.reliability     # Phase 2
 python -m analysis.descriptives    # Phase 3
 python -m analysis.predictive      # Phase 4
 python -m analysis.domain_interactions # Phase 5
+python -m analysis.d_scope_audit      # Phase 5b
 ```
 
 Phases 1b-5 read `analysis/processed/persona_all.csv`, so Phase 1 must run first.
@@ -91,6 +92,12 @@ differences are paired.
 association between each profile dimension and `OA` differs by domain:
 `OA ~ z(H,E,D,F) * domain`. Uncertainty uses cluster-robust standard errors by
 `domain::prompt_id`. This phase is interpretive, not causal.
+
+**Phase 5b - `d_scope_audit.py`.** A post-analysis qualitative trace of health
+responses with consensus `D >= 3`, plus D-only sensitivity checks that remove
+the sole clinician-identity/continuity-led response and its prompt cluster. The
+fixed cue-family coding is reviewable in the source and does not alter original
+ratings or create a new D subtype measure.
 
 ## Outputs
 

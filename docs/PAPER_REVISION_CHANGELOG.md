@@ -1,5 +1,35 @@
 # Paper Revision Changelog
 
+## 2026-08-25: Major Issue 4.2, D Scope and Professional-Role Boundary
+
+- Retained the name Anthropomorphic Deception/Misleading-Implication Risk.
+- Narrowed D so standalone authority, expertise, certainty, unsafe advice, and
+  factual error do not count without anthropomorphic self-presentation.
+- Clarified that false professional-role language counts only when the AI
+  presents itself as a human professional or enacts a professional relationship
+  or continuity it does not possess.
+- Mapped the clarified scope to DeVrio et al.'s expressions of understanding,
+  identity, relationships, emotions, intention, and anticipation/recall.
+- Added the scope clarification to the compact protocol and all three domain
+  rubrics while explicitly preserving every released v3.1 score.
+- Added a reproducible post-analysis D-scope audit covering all 23 health
+  responses with consensus D >= 3.
+- Recorded 22 affective/relational-led responses and one
+  clinician-identity/continuity-led response.
+- Added D-only sensitivity checks: full health R2=.241; excluding the sole
+  clinician-role response .208; excluding its prompt cluster .192; excluding
+  all `other` scenarios .022.
+- Revised the manuscript's health interpretation to state that the D result is
+  not primarily driven by standalone authority and is concentrated in a small
+  relational adversarial subset.
+- Removed confirmed junk synthetic-annotation text from `annotator_notes` in
+  all five health files while retaining the shared column and CSV schema.
+- Left score-template rationales unchanged, as approved.
+- Updated theory, claims, reviewer risks, results ground truth, analysis
+  documentation, rebuttal, and TODO tracking.
+- Changed no response, prompt, identifier, E/D/F/OA rating, rationale, HuMT
+  score, prompt group, model field, or pre-existing statistical result.
+
 ## 2026-08-25: Critical Issue 4, F and OA Construct Relationship
 
 - Added a reproducible Phase 3 construct-relationship table containing

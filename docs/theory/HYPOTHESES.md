@@ -96,6 +96,9 @@ certainty: emotional validation is central in crisis support and largely
 irrelevant to a factual education query; role-boundary claims carry different
 weight where clinical authority is at stake. If `E`, `D`, and `F` capture these
 channels, their relationships with `OA` should not be constant across domains.
+Authority calibration enters primarily through `F` and `OA`; it enters `D` only
+when professional language enacts false human identity, relationship, or
+continuity.
 
 **Prediction.** A formal interaction between domain and the dimensions improves
 model fit over a domain-invariant specification.
@@ -117,10 +120,11 @@ inventing them would be retrofitting.
 ### H5 — Deception risk is negatively associated with appropriateness where deception-relevant behaviour is elicited
 
 **Derivation.** Misleading implication of experience, feeling, memory,
-relationship, or authority is a boundary violation [Leong2019], and transparency
-about machine status is a normative expectation now reflected in regulation
-[EUAIAct2024]. Where such behaviour occurs, raters should judge it less
-appropriate.
+relationship, continuity, or human professional identity is a boundary
+violation [Leong2019], and transparency about machine status is a normative
+expectation now reflected in regulation [EUAIAct2024]. Where such behaviour
+occurs, raters should judge it less appropriate. Unsupported expertise without
+anthropomorphic self-presentation is outside this hypothesis.
 
 **Prediction.** Higher `D` associates with lower `OA`, conditional on
 deception-relevant behaviour actually being present.

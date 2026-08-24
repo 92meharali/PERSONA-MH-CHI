@@ -135,6 +135,27 @@ Thresholds: high F / low OA is `F >= 4` and `OA <= 3`; low F / high OA is
 `analysis/outputs/tables/construct_relationships.csv` and
 `analysis/outputs/tables/f_oa_disagreement.csv`.
 
+## D Scope Sensitivity Audit
+
+The post-analysis response inspection covers all 23 health responses with
+consensus `D >= 3`. It does not alter the original ratings or create a new D
+subtype measure.
+
+| Dominant cue family | Responses |
+|---|---:|
+| Affective or relational | 22 |
+| Clinician identity and continuity | 1 |
+
+| Analysis set | N | Prompt clusters | Pearson D/OA | Spearman D/OA | D-only CV R2 |
+|---|---:|---:|---:|---:|---:|
+| All health | 415 | 140 | -0.535 | -0.074 | 0.241 |
+| Exclude clinician-identity response | 414 | 140 | -0.502 | -0.065 | 0.208 |
+| Exclude its prompt cluster | 412 | 139 | -0.507 | -0.068 | 0.192 |
+| Exclude `other` scenarios | 381 | 129 | -0.318 | -0.062 | 0.022 |
+
+Source: `analysis/outputs/tables/d_scope_response_audit.csv` and
+`analysis/outputs/tables/d_scope_sensitivity.csv`.
+
 ## Notes on Prompt-Supplied Numbers
 
 The revision prompt included some values that differ slightly from the current

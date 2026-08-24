@@ -339,3 +339,96 @@ numeric and response-example trace audit passed; all pre-existing Phase 3 tables
 and figures remained unchanged; Python syntax, source formatting, LaTeX
 environment balance, references, and citations passed. Local PDF compilation
 remains pending because no LaTeX compiler is installed.
+
+## Major Issue 4.2: Scope of D and Professional Authority
+
+### Concern
+
+The v3.1 D anchor listed professional authority alongside feelings,
+relationships, identity, memory, continuity, and dependency. Standalone
+expertise or capability misrepresentation is not necessarily anthropomorphic,
+so the health D result could have reflected unsafe medical authority rather than
+anthropomorphic misleading implication.
+
+### Team Decision
+
+- Keep the construct name Anthropomorphic Deception/Misleading-Implication Risk.
+- Align its scope with DeVrio et al.'s linguistic taxonomy rather than broaden
+  it to generic misleading self-presentation.
+- Count professional-role language only when the AI presents itself as a human
+  professional or enacts a professional relationship or continuity it does not
+  possess.
+- Assign unsupported expertise, excessive certainty, unsafe advice, and factual
+  error without anthropomorphic self-presentation to F or OA, not D.
+- Preserve all original v3.1 scores and document the revision as a scope
+  clarification rather than pretending annotators received a different scale.
+- Leave the approved score-template rationales unchanged.
+- Remove the confirmed junk synthetic-annotation text from health
+  `annotator_notes` while preserving the column and shared schema.
+
+### Implemented Analysis Changes
+
+- Added `analysis/d_scope_audit.py` as a reproducible Phase 5b audit.
+- Added `d_scope_response_audit.csv`, which traces all 23 health responses with
+  consensus D >= 3 to a fixed post-analysis cue-family classification.
+- Added `d_scope_sensitivity.csv` and `d_scope_audit.md`.
+- The inspection identifies 22 affective/relational-led responses and one
+  clinician-identity/continuity-led response.
+- D-only health CV R2 is .241 in the complete corpus, .208 after removing the
+  clinician-role response, and .192 after removing its full prompt cluster.
+- Removing all 34 `other` scenarios reduces D-only CV R2 to .022, demonstrating
+  that the health signal is concentrated in the relational adversarial subset.
+- The cue-family inspection is explicitly labeled post-analysis and does not
+  create a new human-rated subtype variable.
+
+### Implemented Manuscript Changes
+
+- Replaced standalone authority language in the D definition with false human
+  professional identity, enacted professional relationship, or continuity.
+- Added the explicit boundary that unsupported expertise, certainty, unsafe
+  advice, and factual error belong to F or OA without anthropomorphic
+  self-presentation.
+- Connected D directly to DeVrio et al.'s categories involving understanding,
+  identity, relationships, emotions, intention, and recall.
+- Revised the framework table and attribution explanation.
+- Replaced the prior health interpretation about expertise, certainty, and
+  authority with the response-inspection and sensitivity findings.
+- Preserved the conclusion that health evidence is exploratory.
+
+### Rubric and Theory Changes
+
+- Added the same final scope clarification to `data/annotation_protocol.md` and
+  the mental-health, education, and health rubrics.
+- Updated construct definitions, distinctions, PERSONA theory, domain theory,
+  hypotheses, literature map, research questions, and the human-likeness
+  argument.
+- Updated the claims audit and reviewer-risk register with the resolved boundary
+  and remaining subtype limitation.
+
+### Metadata Cleanup
+
+- Blanked only the obsolete `annotator_notes` values in the five health
+  annotator files.
+- Retained the `annotator_notes` column so all domain CSVs preserve their shared
+  schema.
+- Verified all 415 rows in each file and confirmed that every field except
+  `annotator_notes` is identical to the committed pre-cleanup version.
+
+### Unchanged Items
+
+- No original annotation score or rationale changed.
+- No response, prompt, scenario, model, HuMT value, or identifier changed.
+- No original D subtype rating exists; the new cue-family audit is explicitly
+  post-analysis.
+- No headline prediction, reliability, ablation, interaction, correlation, or
+  distribution result changed.
+
+### Status
+
+Implemented and verified on 2026-08-25. The complete Phase 1--5b pipeline
+regenerated successfully. All pre-existing processed datasets, result tables,
+reports, and figures remained byte-identical. The metadata-preservation audit
+confirmed that only `annotator_notes` changed in the five health CSVs. Python,
+CSV schema, numeric trace, source-formatting, LaTeX-structure, reference, and
+citation checks passed. Local PDF compilation remains pending because no LaTeX
+compiler is installed.

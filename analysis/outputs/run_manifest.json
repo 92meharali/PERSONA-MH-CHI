@@ -11,13 +11,14 @@
     "python": "3.9.6"
   },
   "phase_seconds": {
-    "1 - dataset build and audit": 1.12,
-    "1b - HuMT provenance audit": 0.11,
-    "2 - annotation reliability": 4.13,
-    "3 - descriptives and separability": 20.33,
-    "4 - cross-validation, ablation, incremental validity": 3.97,
-    "5 - domain interactions": 0.03
+    "1 - dataset build and audit": 1.79,
+    "1b - HuMT provenance audit": 0.19,
+    "2 - annotation reliability": 7.26,
+    "3 - descriptives and separability": 36.1,
+    "4 - cross-validation, ablation, incremental validity": 6.89,
+    "5 - domain interactions": 0.05,
+    "5b - D scope sensitivity audit": 0.23
   },
-  "processed_dir": "/private/tmp/PERSONA-MH-CHI/analysis/processed",
-  "outputs_dir": "/private/tmp/PERSONA-MH-CHI/analysis/outputs"
+  "processed_dir": "/Users/meharali/Documents/Codex/2026-08-10/ok/work/persona-ethics-repo/analysis/processed",
+  "outputs_dir": "/Users/meharali/Documents/Codex/2026-08-10/ok/work/persona-ethics-repo/analysis/outputs"
 }

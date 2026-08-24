@@ -99,7 +99,8 @@ contrast between a condition that encourages anthropomorphic behaviour and one
 that discourages it, so the manipulation RQ4 presupposes was never run.
 
 **What RQ4 would require.** Prompts or system conditions designed to elicit
-claims of feeling, memory, relationship, continuity, or authority; ideally paired
+claims of feeling, memory, relationship, continuity, or false human professional
+identity; ideally paired
 so that the same user situation appears under different anthropomorphic
 conditions, holding content constant. Until such data exists, RQ4 belongs in
 future work.

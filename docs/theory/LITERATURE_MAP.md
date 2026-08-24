@@ -97,9 +97,12 @@ risk taxonomy for language models.
 **Trust and reliance.** The harm mechanism is over-reliance: appropriate reliance
 requires that a user's trust track the system's actual reliability
 [Lee2004][NV]. Anthropomorphic cues can inflate trust independently of
-reliability, which is what makes false implication of experience or authority a
-risk rather than a stylistic quibble. [Bucinca2021][NV] demonstrates
-interventions against over-reliance in AI-assisted decisions.
+reliability, which makes false implication of experience, relationship, or
+human professional identity a risk rather than a stylistic quibble.
+[Bucinca2021][NV] demonstrates interventions against over-reliance in
+AI-assisted decisions. DeVrio et al.'s categories of understanding, identity,
+relationships, emotions, intention, and recall provide the linguistic scope;
+standalone expertise is not treated as a separate anthropomorphic category.
 
 **Regulation.** EU AI Act Article 50 requires disclosure that a user is
 interacting with an AI system, enforceable from 2 August 2026 [EUAIAct2024]. This

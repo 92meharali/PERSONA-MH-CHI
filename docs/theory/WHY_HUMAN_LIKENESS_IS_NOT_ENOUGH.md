@@ -32,7 +32,8 @@ When a system uses them, it may imply:
 
 - **emotions it does not have** — "I feel terrible that you're going through this"
 - **personal experience it has not had** — "I know exactly what that's like"
-- **authority it does not hold** — advice framed as clinical judgment
+- **human professional identity it does not hold** — speaking as the user's
+  clinician or enacting an ongoing professional relationship
 - **memory it does not possess** — "I've been thinking about what you said"
 - **relational continuity it cannot provide** — "I'll always be here for you"
 - **certainty the evidence does not support** — confident framing of a contested

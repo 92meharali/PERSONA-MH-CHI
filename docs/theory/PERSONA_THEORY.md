@@ -28,7 +28,8 @@ Two asymmetries motivate this.
 A response may be **highly human-like and inappropriate** because it implies
 emotion the system does not have, personal experience it has not had, a
 relationship that does not exist, memory or continuity it does not possess,
-authority it does not hold, or certainty the evidence does not support.
+human professional identity it does not hold, or certainty the evidence does
+not support.
 
 A response may be **less human-like and more appropriate** because it preserves
 role boundaries, states its limits, marks its uncertainty, and matches what the
@@ -94,8 +95,9 @@ collapses:
 - **`E` is relational.** Warmth and validation, judged by whether they are
   calibrated to the situation, not by their intensity.
 - **`D` is a boundary and transparency property.** Whether the response implies
-  experience, feeling, memory, relationship, authority, or continuity that the
-  system does not have.
+  experience, feeling, memory, relationship, continuity, or false human
+  professional identity that the system does not have. Expertise or certainty
+  alone is not `D`.
 - **`F` is contextual calibration.** Whether content, tone, certainty, and role
   behaviour match the situation.
 
