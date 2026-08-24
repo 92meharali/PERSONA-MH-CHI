@@ -108,9 +108,9 @@ Four that shape how everything else should be read:
   system-prompt condition.
 - **Restricted variance** in `H`, in `D`, and in `OA` in some domains bounds what
   any relationship can show.
-- **Single-turn, English-only, five raters per pool.** The medical-domain raters
-  were students rather than licensed clinicians; education raters were teachers
-  and teaching assistants.
+- **Single-turn, English-only, five raters per pool.** Mental-health raters were
+  psychology students and general-health raters were MBBS students rather than
+  licensed clinicians; education raters were teachers and teaching assistants.
 
 ## 7. Where things must not be duplicated
 

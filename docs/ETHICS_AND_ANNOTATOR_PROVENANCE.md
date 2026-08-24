@@ -20,18 +20,19 @@ reviewer note should summarize that local context.
 
 ## Recruitment and qualifications
 
-Annotators were recruited as unpaid volunteers and were assigned to
-domain-relevant rating work:
+Annotators participated voluntarily and were assigned to domain-relevant rating
+work:
 
-- Mental health: final-year students recruited through Allama Iqbal Medical
-  College with relevant medical and mental-health training.
+- Mental health: final-year psychology students recruited through Allama Iqbal
+  Medical College with mental-health-relevant training.
 - General health: MBBS students recruited through Allama Iqbal Medical College.
 - Education: school teachers and teaching assistants recruited through ITU
   University.
 
 These qualifications support domain-relevant judgment. The manuscript must not
-describe the medical students as licensed physicians, psychiatrists, or clinical
-specialists. It must also not describe the annotators as project-team raters.
+describe the psychology students or MBBS students as licensed physicians,
+psychiatrists, or clinical specialists. It must also not describe the annotators
+as project-team raters.
 
 For each domain, five holistic-appropriateness raters provided `OA` judgments and
 five separate dimension-specific raters provided `E`, `D`, and `F` judgments.
@@ -39,7 +40,7 @@ No person rated both sets of constructs in the released design.
 
 ## Participation and workload
 
-- Participation was voluntary and unpaid.
+- Participation was voluntary.
 - Annotators were informed that their contribution would be acknowledged in the
   non-anonymous version of the paper, subject to their consent.
 - Annotation was self-paced over two weeks.

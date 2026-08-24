@@ -23,9 +23,10 @@ means "explains these raters' judgments."
 ## §annotators — Annotator population
 
 Five raters per pool were recruited according to domain. Mental-health raters
-were final-year medical students with relevant training, general-health raters
-were MBBS students, and education raters were school teachers and university
-teaching assistants. They were volunteers rather than project-team annotators.
+were final-year psychology students with mental-health-relevant training,
+general-health raters were MBBS students, and education raters were school
+teachers and university teaching assistants. They were volunteers rather than
+project-team annotators.
 
 The pools provide domain-relevant judgment but do not represent licensed mental-
 health clinicians, patients, or other affected end-user populations. This bounds
