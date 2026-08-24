@@ -41,6 +41,7 @@ profile `P` remains the contribution.
 | Literature map and citation status | [`docs/theory/LITERATURE_MAP.md`](docs/theory/LITERATURE_MAP.md), [`docs/theory/CITATION_MATRIX.md`](docs/theory/CITATION_MATRIX.md) |
 | Research questions and hypotheses | [`docs/theory/RESEARCH_QUESTIONS.md`](docs/theory/RESEARCH_QUESTIONS.md), [`docs/theory/HYPOTHESES.md`](docs/theory/HYPOTHESES.md) |
 | Claim boundaries and limitations | [`docs/theory/CLAIMS_AND_BOUNDARIES.md`](docs/theory/CLAIMS_AND_BOUNDARIES.md) |
+| Ethics and annotator provenance | [`docs/ETHICS_AND_ANNOTATOR_PROVENANCE.md`](docs/ETHICS_AND_ANNOTATOR_PROVENANCE.md) |
 | Analysis reproduction | [`analysis/README.md`](analysis/README.md) |
 
 ## Canonical Data
@@ -55,7 +56,7 @@ data/clean_domains/
 |---|---|---:|---:|---|
 | Mental health | `data/clean_domains/mental_health/` | 660 | 3,300 | embedded |
 | Education | `data/clean_domains/education/` | 415 | 2,075 | `humt_education.csv` |
-| Health | `data/clean_domains/health/` | 415 | 2,075 oversight/adjudication rows | `humt_health.csv` |
+| Health | `data/clean_domains/health/` | 415 | 2,075 | `humt_health.csv` |
 
 Each domain folder contains:
 

@@ -61,8 +61,8 @@ the contextual variation it posits.
 - **Rubric.** Each domain has its own rubric file. They share structure and
   anchor logic but are not identical documents, and scale meaning may not
   transfer exactly.
-- **Rating batch.** Domains were annotated at different times, and the health
-  files are documented as oversight and adjudication passes.
+- **Rating batch.** Domains were annotated at different times and by different
+  domain-relevant rater populations.
 
 A difference between domains is therefore a difference between *domain-plus-its-
 apparatus*. The paper may report that relationships differ across these three

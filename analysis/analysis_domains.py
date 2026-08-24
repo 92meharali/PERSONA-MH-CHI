@@ -115,9 +115,6 @@ def analyze_domain(domain: str) -> str:
     lines = []
     lines.append(f"# {domain.title()} Analysis")
     lines.append("")
-    if domain == "health":
-        lines.append("This domain is treated as oversight/adjudication evidence rather than independently verified human annotation.")
-        lines.append("")
     lines.append("## Data Quality")
     lines.append("")
     lines.append(f"- Responses: {len(item_rows)}")

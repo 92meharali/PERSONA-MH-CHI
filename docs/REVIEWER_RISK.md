@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | D operationalization | D could be read as intentional deception. | AI systems do not intend in the human sense. | D is defined as misleading implication risk, not intent. | Rater judgments still depend on rubric interpretation. |
 | Health ceiling effect | Health OA is heavily ceilinged. | Predictive claims may be variance-limited. | Health is framed as weaker/uncertain evidence; ceiling is reported as 63.86%. | Health cannot strongly validate the framework without more OA variance. |
-| Limited annotator pool | Five raters per pool, not domain professionals. | Generalization and normative authority are limited. | Limitations state rater-pool limits and no claim of objective ground truth. | Professional/user-population validation remains needed. |
+| Limited annotator pool | Five volunteer raters per pool: medical students for mental health and general health, and teachers or teaching assistants for education. | Generalization and normative authority are limited. | Methods report recruitment and qualifications without calling trainees licensed professionals. | Licensed-professional and end-user validation remains needed. |
 | Predictive vs causal interpretation | Models are associative. | Reviewers may object to design recommendations as causal. | Manuscript uses predictive/diagnostic language and labels design implications as not experimentally validated. | Intervention effects remain untested. |
 
 ## Medium

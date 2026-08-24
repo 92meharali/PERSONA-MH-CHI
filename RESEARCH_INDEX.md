@@ -33,6 +33,7 @@ Contains no empirical results, by design.
 |---|---|
 | Construct definitions | [`docs/theory/CONSTRUCT_DEFINITIONS.md`](docs/theory/CONSTRUCT_DEFINITIONS.md) |
 | Why two rating groups | [`docs/theory/ANNOTATION_THEORY.md`](docs/theory/ANNOTATION_THEORY.md) |
+| Ethics and annotator provenance | [`docs/ETHICS_AND_ANNOTATOR_PROVENANCE.md`](docs/ETHICS_AND_ANNOTATOR_PROVENANCE.md) |
 | Rubric, mental health | `data/clean_domains/mental_health/rubric.md` |
 | Rubric, education | `data/clean_domains/education/rubric.md` |
 | Rubric, health | `data/clean_domains/health/rubric.md` |
@@ -45,9 +46,9 @@ attribution rule.
 
 | Domain | Location | Responses | Prompts | Raters |
 |---|---|---|---|---|
-| Mental health | `data/clean_domains/mental_health/` | 660 | 220 | 5 |
-| Education | `data/clean_domains/education/` | 415 | 139 | 5 |
-| Health | `data/clean_domains/health/` | 415 | 140 | 5 |
+| Mental health | `data/clean_domains/mental_health/` | 660 | 220 | 5 per pool |
+| Education | `data/clean_domains/education/` | 415 | 139 | 5 per pool |
+| Health | `data/clean_domains/health/` | 415 | 140 | 5 per pool |
 
 Mental-health prompts derive from CounselBench. Dataset provenance for the other
 domains is in `DOMAIN_DATASETS.md`.
@@ -107,8 +108,9 @@ Four that shape how everything else should be read:
   system-prompt condition.
 - **Restricted variance** in `H`, in `D`, and in `OA` in some domains bounds what
   any relationship can show.
-- **Single-turn, English-only, five raters per domain**, none of them domain
-  professionals.
+- **Single-turn, English-only, five raters per pool.** The medical-domain raters
+  were students rather than licensed clinicians; education raters were teachers
+  and teaching assistants.
 
 ## 7. Where things must not be duplicated
 

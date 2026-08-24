@@ -20,7 +20,7 @@ P = (H, E, D, F)
 |---|---|---:|---|---|
 | `mental_health/` | online mental-health support | 1 OA file + 5 E/D/F files | embedded in Group B files | `rubric.md` |
 | `education/` | tutoring and learning support | 1 OA file + 5 E/D/F files | `humt_education.csv` | `rubric.md` |
-| `health/` | casual health assistance | 1 OA file + 5 E/D/F oversight/adjudication files | `humt_health.csv` | `rubric.md` |
+| `health/` | casual health assistance | 1 OA file + 5 E/D/F files | `humt_health.csv` | `rubric.md` |
 
 `oa_group_a.csv` contains holistic Group A `OA` ratings. The anonymous
 annotator CSVs contain Group B `E`, `D`, and `F` ratings only.

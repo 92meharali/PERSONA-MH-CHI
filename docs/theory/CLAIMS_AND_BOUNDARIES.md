@@ -22,13 +22,15 @@ means "explains these raters' judgments."
 
 ## §annotators — Annotator population
 
-Five raters per domain, drawn from the project team rather than from domain
-professionals or from the populations the responses address. This bounds
-generalisation sharply. [CounselBench2025] used 100 mental health professionals
-for adjacent constructs; the contrast should be stated rather than avoided.
+Five raters per pool were recruited according to domain. Mental-health raters
+were final-year medical students with relevant training, general-health raters
+were MBBS students, and education raters were school teachers and university
+teaching assistants. They were volunteers rather than project-team annotators.
 
-Neither clinical expertise nor lived experience of the situations in the prompts
-is represented in the rating pool.
+The pools provide domain-relevant judgment but do not represent licensed mental-
+health clinicians, patients, or other affected end-user populations. This bounds
+generalisation. [CounselBench2025] used 100 mental-health professionals for
+adjacent constructs; the contrast should be stated rather than avoided.
 
 ## §independence — Criterion independence
 
@@ -158,7 +160,7 @@ never in the abstract's contribution statement.
 | Claim | Category | Current status | Boundary |
 |---|---|---|---|
 | PERSONA is a coherent framework separating four properties | Supported by literature/theory | Argued conceptually in `PERSONA_THEORY.md`, `CONSTRUCT_DEFINITIONS.md`, and `DISTINCTIONS.md` | Conceptual separability is not construct validation |
-| `OA` is elicited independently of the dimensions | Supported by repository design | Group A rated `OA`; Group B rated `E/D/F` | Still limited by small rater pools and project-team annotators |
+| `OA` is elicited independently of the dimensions | Supported by repository design | Group A rated `OA`; Group B rated `E/D/F` | Still limited by small, domain-relevant rater pools |
 | Human-likeness alone is insufficient to explain holistic appropriateness | Supported by current data and literature | `H_only` is weak by domain; full profile outperforms `H` in mental health and education | Do not claim all forms of human-likeness are useless |
 | The multidimensional profile adds information beyond `H` | Supported by current data | Strong in mental health and education; pooled improvement positive | Health improvement is weaker and its interval crosses zero |
 | `F` appears to be a major contributor in some domains | Supported by current data | Ablation and `F_only` models show `F` carries much of the mental-health and education signal | Do not claim `F` causes appropriateness |
