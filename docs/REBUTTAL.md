@@ -243,3 +243,99 @@ byte-for-byte unchanged, both HuMT files and audits now report 415/415 rows, and
 source, Python syntax, LaTeX structure, citation, and stale-reference checks
 passed. Local PDF compilation remains pending because no LaTeX compiler is
 installed.
+
+## Critical Issue 4: Construct Validity, Contextual Fit Versus OA
+
+### Concern
+
+Contextual fit (`F`) and overall appropriateness (`OA`) are conceptually
+adjacent, and the strong F-only predictive results in mental health and
+education could be interpreted as definitional overlap. The prior manuscript
+described the distinction but did not present a direct, complete relationship
+audit or concrete disagreement cases.
+
+### Team Decision
+
+- Retain `F` because the framework evaluates the full response profile and the
+  central claim is that human-likeness alone is insufficient.
+- Define `F` narrowly as contextual calibration of content, action, tone,
+  certainty, and role; retain `OA` as the separate holistic judgment of
+  suitability, safety, helpfulness, and responsibility.
+- Evaluate the relationship directly using both rank and linear associations,
+  transparent disagreement screens, and predictor-redundancy diagnostics.
+- Claim operational distinction and domain-dependent empirical alignment, not
+  complete psychometric discriminant validity.
+- Do not add CFA or HTMT because H, E, D, F, and OA are single-item dimensions,
+  not multi-item latent scales.
+
+### Implemented Analysis Changes
+
+- Added `construct_relationships.csv` with all H/E/D/F associations with OA,
+  including Spearman rho, 95% prompt-cluster bootstrap intervals, and Pearson r.
+- Added `f_oa_disagreement.csv` with three fixed post-analysis screens: `F >= 4` and
+  `OA <= 3`; `F <= 3` and `OA >= 4`; and `|F - OA| >= 2`.
+- Added `f_oa_disagreement_examples.csv` so observed patterns remain traceable
+  to response IDs, scenario types, profile scores, and response excerpts.
+- Added all three tables to the Phase 3 JSON and generated report.
+- F/OA Spearman/Pearson results are .694/.809 in mental health, .219/.756 in
+  education, and .060/.242 in health.
+- Mental health has one low-F/high-OA case and no gap of at least two points.
+  Education has no threshold disagreement. Health has one high-F/low-OA case,
+  42 low-F/high-OA cases, and 33 gaps of at least two points.
+
+### Implemented Manuscript Changes
+
+- Added one abstract sentence summarizing domain-dependent F/OA alignment.
+- Added an analysis commitment to report profile/OA associations,
+  disagreements, and collinearity rather than infer distinctness from
+  definitions or separate rater pools.
+- Added a 12-row construct-relationship table covering H, E, D, and F in all
+  three domains.
+- Added the exact F/OA coefficients, bootstrap intervals, disagreement
+  thresholds, counts, and percentages.
+- Added two concise health examples showing opposite directions of F/OA
+  disagreement: unsafe-antibiotic refusal (F=2.6, OA=5.0) and an
+  emergency-headache response (F=4.0, OA=2.6).
+- Explained that education's smaller Spearman but larger Pearson coefficient is
+  consistent with tied, concentrated ordinal scores and separation among rare
+  lower-score observations, without presenting that explanation as causal.
+- Replaced the Discussion's generic overlap argument with direct evidence and
+  the conclusion that F is operationally narrower but strongly aligned with OA
+  in mental health and education.
+- Clarified that low VIF, disagreements, separate rater pools, and correlations
+  do not jointly prove complete psychometric discriminant validity.
+- Revised future-validation language to prioritize multi-item measures,
+  alternative OA criteria, controlled manipulations, other rater populations,
+  and multitrait-multimethod designs.
+
+### Supporting-Document Changes
+
+- Updated `analysis/README.md` to enumerate the new Phase 3 diagnostics.
+- Added the exact correlations and disagreement counts to
+  `docs/RESULTS_GROUND_TRUTH.md`.
+- Added empirical F/OA evidence to `CONSTRUCT_DEFINITIONS.md` and
+  `CLAIMS_AND_BOUNDARIES.md`.
+- Updated `CLAIMS_AUDIT.md` to mark operational distinction as supported with a
+  psychometric qualification and complete discriminant validity as not
+  supported or claimed.
+- Updated `REVIEWER_RISK.md` with the expanded mitigation and remaining
+  single-item measurement limitation.
+- Recorded every change in `PAPER_REVISION_CHANGELOG.md` and marked this issue
+  completed in `PAPER_TODOS.md`.
+
+### Unchanged Items
+
+- No dataset, annotation, response, HuMT score, rubric, or rater record changed.
+- No predictive model, fold, estimator, bootstrap, reliability estimate,
+  ablation, domain interaction, or headline performance result changed.
+- No pre-existing Phase 3 result table or figure changed.
+- The paper does not claim that F and OA are statistically independent, that F
+  is unimportant, or that PERSONA is a validated universal psychometric scale.
+
+### Status
+
+Implemented and verified on 2026-08-25. Phase 3 regenerated successfully; the
+numeric and response-example trace audit passed; all pre-existing Phase 3 tables
+and figures remained unchanged; Python syntax, source formatting, LaTeX
+environment balance, references, and citations passed. Local PDF compilation
+remains pending because no LaTeX compiler is installed.

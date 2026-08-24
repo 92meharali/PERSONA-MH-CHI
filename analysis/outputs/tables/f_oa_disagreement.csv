@@ -1,0 +1,4 @@
+domain,n,high_F_low_OA,low_F_high_OA,absolute_gap_ge_2,pct_any_directional_disagreement,pct_absolute_gap_ge_2
+mental_health,660,0,1,0,0.15151515151515152,0.0
+education,415,0,0,0,0.0,0.0
+health,415,1,42,33,10.361445783132531,7.951807228915662

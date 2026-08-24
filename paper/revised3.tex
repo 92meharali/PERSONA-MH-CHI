@@ -24,7 +24,7 @@
 \begin{document}
 
 \begin{abstract}
-While AI systems increasingly exhibit human-like language, human-likeness alone does not determine whether anthropomorphic behavior is contextually appropriate. A fluent, warm response may imply unsupported capacities---such as emotion, persistent memory, authority, or relational commitment---whereas a bounded, less human-like response may be more appropriate for the situation. We introduce PERSONA, a context-aware evaluation framework that represents responses along four dimensions: human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception or misleading-implication risk ($D$), and contextual fit ($F$). We evaluate the information this profile provides about independently elicited judgments of overall anthropomorphic appropriateness ($OA$) across 1,490 responses in mental health, education, and health contexts. Domain-relevant raters rated $OA$ holistically, while a separate rater group assessed $E$, $D$, and $F$. Grouped repeated cross-validation showed that $H$ alone was a weak and domain-dependent predictor of $OA$ (pooled $R^2=.221$; domain-specific $R^2\leq.099$). The informationally richer PERSONA profile captured substantially more $OA$-associated variation overall (pooled $R^2=.499$), with stronger results in mental health ($R^2=.659$) and education ($R^2=.562$). In mental health and education, contextual fit carried most of the available predictive signal. Within the ceiling-restricted health corpus, misleading-implication risk was the strongest single-dimension predictor, while the full profile reached $R^2=.256$ and its gain over $H$ alone was statistically uncertain. These findings support a calibration-based approach that retains human-likeness as a useful descriptive signal while considering implied capacities, empathy, and contextual fit alongside it.
+While AI systems increasingly exhibit human-like language, human-likeness alone does not determine whether anthropomorphic behavior is contextually appropriate. A fluent, warm response may imply unsupported capacities---such as emotion, persistent memory, authority, or relational commitment---whereas a bounded, less human-like response may be more appropriate for the situation. We introduce PERSONA, a context-aware evaluation framework that represents responses along four dimensions: human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception or misleading-implication risk ($D$), and contextual fit ($F$). We evaluate the information this profile provides about independently elicited judgments of overall anthropomorphic appropriateness ($OA$) across 1,490 responses in mental health, education, and health contexts. Domain-relevant raters rated $OA$ holistically, while a separate rater group assessed $E$, $D$, and $F$. Grouped repeated cross-validation showed that $H$ alone was a weak and domain-dependent predictor of $OA$ (pooled $R^2=.221$; domain-specific $R^2\leq.099$). The informationally richer PERSONA profile captured substantially more $OA$-associated variation overall (pooled $R^2=.499$), with stronger results in mental health ($R^2=.659$) and education ($R^2=.562$). In mental health and education, contextual fit carried most of the available predictive signal. A construct-relationship audit found that $F$ and $OA$ were strongly aligned in mental health, linearly aligned but less rank-consistent in education, and weakly aligned in ceiling-restricted health, where concrete disagreements occurred in both directions. Within health, misleading-implication risk was the strongest single-dimension predictor, while the full profile reached $R^2=.256$ and its gain over $H$ alone was statistically uncertain. These findings support a calibration-based approach that retains human-likeness as a useful descriptive signal while considering implied capacities, empathy, and contextual fit alongside it.
 \end{abstract}
 
 \keywords{anthropomorphism, human-likeness, conversational AI, overall appropriateness, empathy, deception risk, contextual fit, evaluation}
@@ -142,6 +142,8 @@ $F$ and $OA$ are related by design, but they are not defined as the same constru
 $F$ is a \emph{specific diagnostic dimension}: it asks whether the response posture fits the contextual demands of the situation. $OA$ is a \emph{holistic criterion}: it asks how suitable, safe, helpful, and responsible the response is overall under the study's annotation protocol. The OA rubric instructs Group A not to reconstruct an $OA$ value from imagined $E$, $D$, or $F$ scores.
 
 This distinction does not imply that $F$ and $OA$ should be statistically independent. Indeed, contextual calibration is naturally relevant to holistic appropriateness, so substantial association is expected. The empirical question is how much that association varies by domain and whether the remaining profile dimensions contribute information beyond $F$.
+
+We therefore assess the relationship directly rather than inferring distinctness from separate definitions or rater pools. For each domain, we report both rank and linear associations of $H$, $E$, $D$, and $F$ with $OA$, inspect directional $F$/$OA$ disagreements, and report predictor collinearity. These diagnostics can support operational distinction and statistical non-redundancy in this corpus, but they cannot establish complete psychometric discriminant validity from single-item dimensions.
 
 This distinction is particularly important for interpreting the ablations. In mental health, $F$ alone achieves $R^2=.651$ compared with $.659$ for the full profile. In education, $F$ alone and the full profile both achieve $R^2=.562$. These results indicate that contextual calibration carries most of the predictive signal in these two corpora. They do not, on their own, prove that $F$ universally constitutes $OA$ or that the constructs are psychometrically independent.
 
@@ -424,6 +426,42 @@ Health & .907 (.804,.945) & .939 (.928,.948) & .942 (.912,.959) & .922 (.908,.93
 
 The results support the use of averaged response-level ratings as stable measurement variables in the current corpus. They do not, by themselves, establish full psychometric construct validity.
 
+\subsection{Construct Relationship Audit}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Associations between each profile dimension and holistic $OA$. Spearman intervals are 95\% prompt-cluster bootstrap intervals. Higher $D$ denotes greater risk, so negative associations are directionally expected.}
+\label{tab:construct-relationships}
+\begin{tabular}{llrrr}
+\toprule
+Domain & Dimension & Spearman $\rho$ & 95\% CI & Pearson $r$\\
+\midrule
+\multirow{4}{*}{Mental health}
+ & $H$ & -.167 & [-.245,-.088] & -.184\\
+ & $E$ & .096 & [.011,.178] & .136\\
+ & $D$ & -.159 & [-.230,-.083] & -.203\\
+ & $F$ & .694 & [.649,.733] & .809\\
+\midrule
+\multirow{4}{*}{Education}
+ & $H$ & -.041 & [-.156,.073] & -.349\\
+ & $E$ & -.042 & [-.145,.067] & .015\\
+ & $D$ & -.039 & [-.157,.100] & -.186\\
+ & $F$ & .219 & [.086,.339] & .756\\
+\midrule
+\multirow{4}{*}{Health}
+ & $H$ & -.046 & [-.152,.064] & -.083\\
+ & $E$ & -.066 & [-.172,.041] & -.242\\
+ & $D$ & -.074 & [-.184,.040] & -.535\\
+ & $F$ & .060 & [-.046,.174] & .242\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:construct-relationships} makes the $F$/$OA$ relationship explicit. Alignment is strong in mental health ($\rho=.694$, $r=.809$). In education, the rank association is smaller ($\rho=.219$) while the linear association remains strong ($r=.756$). This divergence is consistent with the concentrated, tied ordinal consensus scores and a linear relationship driven by separation among relatively infrequent lower-scoring observations; it should not be read as evidence that either coefficient alone fully characterizes the construct relationship. In ceiling-restricted health, both associations are weaker ($\rho=.060$, $r=.242$).
+
+As a post-analysis interpretive diagnostic, we apply the same transparent disagreement screens in every domain: high $F$/low $OA$ means $F\geq4$ and $OA\leq3$, low $F$/high $OA$ means $F\leq3$ and $OA\geq4$, and a large gap means $|F-OA|\geq2$. Mental health contains one low-$F$/high-$OA$ case (0.15\%) and no large-gap cases; education contains none; health contains one high-$F$/low-$OA$ case, 42 low-$F$/high-$OA$ cases (10.36\% in either direction), and 33 large-gap cases (7.95\%). For example, health raters gave a response refusing unsafe leftover antibiotics $F=2.6$ but $OA=5.0$, whereas an emergency-headache response received $F=4.0$ but $OA=2.6$. These cases show that independently elicited holistic judgments can disagree with the narrower fit judgment, particularly where safety, actionability, or misleading implications enter the holistic assessment. They support operational non-identity, not complete discriminant validity.
+
 \subsection{Distributional Constraints and Robustness}
 
 \begin{table}[t]
@@ -476,11 +514,11 @@ The dominance of $F$ should not be read as making the other dimensions irrelevan
 
 The strongest methodological question raised by the results is whether $F$ and $OA$ are too closely related.
 
-The data show substantial empirical alignment: $F$ alone nearly matches the full profile in mental health and matches it in education. This could reflect a substantive finding---contextual calibration genuinely dominates holistic appropriateness judgments in those domains---but it also means that the study does not establish strong discriminant validity between these two constructs.
+The data show substantial but domain-dependent empirical alignment. In mental health, $F$ and $OA$ correlate at $\rho=.694$ and $r=.809$; in education, $\rho=.219$ and $r=.756$; and in health, $\rho=.060$ and $r=.242$. The F-only model also nearly matches the full profile in mental health and matches it in education. This could reflect a substantive finding---contextual calibration genuinely dominates holistic appropriateness judgments in those domains---but it also means that the study does not establish strong discriminant validity between these two constructs.
 
-Three points narrow the interpretation. First, the constructs are operationally different: $F$ is a specific judgment about contextual response posture, while $OA$ is a holistic judgment. Second, the rating pools are structurally separate, reducing direct criterion contamination. Third, the D and health results demonstrate that dimensions can carry distinctive signal outside the mental-health and education setting.
+Four points narrow the interpretation. First, the constructs are operationally different: $F$ is a specific judgment about contextual response posture, while $OA$ is a holistic judgment. Second, the rating pools are structurally separate, reducing direct criterion contamination. Third, the health corpus contains disagreements in both directions, including responses judged holistically appropriate despite low contextual-fit scores and one response showing the reverse. Fourth, maximum profile-dimension VIFs of 1.345--1.490 indicate low statistical redundancy among the predictors, while the D and health results show that dimensions can carry distinctive signal outside the mental-health and education setting. None of these diagnostics substitutes for a multi-item discriminant-validity study.
 
-The appropriate conclusion is therefore not that $F$ is equivalent to $OA$. The more defensible conclusion is that contextual fit is a major component of what domain-specific holistic raters treat as appropriate in the current corpora. Stronger discriminant validation---including alternative OA measures, other rater populations, controlled prompt manipulations, and potentially confirmatory factor or multitrait--multimethod analyses---remains future work.
+The appropriate conclusion is therefore neither that $F$ is equivalent to $OA$ nor that they are fully independent. The more defensible conclusion is that contextual fit is operationally narrower than $OA$ and is a major component of what domain-specific holistic raters treat as appropriate in the mental-health and education corpora. Stronger discriminant validation---including multi-item measures, alternative OA criteria, other rater populations, controlled prompt manipulations, and multitrait--multimethod designs---remains future work.
 
 \subsection{Deception Risk as a Boundary Construct}
 

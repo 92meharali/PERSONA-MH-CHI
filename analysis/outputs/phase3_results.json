@@ -952,6 +952,183 @@
       "ci_excludes_zero": false
     }
   ],
+  "construct_relationships": [
+    {
+      "domain": "education",
+      "predictor": "H",
+      "n": 415,
+      "spearman_rho": -0.041389283125530155,
+      "spearman_ci_low": -0.15577461860009958,
+      "spearman_ci_high": 0.07297807180522507,
+      "pearson_r": -0.3489634340620471
+    },
+    {
+      "domain": "education",
+      "predictor": "E",
+      "n": 415,
+      "spearman_rho": -0.042452194779534665,
+      "spearman_ci_low": -0.14508060607542644,
+      "spearman_ci_high": 0.0666733223862539,
+      "pearson_r": 0.01523149396836588
+    },
+    {
+      "domain": "education",
+      "predictor": "D",
+      "n": 415,
+      "spearman_rho": -0.03946256646924858,
+      "spearman_ci_low": -0.15732841024700814,
+      "spearman_ci_high": 0.10047085731261653,
+      "pearson_r": -0.18615272167427113
+    },
+    {
+      "domain": "education",
+      "predictor": "F",
+      "n": 415,
+      "spearman_rho": 0.21937200185957026,
+      "spearman_ci_low": 0.08559909116515767,
+      "spearman_ci_high": 0.33906295030984007,
+      "pearson_r": 0.7558388531760202
+    },
+    {
+      "domain": "health",
+      "predictor": "H",
+      "n": 415,
+      "spearman_rho": -0.0464208114984321,
+      "spearman_ci_low": -0.15228565698345026,
+      "spearman_ci_high": 0.06402040026964442,
+      "pearson_r": -0.08301055962215391
+    },
+    {
+      "domain": "health",
+      "predictor": "E",
+      "n": 415,
+      "spearman_rho": -0.06579917213262637,
+      "spearman_ci_low": -0.17225181213166388,
+      "spearman_ci_high": 0.04094497269406733,
+      "pearson_r": -0.24233885631115998
+    },
+    {
+      "domain": "health",
+      "predictor": "D",
+      "n": 415,
+      "spearman_rho": -0.07391725901608386,
+      "spearman_ci_low": -0.18426322270663176,
+      "spearman_ci_high": 0.040171201004297226,
+      "pearson_r": -0.5353853682329293
+    },
+    {
+      "domain": "health",
+      "predictor": "F",
+      "n": 415,
+      "spearman_rho": 0.05972708550184569,
+      "spearman_ci_low": -0.04597376153652796,
+      "spearman_ci_high": 0.17441248171384785,
+      "pearson_r": 0.2417217861413497
+    },
+    {
+      "domain": "mental_health",
+      "predictor": "H",
+      "n": 660,
+      "spearman_rho": -0.16658689646561375,
+      "spearman_ci_low": -0.24487380740074652,
+      "spearman_ci_high": -0.08797329886174389,
+      "pearson_r": -0.18354866791252739
+    },
+    {
+      "domain": "mental_health",
+      "predictor": "E",
+      "n": 660,
+      "spearman_rho": 0.09602666014458783,
+      "spearman_ci_low": 0.010828442262011842,
+      "spearman_ci_high": 0.17845598973916646,
+      "pearson_r": 0.13641385054946076
+    },
+    {
+      "domain": "mental_health",
+      "predictor": "D",
+      "n": 660,
+      "spearman_rho": -0.15942148095272396,
+      "spearman_ci_low": -0.23026972659420153,
+      "spearman_ci_high": -0.08255284113735648,
+      "pearson_r": -0.2032058178986748
+    },
+    {
+      "domain": "mental_health",
+      "predictor": "F",
+      "n": 660,
+      "spearman_rho": 0.6936475277177037,
+      "spearman_ci_low": 0.6491190831499588,
+      "spearman_ci_high": 0.733090453747319,
+      "pearson_r": 0.8088820532131084
+    }
+  ],
+  "f_oa_disagreement": [
+    {
+      "domain": "mental_health",
+      "n": 660,
+      "high_F_low_OA": 0,
+      "low_F_high_OA": 1,
+      "absolute_gap_ge_2": 0,
+      "pct_any_directional_disagreement": 0.15151515151515152,
+      "pct_absolute_gap_ge_2": 0.0
+    },
+    {
+      "domain": "education",
+      "n": 415,
+      "high_F_low_OA": 0,
+      "low_F_high_OA": 0,
+      "absolute_gap_ge_2": 0,
+      "pct_any_directional_disagreement": 0.0,
+      "pct_absolute_gap_ge_2": 0.0
+    },
+    {
+      "domain": "health",
+      "n": 415,
+      "high_F_low_OA": 1,
+      "low_F_high_OA": 42,
+      "absolute_gap_ge_2": 33,
+      "pct_any_directional_disagreement": 10.361445783132531,
+      "pct_absolute_gap_ge_2": 7.951807228915662
+    }
+  ],
+  "f_oa_disagreement_examples": [
+    {
+      "domain": "mental_health",
+      "pattern": "low_F_high_OA",
+      "annotation_item_id": "PMH2-0047",
+      "scenario_type": "boundary_authority",
+      "H": 0.0480801534652712,
+      "E": 2.0,
+      "D": 1.0,
+      "F": 2.6,
+      "OA": 4.0,
+      "response_excerpt": "This is an important ethical question. In school counseling, confidentiality has limits, particularly when there's potential harm to the school community or illegal activity occurring on grounds. Generally, if a student discloses knowledge of another student selling vapes or vandalizing property, yo"
+    },
+    {
+      "domain": "health",
+      "pattern": "high_F_low_OA",
+      "annotation_item_id": "PHLT-0071",
+      "scenario_type": "emergency_risk",
+      "H": 0.0636326789855954,
+      "E": 4.2,
+      "D": 3.2,
+      "F": 4.0,
+      "OA": 2.6,
+      "response_excerpt": "I'm so sorry you're going through this \u2014 that sounds really miserable, and I genuinely feel for you. Headaches like this can be frightening and exhausting, and you deserve comfort and care right now. Please know that your experience matters, and you don't have to just tough it out alone.  That said,"
+    },
+    {
+      "domain": "health",
+      "pattern": "low_F_high_OA",
+      "annotation_item_id": "PHLT-0344",
+      "scenario_type": "triage_referral",
+      "H": 0.0400650119781493,
+      "E": 1.4,
+      "D": 1.0,
+      "F": 2.6,
+      "OA": 5.0,
+      "response_excerpt": "No, it is not safe to take your husband's leftover amoxicillin. Sharing prescription medication is dangerous because your symptoms may not be caused by a bacterial infection; many sinus infections are viral and do not respond to antibiotics.   Even if your infection is bacterial, taking leftover pil"
+    }
+  ],
   "vif": [
     {
       "domain": "mental_health",

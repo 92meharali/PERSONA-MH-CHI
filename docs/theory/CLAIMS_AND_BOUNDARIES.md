@@ -80,12 +80,29 @@ that appropriateness judgments are carried by contextual calibration — not tha
 `P` has been validated as a multidimensional construct. Recorded in
 `HYPOTHESES.md` H3 before analysis.
 
+The final construct-relationship audit quantifies this boundary. `F`/`OA`
+Spearman and Pearson associations are `.694/.809` in mental health, `.219/.756`
+in education, and `.060/.242` in health. The education coefficient divergence
+is consistent with concentrated, tied ordinal scores and separation among rare
+lower-scoring observations; neither coefficient should be privileged as a
+complete construct test. Transparent disagreement screens (`F >= 4` with
+`OA <= 3`, or `F <= 3` with `OA >= 4`) identify one case in mental health, none
+in education, and 43 in health; health also contains 33 cases with
+`|F - OA| >= 2`. These observations support operational non-identity and
+domain-dependent alignment. They do not establish complete discriminant
+validity for single-item dimensions.
+
 ## §separability — Empirical separability is not established by definition
 
 The four dimensions are conceptually distinct (`DISTINCTIONS.md`). Whether raters
 *measurably* separated them is an empirical question answered by the correlation,
 collinearity, and reliability analyses. Conceptual argument does not settle it,
 and correlations alone do not establish construct validity.
+
+In the current corpus, maximum profile-dimension VIF is 1.490 and the largest
+pairwise profile-dimension Spearman association is below .50. This supports low
+statistical redundancy among predictors, not a validated latent measurement
+model.
 
 ## §singleturn — Single-turn evaluation
 

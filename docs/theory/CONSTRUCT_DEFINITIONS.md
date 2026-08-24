@@ -226,6 +226,14 @@ the data, the correct interpretation is that the framework's predictive content
 is concentrated in `F`, not that the profile as a whole has been validated. See
 `CLAIMS_AND_BOUNDARIES.md` §F-OA.
 
+**Empirical relationship in the released corpus.** `F`/`OA` association varies
+by domain: Spearman/Pearson is `.694/.809` in mental health, `.219/.756` in
+education, and `.060/.242` in health. Directional threshold disagreements occur
+once in mental health, not in education, and 43 times in health. The health
+examples include both high-`OA`/low-`F` and low-`OA`/high-`F` responses. This is
+evidence that separately elicited judgments can diverge, not evidence of full
+psychometric discriminant validity.
+
 ### F versus the others
 
 - **F vs E.** `E` is one channel (emotional calibration); `F` spans content,

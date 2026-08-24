@@ -93,6 +93,35 @@ Spearman rho with 95 per cent prompt-cluster bootstrap intervals and Benjamini-H
 | health | E-F | 415 | 0.131 | [0.006, 0.244] | 0.0152 | yes |
 | health | D-F | 415 | 0.010 | [-0.115, 0.138] | 0.8468 | no |
 
+## Construct relationship audit
+
+Pearson and Spearman associations are shown together because concentrated ordinal scores and ties can produce materially different linear and rank relationships.
+
+| Domain | Predictor vs OA | N | Spearman rho | 95% CI | Pearson r |
+|---|---|---:|---:|---|---:|
+| education | H | 415 | -0.041 | [-0.156, 0.073] | -0.349 |
+| education | E | 415 | -0.042 | [-0.145, 0.067] | 0.015 |
+| education | D | 415 | -0.039 | [-0.157, 0.100] | -0.186 |
+| education | F | 415 | 0.219 | [0.086, 0.339] | 0.756 |
+| health | H | 415 | -0.046 | [-0.152, 0.064] | -0.083 |
+| health | E | 415 | -0.066 | [-0.172, 0.041] | -0.242 |
+| health | D | 415 | -0.074 | [-0.184, 0.040] | -0.535 |
+| health | F | 415 | 0.060 | [-0.046, 0.174] | 0.242 |
+| mental_health | H | 660 | -0.167 | [-0.245, -0.088] | -0.184 |
+| mental_health | E | 660 | 0.096 | [0.011, 0.178] | 0.136 |
+| mental_health | D | 660 | -0.159 | [-0.230, -0.083] | -0.203 |
+| mental_health | F | 660 | 0.694 | [0.649, 0.733] | 0.809 |
+
+## F/OA disagreement audit
+
+This post-analysis diagnostic applies the same fixed directional screens in every domain: F >= 4 with OA <= 3, or F <= 3 with OA >= 4. The absolute-gap column counts |F - OA| >= 2.
+
+| Domain | N | High F / low OA | Low F / high OA | Absolute gap >= 2 | % directional | % gap >= 2 |
+|---|---:|---:|---:|---:|---:|---:|
+| mental_health | 660 | 0 | 1 | 0 | 0.15 | 0.00 |
+| education | 415 | 0 | 0 | 0 | 0.00 | 0.00 |
+| health | 415 | 1 | 42 | 33 | 10.36 | 7.95 |
+
 ## Collinearity among profile dimensions
 
 | Domain | Dimension | N | R2 on the other three | VIF |

@@ -70,7 +70,10 @@ mean squares and matches `pingouin.intraclass_corr` to within 1e-8.
 **Phase 3 - `descriptives.py`.** Distributions by domain and by model, explicit
 ceiling and floor diagnostics, pairwise Spearman and Pearson associations with
 prompt-cluster bootstrap intervals and Benjamini-Hochberg correction, and
-variance inflation factors for the four profile dimensions.
+variance inflation factors for the four profile dimensions. Paper-facing
+construct diagnostics additionally report every profile dimension's association
+with `OA`, directional `F`/`OA` disagreement counts, large-gap counts, and
+traceable response examples.
 
 **Phase 4 - `predictive.py`.** Twelve ordinary least squares specifications per
 grouping, each with an intercept and all fitted on identical released rows.

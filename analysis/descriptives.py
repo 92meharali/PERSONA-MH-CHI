@@ -11,6 +11,9 @@ Outputs:
   analysis/outputs/tables/descriptives_by_model.csv
   analysis/outputs/tables/ceiling_floor.csv
   analysis/outputs/tables/correlations.csv
+  analysis/outputs/tables/construct_relationships.csv
+  analysis/outputs/tables/f_oa_disagreement.csv
+  analysis/outputs/tables/f_oa_disagreement_examples.csv
   analysis/outputs/tables/collinearity_vif.csv
   analysis/outputs/tables/collinearity_condition.csv
   analysis/outputs/figures/fig_distributions_by_domain.png
@@ -160,6 +163,68 @@ def run_correlations(data: pd.DataFrame, rng: np.random.Generator, n_boot: int) 
     return frame
 
 
+def run_construct_relationships(correlations: pd.DataFrame) -> pd.DataFrame:
+    """Create the compact OA-association table used in the manuscript."""
+    rows = []
+    for _, row in correlations.iterrows():
+        pair = {row["variable_a"], row["variable_b"]}
+        if "OA" not in pair:
+            continue
+        predictor = row["variable_b"] if row["variable_a"] == "OA" else row["variable_a"]
+        rows.append({
+            "domain": row["domain"],
+            "predictor": predictor,
+            "n": int(row["n"]),
+            "spearman_rho": row["spearman_rho"],
+            "spearman_ci_low": row["cluster_boot_ci_low"],
+            "spearman_ci_high": row["cluster_boot_ci_high"],
+            "pearson_r": row["pearson_r"],
+        })
+    frame = pd.DataFrame(rows)
+    frame["predictor"] = pd.Categorical(frame["predictor"], ["H", "E", "D", "F"], ordered=True)
+    return frame.sort_values(["domain", "predictor"]).reset_index(drop=True)
+
+
+def run_f_oa_disagreement(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Count and trace cases where the diagnostic F score and holistic OA diverge."""
+    summary_rows, example_rows = [], []
+    patterns = [
+        ("high_F_low_OA", lambda x: (x["F"] >= 4) & (x["OA"] <= 3), "F_minus_OA"),
+        ("low_F_high_OA", lambda x: (x["F"] <= 3) & (x["OA"] >= 4), "OA_minus_F"),
+    ]
+    for domain in DOMAINS:
+        block = data[data["domain"] == domain].dropna(subset=["F", "OA"]).copy()
+        high_low = (block["F"] >= 4) & (block["OA"] <= 3)
+        low_high = (block["F"] <= 3) & (block["OA"] >= 4)
+        gap = (block["F"] - block["OA"]).abs() >= 2
+        summary_rows.append({
+            "domain": domain,
+            "n": len(block),
+            "high_F_low_OA": int(high_low.sum()),
+            "low_F_high_OA": int(low_high.sum()),
+            "absolute_gap_ge_2": int(gap.sum()),
+            "pct_any_directional_disagreement": float((high_low | low_high).mean() * 100),
+            "pct_absolute_gap_ge_2": float(gap.mean() * 100),
+        })
+        for pattern, selector, gap_name in patterns:
+            candidates = block[selector(block)].copy()
+            if candidates.empty:
+                continue
+            candidates["F_minus_OA"] = candidates["F"] - candidates["OA"]
+            candidates["OA_minus_F"] = candidates["OA"] - candidates["F"]
+            selected = candidates.sort_values(gap_name, ascending=False).iloc[0]
+            example_rows.append({
+                "domain": domain,
+                "pattern": pattern,
+                "annotation_item_id": selected["annotation_item_id"],
+                "scenario_type": selected["scenario_type"],
+                "H": selected["H"], "E": selected["E"], "D": selected["D"],
+                "F": selected["F"], "OA": selected["OA"],
+                "response_excerpt": str(selected["response"]).replace("\n", " ")[:300],
+            })
+    return pd.DataFrame(summary_rows), pd.DataFrame(example_rows)
+
+
 def run_vif(data: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for domain in DOMAINS:
@@ -270,6 +335,8 @@ def main(n_boot: int = N_BOOT) -> None:
     by_domain, by_model = run_descriptives(data)
     ceiling = run_ceiling_floor(data)
     correlations = run_correlations(data, rng, n_boot)
+    relationships = run_construct_relationships(correlations)
+    disagreement, disagreement_examples = run_f_oa_disagreement(data)
     vif = run_vif(data)
     condition = run_condition_number(data)
 
@@ -277,6 +344,9 @@ def main(n_boot: int = N_BOOT) -> None:
     save_table(by_model, "descriptives_by_model")
     save_table(ceiling, "ceiling_floor")
     save_table(correlations, "correlations")
+    save_table(relationships, "construct_relationships")
+    save_table(disagreement, "f_oa_disagreement")
+    save_table(disagreement_examples, "f_oa_disagreement_examples")
     save_table(vif, "collinearity_vif")
     save_table(condition, "collinearity_condition")
 
@@ -285,17 +355,21 @@ def main(n_boot: int = N_BOOT) -> None:
     figure_scatter(data, "H", "fig_h_vs_oa.png", "Human-likeness against independently rated appropriateness")
     figure_scatter(data, "F", "fig_f_vs_oa.png", "Contextual fit against independently rated appropriateness")
 
-    save_markdown(render(by_domain, by_model, ceiling, correlations, vif, condition), "descriptives")
+    save_markdown(render(by_domain, by_model, ceiling, correlations, relationships,
+                         disagreement, vif, condition), "descriptives")
     save_json({"descriptives_by_domain": by_domain.to_dict(orient="records"),
                "descriptives_by_model": by_model.to_dict(orient="records"),
                "ceiling_floor": ceiling.to_dict(orient="records"),
                "correlations": correlations.to_dict(orient="records"),
+               "construct_relationships": relationships.to_dict(orient="records"),
+               "f_oa_disagreement": disagreement.to_dict(orient="records"),
+               "f_oa_disagreement_examples": disagreement_examples.to_dict(orient="records"),
                "vif": vif.to_dict(orient="records"),
                "condition_number": condition.to_dict(orient="records")}, "phase3_results")
     print("Phase 3 complete: descriptives, separability, 4 figures")
 
 
-def render(by_domain, by_model, ceiling, correlations, vif, condition) -> str:
+def render(by_domain, by_model, ceiling, correlations, relationships, disagreement, vif, condition) -> str:
     lines = ["# Descriptive statistics and dimension separability (Phase 3)", ""]
 
     lines += ["## Consensus score distributions by domain", "",
@@ -332,6 +406,25 @@ def render(by_domain, by_model, ceiling, correlations, vif, condition) -> str:
         lines.append(f"| {r['domain']} | {r['variable_a']}-{r['variable_b']} | {int(r['n'])} | "
                      f"{r['spearman_rho']:.3f} | [{r['cluster_boot_ci_low']:.3f}, {r['cluster_boot_ci_high']:.3f}] | "
                      f"{r['spearman_p_fdr']:.4f} | {'yes' if r['ci_excludes_zero'] else 'no'} |")
+
+    lines += ["", "## Construct relationship audit", "",
+              "Pearson and Spearman associations are shown together because concentrated ordinal "
+              "scores and ties can produce materially different linear and rank relationships.", "",
+              "| Domain | Predictor vs OA | N | Spearman rho | 95% CI | Pearson r |",
+              "|---|---|---:|---:|---|---:|"]
+    for _, r in relationships.iterrows():
+        lines.append(f"| {r['domain']} | {r['predictor']} | {int(r['n'])} | {r['spearman_rho']:.3f} | "
+                     f"[{r['spearman_ci_low']:.3f}, {r['spearman_ci_high']:.3f}] | {r['pearson_r']:.3f} |")
+
+    lines += ["", "## F/OA disagreement audit", "",
+              "This post-analysis diagnostic applies the same fixed directional screens in every domain: "
+              "F >= 4 with OA <= 3, or F <= 3 with OA >= 4. The absolute-gap column counts |F - OA| >= 2.", "",
+              "| Domain | N | High F / low OA | Low F / high OA | Absolute gap >= 2 | % directional | % gap >= 2 |",
+              "|---|---:|---:|---:|---:|---:|---:|"]
+    for _, r in disagreement.iterrows():
+        lines.append(f"| {r['domain']} | {int(r['n'])} | {int(r['high_F_low_OA'])} | "
+                     f"{int(r['low_F_high_OA'])} | {int(r['absolute_gap_ge_2'])} | "
+                     f"{r['pct_any_directional_disagreement']:.2f} | {r['pct_absolute_gap_ge_2']:.2f} |")
 
     lines += ["", "## Collinearity among profile dimensions", "",
               "| Domain | Dimension | N | R2 on the other three | VIF |", "|---|---|---:|---:|---:|"]

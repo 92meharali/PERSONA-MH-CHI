@@ -107,6 +107,34 @@ Source: `analysis/outputs/tables/domain_interaction_model_fit.csv`,
 
 Source: `analysis/outputs/tables/collinearity_vif.csv`.
 
+## Construct Relationship Audit
+
+| Domain | Dimension | Spearman rho | Pearson r |
+|---|---|---:|---:|
+| Mental health | H | -0.167 | -0.184 |
+| Mental health | E | 0.096 | 0.136 |
+| Mental health | D | -0.159 | -0.203 |
+| Mental health | F | 0.694 | 0.809 |
+| Education | H | -0.041 | -0.349 |
+| Education | E | -0.042 | 0.015 |
+| Education | D | -0.039 | -0.186 |
+| Education | F | 0.219 | 0.756 |
+| Health | H | -0.046 | -0.083 |
+| Health | E | -0.066 | -0.242 |
+| Health | D | -0.074 | -0.535 |
+| Health | F | 0.060 | 0.242 |
+
+| Domain | High F / low OA | Low F / high OA | Absolute gap >= 2 |
+|---|---:|---:|---:|
+| Mental health | 0 | 1 | 0 |
+| Education | 0 | 0 | 0 |
+| Health | 1 | 42 | 33 |
+
+Thresholds: high F / low OA is `F >= 4` and `OA <= 3`; low F / high OA is
+`F <= 3` and `OA >= 4`. Source:
+`analysis/outputs/tables/construct_relationships.csv` and
+`analysis/outputs/tables/f_oa_disagreement.csv`.
+
 ## Notes on Prompt-Supplied Numbers
 
 The revision prompt included some values that differ slightly from the current

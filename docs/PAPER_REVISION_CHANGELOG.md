@@ -1,5 +1,38 @@
 # Paper Revision Changelog
 
+## 2026-08-25: Critical Issue 4, F and OA Construct Relationship
+
+- Added a reproducible Phase 3 construct-relationship table containing
+  Spearman correlations, prompt-cluster bootstrap intervals, and Pearson
+  correlations for every H/E/D/F association with OA in every domain.
+- Added transparent post-analysis F/OA disagreement diagnostics using three fixed screens:
+  F >= 4 with OA <= 3, F <= 3 with OA >= 4, and |F - OA| >= 2.
+- Added a trace table containing the strongest available response example for
+  each observed directional disagreement pattern and domain.
+- Added a manuscript table with all 12 profile-dimension/OA relationships.
+- Reported F/OA Spearman/Pearson associations of .694/.809 in mental health,
+  .219/.756 in education, and .060/.242 in health.
+- Explained the education rank/linear divergence cautiously as consistent with
+  concentrated tied ratings and separation among infrequent lower-score cases,
+  without claiming that this explanation is proven.
+- Reported one directional disagreement in mental health, none in education,
+  and 43 in health; health also contains 33 absolute gaps of at least two points.
+- Added two health response summaries showing disagreement in both directions:
+  unsafe-antibiotic refusal (F=2.6, OA=5.0) and emergency-headache response
+  (F=4.0, OA=2.6).
+- Clarified throughout that these results support operational distinction,
+  domain-dependent alignment, and low statistical redundancy, not complete
+  psychometric discriminant validity.
+- Replaced generic F/OA discussion with evidence-backed interpretation and
+  removed confirmatory-factor-analysis language that is unsuitable for the
+  current single-item dimensions.
+- Updated the analysis README, results ground truth, construct definitions,
+  claims boundaries, claims audit, reviewer-risk register, rebuttal, and TODO
+  list to match the manuscript and generated outputs.
+- Preserved all datasets, predictive specifications, reliability estimates,
+  cross-validation results, ablations, domain interactions, and pre-existing
+  Phase 3 tables and figures unchanged.
+
 ## 2026-08-25: Critical Issue 3, Reproducibility and Count Reconciliation
 
 - Named the predictive estimator as ordinary least squares linear regression
