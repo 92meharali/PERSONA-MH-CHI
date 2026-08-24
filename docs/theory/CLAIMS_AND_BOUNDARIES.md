@@ -167,6 +167,6 @@ never in the abstract's contribution statement.
 | `F` appears to be a major contributor in some domains | Supported by current data | Ablation and `F_only` models show `F` carries much of the mental-health and education signal | Do not claim `F` causes appropriateness |
 | The profile dimensions are not redundant copies | Supported by current diagnostics | Pairwise correlations, VIF, and condition numbers do not show obvious redundancy | This supports separability, not full construct validity |
 | Relationships differ by domain | Supported by formal audit | Domain interaction model estimates slope differences with uncertainty | R² differences alone are not evidence of interaction |
-| Health provides equal-strength validation | Not supported / should not be claimed | Ceiling effects and uncertainty limit the health result even after filtering to HuMT-complete rows | Treat as transfer/ceiling-case evidence |
+| Health provides equal-strength validation | Not supported / should not be claimed | Ceiling effects and uncertainty limit the health result | Treat as transfer/ceiling-case evidence |
 | PERSONA distinguishes appropriate from misleading anthropomorphism under elicitation | Requires additional data | RQ4 is not answerable with the current corpus | Needs anthropomorphic elicitation or paired conditions |
 | PERSONA is validated | Not supported / should not be claimed | The current archive supports a first empirical evaluation | Avoid final validation language until stronger external evidence exists |

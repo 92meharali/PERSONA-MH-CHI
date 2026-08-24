@@ -14,9 +14,11 @@ hand.
 | HuMT matched responses | 415 |
 | Prompt groups | 140 |
 
-The health release is filtered to HuMT-complete rows. The committed HuMT export
-still contains 450 provenance rows and lacks stable response IDs, so the pipeline
-uses documented text matching and reports the join tiers.
+The health release contains 415 responses with complete HuMT coverage. The HuMT
+file lacks stable response IDs, so the pipeline uses documented one-to-one text
+matching and reports the join tiers. The 140 prompt clusters include 136
+clusters with three model responses, three with two responses, and one with one
+response.
 
 ## Canonical Outputs
 
@@ -31,6 +33,5 @@ uses documented text matching and reports the join tiers.
 
 ## Interpretation
 
-Health remains ceiling-heavy even after filtering to HuMT-complete rows. Treat it
-as transfer and ceiling-case evidence, not equal-strength validation beside
-mental health.
+Health remains ceiling-heavy. Treat it as transfer and ceiling-case evidence,
+not equal-strength validation beside mental health.

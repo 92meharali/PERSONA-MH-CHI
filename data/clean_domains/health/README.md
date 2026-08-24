@@ -14,13 +14,14 @@ The current health files contain independent human annotations from the study's 
 | `anonymous_annotator_3.csv` | 415 | Group B E/D/F ratings |
 | `anonymous_annotator_4.csv` | 415 | Group B E/D/F ratings |
 | `anonymous_annotator_5.csv` | 415 | Group B E/D/F ratings |
-| `humt_health.csv` | 450 | Combined HuMT export; 415 rows are used in the filtered release |
+| `humt_health.csv` | 415 | HuMT values for all released responses |
 | `rubric.md` | - | PERSONA-Health annotation protocol |
 | `analysis.md` | - | Domain analysis summary |
 
 ## Design
 
-- 415 HuMT-complete responses.
+- 415 responses with complete HuMT coverage across 140 prompt clusters.
+- Model coverage varies slightly: 136 clusters contain three responses, three contain two responses, and one contains one response.
 - 5 Group A OA ratings per response.
 - 5 Group B E/D/F ratings per response.
 - Group A scored independent holistic `OA`.

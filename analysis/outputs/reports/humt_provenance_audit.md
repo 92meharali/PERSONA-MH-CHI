@@ -7,8 +7,8 @@ This audit checks whether the current HuMT joins can be kept without changing sc
 | Domain | Responses | HuMT rows | Matched | Unmatched | Duplicate response texts | Duplicate HuMT texts | Stable ID in HuMT | Fuzzy matches | Decision |
 |---|---:|---:|---:|---:|---:|---:|---|---:|---|
 | mental_health | 660 | 0 | 660 | 0 | 0 | 0 | no | 0 | embedded_humt |
-| education | 415 | 450 | 415 | 0 | 0 | 2 | no | 7 | keep_text_join_documented |
-| health | 415 | 450 | 415 | 0 | 0 | 0 | no | 0 | keep_text_join_documented |
+| education | 415 | 415 | 415 | 0 | 0 | 0 | no | 7 | keep_text_join_documented |
+| health | 415 | 415 | 415 | 0 | 0 | 0 | no | 0 | keep_text_join_documented |
 
 ## Findings
 

@@ -180,3 +180,66 @@ Implemented and verified on 2026-08-25. The numerical-token audit confirmed that
 all active manuscript numbers were preserved; LaTeX environment and reference
 checks passed. A local PDF compile was not possible because no LaTeX compiler is
 installed, so the existing Overleaf compilation TODO remains open.
+
+## Critical Issue 3: Reproducibility and Data Reconciliation
+
+### Concern
+
+The manuscript did not name the predictive estimator or fully specify
+preprocessing, tuning, grouping, seeds, scoring, and uncertainty procedures. It
+also combined the released 415-response education and health counts with stale
+language about larger HuMT exports and did not explain why 415 responses map to
+139 education and 140 health prompt clusters. Prompt provenance was described
+inconsistently.
+
+### Team-Confirmed Facts
+
+- Education and health each contained 415 released responses from the outset.
+- There was no larger annotated response corpus and no analysis attrition stage.
+- Education contains 139 prompt clusters: 138 have three model responses and one
+  has one response.
+- Health contains 140 prompt clusters: 136 have three model responses, three
+  have two responses, and one has one response.
+- The estimator is ordinary least squares linear regression with an intercept.
+- Education natural prompts were sourced and adapted from Bridge and MathDial.
+- Health natural prompts were sourced and adapted from HealthBench.
+- Education and health adversarial prompts were authored for this study.
+
+### Implemented Changes
+
+- Named OLS with an intercept in the manuscript and generated predictive report.
+- Documented recorded-scale predictors, pooled domain indicators, and no
+  regularization, imputation, feature selection, tuning, or outcome
+  transformation.
+- Documented five-fold prompt-grouped CV repeated 20 times, deterministic seeds
+  42--61, mean out-of-fold R-squared, 1,000 prompt-cluster bootstrap resamples,
+  and paired comparison intervals.
+- Added exact prompt-cluster size distributions and stated that prompt groups
+  remain intact in cross-validation.
+- Removed filtering, attrition, and larger-precursor-corpus language.
+- Reduced `humt_education.csv` and `humt_health.csv` to the 415 one-to-one HuMT
+  records belonging to each released corpus. No HuMT score used in analysis was
+  changed.
+- Corrected prompt provenance and added primary Bridge, MathDial, and HealthBench
+  citations.
+- Updated the current manuscript, older manuscript copy, analysis code,
+  generated reports, domain documentation, claims boundaries, risk register,
+  changelog, and TODO list.
+
+### Unchanged Items
+
+- Dataset sizes remain 660 mental-health, 415 education, and 415 health
+  responses, totaling 1,490.
+- Prompt-cluster counts remain 220, 139, and 140, totaling 499.
+- No released response, human rating, or analysis-used HuMT score changed.
+- Predictive specifications and all reported statistical results remain
+  unchanged.
+
+### Status
+
+Implemented and verified on 2026-08-25. The data-build, HuMT-provenance, and
+predictive phases regenerated successfully. All headline result tables remained
+byte-for-byte unchanged, both HuMT files and audits now report 415/415 rows, and
+source, Python syntax, LaTeX structure, citation, and stale-reference checks
+passed. Local PDF compilation remains pending because no LaTeX compiler is
+installed.

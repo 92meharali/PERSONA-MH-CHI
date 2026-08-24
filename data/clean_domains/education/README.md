@@ -12,13 +12,14 @@ Education adapts PERSONA to tutoring and teaching-assistant contexts. It tests w
 | `anonymous_annotator_3.csv` | 415 | Group B E/D/F ratings |
 | `anonymous_annotator_4.csv` | 415 | Group B E/D/F ratings |
 | `anonymous_annotator_5.csv` | 415 | Group B E/D/F ratings |
-| `humt_education.csv` | 450 | Combined HuMT export; 415 rows are used in the filtered release |
+| `humt_education.csv` | 415 | HuMT values for all released responses |
 | `rubric.md` | - | PERSONA-Education annotation protocol |
 | `analysis.md` | - | Domain analysis summary |
 
 ## Design
 
-- 415 HuMT-complete responses.
+- 415 responses with complete HuMT coverage across 139 prompt clusters.
+- Model coverage varies slightly: 138 clusters contain three responses and one contains one response.
 - 5 Group A OA ratings per response.
 - 5 Group B E/D/F ratings per response.
 - Group A scored independent holistic `OA`.

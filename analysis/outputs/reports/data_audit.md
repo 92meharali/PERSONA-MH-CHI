@@ -17,8 +17,8 @@ The committed HuMT exports for education and health carry no response id, so the
 | Domain | Available | full | pre300 | pre200 | pre120 | pre80 | fuzzy | embedded | Total | Unmatched | Ambiguous |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | mental_health | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 660 | 660 | 0 | 0 |
-| education | 450 | 359 | 10 | 16 | 12 | 11 | 7 | 0 | 415 | 0 | 0 |
-| health | 450 | 412 | 2 | 0 | 0 | 1 | 0 | 0 | 415 | 0 | 0 |
+| education | 415 | 359 | 10 | 16 | 12 | 11 | 7 | 0 | 415 | 0 | 0 |
+| health | 415 | 412 | 2 | 0 | 0 | 1 | 0 | 0 | 415 | 0 | 0 |
 
 ## Structural repairs
 

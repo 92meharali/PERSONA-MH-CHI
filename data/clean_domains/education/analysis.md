@@ -14,9 +14,10 @@ hand.
 | HuMT matched responses | 415 |
 | Prompt groups | 139 |
 
-The education release is filtered to HuMT-complete rows. The committed HuMT
-export still contains 450 provenance rows and lacks stable response IDs, so the
-pipeline uses documented text matching and reports the join tiers.
+The education release contains 415 responses with complete HuMT coverage. The
+HuMT file lacks stable response IDs, so the pipeline uses documented one-to-one
+text matching and reports the join tiers. The 139 prompt clusters include 138
+clusters with three model responses and one cluster with one response.
 
 ## Canonical Outputs
 

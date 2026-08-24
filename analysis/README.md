@@ -72,13 +72,17 @@ ceiling and floor diagnostics, pairwise Spearman and Pearson associations with
 prompt-cluster bootstrap intervals and Benjamini-Hochberg correction, and
 variance inflation factors for the four profile dimensions.
 
-**Phase 4 - `predictive.py`.** Twelve specifications per grouping, all fitted on
-identical complete-case rows. Cross-validation is 5-fold grouped on `prompt_id`
-and repeated 20 times with independently seeded fold assignments; the reported
-figure is the mean with a standard deviation across repeats. Confidence
-intervals come from 1000 prompt-cluster bootstrap resamples of the out-of-fold
-predictions, and every comparison between specifications reuses the same
-resamples so the differences are paired.
+**Phase 4 - `predictive.py`.** Twelve ordinary least squares specifications per
+grouping, each with an intercept and all fitted on identical released rows.
+Predictors enter on their recorded scales, pooled models include domain
+indicators, and there is no regularization, imputation, feature selection,
+hyperparameter tuning, or outcome transformation. Cross-validation is 5-fold
+grouped on `prompt_id` and repeated 20 times with deterministic seeds 42--61;
+the reported figure is the mean of the repeat-level out-of-fold R-squared values
+with a standard deviation across repeats. Confidence intervals come from 1000
+prompt-cluster bootstrap resamples of the mean out-of-fold predictions, and
+every comparison between specifications reuses the same resamples so the
+differences are paired.
 
 **Phase 5 - `domain_interactions.py`.** A targeted OLS audit tests whether the
 association between each profile dimension and `OA` differs by domain:
@@ -128,13 +132,12 @@ sourced from the old runner should be regenerated before submission.
 
 ## Known gaps
 
-- The active education and health releases are filtered to 415 HuMT-complete
-  responses each. Their committed HuMT exports still contain 450 provenance rows
-  and still lack stable response IDs, so future exports should include
-  `annotation_item_id`.
-- Because 415 is not divisible by three, the filtered education and health
-  releases contain a small number of prompt groups with fewer than three
-  responses. Grouped cross-validation still groups by `prompt_id`.
+- The education and health releases each contain 415 responses with complete
+  HuMT coverage. Their HuMT files lack stable response IDs, so future exports
+  should include `annotation_item_id`.
+- Because 415 is not divisible by three, these releases contain a small number
+  of prompt groups with fewer than three model responses. Grouped
+  cross-validation keeps every `prompt_id` intact.
 - The corpus contains a single system-prompt condition, so the paired
   contrast of the same context under different anthropomorphic behaviour
   cannot be run. This is recorded as **NOT AVAILABLE - requires additional

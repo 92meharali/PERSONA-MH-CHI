@@ -154,7 +154,7 @@ We also prepared an adversarial elicitation question during theory development, 
 The dataset contains 1,490 complete responses across three domains: 660 mental health responses, 415 education responses, and 415 health responses. Each response has a model label, condition label, scenario type, response text, automated $H$ score, averaged Group A $OA$ score, and averaged Group B $E$, $D$, and $F$ scores.
 
 \begin{table}
-\caption{Dataset coverage after HuMT-complete filtering.}
+\caption{Dataset coverage in the released analysis corpus.}
 \label{tab:dataset}
 \begin{tabular}{lrrrr}
 \toprule
@@ -169,7 +169,7 @@ Total & 1,490 & 499 & 7,450 & 7,450 \\
 \end{tabular}
 \end{table}
 
-Mental health is the primary empirical domain. It contains three responses per prompt group and full HumT coverage. Education and health provide cross-domain evidence after filtering to HuMT-complete rows so that all models use the same complete cases. The health domain is treated as secondary evidence because $OA$ is strongly ceiling-heavy.
+Mental health is the primary empirical domain. It contains three responses per prompt group and full HumT coverage. Education and health each contain 415 released responses with complete HumT coverage; a small number of their prompt groups contain responses from fewer than three models. The health domain is treated as secondary evidence because $OA$ is strongly ceiling-heavy.
 
 The mental health prompts were derived from clinically motivated counselling and mental-health question-answering settings, including general distress, crisis risk, psychoeducation, and boundary/authority cases \cite{CounselBench2025}. Education prompts cover learning support situations such as worked examples, conceptual explanations, and relationship-boundary cases. Health prompts cover general health information, emergency risk, clinician communication, medication/treatment, triage/referral, and uncertainty-hedging cases. The domains were chosen because they vary in the stakes and norms governing anthropomorphic language. Mental health often makes empathy and safety response posture salient; education makes explanation style and pedagogical fit salient; health makes uncertainty, authority, and referral boundaries salient.
 
@@ -181,8 +181,8 @@ The annotation protocol instructed raters to score the construct assigned to the
 \subsection{Why Separate Group A and Group B?}
 The separation between Group A and Group B is central. If the same raters supplied $OA$ and the component dimensions, strong prediction might reflect shared rater habits rather than response properties. If $OA$ were computed directly from $E$, $D$, and $F$, prediction would be tautological. PERSONA avoids both problems by treating $OA$ as an independently elicited criterion and the profile dimensions as predictors.
 
-\subsection{HuMT Coverage and Filtering}
-HumT values were deterministically joined to response text. The active analysis uses only complete cases with matched HuMT values: 660/660 mental health responses, 415/415 education responses, and 415/415 health responses. This avoids mixing response sets across specifications and ensures that performance differences reflect predictors rather than missingness.
+\subsection{HuMT Coverage}
+HumT values were deterministically joined to response text. The released corpus has complete coverage: 660/660 mental health responses, 415/415 education responses, and 415/415 health responses. Every specification uses identical released rows, ensuring that performance differences reflect predictors rather than missingness.
 
 \subsection{Illustrative Response Profiles}
 Table~\ref{tab:examples} shows anonymized response excerpts selected from the processed dataset to illustrate how the profile diagnoses different forms of anthropomorphic behavior. These are examples for interpretation, not additional statistical tests.

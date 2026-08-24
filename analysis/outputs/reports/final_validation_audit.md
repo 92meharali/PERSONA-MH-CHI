@@ -20,7 +20,7 @@ documentation branches were stacked.
 | Area | Audit result |
 |---|---|
 | HuMT joins | The existing join is deterministic and ambiguity-aware: exact normalized text, shrinking prefixes, then mutually-best fuzzy matching. Unmatched rows remain unmatched and are reported in `humt_provenance_audit.md`. |
-| HuMT provenance reporting | Phase 1 reports mental health 660/660 matched, education 415/415 matched, health 415/415 matched, with zero ambiguous keys accepted in the active filtered release. |
+| HuMT provenance reporting | Phase 1 reports mental health 660/660 matched, education 415/415 matched, and health 415/415 matched, with zero ambiguous keys accepted in the released corpus. |
 | Construct separability | Phase 3 already reported pairwise correlations, FDR-adjusted p-values, cluster-bootstrap intervals, and VIF. |
 | ICC implementation | `reliability.py` computes absolute-agreement ICC(A,1) and ICC(A,k) from ANOVA mean squares; ICC(A,k) is now primary and alpha supplementary. |
 | Ablation coverage | Phase 4 already covers `H`, `H+E`, `H+D`, `H+F`, `H+E+D`, `H+E+F`, `H+D+F`, `E+D+F`, and `H+E+D+F`, plus single-dimension specifications. Phase 4 outputs were regenerated only because the canonical rating-long input changed from combined rows to separate Group A and Group B rows; the predictive implementation was not redesigned. |

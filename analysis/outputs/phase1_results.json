@@ -963,7 +963,7 @@
     {
       "domain": "education",
       "responses": 415,
-      "humt_rows_available": 450,
+      "humt_rows_available": 415,
       "matched_full": 359,
       "matched_prefix_300": 10,
       "matched_prefix_200": 16,
@@ -980,7 +980,7 @@
     {
       "domain": "health",
       "responses": 415,
-      "humt_rows_available": 450,
+      "humt_rows_available": 415,
       "matched_full": 412,
       "matched_prefix_300": 2,
       "matched_prefix_200": 0,

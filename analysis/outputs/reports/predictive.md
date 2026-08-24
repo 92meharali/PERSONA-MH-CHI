@@ -1,5 +1,7 @@
 # Cross-validated prediction, ablation, incremental validity (Phase 4)
 
+Every specification uses ordinary least squares linear regression with an intercept. Predictors enter on their recorded scales; pooled specifications also include domain indicators. There is no regularization, imputation, feature selection, hyperparameter tuning, or outcome transformation.
+
 Cross-validation is 5-fold, grouped on `prompt_id`, repeated 20 times with independently seeded fold assignments (base seed 42). Confidence intervals come from 1000 prompt-cluster bootstrap resamples of the out-of-fold predictions; comparisons between specifications reuse the same resamples so the differences are paired.
 
 ## Sample
@@ -11,7 +13,7 @@ Cross-validation is 5-fold, grouped on `prompt_id`, repeated 20 times with indep
 | health | 415 | 415 | 0 | 140 |
 | pooled | 1490 | 1490 | 0 | 499 |
 
-Rows excluded are responses with no HuMT value. Every specification within a grouping uses the identical complete-case rows, so performance differences reflect predictors only.
+All released responses are complete for the analysis variables. Every specification within a grouping uses identical rows, so performance differences reflect predictors only.
 
 ## Cross-validated performance
 

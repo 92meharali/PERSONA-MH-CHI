@@ -1716,6 +1716,11 @@
     }
   ],
   "settings": {
+    "estimator": "ordinary_least_squares_with_intercept",
+    "regularization": "none",
+    "hyperparameter_tuning": "none",
+    "predictor_scaling": "recorded_scales",
+    "imputation": "none",
     "seed": 42,
     "folds": 5,
     "repeats": 20,

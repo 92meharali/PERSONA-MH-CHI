@@ -349,7 +349,10 @@ def main() -> None:
                "cv_performance": performance.to_dict(orient="records"),
                "ablation": ablation.to_dict(orient="records"),
                "incremental_validity": incremental.to_dict(orient="records"),
-               "settings": {"seed": SEED, "folds": CV_FOLDS, "repeats": CV_REPEATS,
+               "settings": {"estimator": "ordinary_least_squares_with_intercept",
+                            "regularization": "none", "hyperparameter_tuning": "none",
+                            "predictor_scaling": "recorded_scales", "imputation": "none",
+                            "seed": SEED, "folds": CV_FOLDS, "repeats": CV_REPEATS,
                             "bootstrap": N_BOOT, "grouping": "prompt_id"}},
               "phase4_results")
     print(f"Phase 4 complete: {len(performance)} specifications across {performance['domain'].nunique()} groupings")
@@ -357,6 +360,10 @@ def main() -> None:
 
 def render(performance, ablation, incremental, coverage) -> str:
     lines = ["# Cross-validated prediction, ablation, incremental validity (Phase 4)", "",
+             "Every specification uses ordinary least squares linear regression with an intercept. "
+             "Predictors enter on their recorded scales; pooled specifications also include domain "
+             "indicators. There is no regularization, imputation, feature selection, hyperparameter "
+             "tuning, or outcome transformation.", "",
              f"Cross-validation is 5-fold, grouped on `prompt_id`, repeated {CV_REPEATS} times with "
              f"independently seeded fold assignments (base seed {SEED}). Confidence intervals come from "
              f"{N_BOOT} prompt-cluster bootstrap resamples of the out-of-fold predictions; comparisons "
@@ -367,8 +374,8 @@ def render(performance, ablation, incremental, coverage) -> str:
     for _, r in coverage.iterrows():
         lines.append(f"| {r['domain']} | {r['responses']} | {r['complete_cases']} | "
                      f"{r['excluded_incomplete']} | {r['prompt_groups']} |")
-    lines += ["", "Rows excluded are responses with no HuMT value. Every specification within a grouping "
-              "uses the identical complete-case rows, so performance differences reflect predictors only.", ""]
+    lines += ["", "All released responses are complete for the analysis variables. Every specification "
+              "within a grouping uses identical rows, so performance differences reflect predictors only.", ""]
 
     lines += ["## Cross-validated performance", "",
               "| Grouping | Specification | N | CV R² | SD across repeats | 95% CI | Spearman | Pearson | MAE | RMSE | In-sample R² |",

@@ -1,5 +1,33 @@
 # Paper Revision Changelog
 
+## 2026-08-25: Critical Issue 3, Reproducibility and Count Reconciliation
+
+- Named the predictive estimator as ordinary least squares linear regression
+  with an intercept.
+- Documented that predictors enter on their recorded scales and that pooled
+  models include domain indicators.
+- Documented the absence of regularization, imputation, feature selection,
+  hyperparameter tuning, and outcome transformation.
+- Documented grouped five-fold cross-validation repeated 20 times, deterministic
+  seeds 42--61, prompt-level grouping, 1,000 prompt-cluster bootstrap resamples,
+  paired comparisons, and the primary scoring procedure.
+- Established 415 as both the original released and final analysis response count
+  for education and health; removed filtering and attrition language.
+- Reduced each clean HuMT file to the 415 one-to-one records belonging to the
+  released corpus, without changing any HuMT value used in analysis.
+- Reconciled prompt structure: education has 139 clusters with sizes 138x3 and
+  1x1; health has 140 clusters with sizes 136x3, 3x2, and 1x1.
+- Clarified that grouped cross-validation keeps each prompt intact despite
+  variable model coverage.
+- Corrected provenance: education natural prompts were sourced and adapted from
+  Bridge and MathDial, health natural prompts from HealthBench, and adversarial
+  prompts were authored for this study.
+- Added primary citations for Bridge, MathDial, and HealthBench.
+- Updated domain READMEs, domain analyses, analysis documentation, claims
+  boundaries, generated audits, and the older manuscript copy to remove stale
+  filtering language.
+- Preserved the released 1,490-response corpus and every analysis result.
+
 ## 2026-08-25: Critical Issue 2, H-Only Baseline Framing
 
 - Replaced the old RQ wording with questions about human-likeness sufficiency,

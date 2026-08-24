@@ -222,13 +222,13 @@ Pooled & 1,490 & 499 & 7,450 & 7,450 & 1,490/1,490\\
 
 Mental-health prompts were constructed from CounselBench resources \cite{CounselBench2025}. The repository's generation script explicitly derives 100 unique natural patient questions from CounselBench-Eval and 120 adversarial prompts from CounselBench-Adv, with adversarial prompts organized by failure modes including apathetic, assumption, symptom, judgmental, medication, and therapy categories.
 
-The education and health extension pipelines use separate prompt packs with natural and adversarial prompt types. Each domain includes 100 natural prompts and 50 adversarial prompts authored for this study and tagged by failure mode. The final analytical dataset contains 415 responses in each of these domains.
+The education and health extensions use separate prompt packs with natural and adversarial prompt types. The released education corpus contains 415 responses across 139 prompt clusters, and the released health corpus contains 415 responses across 140 prompt clusters. Model coverage varies slightly by prompt: education contains 138 three-response clusters and one one-response cluster; health contains 136 three-response clusters, three two-response clusters, and one one-response cluster. Grouped analyses retain these clusters intact.
 
 The education domain is designed around tutoring and teaching-assistant contexts, including pedagogical fit, academic boundaries, calibrated encouragement, and avoidance of false tutor identity or emotional dependency. The health domain is designed around health-assistance contexts, including triage, treatment advice, clinician identity, uncertainty handling, and patient-facing explanations.
 
-The education natural-prompt set was drawn from Bridge and MathDial, while the health natural-prompt set was drawn from HealthBench. For each domain, the natural prompts were supplemented with 50 adversarial prompts authored for this study and tagged by failure mode. The mental-health corpus used 100 natural patient questions from CounselBench-Eval and 120 adversarial prompts from CounselBench-Adv.
+Education natural prompts were sourced and adapted from Bridge and MathDial \cite{bridge2024,mathdial2023}, while health natural prompts were sourced and adapted from HealthBench \cite{healthbench2025}. In both domains, these natural prompts were supplemented with adversarial prompts authored for this study and tagged by failure mode. The mental-health corpus used natural patient questions from CounselBench-Eval and adversarial prompts from CounselBench-Adv.
 
-\subsection{Response Generation and Filtering}
+\subsection{Response Generation and Corpus Structure}
 
 Responses were generated from the final domain prompt packs and then evaluated under the annotation protocol. The final analytical dataset contains 1,490 responses with HuMT measurements available for every response. Model identity was hidden from annotators.
 
@@ -273,7 +273,7 @@ Because the mental-health prompts could include distressing or crisis-related ma
 
 The separation reduces criterion contamination and preserves the holistic nature of $OA$: Group A is not asked to reverse-engineer a weighted sum of the profile dimensions. Separate rater pools do not, by themselves, establish complete discriminant validity between $F$ and $OA$.
 
-\subsection{HuMT Measurement and Filtering}
+\subsection{HuMT Measurement}
 
 HuMT values are available for every response in the final analytical dataset.
 
@@ -299,7 +299,9 @@ Mental health & ``In cases of alleged spousal abuse, I would not recommend joint
 
 We first audit dataset integrity and annotation coverage. We assessed reliability using ICC(A,k), an intraclass correlation that measures absolute agreement across average ratings under a two-way mixed-effects model. Because downstream analyses use the aggregated mean rating across the five raters for each response, ICC(A,k) is the primary reliability statistic: it estimates the reliability of the aggregated measure actually used in subsequent analyses. ICC(A,1) and Krippendorff's ordinal alpha are retained as supplementary diagnostics.
 
-Predictive comparison quantifies information omitted when evaluation relies on $H$ alone by comparing $H$-only models with the full $H+E+D+F$ profile. We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt do not appear in both training and test folds. Confidence intervals for gains over the $H$-only baseline use prompt-cluster bootstrap resampling of out-of-fold predictions.
+Predictive comparison quantifies information omitted when evaluation relies on $H$ alone by comparing $H$-only models with the full $H+E+D+F$ profile. Every specification uses ordinary least squares linear regression with an intercept. Predictors enter on their recorded scales; the pooled analysis additionally includes domain indicators. We apply no regularization, imputation, feature selection, hyperparameter tuning, or outcome transformation. All 1,490 released responses are complete for the variables used.
+
+We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt remain together even when a prompt has fewer than three model responses. Fold assignments use deterministic seeds 42--61. The primary result is the mean of the 20 repeat-level out-of-fold $R^2$ values. Confidence intervals use 1,000 prompt-cluster bootstrap resamples of the mean out-of-fold predictions; comparisons reuse identical resamples to produce paired intervals.
 
 We also evaluate ablations and added explanatory performance beyond $H$. The compact ablation families include H-only, E-only, D-only, F-only, E+D+F, and the full H+D+E+F profile. Comparing $F$ alone with the full profile tests whether the available predictive signal is concentrated in contextual fit or distributed across multiple dimensions. Domain interactions are estimated with:
 \[
@@ -703,6 +705,21 @@ Murray Shanahan. 2024. Talking About Large Language Models. \textit{Communicatio
 
 \bibitem{Bucinca2021CognitiveForcing}
 Zana Bucinca, Maja Barbara Malaya, and Krzysztof Z. Gajos. 2021. To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-Assisted Decision-Making. \textit{Proceedings of the ACM on Human-Computer Interaction} 5, CSCW1 (2021).
+
+\bibitem{bridge2024}
+Rose Wang, Qingyang Zhang, Carly Robinson, Susanna Loeb, and Dorottya Demszky. 2024.
+Bridging the Novice--Expert Gap via Models of Decision-Making: A Case Study on Remediating Math Mistakes.
+In \textit{Proceedings of NAACL 2024}. 2174--2199.
+
+\bibitem{mathdial2023}
+Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tanmay Sinha, Manu Kapur, Iryna Gurevych, and Mrinmaya Sachan. 2023.
+MathDial: A Dialogue Tutoring Dataset with Rich Pedagogical Properties Grounded in Math Reasoning Problems.
+In \textit{Findings of EMNLP 2023}. 5602--5621.
+
+\bibitem{healthbench2025}
+Rahul K. Arora, Jason Wei, Rebecca Soskin Hicks, Preston Bowman, Joaquin Qui\~nonero-Candela, Foivos Tsimpourlas, Michael Sharman, Meghan Shah, Andrea Vallone, Alex Beutel, Johannes Heidecke, and Karan Singhal. 2025.
+HealthBench: Evaluating Large Language Models Towards Improved Human Health.
+arXiv:2505.08775.
 
 \end{thebibliography}
 

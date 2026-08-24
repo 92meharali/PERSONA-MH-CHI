@@ -19,12 +19,12 @@
     {
       "domain": "education",
       "responses": 415,
-      "humt_rows": 450,
+      "humt_rows": 415,
       "matched": 415,
       "unmatched": 0,
       "ambiguous_accepted": 0,
       "response_duplicate_normalized_texts": 0,
-      "humt_duplicate_normalized_texts": 2,
+      "humt_duplicate_normalized_texts": 0,
       "repository_response_id_available": true,
       "humt_stable_response_id_available": false,
       "humt_columns": "source_file;text;text_trunc;humt_text;std_humt_text",
@@ -35,7 +35,7 @@
     {
       "domain": "health",
       "responses": 415,
-      "humt_rows": 450,
+      "humt_rows": 415,
       "matched": 415,
       "unmatched": 0,
       "ambiguous_accepted": 0,
