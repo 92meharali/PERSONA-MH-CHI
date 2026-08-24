@@ -4,7 +4,7 @@ This folder contains a CHI-style LaTeX rewrite of the PERSONA paper.
 
 ## Files
 
-- `persona_chi2027.tex`: main anonymous-review manuscript draft.
+- `revised3.tex`: main anonymous-review manuscript draft.
 - `persona_chi2027.bib`: bibliography used by the draft.
 - `acmart.cls` and `ACM-Reference-Format.bst`: copied from the uploaded ACM Primary Article Template.
 - `figures/`: copied analysis figures used by the draft.
