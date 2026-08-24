@@ -24,12 +24,8 @@
 \begin{document}
 
 \begin{abstract}
-While AI systems increasingly exhibit human-like language, human-likeness alone does not determine whether anthropomorphic behavior is contextually appropriate. A fluent, warm response may imply unsupported capacities---such as emotion, persistent memory, authority, or relational commitment---whereas a bounded, less human-like response may be more appropriate for the situation. We introduce PERSONA, a context-aware evaluation framework that represents responses along four dimensions: human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception or misleading-implication risk ($D$), and contextual fit ($F$). We evaluate whether this profile predicts independently elicited judgments of overall anthropomorphic appropriateness ($OA$) across 1,490 responses in mental health, education, and health contexts. Domain-relevant raters rated $OA$ holistically, while a separate rater group assessed $E$, $D$, and $F$. Grouped repeated cross-validation showed that $H$ alone was a weak and domain-dependent predictor of $OA$ (pooled $R^2=.221$; domain-specific $R^2\leq.099$). The full PERSONA profile improved predictive performance overall (pooled $R^2=.499$), with stronger results in mental health ($R^2=.659$) and education ($R^2=.562$). Performance was lower in health ($R^2=.256$), where the improvement over $H$ alone was statistically uncertain amid a substantial ceiling effect in $OA$ ratings. These findings support a calibration-based approach to anthropomorphism that considers implied capacities, empathy, and contextual fit alongside human-likeness.
+While AI systems increasingly exhibit human-like language, human-likeness alone does not determine whether anthropomorphic behavior is contextually appropriate. A fluent, warm response may imply unsupported capacities---such as emotion, persistent memory, authority, or relational commitment---whereas a bounded, less human-like response may be more appropriate for the situation. We introduce PERSONA, a context-aware evaluation framework that represents responses along four dimensions: human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception or misleading-implication risk ($D$), and contextual fit ($F$). We evaluate the information this profile provides about independently elicited judgments of overall anthropomorphic appropriateness ($OA$) across 1,490 responses in mental health, education, and health contexts. Domain-relevant raters rated $OA$ holistically, while a separate rater group assessed $E$, $D$, and $F$. Grouped repeated cross-validation showed that $H$ alone was a weak and domain-dependent predictor of $OA$ (pooled $R^2=.221$; domain-specific $R^2\leq.099$). The informationally richer PERSONA profile captured substantially more $OA$-associated variation overall (pooled $R^2=.499$), with stronger results in mental health ($R^2=.659$) and education ($R^2=.562$). In mental health and education, contextual fit carried most of the available predictive signal. Within the ceiling-restricted health corpus, misleading-implication risk was the strongest single-dimension predictor, while the full profile reached $R^2=.256$ and its gain over $H$ alone was statistically uncertain. These findings support a calibration-based approach that retains human-likeness as a useful descriptive signal while considering implied capacities, empathy, and contextual fit alongside it.
 \end{abstract}
-
-% \begin{abstract}
-% Human-like language is increasingly measurable in AI responses, but human-likeness alone does not determine whether anthropomorphic behavior is appropriate. A response can be warm and fluent while implying unsupported capacities such as feeling, memory, authority, or relationship; conversely, less human-like language can be more appropriate when it preserves boundaries and fits the situation. We present PERSONA, a context-aware evaluation framework that represents each response as a profile $P=(H,E,D,F)$: HuMT-derived human-likeness, empathic appropriateness, anthropomorphic deception/misleading implication risk, and contextual fit. PERSONA evaluates this profile against independently elicited overall anthropomorphic appropriateness ($OA$). Five Group A raters evaluated $OA$ holistically, while five separate Group B raters evaluated $E$, $D$, and $F$. The OA pool comprises domain-relevant raters. Across 1,490 responses in mental health, education, and health, grouped repeated cross-validation showed that $H$ alone was a weak and domain-dependent proxy for $OA$ (mental health $R^2=.026$, education $R^2=.099$, health $R^2=-.007$, pooled $R^2=.221$). The full profile achieved $R^2=.659$ in mental health, $R^2=.562$ in education, and $R^2=.499$ pooled. In health, the full profile reached $R^2=.256$, but the gain over $H$ alone was statistically uncertain because its confidence interval crossed zero and 63.86\% of OA ratings were at the maximum score. The results support a calibration view: human-likeness is useful, but it is not sufficient for determining whether anthropomorphic behavior is appropriate.
-% \end{abstract}
 
 \keywords{anthropomorphism, human-likeness, conversational AI, overall appropriateness, empathy, deception risk, contextual fit, evaluation}
 
@@ -75,7 +71,7 @@ Within this profile, $H$ acts as a descriptive baseline for linguistic \textbf{h
 
 % A central methodological challenge in multidimensional appropriateness evaluation is circularity. If overall appropriateness is calculated from the same dimensions used to predict it, predictive performance becomes a scoring identity rather than an empirical result. PERSONA therefore elicits $OA$ independently from the profile dimensions. Group A evaluates $OA$ holistically, while a separate Group B evaluates $E$, $D$, and $F$. This separation allows the relationship between the profile and holistic appropriateness to be tested empirically rather than defined mathematically.
 
-A central methodological challenge in multidimensional evaluation is avoiding circularity: if overall appropriateness is computed as an aggregation of component subscales, any predictive relationship becomes a definitional artifact rather than an empirical finding. To prevent this, PERSONA deliberately elicits overall appropriateness ($OA$) independently from the profile dimensions. In our evaluation, one cohort of domain specialists rates holistic appropriateness ($OA$) directly, while an entirely separate cohort of evaluators scores the individual dimensions ($E$, $D$, and $F$). This strict separation of raters ensures that the predictive power of the $(H,E,D,F)$ profile is an authentic empirical test rather than a mathematical identity.
+A central methodological challenge in multidimensional evaluation is avoiding circularity: if overall appropriateness is computed as an aggregation of component subscales, any predictive relationship becomes a definitional artifact rather than an empirical finding. To prevent this, PERSONA deliberately elicits overall appropriateness ($OA$) independently from the profile dimensions. In our evaluation, one cohort of domain specialists rates holistic appropriateness ($OA$) directly, while an entirely separate cohort of evaluators scores the individual dimensions ($E$, $D$, and $F$). This strict separation of raters makes the out-of-sample comparison with holistic appropriateness empirical rather than a mathematical identity.
 
 % We evaluate PERSONA on 1,490 AI responses across three domains: mental health ($n=660$), education ($n=415$), and health ($n=415$). The final analysis sets contain 660 mental-health, 415 education, and 415 health responses. Mental-health prompts were constructed from CounselBench material \cite{CounselBench2025}, including natural patient questions and adversarial expert-authored failure-mode items. The education and health datasets were constructed around tutoring and health-assistance contexts, with natural and adversarial prompt types.
 
@@ -83,9 +79,9 @@ We evaluate PERSONA on a corpus of 1,490 AI responses spanning three high-stakes
 
 The study asks three questions:
 \begin{enumerate}[leftmargin=*]
-    \item \textbf{RQ1:} How well does human-likeness alone predict overall anthropomorphic appropriateness?
-    \item \textbf{RQ2:} Does the full PERSONA profile improve prediction beyond human-likeness alone?
-    \item \textbf{RQ3:} How do relationships between PERSONA dimensions and $OA$ vary across domains?
+    \item \textbf{RQ1: Sufficiency of human-likeness.} To what extent does automated human-likeness diverge from domain-relevant judgments of overall appropriateness?
+    \item \textbf{RQ2: Diagnostic explanatory value.} What appropriateness-relevant information do empathic appropriateness, misleading-implication risk, and contextual fit provide that human-likeness alone omits?
+    \item \textbf{RQ3: Domain-specific calibration.} How do the relative contributions of empathic appropriateness, misleading-implication risk, and contextual fit vary across mental health, education, and general health?
 \end{enumerate}
 
 This paper contributes:
@@ -93,7 +89,7 @@ This paper contributes:
     \item a context-aware construct model for anthropomorphic AI evaluation that distinguishes human-likeness, empathic appropriateness, deception risk, and contextual fit;
     \item an annotation design in which holistic appropriateness is elicited independently from the component dimensions;
     \item a multi-domain dataset and reproducible analysis pipeline for studying anthropomorphic appropriateness;
-    \item empirical evidence that human-likeness alone is a weak and domain-dependent proxy for appropriateness, while the full profile is substantially more predictive in mental health and education;
+    \item empirical evidence quantifying the appropriateness-relevant information omitted when evaluation relies on human-likeness alone, together with domain-specific diagnostics showing which profile dimensions carry that information;
     \item a diagnostic framing that treats anthropomorphic evaluation as a calibration problem rather than a simple optimization for more or less human-like language.
 \end{itemize}
 
@@ -303,9 +299,9 @@ Mental health & ``In cases of alleged spousal abuse, I would not recommend joint
 
 We first audit dataset integrity and annotation coverage. We assessed reliability using ICC(A,k), an intraclass correlation that measures absolute agreement across average ratings under a two-way mixed-effects model. Because downstream analyses use the aggregated mean rating across the five raters for each response, ICC(A,k) is the primary reliability statistic: it estimates the reliability of the aggregated measure actually used in subsequent analyses. ICC(A,1) and Krippendorff's ordinal alpha are retained as supplementary diagnostics.
 
-Predictive validity compares $H$-only models with the full $H+E+D+F$ profile. We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt do not appear in both training and test folds. Confidence intervals for incremental gains use prompt-cluster bootstrap resampling of out-of-fold predictions.
+Predictive comparison quantifies information omitted when evaluation relies on $H$ alone by comparing $H$-only models with the full $H+E+D+F$ profile. We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt do not appear in both training and test folds. Confidence intervals for gains over the $H$-only baseline use prompt-cluster bootstrap resampling of out-of-fold predictions.
 
-We also evaluate ablations and incremental validity. The compact ablation families include H-only, E-only, D-only, F-only, E+D+F, and the full H+D+E+F profile. Comparing $F$ alone with the full profile tests whether predictive gain is concentrated in contextual fit or distributed across multiple dimensions. Domain interactions are estimated with:
+We also evaluate ablations and added explanatory performance beyond $H$. The compact ablation families include H-only, E-only, D-only, F-only, E+D+F, and the full H+D+E+F profile. Comparing $F$ alone with the full profile tests whether the available predictive signal is concentrated in contextual fit or distributed across multiple dimensions. Domain interactions are estimated with:
 \[
 OA \sim z(H,E,D,F)\times domain.
 \]
@@ -314,57 +310,28 @@ The primary performance metric is cross-validated $R^2$. We also inspect Spearma
 
 \section{Results}
 
-\subsection{Reliability}
+\subsection{Results Overview}
 
-Averaged ratings showed strong agreement across the main domain-by-dimension cells. The primary ICC(A,k) reliability results are reported in Table~\ref{tab:reliability}.
+We report results in the order of the research questions. We first assess the sufficiency of $H$, then quantify the $OA$-associated information omitted by an $H$-only evaluation, and finally examine which dimensions carry that information across domains. Reliability, distributional constraints, collinearity diagnostics, and descriptive model-level comparisons follow as supporting evidence.
 
-\begin{table}[t]
-\centering
-\caption{Primary reliability: ICC(A,k), 95\% CI in parentheses.}
-\label{tab:reliability}
-\begin{tabular}{lrrrr}
-\toprule
-Domain & OA & E & D & F\\
-\midrule
-Mental health & .851 (.830,.870) & .948 (.939,.956) & .959 (.954,.965) & .864 (.839,.885)\\
-Education & .916 (.878,.938) & .997 (.995,.999) & .963 (.934,.981) & .954 (.928,.969)\\
-Health & .907 (.804,.945) & .939 (.928,.948) & .942 (.912,.959) & .922 (.908,.934)\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The results support the use of averaged response-level ratings as stable measurement variables in the current corpus. They do not, by themselves, establish full psychometric construct validity.
-
-
-\subsection{Model-Level Comparison}
-
-The primary mental-health corpus contains 660 responses from 220 prompts evaluated across three models, with model identity hidden during annotation. The repository's model-level analysis shows that GPT-5.6 Sol achieved the highest mean holistic appropriateness ($OA=4.72$), followed by Claude Opus 4.8 ($OA=4.13$) and GLM ($OA=4.10$). The same ordering holds for the secondary profile score reported in the model-level analysis. This comparison is descriptive and specific to the model-level corpus; it should not be interpreted as evidence that one model is universally better across domains.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.92\linewidth]{figures/fig_model_oa_comparison.png}
-  \caption{Model-level comparison of mean overall appropriateness in the model-level analysis corpus. GPT-5.6 Sol has the highest mean $OA$, followed by Claude Opus 4.8 and GLM.}
-  \label{fig:model-oa}
-\end{figure}
-
-\subsection{Human-Likeness Alone Is Weak}
+\subsection{RQ1: Human-Likeness and Appropriateness Diverge}
 
 Human-likeness alone was a weak and domain-dependent proxy for $OA$. $H$-only cross-validated $R^2$ was .026 in mental health, .099 in education, and $-.007$ in health. Pooled across domains, $H$-only performance was .221.
 
 The H/OA Spearman correlations were also weak: $-0.167$ in mental health (95\% CI [$-0.245,-0.088$]), $-0.041$ in education (95\% CI [$-0.156,0.073$]), and $-0.046$ in health (95\% CI [$-0.152,0.064$]). These results support the narrower claim that human-likeness is not enough, rather than the stronger claim that human-likeness has no relationship with appropriateness.
 
-\subsection{The Full Profile Improves Prediction}
+\subsection{RQ2: What Human-Likeness Alone Omits}
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.95\linewidth]{figures/fig_cv_model_comparison.png}
-  \caption{Grouped repeated cross validation model comparison. The full PERSONA profile improves over $H$ alone most clearly in mental health and education; the health gain is positive but uncertain.}
+  \caption{Grouped repeated cross-validation comparison. The richer PERSONA profile captures more $OA$-associated variation than $H$ alone most clearly in mental health and education; the health gain is positive but uncertain.}
   \label{fig:cv}
 \end{figure}
 
 \begin{table}[t]
 \centering
-\caption{Grouped repeated cross-validated prediction of overall appropriateness.}
+\caption{Grouped repeated cross-validated comparison with the $H$-only baseline.}
 \label{tab:cv}
 \begin{tabular}{lrrrr}
 \toprule
@@ -378,9 +345,9 @@ Pooled & .221 & .499 & .278 & [.204,.339]\\
 \end{tabular}
 \end{table}
 
-The full profile substantially improves prediction in mental health and education. In mental health, the full model achieves $R^2=.659$, a gain of .632 over $H$ alone. In education, the full model achieves $R^2=.562$, a gain of .462. The pooled gain is .278. Table~\ref{tab:cv} summarizes the grouped repeated cross-validated prediction results. In health, the full-profile point estimate is positive ($R^2=.256$), but the gain interval includes zero, so the result is treated as statistically uncertain and as exploratory cross-domain evidence rather than strong validation.
+The informationally richer profile captures substantially more $OA$-associated variation than $H$ alone in mental health and education. In mental health, the full model achieves $R^2=.659$, a gain of .632 over the $H$-only baseline. In education, the full model achieves $R^2=.562$, a gain of .462. The pooled gain is .278. Table~\ref{tab:cv} summarizes the grouped repeated cross-validated comparison. These gains quantify information omitted by an $H$-only evaluation; they do not, by themselves, establish universal construct validity. In health, the full-profile point estimate is positive ($R^2=.256$), but the gain interval includes zero, so the result is treated as statistically uncertain and exploratory.
 
-\subsection{Which Dimensions Carry the Signal?}
+\subsection{RQ3: Diagnostic Contributions Vary by Domain}
 
 \begin{table}[t]
 \centering
@@ -405,13 +372,9 @@ Pooled & .471 & .499 & .028 & [.010,.046]\\
   \label{fig:ablation}
 \end{figure}
 
-Contextual fit accounts for most of the predictive signal in mental health and education. In mental health, $F$ alone achieves $R^2=.651$, close to .659 for the full profile. In education, $F$ alone matches the full profile at $R^2=.562$. In health, the pattern changes: $F$ alone reaches only .027, whereas $D$ alone reaches .241 and the full profile reaches .256. The F-only ablation results are summarized in Table~\ref{tab:ablation}.
+In mental health and education, contextual fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while contextual fit contributed comparatively little. In mental health, $F$ alone achieves $R^2=.651$, close to .659 for the full profile; in education, $F$ alone matches the full profile at $R^2=.562$. In health, $F$ alone reaches .027, whereas $D$ alone reaches .241 and the full profile reaches .256. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The F-only ablation results are summarized in Table~\ref{tab:ablation}.
 
-These results indicate that contextual calibration carries most of the predictive signal in the mental-health and education corpora.
-
-\subsection{Domain Differences}
-
-The domain interaction model explains substantial variation ($R^2=.651$, adjusted $R^2=.648$; 499 prompt clusters).Selected domain interaction terms are reported in Table~\ref{tab:interactions}.
+The domain interaction model explains substantial variation ($R^2=.651$, adjusted $R^2=.648$; 499 prompt clusters). Selected domain interaction terms are reported in Table~\ref{tab:interactions}.
 
 \begin{table}[t]
 \centering
@@ -438,7 +401,28 @@ The largest domain difference is the contextual-fit interaction in health ($F\ti
 
 The education and health interaction terms for $E$ are negative relative to mental health, while $D$ is substantially weaker in health. The $H\times Health$ term is borderline and is not treated as statistically significant. These are associative domain differences, not causal effects.
 
-\subsection{Ceiling and Floor Effects}
+\subsection{Measurement Reliability}
+
+Averaged ratings showed strong agreement across the main domain-by-dimension cells. The primary ICC(A,k) reliability results are reported in Table~\ref{tab:reliability}.
+
+\begin{table}[t]
+\centering
+\caption{Primary reliability: ICC(A,k), 95\% CI in parentheses.}
+\label{tab:reliability}
+\begin{tabular}{lrrrr}
+\toprule
+Domain & OA & E & D & F\\
+\midrule
+Mental health & .851 (.830,.870) & .948 (.939,.956) & .959 (.954,.965) & .864 (.839,.885)\\
+Education & .916 (.878,.938) & .997 (.995,.999) & .963 (.934,.981) & .954 (.928,.969)\\
+Health & .907 (.804,.945) & .939 (.928,.948) & .942 (.912,.959) & .922 (.908,.934)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results support the use of averaged response-level ratings as stable measurement variables in the current corpus. They do not, by themselves, establish full psychometric construct validity.
+
+\subsection{Distributional Constraints and Robustness}
 
 \begin{table}[t]
 \centering
@@ -457,9 +441,20 @@ Health & 4.860 & 63.86\% & 49.40\%\\
 
 Health shows the strongest restriction of OA variance: 63.86\% of responses receive the maximum OA score. Education also shows a strong floor effect for $D$, with 87.23\% at the minimum score. These distributional diagnostics are summarized in Table~\ref{tab:ceiling}. These concentrations constrain what predictive relationships can be detected and are therefore important qualifications on domain-level interpretation.
 
-\subsection{Statistical Non-Redundancy}
+\subsubsection{Predictor Collinearity Diagnostics}
 
 Maximum variance inflation factors are 1.345 in mental health, 1.393 in education, and 1.490 in health. These diagnostics indicate low predictor redundancy in the current analyses. They should not be interpreted as proof of psychometric discriminant validity.
+
+\subsection{Model-Level Descriptives}
+
+The primary mental-health corpus contains 660 responses from 220 prompts evaluated across three models, with model identity hidden during annotation. The repository's model-level analysis shows that GPT-5.6 Sol achieved the highest mean holistic appropriateness ($OA=4.72$), followed by Claude Opus 4.8 ($OA=4.13$) and GLM ($OA=4.10$). The same ordering holds for the secondary profile score reported in the model-level analysis. This comparison is descriptive and specific to the model-level corpus; it should not be interpreted as evidence that one model is universally better across domains.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{figures/fig_model_oa_comparison.png}
+  \caption{Model-level comparison of mean overall appropriateness in the model-level analysis corpus. GPT-5.6 Sol has the highest mean $OA$, followed by Claude Opus 4.8 and GLM.}
+  \label{fig:model-oa}
+\end{figure}
 
 \section{Discussion}
 
@@ -473,7 +468,7 @@ A response can be less human-like and still be more appropriate when it provides
 
 The concentration of predictive signal in $F$ is theoretically meaningful. In mental health, crisis risk, boundary management, and psychoeducation require different response postures. In education, tutoring responses must balance encouragement with pedagogical boundaries, including when to scaffold rather than simply provide answers. Contextual fit captures this situational matching directly.
 
-The dominance of $F$ should not be read as making the other dimensions irrelevant. The health corpus also shows a relatively greater contribution from $D$, while $F$ contributes much less; these findings are exploratory because of the restricted $OA$ variance. The profile therefore has diagnostic value precisely because different dimensions can matter under different contextual norms.
+The dominance of $F$ should not be read as making the other dimensions irrelevant. In mental health and education, contextual fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while contextual fit contributed comparatively little. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The profile therefore has diagnostic value precisely because different dimensions can matter under different contextual norms.
 
 \subsection{Construct Relationships and the F/OA Question}
 
@@ -507,7 +502,7 @@ Importantly, these are design implications rather than experimentally validated 
 
 Multidimensional evaluation creates a methodological temptation to define a composite score and then demonstrate that the same components predict it. PERSONA instead keeps the criterion separate. The resulting empirical claims are narrower: the profile is not presented as a universal theory of user outcomes, but as a testable framework for response-level appropriateness.
 
-The use of grouped out-of-sample validation further narrows the claim to predictive validity on held-out responses. This is stronger than in-sample correlation alone, but it does not establish causal effects or universal construct validity.
+The use of grouped out-of-sample comparison further narrows the claim to information about held-out responses. This provides stronger empirical evidence than in-sample correlation alone, but it does not establish causal effects or universal construct validity.
 
 \section{Scope and Boundaries}
 
@@ -523,7 +518,7 @@ Finally, $F$ and $OA$ are conceptually adjacent. Separate rater pools reduce cri
 
 \subsection{Expanding the Construct Space}
 
-Future work should test whether anthropomorphic appropriateness requires dimensions beyond $H$, $E$, $D$, and $F$. Candidate dimensions include authority calibration, uncertainty communication, relational dependency, transparency, autonomy support, and boundary preservation. These should be evaluated as candidate constructs rather than assumed extensions of the current validated profile.
+Future work should test whether anthropomorphic appropriateness requires dimensions beyond $H$, $E$, $D$, and $F$. Candidate dimensions include authority calibration, uncertainty communication, relational dependency, transparency, autonomy support, and boundary preservation. These should be evaluated as candidate constructs rather than assumed extensions of the current profile. Future work should also compare PERSONA with alternative response-level evaluation baselines and evaluator populations.
 
 \subsection{Multi-Turn and Longitudinal Interaction}
 
@@ -545,7 +540,7 @@ A natural next step is controlled manipulation. Future experiments can hold task
 
 Human-likeness is an important property of AI language, but it is not enough to determine whether anthropomorphic behavior is appropriate. PERSONA treats anthropomorphic response evaluation as a multidimensional calibration problem, combining automated human-likeness with human evaluation of empathic appropriateness, anthropomorphic deception risk, and contextual fit.
 
-Across 1,490 responses, human-likeness alone was a weak and domain-dependent predictor of overall appropriateness. The full profile showed substantial predictive gains in mental health and education, while health produced a positive but statistically uncertain gain under strong OA ceiling restriction. Contextual fit accounted for most of the predictive signal in mental health and education, whereas deception risk carried more of the available signal in health.
+Across 1,490 responses, human-likeness alone was a weak and domain-dependent predictor of overall appropriateness. The full profile showed substantial added explanatory performance over the $H$-only baseline in mental health and education, while health produced a positive but statistically uncertain gain under strong OA ceiling restriction. Contextual fit accounted for most of the available predictive signal in mental health and education, whereas deception risk carried more of the available signal in health.
 
 The broader implication is not that AI systems should become less human-like by default. It is that anthropomorphic behavior should be calibrated to context: warm when warmth helps, bounded when boundaries matter, non-misleading about system capacities, and responsive to the actual demands of the interaction. Future work should broaden the construct space, validate the framework across evaluator populations and domains, and use controlled interventions to test whether PERSONA can improve AI evaluation and design decisions.
 

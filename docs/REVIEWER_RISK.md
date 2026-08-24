@@ -5,6 +5,7 @@
 | Risk | Problem | Why reviewer may care | Manuscript response | Residual limitation |
 |---|---|---|---|---|
 | F/OA overlap | Contextual fit and overall appropriateness are conceptually adjacent. | A reviewer may argue high F prediction is partly definitional. | Results and limitations explicitly state that F accounts for much predictive signal but does not constitute OA. | The study cannot fully separate conceptual overlap from empirical alignment. |
+| Asymmetric baseline comparison | The richer profile is compared with H alone, so a performance gain is expected when OA-associated predictors are added. | A reviewer may interpret the comparison as near-tautological or as an unsupported superiority claim. | RQs, analysis, results, and discussion now frame the comparison as quantifying information omitted by H alone; ablations identify which dimensions carry it. | The study does not compare PERSONA with every alternative response-level evaluation baseline. |
 | Construct validity | Reliability and low VIF do not prove psychometric validity. | CHI reviewers may reject overclaiming. | Manuscript says low VIF supports statistical non-redundancy, not full construct validation. | External validation with other rater populations remains future work. |
 | HCI contribution | Paper could look like a statistical benchmark only. | CHI expects design/research relevance. | Added diagnostic examples, architecture figure, and design implications. | No experiment tests whether designers using PERSONA make better decisions. |
 

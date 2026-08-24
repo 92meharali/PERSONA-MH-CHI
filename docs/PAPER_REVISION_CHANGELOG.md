@@ -1,5 +1,34 @@
 # Paper Revision Changelog
 
+## 2026-08-25: Critical Issue 2, H-Only Baseline Framing
+
+- Replaced the old RQ wording with questions about human-likeness sufficiency,
+  omitted appropriateness-relevant information, and domain-specific calibration.
+- Reframed "predictive validity" as a grouped out-of-sample comparison that
+  quantifies information omitted by an H-only evaluation.
+- Replaced claims that the full profile "improves prediction" or "validates"
+  PERSONA with claims about added explanatory performance and OA-associated
+  information.
+- Reordered Results so RQ1, RQ2, and RQ3 appear before reliability,
+  distributional diagnostics, and model-level descriptives.
+- Added a Results Overview subsection and explicit RQ labels.
+- Preserved all model specifications, folds, estimates, confidence intervals,
+  figures, tables, and generated analysis outputs unchanged.
+- Added the agreed cautious health interpretation: D is the strongest
+  single-dimension predictor within a restricted OA range, and the pattern is
+  exploratory rather than a definitive reversal.
+- Added a general future-work commitment to compare PERSONA with alternative
+  response-level evaluation baselines and evaluator populations.
+- Added an explicit non-claim to the claims audit: superiority over every
+  alternative response-level baseline was not tested and is not claimed.
+- Added the asymmetric-baseline concern to the reviewer risk register.
+- Updated theory RQs and the paper argument to match the manuscript.
+- Removed a stale commented-out abstract to prevent conflicting claims from
+  persisting in the source.
+- Fixed the missing space after "499 prompt clusters)."
+- Created `docs/REBUTTAL.md` as the cumulative record of professor concerns,
+  decisions, manuscript edits, supporting-document edits, and status.
+
 ## Internal Audit Before Editing
 
 ### A. Already strong

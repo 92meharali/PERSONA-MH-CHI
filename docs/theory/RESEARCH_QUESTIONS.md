@@ -8,11 +8,11 @@ from any result.
 
 ### RQ1
 
-> To what extent does automated human-likeness predict independently judged
-> conversational appropriateness?
+> To what extent does automated human-likeness diverge from domain-relevant
+> judgments of overall appropriateness?
 
-**Answerable: yes.** `H` is available for every response in mental health and for
-most responses in education and health; `OA` is available throughout.
+**Answerable: yes.** `H` and `OA` are available for every response in the final
+analysis sets across all three domains.
 
 **Interpretive constraint.** `H` in this corpus has very little spread. A weak
 `H`-`OA` relationship under restricted predictor variance is not evidence that
@@ -25,24 +25,29 @@ alongside the relationship and must not upgrade a null into a general claim. See
 
 ### RQ2
 
-> Do empathy, deception risk, and contextual fit provide information about
-> appropriateness beyond human-likeness alone?
+> What appropriateness-relevant information do empathic appropriateness,
+> misleading-implication risk, and contextual fit provide that human-likeness
+> alone omits?
 
-**Answerable: yes**, and this is the framework's primary empirical question.
+**Answerable: yes**, and this is the framework's primary diagnostic empirical
+question.
 
-**Interpretive constraint.** "The profile beats `H` alone" and "the profile is
-multidimensional" are different claims. If the increment over `H` is carried by
-one dimension, RQ2 is answered affirmatively while the multidimensionality claim
-is not supported. The analysis must therefore report per-dimension ablation, not
-only the full-versus-baseline contrast, and the paper must state which of the two
-claims the evidence supports.
+**Interpretive constraint.** The full-versus-`H` comparison quantifies
+appropriateness-relevant information omitted by an `H`-only evaluation. It does
+not establish that PERSONA is superior to every possible response-level
+evaluation baseline or that it is a fully validated psychometric instrument.
+"The profile contains information beyond `H`" and "every profile dimension is
+equally informative" are also different claims. The analysis must therefore
+report per-dimension ablations and state which dimensions carry the available
+signal.
 
 ---
 
 ### RQ3
 
-> Do the relationships between anthropomorphic dimensions and overall
-> appropriateness vary across interaction domains?
+> How do the relative contributions of empathic appropriateness,
+> misleading-implication risk, and contextual fit vary across mental health,
+> education, and general health?
 
 **Answerable: partially.** Three domains exist (mental health, education,
 health), each with the same four dimensions and the same criterion, which
@@ -111,6 +116,6 @@ CounselBench will catch immediately.
 | RQ | Answerable | Principal constraint |
 |---|---|---|
 | RQ1 | Yes | Restricted `H` variance limits generalisation |
-| RQ2 | Yes | Must separate "beats H" from "is multidimensional" |
+| RQ2 | Yes | Omitted-information comparison is not universal validation |
 | RQ3 | Partially | Domain confounded with dataset and rubric; ceiling effects |
 | RQ4 | **No** | Adversarial set targets clinical, not anthropomorphic, failure; single condition |

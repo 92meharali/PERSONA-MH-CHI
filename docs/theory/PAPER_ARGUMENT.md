@@ -66,9 +66,9 @@ identity (`ANNOTATION_THEORY.md` §4).
 
 ## Empirical questions
 
-1. Does `H` alone predict `OA`? (RQ1)
-2. Does the full profile add information beyond `H`? (RQ2)
-3. Do the relationships differ across domains? (RQ3)
+1. To what extent does automated `H` diverge from domain-relevant judgments of `OA`? (RQ1)
+2. What appropriateness-relevant information do `E`, `D`, and `F` provide that `H` alone omits? (RQ2)
+3. How do the relative contributions of `E`, `D`, and `F` vary across mental health, education, and general health? (RQ3)
 4. Does adversarial anthropomorphic elicitation activate `D`? (RQ4)
 
 RQ4 is **not answerable with the present corpus** — the adversarial items target
@@ -97,11 +97,13 @@ minimising human-likeness. `H` enters the profile with no assumed direction.
 **The contribution is `P`, not `S`.** `S` is a ranking convenience, confined to a
 subsection, absent from the abstract.
 
-**Report which claim the evidence supports.** "The profile beats `H` alone" and
-"the profile is multidimensional" are separate claims requiring separate
-evidence. If ablation shows the increment is carried by one dimension, the paper
-reports that — the finding becomes *which channel carries appropriateness*, which
-is a real result, rather than a validation of `P` that the data did not deliver.
+**Report which claim the evidence supports.** The full-versus-`H` comparison
+quantifies information omitted when evaluation relies on human-likeness alone;
+it is not evidence that the profile is superior to every alternative
+response-level baseline. If ablation shows the available signal is carried by
+one dimension, the paper reports that directly. The result then identifies
+*which channel carries appropriateness-relevant information* rather than
+claiming validation that the data do not deliver.
 
 **Do not retrofit.** This file predates the final analysis. If results are
 unexpected, they are reported as results; the argument is not rewritten to have

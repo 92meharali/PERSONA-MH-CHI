@@ -1,13 +1,14 @@
 # CHI Manuscript Claims Audit
 
-This file audits major claims in `paper/persona_chi2027.tex` after the final
+This file audits major claims in `paper/revised3.tex` after the current
 revision pass.
 
 | Claim | Evidence source | Exact result or support | Evidence type | Status |
 |---|---|---|---|---|
 | Human-likeness alone is insufficient as a proxy for overall anthropomorphic appropriateness. | `analysis/outputs/tables/cv_performance.csv`; `analysis/outputs/tables/correlations.csv` | H-only R2: MH 0.026, Edu 0.099, Health -0.007, Pooled 0.221; H/OA Spearman weak by domain. | Empirical | SUPPORTED |
 | Human-likeness is not wrong or harmful by default. | `docs/theory/PERSONA_THEORY.md`; HumT and HCI literature cited in manuscript | Theory assigns no fixed valence to H and treats it as descriptive. | Theoretical / literature-supported | SUPPORTED |
-| The full PERSONA profile adds predictive information beyond H alone. | `analysis/outputs/tables/incremental_validity.csv` | Full vs H-only gain: MH +0.632 CI [0.567,0.686]; Edu +0.462 CI [0.278,0.598]; Pooled +0.278 CI [0.204,0.339]; Health +0.264 CI [-0.053,0.400]. | Empirical | SUPPORTED WITH DOMAIN QUALIFICATION |
+| The full PERSONA profile captures OA-associated information omitted by H alone. | `analysis/outputs/tables/incremental_validity.csv` | Full vs H-only gain: MH +0.632 CI [0.567,0.686]; Edu +0.462 CI [0.278,0.598]; Pooled +0.278 CI [0.204,0.339]; Health +0.264 CI [-0.053,0.400]. | Empirical | SUPPORTED WITH DOMAIN QUALIFICATION |
+| PERSONA is superior to every alternative response-level quality baseline. | No direct baseline comparison in the current analysis. | The current comparison is specifically full profile versus H-only. | Empirical | NOT TESTED / NOT CLAIMED |
 | Health provides weaker evidence. | `analysis/outputs/tables/incremental_validity.csv`; `analysis/outputs/tables/ceiling_floor.csv` | Health gain CI crosses zero; health OA ceiling is 63.86%. | Empirical | SUPPORTED |
 | Contextual fit accounts for much of the predictive signal in mental health and education. | `analysis/outputs/tables/ablation.csv` | F-only R2: MH 0.651 vs full 0.659; Edu 0.562 vs full 0.562. | Empirical | SUPPORTED |
 | F is not the same as OA. | `docs/theory/CONSTRUCT_DEFINITIONS.md`; `docs/theory/CLAIMS_AND_BOUNDARIES.md` | F is contextual calibration; OA is holistic and can include safety, accuracy, actionability, and responsibility. | Theoretical | REQUIRES QUALIFICATION |
