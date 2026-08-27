@@ -592,3 +592,14 @@ construct-relationship audit, examples, limitations, citations, and all 32
 references remain unchanged. This avoids sacrificing necessary detail when the
 rendered manuscript was already within approximately 1.7\% of the requested
 6,800-word target.
+
+### CHI Format Recheck
+
+The 19-page compiled length is expected under CHI 2027's required single-column
+anonymous review format and is not itself a paper-length violation. The Papers
+call evaluates length primarily by words and encourages 5,000--8,000 words,
+excluding references, figure/table captions, and appendices. A subsequent audit
+identified that the prior abstract exceeded the separate 150-word maximum. The
+abstract was reduced to a TeXcount sum of 137 words while preserving the framework,
+sample size, independent rating design, headline cross-validation results,
+domain-specific finding, uncertain health result, and calibration conclusion.
