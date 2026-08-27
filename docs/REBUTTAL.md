@@ -1,8 +1,9 @@
 # PERSONA Manuscript Revision and Rebuttal Record
 
-This internal document records each professor-raised critical issue, the research
-team's decision, every resulting change, the affected files, and remaining work.
-It is not manuscript text and should not be submitted as part of the paper.
+This document records each professor-raised critical issue, the research team's
+decision, every resulting change, the affected files, and remaining work. It can
+be shared with the supervising professor as a revision record, but it is not
+manuscript text and should not be submitted as part of the paper.
 
 ## Critical Issue 1: Ethics and Annotator Documentation
 
@@ -25,6 +26,10 @@ ratings as oversight or adjudication data.
 - Annotators had two weeks to complete the work.
 - Annotators could withdraw; none withdrew, and all completed the study.
 - Annotators worked independently.
+- Group B dimension ratings were completed by members of the author team and
+  research interns after they jointly reviewed and agreed upon the construct
+  definitions, anchors, attribution rules, and detailed annotation procedure.
+  Ratings were completed independently after annotation began.
 - Annotators were instructed not to use AI to assign scores or write rationales.
   AI could be used only to clarify material they did not understand.
 - Sensitive-content considerations were included in study procedures.
@@ -188,7 +193,7 @@ installed, so the existing Overleaf compilation TODO remains open.
 The manuscript did not name the predictive estimator or fully specify
 preprocessing, tuning, grouping, seeds, scoring, and uncertainty procedures. It
 also combined the released 415-response education and health counts with stale
-language about larger HuMT exports and did not explain why 415 responses map to
+language about larger HumT exports and did not explain why 415 responses map to
 139 education and 140 health prompt clusters. Prompt provenance was described
 inconsistently.
 
@@ -217,8 +222,8 @@ inconsistently.
 - Added exact prompt-cluster size distributions and stated that prompt groups
   remain intact in cross-validation.
 - Removed filtering, attrition, and larger-precursor-corpus language.
-- Reduced `humt_education.csv` and `humt_health.csv` to the 415 one-to-one HuMT
-  records belonging to each released corpus. No HuMT score used in analysis was
+- Reduced `humt_education.csv` and `humt_health.csv` to the 415 one-to-one HumT
+  records belonging to each released corpus. No HumT score used in analysis was
   changed.
 - Corrected prompt provenance and added primary Bridge, MathDial, and HealthBench
   citations.
@@ -231,15 +236,15 @@ inconsistently.
 - Dataset sizes remain 660 mental-health, 415 education, and 415 health
   responses, totaling 1,490.
 - Prompt-cluster counts remain 220, 139, and 140, totaling 499.
-- No released response, human rating, or analysis-used HuMT score changed.
+- No released response, human rating, or analysis-used HumT score changed.
 - Predictive specifications and all reported statistical results remain
   unchanged.
 
 ### Status
 
-Implemented and verified on 2026-08-25. The data-build, HuMT-provenance, and
+Implemented and verified on 2026-08-25. The data-build, HumT-provenance, and
 predictive phases regenerated successfully. All headline result tables remained
-byte-for-byte unchanged, both HuMT files and audits now report 415/415 rows, and
+byte-for-byte unchanged, both HumT files and audits now report 415/415 rows, and
 source, Python syntax, LaTeX structure, citation, and stale-reference checks
 passed. Local PDF compilation remains pending because no LaTeX compiler is
 installed.
@@ -325,7 +330,7 @@ audit or concrete disagreement cases.
 
 ### Unchanged Items
 
-- No dataset, annotation, response, HuMT score, rubric, or rater record changed.
+- No dataset, annotation, response, HumT score, rubric, or rater record changed.
 - No predictive model, fold, estimator, bootstrap, reliability estimate,
   ablation, domain interaction, or headline performance result changed.
 - No pre-existing Phase 3 result table or figure changed.
@@ -417,7 +422,7 @@ anthropomorphic misleading implication.
 ### Unchanged Items
 
 - No original annotation score or rationale changed.
-- No response, prompt, scenario, model, HuMT value, or identifier changed.
+- No response, prompt, scenario, model, HumT value, or identifier changed.
 - No original D subtype rating exists; the new cue-family audit is explicitly
   post-analysis.
 - No headline prediction, reliability, ablation, interaction, correlation, or
@@ -432,3 +437,130 @@ confirmed that only `annotator_notes` changed in the five health CSVs. Python,
 CSV schema, numeric trace, source-formatting, LaTeX-structure, reference, and
 citation checks passed. Local PDF compilation remains pending because no LaTeX
 compiler is installed.
+
+## Professor Review Follow-up: `kinda_final.tex`
+
+### Scope
+
+Following review of the compiled 19-page draft against the professor's complete
+revision checklist, the manuscript was updated as `paper/kinda_final.tex`. This
+follow-up corrects a reliability-table transcription problem, completes several
+requested reporting additions, and improves examples and presentation. It does
+not change the dataset, annotations, analysis pipeline, or generated results.
+
+### Critical Items
+
+#### Reliability Table: Resolved
+
+The reviewed PDF contained incorrect supplementary reliability values in its
+expanded table. Most importantly, it reported health E as ICC(A,k) = .992,
+ICC(A,1) = .961, and ordinal alpha = .959, which did not match the generated
+analysis output.
+
+The table in `kinda_final.tex` was replaced directly from
+`analysis/outputs/tables/reliability.csv`. The corrected health E values are
+ICC(A,k) = .939 with 95% CI [.928, .948], ICC(A,1) = .754, and ordinal alpha =
+.667. The remaining ICC(A,1) and alpha values were likewise reconciled with the
+generated table. The education E values remain ICC(A,k) = .997, ICC(A,1) =
+.985, and alpha = .988.
+
+#### Institutional Determination: Pending
+
+The manuscript accurately states that the study did not receive prospective
+institutional ethics review and does not claim approval or exemption. A written
+institutional determination remains pending. Its actual outcome and timing must
+be added when received; it must not be described as retrospective approval.
+
+#### Anonymous Supplementary Package: Pending
+
+The manuscript uses the anonymous ACM review format and no longer directs
+reviewers to the public repository. Before submission, the supplementary package
+must still be checked for author names, institutional details, repository URLs,
+usernames, acknowledgments, file metadata, and discoverable folder names.
+
+### High-Priority Reporting Changes
+
+- Removed the ambiguous statement that education and health were "pre-filtered
+  prior to sampling." The manuscript now states that the attrition table begins
+  with the final prompt packs and reports zero API failures, post-generation
+  exclusions, HumT failures, and incomplete annotation rows.
+- Clarified rater composition. Group A consists of the domain-relevant pools
+  already documented: psychology students, MBBS students, teachers, and teaching
+  assistants. Group B consists of members of the author team and research
+  interns who agreed upon the rubric and detailed process before independently
+  rating E, D, and F. No rater contributed to both OA and E/D/F.
+- Added the exact generation endpoints available in the repository:
+  `gpt-5.6-sol` through the OpenAI Responses API,
+  `anthropic/claude-opus-4.8` through the OpenRouter Chat Completions API, and
+  `z-ai/glm-5.2` through the OpenRouter Chat Completions API.
+- Did not invent generation access dates because the repository does not
+  preserve defensible dates for every endpoint. This remains a metadata gap to
+  resolve only if contemporaneous records are located.
+- Standardized all active manuscript uses of the metric name to `HumT`.
+
+### HumT and the Generic-Quality Question
+
+The manuscript now explains the HumT mechanism more precisely. HumT is an
+LLM-based linguistic metric, but it is not an LLM judge of response quality. It
+compares the relative probability of text under animate and inanimate reporting
+frames, such as "he or she said" versus "it said." Pronouns, conversational
+phrasing, and related linguistic cues may affect this attribution; helpfulness,
+safety, and overall response quality are not its targets.
+
+This clarification strengthens the interpretation of H as a style-focused
+baseline, but it does not create or substitute for an independent generic
+response-quality control. The team therefore retains the previously approved
+narrow framing: the H-only comparison quantifies OA-associated information
+omitted by reliance on H alone and is not claimed as universal incremental
+validity over every quality baseline.
+
+### Examples and Presentation Changes
+
+- Removed the defensive sentence that called the examples "interpretive
+  illustrations rather than additional statistical tests."
+- Expanded the example-table caption to spell out H, E, D, F, and OA; state that
+  E/D/F/OA are means across five raters; and confirm that the final corpus has no
+  missing ratings.
+- Added a traceable matched education pair from the same active-exam prompt. One
+  response supplies the answer (H = .146, E = 1.0, D = 1.0, F = 1.0, OA = 1.0),
+  while the comparison response refuses and offers the power rule (H = .065,
+  E = 2.0, D = 1.0, F = 4.0, OA = 4.0).
+- Removed the secondary composite profile score, which was not required by an
+  RQ and introduced an unnecessary additional aggregation.
+- Replaced the oversized three-bar model figure with a compact model/mean-OA
+  table.
+- Increased the ablation figure to the full available line width.
+- Revised the Results overview to foreground the domain-specific calibration
+  finding before walking through the RQs.
+- Moved domain-specific calibration to the opening of the Discussion, followed
+  by the narrower conclusion that human-likeness is useful but insufficient.
+
+### Unchanged Analysis and Data
+
+- No response, prompt, score, rationale, annotator record, HumT value, model
+  output, or identifier changed.
+- No estimator, preprocessing step, fold assignment, bootstrap procedure,
+  reliability computation, predictive result, ablation result, interaction,
+  correlation, or sensitivity result changed.
+- The reliability edit corrects manuscript transcription against the generated
+  source table; it does not recalculate or selectively alter reliability.
+- The matched example uses existing processed-dataset rows and reported means.
+
+### Remaining Editorial Work
+
+- Incorporate the written institutional determination when received.
+- Complete the anonymous supplementary-package audit.
+- Normalize and alphabetize the complete reference list and author-name style.
+- Add model access dates only if contemporaneous records can verify them.
+- Recompile `kinda_final.tex` on Overleaf and inspect table placement, figure
+  readability, page count, references, and line wrapping.
+- Conduct a final concision pass after compilation; the latest content additions
+  should be balanced against repeated caveats and non-central explanation.
+
+### Status
+
+Implemented in `paper/kinda_final.tex` and pushed in commit `a261421` on
+2026-08-27. Source-level checks confirmed balanced environments, unique labels,
+resolved internal references, corrected reliability values, and no active
+`HumT` spelling. Local PDF compilation remains unavailable; Overleaf rendering
+and the two external critical items above remain pending.
