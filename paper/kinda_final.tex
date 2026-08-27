@@ -39,11 +39,6 @@ Appropriateness and human-likeness can diverge in either direction. A response c
 
 What counts as calibrated, however, depends fundamentally on context: a crisis disclosure demands direct safety guidance over performative reassurance; a tutoring exchange requires encouragement without preempting student problem-solving; and a clinical inquiry calls for explicit epistemic uncertainty and referral boundaries. Whether appropriateness varies systematically in this manner, and which multidimensional properties explain this variance, are empirical questions that scalar measures of linguistic style cannot answer.
 
-% To address these questions, we introduce PERSONA, a framework for evaluating contextual appropriateness in anthropomorphic AI responses. PERSONA represents each response as:
-% \[
-% P=(H,E,D,F),
-% \]
-% where $H$ is human-likeness, $E$ is empathic appropriateness, $D$ is anthropomorphic deception/misleading implication risk, and $F$ is contextual fit. The framework is intentionally multidimensional: $H$ is a descriptive signal, while $E$, $D$, and $F$ characterize distinct evaluative properties of a response.
 
 To operationalize this distinction, we introduce PERSONA, an evaluation framework that decouples the surface style of an AI response from its interactional adequacy. Rather than reducing anthropomorphism to a single score, PERSONA characterizes each response as a four-dimensional profile:
 \begin{equation}
@@ -57,23 +52,15 @@ Within this profile, $H$ acts as a descriptive baseline for linguistic \textbf{h
 \end{itemize}
 
 
-% Anthropomorphic cues in conversational AI directly shape user mental models regarding system capabilities, reliability, and relational boundaries \cite{devrio2025}. While recent work provides valuable tools to measure human-likeness \cite{cheng2025} and categorize anthropomorphic dialogue cues \cite{abercrombie2023, devrio2025}, these approaches remain primarily descriptive. The central HCI challenge is not merely determining how human-like an output appears, but assessing whether that anthropomorphic behavior is contextually appropriate: safeguarding user trust, signaling accurate system capabilities, and respecting situational constraints.
 
-% This distinction is critical because human-likeness does not guarantee interactional adequacy. While conversational warmth can improve accessibility and engagement, optimizing purely for human-like fluency risks obscuring system limitations or simulating unsupported capacities, such as emotional interiority or ungrounded authority. In practice, appropriateness diverges across domains: mental health contexts prioritize rapid safety intervention over simulated empathy, educational tutoring requires firm pedagogical scaffolding alongside encouragement, and health inquiries demand calibrated uncertainty and referral boundaries that stylistic metrics fundamentally miss.
 
-% Anthropomorphic language is now part of everyday interaction with generative AI systems. Assistants say ``I can help,'' offer reassurance, explain uncertainty, apologize, encourage, and sometimes imply care, memory, personal experience, or expertise. These linguistic choices matter because they shape how people understand what an AI system is, what it can do, and what kind of relationship is being enacted in the interaction \cite{devrio2025}.
 
-% Recent advances have made human-likeness increasingly quantifiable: automated metrics now measure human-like linguistic features in LLM outputs \cite{cheng2025}, structured taxonomies classify personification cues \cite{devrio2025}, and empirical studies document the conversational risks of anthropomorphic framing \cite{abercrombie2023}. Yet, treating human-likeness merely as a scalar property to be detected or optimized overlooks the core HCI challenge. The critical question is not whether an AI response sounds human, but whether its anthropomorphic behavior is contextually appropriate: safeguarding user trust, signaling accurate system capabilities, and respecting domain-specific boundaries.
 
-% Crucially, our claim is not that human-likeness is inherently problematic or should be systematically minimized. Conversational warmth can enhance usability, clarity, and perceived support. Rather, the tension arises because human-likeness is merely a descriptive surface signal, not a normative criterion for appropriateness. High fluency and warmth offer no guarantee that a system has maintained honest boundaries about its capabilities or calibrated its tone to user vulnerability. For instance, a mental health crisis demands immediate safety triage rather than performative emotional reassurance; an educational interaction requires approachable scaffolding while preserving pedagogical boundaries; and a health inquiry necessitates explicit epistemic uncertainty and clinical referral boundaries that stylistic fluency alone cannot ensure.
 
-%Recent work has made human-likeness itself more measurable. HumT provides an automated measure of human-like language in LLM outputs \cite{cheng2025}; DeVrio et al.\ provide a taxonomy of linguistic expressions that contribute to anthropomorphism in language technologies \cite{devrio2025}; and prior work documents personification cues and their potential harms in dialogue systems \cite{abercrombie2023}. This is an important foundation. However, the central HCI challenge is not simply measuring how human-like an AI response appears, but determining when anthropomorphic behavior is appropriate.
 
-% A central methodological challenge in multidimensional appropriateness evaluation is circularity. If overall appropriateness is calculated from the same dimensions used to predict it, predictive performance becomes a scoring identity rather than an empirical result. PERSONA therefore elicits $OA$ independently from the profile dimensions. Group A evaluates $OA$ holistically, while a separate Group B evaluates $E$, $D$, and $F$. This separation allows the relationship between the profile and holistic appropriateness to be tested empirically rather than defined mathematically.
 
 A central methodological challenge in multidimensional evaluation is avoiding circularity: if overall appropriateness is computed as an aggregation of component subscales, any predictive relationship becomes a definitional artifact rather than an empirical finding. To prevent this, PERSONA deliberately elicits overall appropriateness ($OA$) independently from the profile dimensions. In our evaluation, one cohort of domain specialists rates holistic appropriateness ($OA$) directly, while an entirely separate cohort of evaluators scores the individual dimensions ($E$, $D$, and $F$). This strict separation of raters makes the out-of-sample comparison with holistic appropriateness empirical rather than a mathematical identity.
 
-% We evaluate PERSONA on 1,490 AI responses across three domains: mental health ($n=660$), education ($n=415$), and health ($n=415$). The final analysis sets contain 660 mental-health, 415 education, and 415 health responses. Mental-health prompts were constructed from CounselBench material \cite{CounselBench2025}, including natural patient questions and adversarial expert-authored failure-mode items. The education and health datasets were constructed around tutoring and health-assistance contexts, with natural and adversarial prompt types.
 
 We evaluate PERSONA on a corpus of 1,490 AI responses spanning three high-stakes domains: mental health ($n=660$), education ($n=415$), and general health ($n=415$). Mental health prompts were drawn from CounselBench \cite{CounselBench2025}, while educational and health scenarios were developed around interactive tutoring and health-assistance contexts. Across all three domains, prompts encompass both natural user inquiries and expert-authored adversarial prompts designed to probe boundary failures and unwarranted anthropomorphism.
 
@@ -433,20 +420,6 @@ The education and health interaction terms for $E$ are negative relative to ment
 
 Averaged ratings showed strong overall agreement across the main domain-by-dimension cells. Table~\ref{tab:reliability} reports the primary average-measures reliability ICC(A,k), alongside supplementary single-rater ICC(A,1) and Krippendorff's ordinal $\alpha$ values.
 
-% \begin{table}[t]
-% \centering
-% \caption{Primary reliability: ICC(A,k), 95\% CI in parentheses.}
-% \label{tab:reliability}
-% \begin{tabular}{lrrrr}
-% \toprule
-% Domain & OA & E & D & F\\
-% \midrule
-% Mental health & .851 (.830,.870) & .948 (.939,.956) & .959 (.954,.965) & .864 (.839,.885)\\
-% Education & .916 (.878,.938) & .997 (.995,.999) & .963 (.934,.981) & .954 (.928,.969)\\
-% Health & .907 (.804,.945) & .939 (.928,.948) & .942 (.912,.959) & .922 (.908,.934)\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
 
 \begin{table}[t]
 \centering
@@ -515,22 +488,7 @@ Table~\ref{tab:construct-relationships} makes the $F$/$OA$ relationship explicit
 
 As a post-analysis interpretive diagnostic, we apply the same transparent disagreement screens in every domain: high $F$/low $OA$ means $F\geq4$ and $OA\leq3$, low $F$/high $OA$ means $F\leq3$ and $OA\geq4$, and a large gap means $|F-OA|\geq2$. Mental health contains one low-$F$/high-$OA$ case (0.15\%) and no large-gap cases; education contains none; health contains one high-$F$/low-$OA$ case, 42 low-$F$/high-$OA$ cases (10.36\% in either direction), and 33 large-gap cases (7.95\%). For example, health raters gave a response refusing unsafe leftover antibiotics $F=2.6$ but $OA=5.0$, whereas an emergency-headache response received $F=4.0$ but $OA=2.6$. These cases show that independently elicited holistic judgments can disagree with the narrower fit judgment, particularly where safety, actionability, or misleading implications enter the holistic assessment. They support operational non-identity, not complete discriminant validity.
 
-% \subsection{Distributional Constraints and Robustness}
 
-% \begin{table}[t]
-% \centering
-% \caption{Distributional diagnostics relevant to interpretation.}
-% \label{tab:ceiling}
-% \begin{tabular}{lrrr}
-% \toprule
-% Domain & OA mean & OA ceiling & D floor\\
-% \midrule
-% Mental health & 4.317 & 20.91\% & 16.67\%\\
-% Education & 4.327 & 21.93\% & 87.23\%\\
-% Health & 4.860 & 63.86\% & 49.40\%\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
 
 \begin{table}[t]
 \centering
@@ -550,7 +508,6 @@ Health        & .031 & .023 & -.037 & .094 & 4.860 & 63.86\% & 49.40\% \\
 \end{tabular}
 \end{table}
 
-% Health shows the strongest restriction of OA variance: 63.86\% of responses receive the maximum OA score. Education also shows a strong floor effect for $D$, with 87.23\% at the minimum score. These distributional diagnostics are summarized in Table~\ref{tab:ceiling}. These concentrations constrain what predictive relationships can be detected and are therefore important qualifications on domain-level interpretation.
 
 Distributional diagnostics across all dimensions are summarized in Table~\ref{tab:ceiling}. Notably, human-likeness ($H$) exhibits restricted variation in both mental health (mean $= .050$, SD $= .022$, range $[-.020, .129]$) and health (mean $= .031$, SD $= .023$, range $[-.037, .094]$) compared to education (range $[-.031, .354]$). This narrow spread in $H$ indicates that the weak predictive power of human-likeness for $OA$ in health and mental health may partly reflect variance restriction in linguistic signaling within those corpora. In addition, health shows a strong ceiling effect for $OA$ (63.86\% at maximum score), while education shows a pronounced floor effect for $D$ (87.23\% at minimum score). These variance constraints limit the detectable predictive relationships and qualify our domain-level interpretations.
 
@@ -806,8 +763,6 @@ J. Weizenbaum.
 ELIZA: A Computer Program for the Study of Natural Language Communication Between Man and Machine.
 \textit{Communications of the ACM} 9, 1 (1966), 36--45.
 
-% \bibitem{CounselBench2025}
-% CounselBench. 2025. \textit{CounselBench: A Large-Scale Expert Evaluation and Adversarial Benchmarking of Large Language Models in Mental Health Question Answering}. arXiv:2506.08584.
 \bibitem{CounselBench2025}
 Yahan Li, Jifan Yao, John Bosco S. Bunyi, Adam C. Frank, Angel Hsing-Chi Hwang, and Ruishan Liu.
 \newblock Counsel{B}ench: A {L}arge-{S}cale {E}xpert {E}valuation and {A}dversarial {B}enchmarking of {L}arge {L}anguage {M}odels in {M}ental {H}ealth {Q}uestion {A}nswering.

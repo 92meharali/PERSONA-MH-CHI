@@ -564,3 +564,31 @@ Implemented in `paper/kinda_final.tex` and pushed in commit `a261421` on
 resolved internal references, corrected reliability values, and no active
 `HumT` spelling. Local PDF compilation remains unavailable; Overleaf rendering
 and the two external critical items above remain pending.
+
+## Manuscript Length Audit
+
+### Requested Target
+
+The manuscript was reviewed against the requested target of approximately 6,800
+words. TeXcount reports 6,686 words under its standard non-reference sum, which
+includes text, headings, captions, and counted mathematical content. The main
+text, headings, and captions account for 6,427 words; the bibliography is
+excluded from both figures, as is conventional for manuscript-length reporting.
+
+### Change Made
+
+The source contained 46 lines of obsolete commented-out draft prose, superseded
+tables, and a duplicate commented bibliography entry. These lines inflated raw
+source counts even though they did not appear in the compiled paper. They were
+removed from `paper/kinda_final.tex`.
+
+### Content Preserved
+
+No active manuscript prose or rendered content was removed during this cleanup.
+The theoretical argument, DeVrio grounding, research questions, construct
+definitions, dataset and rater documentation, ethics disclosure, reproducible
+analysis specification, corrected reliability values, headline results,
+construct-relationship audit, examples, limitations, citations, and all 32
+references remain unchanged. This avoids sacrificing necessary detail when the
+rendered manuscript was already within approximately 1.7\% of the requested
+6,800-word target.
