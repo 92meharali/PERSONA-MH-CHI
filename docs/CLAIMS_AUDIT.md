@@ -1,6 +1,6 @@
 # CHI Manuscript Claims Audit
 
-This file audits major claims in `paper/revised3.tex` after the current
+This file audits major claims in the current primary manuscript after the latest
 revision pass.
 
 | Claim | Evidence source | Exact result or support | Evidence type | Status |

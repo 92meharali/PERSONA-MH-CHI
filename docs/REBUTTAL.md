@@ -609,3 +609,13 @@ identified that the prior abstract exceeded the separate 150-word maximum. The
 abstract was reduced to a TeXcount sum of 137 words while preserving the framework,
 sample size, independent rating design, headline cross-validation results,
 domain-specific finding, uncertain health result, and calibration conclusion.
+
+## Revised 5 Shortened Draft
+
+The author-supplied shortened draft was adopted as the current primary
+manuscript. A direct comparison found no new substantive prose, numerical,
+table, figure, citation, or structural changes relative to the preceding draft.
+The supplied copy contained the superseded no-approval ethics sentence because
+it predated the EIRB update; the current approved parent-project statement was
+therefore retained. A missing final newline was also restored. No research data,
+analysis, or reported result changed.

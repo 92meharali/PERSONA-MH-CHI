@@ -1,5 +1,18 @@
 # Paper Revision Changelog
 
+## 2026-09-01: Revised 5 Shortened Draft
+
+- Adopted the author-supplied shortened TeX draft as the current primary
+  anonymous-review manuscript.
+- Confirmed that it matched the preceding draft except for an outdated ethics
+  sentence and the missing final newline.
+- Preserved the author-supplied content while merging the newer EIRB-approved
+  parent-project statement.
+- Updated the manuscript index and claims-audit pointer to the new primary
+  version.
+- Changed no dataset, annotation, analysis, statistical result, table, figure,
+  citation, or active argument.
+
 ## 2026-09-01: EIRB Approval Status
 
 - Received and reviewed the signed university EIRB approval dated 12 February
