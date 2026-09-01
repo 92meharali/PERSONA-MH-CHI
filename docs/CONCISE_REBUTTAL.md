@@ -13,8 +13,9 @@ backgrounds, separate rating groups, two-week annotation period, informed
 consent, voluntary participation, withdrawal rights, independent work, limited
 AI-use policy, anonymization, and sensitive-content safeguards. We also
 corrected the health ratings to be described as human annotations rather than
-oversight or adjudication. A written institutional ethics determination remains
-pending and will be reported accurately when received.
+oversight or adjudication. We also confirmed that PERSONA is a sub-study under a
+broader university EIRB-approved project, with approval dated 12 February 2026,
+and added this status using wording that preserves the parent-project scope.
 
 ## 2. Strength of the H-Only Comparison
 
@@ -109,6 +110,5 @@ The revised manuscript makes a narrower and more defensible contribution:
 human-likeness remains a useful descriptive signal, but it is not sufficient for
 evaluating contextual appropriateness. The framework provides a diagnostic
 profile of empathy, misleading anthropomorphic implications, and contextual
-fit, with its strongest evidence in mental health and education. Remaining work
-is limited to obtaining the written institutional ethics determination and
-completing the final anonymous supplementary-material audit.
+fit, with its strongest evidence in mental health and education. The remaining
+external task is the final anonymous supplementary-material audit.

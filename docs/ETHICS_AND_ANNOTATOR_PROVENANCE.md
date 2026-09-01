@@ -2,21 +2,26 @@
 
 This document is the canonical factual record for reporting participant ethics,
 recruitment, and annotation provenance in the PERSONA manuscript. It records the
-research team's clarification supplied on 2026-08-25 and should be updated if a
-formal ethics determination or additional procedural documentation is obtained.
+research team's clarifications supplied on 2026-08-25 and 2026-09-01, together
+with the signed university EIRB approval supplied on 2026-09-01.
 
 ## Ethics status
 
-The annotation study did not receive prospective institutional ethics-board or
-IRB review. The project must not claim approval, exemption, or retrospective
-approval. Annotators provided informed consent before participating.
+The research team confirms that PERSONA was conducted as a sub-study under a
+broader research project approved by the Information Technology University
+Ethical Institutional Review Board on 12 February 2026. The signed approval
+letter names the parent project rather than PERSONA, records an approval action,
+and states that approval remains valid for the life of the project provided the
+research follows university policy. Annotators provided informed consent before
+participating.
 
-Before submission, the authors should obtain a written determination from the
-relevant institutional office stating whether this study required formal review
-under the rules that applied in the authors' research environment. Any later
-determination must be reported with its true timing and must not be presented as
-prospective or retrospective approval of the completed study. CHI's required
-reviewer note should summarize that local context.
+Reporting must preserve this scope distinction: the manuscript may state that
+PERSONA was conducted under the approved parent project, but must not imply that
+the approval letter separately names PERSONA. The signed letter contains project
+and investigator identities and committee signatures, so it is retained in the
+private study record rather than committed to the anonymous public repository.
+An appropriately redacted copy or institutional verification can be supplied if
+required during review.
 
 ## Recruitment and qualifications
 

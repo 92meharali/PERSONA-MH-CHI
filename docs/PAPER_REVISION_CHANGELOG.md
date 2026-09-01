@@ -1,5 +1,19 @@
 # Paper Revision Changelog
 
+## 2026-09-01: EIRB Approval Status
+
+- Received and reviewed the signed university EIRB approval dated 12 February
+  2026.
+- Recorded the research team's confirmation that PERSONA is a sub-study within
+  the broader approved project.
+- Updated the active and retained manuscript drafts, ethics provenance record,
+  rebuttals, and submission checklist to replace the obsolete pending status.
+- Preserved the scope distinction that the letter names the parent project
+  rather than PERSONA separately.
+- Kept the signed document out of the anonymous public repository because it
+  contains project and investigator identities and committee signatures.
+- Changed no dataset, annotation, analysis, result, figure, or table.
+
 ## 2026-08-25: Major Issue 4.2, D Scope and Professional-Role Boundary
 
 - Retained the name Anthropomorphic Deception/Misleading-Implication Risk.

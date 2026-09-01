@@ -17,7 +17,9 @@ ratings as oversight or adjudication data.
 
 ### Team-Confirmed Facts
 
-- No prospective ethics review had been obtained at the time of revision.
+- The research team subsequently confirmed that PERSONA is a sub-study under a
+  broader university EIRB-approved project. The signed approval is dated 12
+  February 2026 and identifies the parent project rather than PERSONA directly.
 - Annotators gave consent and participated voluntarily.
 - Mental-health annotators were final-year psychology students with
   mental-health-relevant training.
@@ -49,9 +51,10 @@ ratings as oversight or adjudication data.
 - Removed the word "unpaid" and retained only "voluntary participation."
 - Corrected health provenance throughout the repository from
   oversight/adjudication language to independent human annotation.
-- Added an urgent TODO to obtain a written institutional ethics determination
-  and report its actual status and timing without presenting it as retrospective
-  approval.
+- Replaced the earlier pending-determination language after receiving the signed
+  approval and team confirmation of PERSONA's status within the parent project.
+- Preserved the scope distinction: the approval letter names the parent project,
+  while the research team confirms that PERSONA falls within its approved scope.
 - Added a future acknowledgment TODO for consenting annotators.
 
 ### Affected Files
@@ -65,8 +68,9 @@ ratings as oversight or adjudication data.
 
 ### Status
 
-Implemented and pushed in commits `68d538c` and `bd9ac79`. Institutional ethics
-determination remains pending and must be incorporated when received.
+The original documentation changes were implemented on 2026-08-25. Ethics
+status was updated on 2026-09-01 after the signed approval and parent-project
+scope confirmation were supplied.
 
 ## Critical Issue 2: Near-Tautological H-Only Versus Full-Profile Comparison
 
@@ -464,12 +468,15 @@ ICC(A,k) = .939 with 95% CI [.928, .948], ICC(A,1) = .754, and ordinal alpha =
 generated table. The education E values remain ICC(A,k) = .997, ICC(A,1) =
 .985, and alpha = .988.
 
-#### Institutional Determination: Pending
+#### Institutional Approval: Resolved
 
-The manuscript accurately states that the study did not receive prospective
-institutional ethics review and does not claim approval or exemption. A written
-institutional determination remains pending. Its actual outcome and timing must
-be added when received; it must not be described as retrospective approval.
+The research team confirmed that PERSONA is a sub-study under a broader project
+approved by the authors' university EIRB on 12 February 2026. The manuscript now
+states this relationship precisely: the signed letter identifies the parent
+project, while the team confirms that PERSONA falls within its approved scope.
+The signed document is retained privately because it contains investigator
+identities and committee signatures and should not be uploaded with anonymous
+public materials.
 
 #### Anonymous Supplementary Package: Pending
 
@@ -548,7 +555,6 @@ validity over every quality baseline.
 
 ### Remaining Editorial Work
 
-- Incorporate the written institutional determination when received.
 - Complete the anonymous supplementary-package audit.
 - Normalize and alphabetize the complete reference list and author-name style.
 - Add model access dates only if contemporaneous records can verify them.
@@ -563,7 +569,7 @@ Implemented in `paper/kinda_final.tex` and pushed in commit `a261421` on
 2026-08-27. Source-level checks confirmed balanced environments, unique labels,
 resolved internal references, corrected reliability values, and no active
 `HumT` spelling. Local PDF compilation remains unavailable; Overleaf rendering
-and the two external critical items above remain pending.
+and the anonymous supplementary-package audit remain pending.
 
 ## Manuscript Length Audit
 
