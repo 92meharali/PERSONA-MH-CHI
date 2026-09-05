@@ -21,9 +21,8 @@ ratings as oversight or adjudication data.
   broader university EIRB-approved project. The signed approval is dated 12
   February 2026 and identifies the parent project rather than PERSONA directly.
 - Annotators gave consent and participated voluntarily.
-- Mental-health annotators were final-year psychology students with
-  mental-health-relevant training.
-- General-health annotators were MBBS students.
+- Mental-health annotators had relevant psychology and mental-health training.
+- General-health annotators had relevant medical training.
 - Education annotators were school teachers and ITU teaching assistants.
 - Annotators had two weeks to complete the work.
 - Annotators could withdraw; none withdrew, and all completed the study.
@@ -46,8 +45,8 @@ ratings as oversight or adjudication data.
 - Added consent, voluntary participation, withdrawal rights, two-week timing,
   independent annotation, AI-use boundaries, and sensitive-content safeguards
   to the manuscript and repository documentation.
-- Corrected mental-health qualifications from generic medical-student wording to
-  final-year psychology students with relevant training.
+- Corrected mental-health qualifications to report only the verified psychology
+  and mental-health training.
 - Removed the word "unpaid" and retained only "voluntary participation."
 - Corrected health provenance throughout the repository from
   oversight/adjudication language to independent human annotation.
@@ -491,9 +490,9 @@ usernames, acknowledgments, file metadata, and discoverable folder names.
   prior to sampling." The manuscript now states that the attrition table begins
   with the final prompt packs and reports zero API failures, post-generation
   exclusions, HumT failures, and incomplete annotation rows.
-- Clarified rater composition. Group A consists of the domain-relevant pools
-  already documented: psychology students, MBBS students, teachers, and teaching
-  assistants. Group B consists of members of the author team and research
+- Clarified rater composition. Group A consists of raters with relevant
+  psychology, mental-health, medical, teaching, or teaching-assistant
+  backgrounds. Group B consists of members of the author team and research
   interns who agreed upon the rubric and detailed process before independently
   rating E, D, and F. No rater contributed to both OA and E/D/F.
 - Added the exact generation endpoints available in the repository:

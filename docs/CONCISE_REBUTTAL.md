@@ -16,6 +16,11 @@ corrected the health ratings to be described as human annotations rather than
 oversight or adjudication. We also confirmed that PERSONA is a sub-study under a
 broader university EIRB-approved project, with approval dated 12 February 2026,
 and added this status using wording that preserves the parent-project scope.
+We corrected the rater descriptions to report only verified training and roles.
+We also disclose that Group B included author-team
+members and research interns; although they rated independently and did not rate
+OA, shared rubric interpretations or expectancy effects remain possible and
+motivate replication with external dimension raters.
 
 ## 2. Strength of the H-Only Comparison
 

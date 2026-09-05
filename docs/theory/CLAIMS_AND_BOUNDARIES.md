@@ -22,16 +22,19 @@ means "explains these raters' judgments."
 
 ## §annotators — Annotator population
 
-Five raters per pool were recruited according to domain. Mental-health raters
-were final-year psychology students with mental-health-relevant training,
-general-health raters were MBBS students, and education raters were school
-teachers and university teaching assistants. They were volunteers rather than
-project-team annotators.
+Five raters per pool were assigned according to domain. Group A mental-health
+raters had relevant psychology and mental-health training, Group A
+general-health raters had relevant medical training, and Group A education
+raters were school teachers and university teaching assistants. Group B
+included author-team members and research interns who applied the shared rubric
+independently.
 
-The pools provide domain-relevant judgment but do not represent licensed mental-
-health clinicians, patients, or other affected end-user populations. This bounds
-generalisation. [CounselBench2025] used 100 mental-health professionals for
-adjacent constructs; the contrast should be stated rather than avoided.
+The pools provide domain-relevant judgment but do not represent every domain
+professional, patient, or other affected end-user population. Group B's
+familiarity with the framework may also produce shared-interpretation or
+expectancy effects. These factors bound generalisation. [CounselBench2025] used
+100 mental-health professionals for adjacent constructs; the contrast should be
+stated rather than avoided.
 
 ## §independence — Criterion independence
 

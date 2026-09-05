@@ -19,6 +19,11 @@
   findings to the current operationalization.
 - Updated the manuscript, theory foundation, claims audit, rebuttal, data
   documentation, analysis-facing terminology, and presentation consistently.
+- Corrected annotator provenance to retain only verified training and role
+  descriptions.
+- Disclosed Group B's author-team and research-intern composition and added the
+  bounded risk of shared rubric interpretation or expectancy effects, while
+  preserving its separation from the OA pool.
 - Changed no prompt, response, rating, annotation rationale, model, fold,
   statistical result, table value, or inferential procedure.
 

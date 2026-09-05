@@ -28,20 +28,27 @@ required during review.
 Annotators participated voluntarily and were assigned to domain-relevant rating
 work:
 
-- Mental health: final-year psychology students recruited through Allama Iqbal
-  Medical College with mental-health-relevant training.
-- General health: MBBS students recruited through Allama Iqbal Medical College.
+- Mental health: raters with relevant psychology and mental-health training,
+  recruited through Allama Iqbal Medical College.
+- General health: raters with relevant medical training, recruited through
+  Allama Iqbal Medical College.
 - Education: school teachers and teaching assistants recruited through ITU
   University.
 
-These qualifications support domain-relevant judgment. The manuscript must not
-describe the psychology students or MBBS students as licensed physicians,
-psychiatrists, or clinical specialists. It must also not describe the annotators
-as project-team raters.
+These qualifications support domain-relevant judgment. The manuscript should
+not infer unverified licenses, job titles, or specialist status from this
+training. Group A should not be described as project-team raters; Group B
+included members of the author team and research interns.
 
 For each domain, five holistic-appropriateness raters provided `OA` judgments and
 five separate dimension-specific raters provided `E`, `D`, and `F` judgments.
 No person rated both sets of constructs in the released design.
+
+Because Group B was familiar with the framework, its ratings may reflect shared
+rubric interpretations or expectancy effects even though raters worked
+independently. This is a limitation of external independence, not a failure of
+the Group A/Group B separation: Group B did not rate `OA`, and Group A did not
+rate `E`, `D`, or `F`.
 
 ## Participation and workload
 

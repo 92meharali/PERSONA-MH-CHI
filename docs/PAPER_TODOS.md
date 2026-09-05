@@ -11,5 +11,6 @@
 - [DONE: Confirmed on 2026-09-01 that PERSONA is a sub-study under a broader university EIRB-approved project; recorded the 2026-02-12 approval date and the parent-project scope distinction without publishing the signed identifying letter.]
 - [DONE: Renamed F to Domain Fit across current paper-facing materials while preserving and documenting the original Contextual Fit annotation label, definition, anchors, and ratings.]
 - [DONE: Added context-aware-computing grounding and a bounded Episteme--Phronesis conceptual lens without equating HumT with factual knowledge or PERSONA with practical wisdom.]
+- [DONE: Corrected annotator status descriptions and added a concise Group B framework-familiarity limitation without weakening the structural separation from OA.]
 - [TODO: Add consenting annotators to the acknowledgments in the non-anonymous accepted version; verify final author list, affiliations, funding, and data-availability wording.]
 - [TODO: VERIFY whether the literature review needs more domain-specific education and general-health appropriateness citations beyond the current HCI/anthropomorphism/trust base.]
