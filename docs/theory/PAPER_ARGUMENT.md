@@ -40,6 +40,23 @@ existing instrument says *which property* made it so — whether the warmth was
 miscalibrated, whether a false capacity was implied, or whether the whole posture
 was wrong for the situation.
 
+## Conceptual lens
+
+Aristotle's distinction between *episteme* (generalizable or demonstrable
+knowledge) and *phronesis* (practical judgment concerning variable particulars)
+helps articulate the paper's motivating gap. PERSONA uses this distinction as a
+conceptual lens rather than a literal measurement mapping. HumT-based `H`
+captures linguistic human-likeness, not factual knowledge or *episteme*; `E`,
+`D`, and `F` diagnose selected aspects of situation-sensitive calibration rather
+than proving that a model possesses *phronesis*.
+
+Context-aware computing further distinguishes the broader interactional
+environment from the bounded domains studied here. Dey provides an operational
+account of context and situation for context-aware applications; Dourish
+emphasizes that context is also produced through interaction rather than fixed
+in advance. PERSONA treats mental health, education, and general health as
+analytical domains within this broader context.
+
 ## Proposal
 
 Represent the anthropomorphic properties of a response as a profile:
@@ -49,7 +66,9 @@ P = (H, E, D, F)
 ```
 
 `H` descriptive human-likeness (automated), `E` empathic appropriateness, `D`
-anthropomorphic deception risk, `F` contextual fit. Each is defined so that it
+anthropomorphic deception risk, `F` domain fit. `F` retains the original rubric's
+focus on content, action, tone, certainty, and role boundaries while making its
+domain-specific application explicit. Each dimension is defined so that it
 captures a channel the others do not (`CONSTRUCT_DEFINITIONS.md`;
 `DISTINCTIONS.md`).
 

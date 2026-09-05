@@ -53,15 +53,25 @@ is broadly on topic.
 | Deception in social robotics requires explicit treatment | [Sharkey2020]; [Danaher2020] | — | Needs verification |
 | Ordinary conversational anthropomorphism differs from misleading signalling | Project rubric | The `D` negative list operationalises the boundary | Direct support (own protocol, not external) |
 
-## Contextual fit (F)
+## Domain fit (F)
 
 | Claim | Source | What it supports | Status |
 |---|---|---|---|
+| Context can be operationalized through information relevant to an entity's situation | [Dey2001] | Operational context definition and situation abstraction | Direct support |
+| Context is also interactionally produced rather than fully fixed in advance | [Dourish2004] | Critique of representational context and interactional alternative | Direct support |
 | Appropriateness norms are context-relative | [Nissenbaum2004] | Informational norms specific to social contexts | Needs verification (**load-bearing**) |
 | Domain experts flag failures that quality scores miss | [CounselBench2025] | LLMs scored high on perceived quality yet were flagged for unauthorised medical advice | Direct support |
 | Model-based judges are unreliable for expert-identified issues | [CounselBench2025] | LLM judges overrate and overlook safety issues experts identify | Direct support |
 | `F` is not general response quality | Project rubric | Same text scores differently by scenario | Direct support (own protocol) |
-| Different domains impose different warmth/boundary/authority expectations | — | — | **Weak support** — [CounselBench2025] covers mental health only; no source spans the three domains |
+| Different domains impose different action, certainty, and role expectations | [Dey2001]; [Dourish2004]; project rubrics | Context/situation theory plus domain-specific operational anchors | Supported as framework synthesis; not a universal empirical law |
+
+## Episteme--phronesis conceptual lens
+
+| Claim | Source | What it supports | Status |
+|---|---|---|---|
+| Episteme concerns demonstrable/generalizable knowledge, while phronesis concerns practical judgment about variable particulars | [Aristotle2009] | Classical distinction in *Nicomachean Ethics*, Book VI | Direct support |
+| PERSONA directly measures episteme or phronesis | — | — | **Unsupported and not claimed** |
+| HumT measures factual or scientific knowledge | [Cheng2025HumT] | HumT measures human-like language, not factual knowledge | **Contradicted by metric scope and not claimed** |
 
 ## Overall appropriateness (OA)
 
@@ -87,7 +97,8 @@ is broadly on topic.
 **Priority 1 — load-bearing and unverified**
 
 1. [Lee2004] — the entire over-reliance harm mechanism rests on it.
-2. [Nissenbaum2004] — the only theoretical grounding for context-relativity.
+2. [Nissenbaum2004] — supports contextual norms; Dey and Dourish now provide
+   complementary context-aware-computing foundations.
 3. [Ayers2023] — the claim that models already achieve high measured empathy.
 
 **Priority 2 — unsupported claims needing a source or a softer statement**

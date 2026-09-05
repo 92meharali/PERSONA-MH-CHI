@@ -45,17 +45,18 @@ also reconciled all dataset and prompt-cluster counts, clarified prompt sources,
 and confirmed that all 1,490 responses have complete ratings and human-likeness
 measurements.
 
-## 4. Contextual Fit and Overall Appropriateness
+## 4. Domain Fit and Overall Appropriateness
 
-**Concern.** Contextual fit and overall appropriateness are conceptually close,
-and the strong contextual-fit results could reflect construct overlap.
+**Concern.** Domain fit and overall appropriateness are conceptually close,
+and the strong domain-fit results could reflect construct overlap.
 
-**What we implemented.** We clarified that contextual fit is a focused judgment
-of response posture, whereas overall appropriateness is a holistic judgment of
-suitability, safety, helpfulness, and responsibility. We added rank and linear
+**What we implemented.** We clarified that domain fit is a focused judgment of
+content, action, tone, certainty, and role boundaries within a bounded domain,
+whereas overall appropriateness is a holistic judgment of suitability, safety,
+helpfulness, and responsibility. We added rank and linear
 associations, disagreement cases, and collinearity diagnostics. The manuscript
 now claims operational distinction and domain-dependent alignment, not complete
-discriminant validity. It explicitly acknowledges that contextual fit carries
+discriminant validity. It explicitly acknowledges that domain fit carries
 most of the predictive signal in mental health and education.
 
 ## 5. Scope of Deception Risk
@@ -67,7 +68,7 @@ deception even when no human identity or relationship is implied.
 anthropomorphic implications in the AI's own voice, including false human
 professional identity, relationship, memory, emotion, or continuity. Unsupported
 expertise, excessive certainty, unsafe advice, and factual error without such
-self-presentation are assigned to contextual fit or overall appropriateness.
+self-presentation are assigned to domain fit or overall appropriateness.
 The construct is now explicitly grounded in DeVrio et al.'s linguistic taxonomy.
 
 ## 6. Reliability and Statistical Accuracy
@@ -104,11 +105,44 @@ produces a longer page count. The abstract was reduced below 150 words while
 retaining the framework, sample, rating design, headline findings, health
 qualification, and central conclusion.
 
+## 9. Context, Domains, and Terminology
+
+**Concern.** The manuscript treated context and the three evaluated domains as
+interchangeable, and the construct name obscured the bounded operational
+settings.
+
+**What we implemented.** We now distinguish macro-level context from mental
+health, education, and general health as bounded analytical domains. The
+manuscript reports `F` as Domain Fit while preserving the original rubric's
+content, action, tone, certainty, and role-boundary criteria. The frozen rubrics
+record that annotators saw the label Contextual Fit and that no anchor or rating
+changed.
+
+## 10. Context-Aware and Philosophical Grounding
+
+**Concern.** The framework needed stronger theoretical grounding for why
+appropriateness varies by situation.
+
+**What we implemented.** We added Dey's operational account of context,
+Dourish's interactional critique, and the Aristotelian distinction between
+*episteme* and *phronesis*. The latter is explicitly a conceptual lens, not a
+measurement claim: HumT measures linguistic human-likeness rather than factual
+knowledge, and PERSONA does not claim to measure or confer practical wisdom.
+
+## 11. Human-Likeness Measurement Scope
+
+**Concern.** Weak H-only prediction could partly reflect limited observed HumT
+dispersion rather than a universal failure of human-likeness measures.
+
+**What we implemented.** We added this qualification to the discussion and
+limited the finding to the current HumT operationalization. Multi-metric and
+human-rated human-likeness measures are identified as future validation work.
+
 ## Overall Outcome
 
 The revised manuscript makes a narrower and more defensible contribution:
 human-likeness remains a useful descriptive signal, but it is not sufficient for
-evaluating contextual appropriateness. The framework provides a diagnostic
-profile of empathy, misleading anthropomorphic implications, and contextual
-fit, with its strongest evidence in mental health and education. The remaining
+evaluating context-sensitive appropriateness. The framework provides a
+diagnostic profile of empathy, misleading anthropomorphic implications, and
+domain fit, with its strongest evidence in mental health and education. The remaining
 external task is the final anonymous supplementary-material audit.

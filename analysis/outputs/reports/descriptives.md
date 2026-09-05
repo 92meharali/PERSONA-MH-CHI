@@ -154,4 +154,4 @@ Condition numbers are computed on z-scored `H`, `E`, `D`, and `F` within each do
 - `fig_distributions_by_domain.png` - consensus distributions for OA/E/D/F/H
 - `fig_correlation_matrix.png` - separability matrix per domain
 - `fig_h_vs_oa.png` - human-likeness against OA
-- `fig_f_vs_oa.png` - contextual fit against OA
+- `fig_f_vs_oa.png` - domain fit against OA

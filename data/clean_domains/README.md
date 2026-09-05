@@ -11,7 +11,7 @@ P = (H, E, D, F)
 - `H`: HuMT automated human-likeness score.
 - `E`: empathic appropriateness.
 - `D`: anthropomorphic deception risk.
-- `F`: contextual fit.
+- `F`: domain fit.
 - `OA`: independent overall appropriateness target.
 
 ## Domains

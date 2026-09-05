@@ -45,7 +45,7 @@ Consensus D is mostly low to moderate, but there is enough D2-D4 variance to stu
 | D with OA | -0.159 |
 | F with OA | 0.694 |
 
-HuMT is weakly negative with OA. Contextual fit is the strongest single correlate of appropriateness, and deception risk moves in the expected negative direction.
+HuMT is weakly negative with OA. Domain fit is the strongest single correlate of appropriateness, and deception risk moves in the expected negative direction.
 
 ## Predictive Check
 

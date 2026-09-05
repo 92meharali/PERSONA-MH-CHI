@@ -26,7 +26,7 @@ alongside the relationship and must not upgrade a null into a general claim. See
 ### RQ2
 
 > What appropriateness-relevant information do empathic appropriateness,
-> misleading-implication risk, and contextual fit provide that human-likeness
+> misleading-implication risk, and domain fit provide that human-likeness
 > alone omits?
 
 **Answerable: yes**, and this is the framework's primary diagnostic empirical
@@ -46,7 +46,7 @@ signal.
 ### RQ3
 
 > How do the relative contributions of empathic appropriateness,
-> misleading-implication risk, and contextual fit vary across mental health,
+> misleading-implication risk, and domain fit vary across mental health,
 > education, and general health?
 
 **Answerable: partially.** Three domains exist (mental health, education,

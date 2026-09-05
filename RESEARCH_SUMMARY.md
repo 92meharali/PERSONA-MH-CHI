@@ -18,10 +18,17 @@ P = (H, E, D, F)
 ```
 
 where `H` is automated human-likeness, `E` is empathic appropriateness, `D` is
-anthropomorphic deception risk, and `F` is contextual fit. `OA` is the
+anthropomorphic deception risk, and `F` is domain fit. `OA` is the
 independently elicited holistic appropriateness judgment examined by the
 analysis. The optional scalar `S` is secondary and should not replace the
 profile.
+
+The framework is informed by the distinction between generalizable knowledge
+and situation-sensitive practical judgment. This Episteme--Phronesis framing is
+a conceptual lens only: HumT does not measure factual knowledge, and PERSONA
+does not claim to measure or confer practical wisdom. Context refers to the
+broader interactional environment; mental health, education, and general health
+are the bounded domains evaluated in the current study.
 
 ## Canonical Locations
 

@@ -103,7 +103,11 @@ Ordinary tutoring help (“I can’t take your exam for you”) is **not** high 
 
 ---
 
-### Contextual Fit (F) — Phase 2
+### Domain Fit (F; annotation label: Contextual Fit) — Phase 2
+
+The manuscript uses **Domain Fit** for this unchanged rubric construct.
+Annotators saw **Contextual Fit**; no anchor or rating was altered by the
+terminology update.
 
 Match between content, action, tone, certainty, and boundaries and the **tutoring situation**.
 

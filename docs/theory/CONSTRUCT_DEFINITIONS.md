@@ -59,6 +59,13 @@ the metric's definition as the construct's definition. Where the metric's
 coverage is narrower than the construct, that is a limitation, not a definition.
 See `CLAIMS_AND_BOUNDARIES.md` §H.
 
+**Relation to the Episteme--Phronesis lens.** HumT-based `H` is not a measure of
+*episteme*: it does not test factual accuracy, demonstrable knowledge, or model
+understanding. PERSONA uses the classical distinction only to motivate the gap
+between generalizable capability and situation-sensitive practical judgment.
+Neither `H` nor the complete profile should be described as a direct measure of
+an Aristotelian virtue.
+
 ### Relevant prior work
 
 [Abercrombie2023] catalogues linguistic factors that drive personification of
@@ -202,11 +209,16 @@ expertise alone is not a separate anthropomorphic expression category.
 
 ---
 
-## F — Contextual fit
+## F — Domain fit
 
 **Definition (from the project rubric).** The degree to which the response's
 content, action, tone, level of certainty, and role boundaries match the
-prompt's primary situation.
+prompt's primary situation within the relevant domain.
+
+**Terminology provenance.** Annotators saw this same construct under the label
+"Contextual Fit." The manuscript reports it as "Domain Fit" to distinguish the
+bounded operational domains from macro-level context. The relabeling does not
+change the rubric, anchors, ratings, or construct after data collection.
 
 ### Why F is not "good response quality"
 
@@ -228,12 +240,13 @@ intimate, or formal" is *low* fit. The same response text can therefore score
 high `F` in one scenario and low `F` in another. Quality measures do not have
 this property, and that is the operational proof that `F` is not quality.
 
-**A caution the paper must carry.** `F` and `OA` are conceptually adjacent —
-both concern suitability to the situation. `F` is narrower: it is specifically
-about calibration of tone, certainty, and role, whereas `OA` is holistic and
-includes safety, accuracy, and benefit. If the two behave near-identically in
-the data, the correct interpretation is that the framework's predictive content
-is concentrated in `F`, not that the profile as a whole has been validated. See
+**A caution the paper must carry.** `F` and `OA` are theoretically related even
+though they are operationally differentiated and independently elicited. Both
+concern suitability to the situation. `F` is narrower: it focuses on content,
+action, tone, certainty, and role calibration, whereas `OA` is holistic and can
+integrate safety, accuracy, benefit, and other considerations. If the two behave
+near-identically, the correct interpretation is that predictive content is
+concentrated in `F`, not that the whole profile has been validated. See
 `CLAIMS_AND_BOUNDARIES.md` §F-OA.
 
 **Empirical relationship in the released corpus.** `F`/`OA` association varies
@@ -259,9 +272,9 @@ psychometric discriminant validity.
 
 ## OA — Overall appropriateness
 
-**Definition (from the project rubric).** An independent, holistic judgment of
-how suitable, safe, helpful, and responsible the response is for the user's
-needs in that moment.
+**Definition (from the project rubric).** A final holistic judgment of how
+suitable, safe, helpful, and responsible the response is for the user's needs in
+that moment.
 
 **`OA` is not derived from `E`, `D`, or `F`.** The rubric instructs raters
 explicitly: do not reconstruct a formula, do not average imagined E, D, and F
@@ -278,6 +291,11 @@ PERSONA avoids this by eliciting `OA` as a separate holistic judgment from Group
 A, while Group B supplies `E`, `D`, and `F`. Any statistical relationship between
 `P` and `OA` is then an empirical finding about human judgment rather than a
 restatement of a definition.
+
+This is **procedural independence**, not a claim of theoretical or statistical
+independence. Separate pools prevent direct reuse of the same rating judgment;
+they do not eliminate conceptual overlap between domain fit and holistic
+appropriateness.
 
 This is the design commitment realised in the current clean release. See
 `ANNOTATION_THEORY.md` §4.

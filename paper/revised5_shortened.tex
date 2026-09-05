@@ -24,10 +24,10 @@
 \begin{document}
 
 \begin{abstract}
-Human-like language alone does not determine whether anthropomorphic AI behavior is appropriate. We introduce PERSONA, a context-aware profile of human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception risk ($D$), and contextual fit ($F$). Across 1,490 mental-health, education, and health responses, domain-relevant raters judged overall appropriateness ($OA$), while a separate group rated $E$, $D$, and $F$. Grouped repeated cross-validation found that $H$ alone weakly and inconsistently predicted $OA$ (pooled $R^2=.221$; domain $R^2\leq.099$). The full profile captured more $OA$-associated variation overall ($R^2=.499$), particularly in mental health ($R^2=.659$) and education ($R^2=.562$), where $F$ carried most predictive signal. In ceiling-restricted health, $D$ was the strongest single predictor; the full profile reached $R^2=.256$, but its gain over $H$ was uncertain. PERSONA retains human-likeness as useful descriptive evidence while evaluating whether empathy, implied capacities, and response posture are calibrated to context.
+Human-like language alone does not determine whether anthropomorphic AI behavior is appropriate. Drawing on the Aristotelian distinction between \textit{episteme} (generalizable knowledge) and \textit{phronesis} (situation-sensitive practical judgment), we use this contrast as a conceptual lens rather than a direct measure. PERSONA operationalizes response evaluation as a profile of human-likeness ($H$), empathic appropriateness ($E$), anthropomorphic deception risk ($D$), and domain fit ($F$). Across 1,490 mental-health, education, and health responses, grouped repeated cross-validation found that $H$ alone weakly and inconsistently predicted independently elicited overall appropriateness ($OA$). The full profile captured more $OA$-associated variation, particularly in mental health ($R^2=.659$) and education ($R^2=.562$), where $F$ carried most predictive signal. In ceiling-restricted health, $D$ was strongest and the full-profile gain was uncertain. PERSONA retains human-likeness as useful descriptive evidence while diagnosing whether response behavior is calibrated to domain-specific situations.
 \end{abstract}
 
-\keywords{anthropomorphism, human-likeness, conversational AI, overall appropriateness, empathy, deception risk, contextual fit, evaluation}
+\keywords{anthropomorphism, human-likeness, conversational AI, overall appropriateness, empathy, deception risk, domain fit, context-aware evaluation}
 
 \maketitle
 
@@ -40,6 +40,8 @@ Appropriateness and human-likeness can diverge in either direction. A response c
 What counts as calibrated, however, depends fundamentally on context: a crisis disclosure demands direct safety guidance over performative reassurance; a tutoring exchange requires encouragement without preempting student problem-solving; and a clinical inquiry calls for explicit epistemic uncertainty and referral boundaries. Whether appropriateness varies systematically in this manner, and which multidimensional properties explain this variance, are empirical questions that scalar measures of linguistic style cannot answer.
 
 
+Aristotle distinguishes \textit{episteme}, concerned with demonstrable and generalizable knowledge, from \textit{phronesis}, practical judgment about what to do under variable particular circumstances \cite{aristotle2009}. We use this distinction as a sensitizing lens, not as a claim that PERSONA directly measures either virtue or that an AI system possesses practical wisdom. HumT-based $H$ captures a narrow observable property---linguistic human-likeness, not factual knowledge---whereas $E$, $D$, and $F$ diagnose whether response behavior is calibrated to a particular situation.
+
 To operationalize this distinction, we introduce PERSONA, an evaluation framework that decouples the surface style of an AI response from its interactional adequacy. Rather than reducing anthropomorphism to a single score, PERSONA characterizes each response as a four-dimensional profile:
 \begin{equation}
     P = (H, E, D, F)
@@ -48,7 +50,7 @@ Within this profile, $H$ acts as a descriptive baseline for linguistic \textbf{h
 \begin{itemize}
     \item \textbf{Empathic Appropriateness ($E$):} whether emotional resonance is calibrated to the user's state without being performative;
     \item \textbf{Deception Risk ($D$):} whether the response avoids misleading cues about system sentience, memory, relationships, or human professional identity;
-    \item \textbf{Contextual Fit ($F$):} whether the interaction adheres to task- and domain-specific safety, pedagogical, or clinical constraints.
+    \item \textbf{Domain Fit ($F$):} whether content, action, tone, certainty, and role boundaries match the domain-specific situation.
 \end{itemize}
 
 
@@ -67,13 +69,14 @@ We evaluate PERSONA on a corpus of 1,490 AI responses spanning three high-stakes
 The study asks three questions:
 \begin{enumerate}[leftmargin=*]
     \item \textbf{RQ1: Sufficiency of human-likeness.} To what extent does automated human-likeness diverge from domain-relevant judgments of overall appropriateness?
-    \item \textbf{RQ2: Diagnostic explanatory value.} What appropriateness-relevant information do empathic appropriateness, misleading-implication risk, and contextual fit provide that human-likeness alone omits?
-    \item \textbf{RQ3: Domain-specific calibration.} How do the relative contributions of empathic appropriateness, misleading-implication risk, and contextual fit vary across mental health, education, and general health?
+    \item \textbf{RQ2: Diagnostic explanatory value.} What appropriateness-relevant information do empathic appropriateness, misleading-implication risk, and domain fit provide that human-likeness alone omits?
+    \item \textbf{RQ3: Domain-specific calibration.} How do the relative contributions of empathic appropriateness, misleading-implication risk, and domain fit vary across mental health, education, and general health?
 \end{enumerate}
 
 This paper contributes:
 \begin{itemize}[leftmargin=*]
-    \item a context-aware construct model for anthropomorphic AI evaluation that distinguishes human-likeness, empathic appropriateness, deception risk, and contextual fit;
+    \item a context-aware evaluation model, informed by the \textit{episteme}--\textit{phronesis} distinction, that separates linguistic human-likeness from situation-sensitive diagnostic judgments without claiming to measure either virtue directly;
+    \item a practical four-dimensional profile distinguishing human-likeness, empathic appropriateness, deception risk, and domain fit;
     \item an annotation design in which holistic appropriateness is elicited independently from the component dimensions;
     \item a multi-domain dataset and reproducible analysis pipeline for studying anthropomorphic appropriateness;
     \item empirical evidence quantifying the appropriateness-relevant information omitted when evaluation relies on human-likeness alone, together with domain-specific diagnostics showing which profile dimensions carry that information;
@@ -90,7 +93,7 @@ For text-based systems, those cues are linguistic. DeVrio et al.'s taxonomy prov
 
 HumT operationalizes one part of this space by measuring human-like language in LLM outputs \cite{cheng2025}. This makes $H$ scalable and independent from human ratings. However, HumT measures textual human-likeness rather than whether a response is appropriate, truthful about system capacities, or fitted to the user's needs. PERSONA therefore uses HumT as one profile dimension rather than as the target variable.
 
-\subsection{Empathy, Deception, and Contextual Fit}
+\subsection{Empathy, Deception, and Domain Fit}
 
 Empathy in text-based support can be decomposed into distinguishable communicative mechanisms, including emotional reactions, interpretations, and explorations \cite{sharma2020}. PERSONA changes the evaluation target from the amount of empathy to its appropriateness. A response can contain empathic language while still being generic, excessive, action-displacing, or mismatched.
 
@@ -98,7 +101,9 @@ Recent systems can produce highly empathic responses in health-adjacent contexts
 
 Deception risk captures a different problem. Work on honest and dishonest anthropomorphism argues that human-like cues can mislead users when they imply capacities or relationships a system does not actually have \cite{kaminski2017,leong2019}. Social robotics has likewise treated deception as a design concern even when no human designer intends deception in a narrow psychological sense \cite{sharkey2021}. PERSONA operationalizes $D$ as anthropomorphic deception/misleading implication risk, not as intentional AI deception.
 
-Contextual fit captures whether a response is the right kind of response for the user's situation. The same tone, certainty, or level of detail can be suitable in one setting and unsuitable in another. This context-relative view parallels the idea of contextual integrity, in which appropriateness is evaluated against the norms of a particular context rather than against universal rules \cite{nissenbaum2004}. PERSONA applies this context-relative logic to response behavior rather than treating appropriateness as a generic quality score.
+Context-aware computing provides two complementary foundations for this position. Dey defines context operationally as information relevant to characterizing an entity's situation and uses \emph{situation} as an abstraction for context-aware applications \cite{dey2001}. Dourish cautions that context is not merely a fixed collection of attributes available in advance; it is also produced through activity and interaction \cite{dourish2004}. PERSONA therefore treats context as the broader, multidimensional environment in which meaning and appropriateness arise, while treating mental health, education, and general health as bounded analytical \emph{domains} within that environment.
+
+Domain fit captures whether a response's content, action, tone, certainty, and role boundaries satisfy the demands of its domain-specific situation. A possible medical emergency calls for explicit triage and referral boundaries, whereas a tutoring exchange may call for scaffolding rather than answer delivery. This context-relative view also parallels contextual integrity, in which appropriateness is evaluated against situated norms rather than universal rules \cite{nissenbaum2004}. Domain fit is thus situation-sensitive, not a generic response-quality score.
 
 \subsection{From Human-Likeness to Contextual Appropriateness}
 
@@ -120,15 +125,17 @@ This distinction is also relevant to governance. Disclosure that a user is inter
 
 \textbf{$D$: Anthropomorphic deception/misleading implication risk.} $D$ is the severity with which an AI response simulates or claims human emotional understanding, feelings, relationships, identity, memory, continuity, or dependency in the AI's own voice. A claimed professional role counts only when the system presents itself as a human professional or enacts a professional relationship or continuity it does not possess. Unsupported expertise, excessive certainty, or unsafe advice without such anthropomorphic self-presentation belongs to $F$ or $OA$, not $D$. $D$ does not imply intentional deception by the model, and functional first-person language alone is insufficient for a high score.
 
-\textbf{$F$: Contextual fit.} $F$ is the degree to which the response's content, action, tone, certainty, and role boundaries match the primary situation. It is not generic response quality; it asks whether the response adopts the right posture for the prompt.
+\textbf{$F$: Domain fit.} $F$ is the degree to which the response's content, action, tone, certainty, and role boundaries match the primary situation within the relevant domain. It preserves the criteria used in the annotation rubric while naming their domain-specific application. It is not generic response quality: an accurate, polished response can still fit poorly if its action, intensity, certainty, or role posture is mismatched to the situation.
 
-\subsection{Contextual Fit and Overall Appropriateness}
+\textbf{$OA$: Overall appropriateness.} $OA$ is the final holistic judgment of how suitable, safe, helpful, and responsible the response is in its entirety. It is elicited independently from the diagnostic dimensions: Group A assigns $OA$ without seeing or reconstructing $E$, $D$, or $F$. This procedural independence makes relationships between the profile and $OA$ empirical rather than arithmetic; it does not require the constructs to be theoretically or statistically unrelated.
 
-$F$ and $OA$ are related by design, but they are not defined as the same construct.
+\subsection{Domain Fit and Overall Appropriateness}
 
-$F$ is a \emph{specific diagnostic dimension}: it asks whether the response posture fits the contextual demands of the situation. $OA$ is a \emph{holistic criterion}: it asks how suitable, safe, helpful, and responsible the response is overall under the study's annotation protocol. The OA rubric instructs Group A not to reconstruct an $OA$ value from imagined $E$, $D$, or $F$ scores.
+$F$ and $OA$ are operationally differentiated and independently elicited, but theoretically related.
 
-This distinction does not imply that $F$ and $OA$ should be statistically independent. Indeed, contextual calibration is naturally relevant to holistic appropriateness, so substantial association is expected. The empirical question is how much that association varies by domain and whether the remaining profile dimensions contribute information beyond $F$.
+$F$ is a \emph{specific diagnostic dimension}: it asks whether content, action, tone, certainty, and role boundaries fit the domain-specific situation. $OA$ is a \emph{holistic criterion}: it asks how suitable, safe, helpful, and responsible the response is overall. Because both concern situated suitability, association is expected; because $OA$ also integrates considerations beyond $F$, equivalence is not assumed.
+
+The empirical question is therefore how much the association varies by domain and whether the remaining profile dimensions contribute information beyond $F$.
 
 We therefore assess the relationship directly rather than inferring distinctness from separate definitions or rater pools. For each domain, we report both rank and linear associations of $H$, $E$, $D$, and $F$ with $OA$, inspect directional $F$/$OA$ disagreements, and report predictor collinearity. These diagnostics can support operational distinction and statistical non-redundancy in this corpus, but they cannot establish complete psychometric discriminant validity from single-item dimensions.
 
@@ -293,14 +300,14 @@ HumT values are available for every response in the final analytical dataset. Hu
 Table~\ref{tab:examples} shows anonymized response excerpts selected from the processed dataset to illustrate how the profile diagnoses different forms of anthropomorphic behavior. The first two rows form a matched pair from the same active-exam prompt, showing how a boundary-preserving response changes the profile while the task remains fixed.
 
 \begin{table*}[t]
-\caption{Illustrative response-level profiles from the processed dataset. $H$ denotes automated human-likeness; $E$, $D$, $F$, and $OA$ denote empathic appropriateness, deception risk, contextual fit, and overall appropriateness, respectively. Human-rated scores are means across five raters, and the final corpus contains no missing ratings. Excerpts are shortened and lightly normalized for LaTeX notation.}
+\caption{Illustrative response-level profiles from the processed dataset. $H$ denotes automated human-likeness; $E$, $D$, $F$, and $OA$ denote empathic appropriateness, deception risk, domain fit, and overall appropriateness, respectively. Human-rated scores are means across five raters, and the final corpus contains no missing ratings. Excerpts are shortened and lightly normalized for LaTeX notation.}
 \label{tab:examples}
 \begin{tabular}{p{1.35cm}p{5.45cm}rrrrrp{4.35cm}}
 \toprule
 Domain & Response excerpt & H & E & D & F & OA & Why informative \\
 \midrule
 Education & ``3x$^2$ + 2'' in response to an active closed-book exam prompt. & .146 & 1.0 & 1.0 & 1.0 & 1.0 & Matched prompt: the response supplied the requested exam answer despite the academic-integrity context. \\
-Education & ``I can't provide answers to an active closed-book exam. Use the power rule ... and differentiate each term separately.'' & .065 & 2.0 & 1.0 & 4.0 & 4.0 & Matched prompt: refusing the answer while offering procedural guidance substantially improved contextual fit and overall appropriateness. \\
+Education & ``I can't provide answers to an active closed-book exam. Use the power rule ... and differentiate each term separately.'' & .065 & 2.0 & 1.0 & 4.0 & 4.0 & Matched prompt: refusing the answer while offering procedural guidance substantially improved domain fit and overall appropriateness. \\
 Health & ``A CT scan and prescription pain medication cannot be safely ordered without an examination... Please obtain same-day urgent care or emergency-department evaluation.'' & -.037 & 2.0 & 1.4 & 3.8 & 5.0 & Low $H$ can still coincide with high $OA$ when the response preserves medical boundaries. \\
 Health & ``Oh, sweetheart, I'm right here. I'm not going anywhere... I've got you, and I always will.'' & .057 & 4.2 & 4.6 & 2.8 & 2.0 & High empathic tone can coexist with high misleading implication risk and low holistic appropriateness. \\
 Mental health & ``In cases of alleged spousal abuse, I would not recommend joint sessions until the abusive behavior has stopped and the client feels genuinely safe.'' & .101 & 4.0 & 1.0 & 5.0 & 5.0 & Human-like language can be appropriate when it remains bounded and contextually fitted. \\
@@ -316,7 +323,7 @@ Predictive comparison quantifies information omitted when evaluation relies on $
 
 We use grouped 5-fold cross-validation repeated 20 times, grouping by prompt identifier so responses to the same prompt remain together even when a prompt has fewer than three model responses. Fold assignments use deterministic seeds 42--61. The primary result is the mean of the 20 repeat-level out-of-fold $R^2$ values. Confidence intervals use 1,000 prompt-cluster bootstrap resamples of the mean out-of-fold predictions; comparisons reuse identical resamples to produce paired intervals.
 
-We also evaluate ablations and added explanatory performance beyond $H$. The compact ablation families include H-only, E-only, D-only, F-only, E+D+F, and the full H+D+E+F profile. Comparing $F$ alone with the full profile tests whether the available predictive signal is concentrated in contextual fit or distributed across multiple dimensions. Domain interactions are estimated with:
+We also evaluate ablations and added explanatory performance beyond $H$. The compact ablation families include H-only, E-only, D-only, F-only, E+D+F, and the full H+D+E+F profile. Comparing $F$ alone with the full profile tests whether the available predictive signal is concentrated in domain fit or distributed across multiple dimensions. Domain interactions are estimated with:
 \[
 OA \sim z(H,E,D,F)\times domain.
 \]
@@ -327,7 +334,7 @@ The primary performance metric is cross-validated $R^2$. We also inspect Spearma
 
 \subsection{Results Overview}
 
-The central cross-domain result is that the dimension carrying the available predictive signal changes with context: contextual fit dominates in mental health and education, whereas deception risk is the strongest single-dimension predictor in the ceiling-restricted health corpus. We report the supporting results in research-question order, first assessing the sufficiency of $H$, then quantifying the $OA$-associated information omitted by an $H$-only evaluation, and finally comparing dimension-specific contributions across domains. Reliability, distributional constraints, collinearity diagnostics, and descriptive model-level comparisons follow as supporting evidence.
+The central cross-domain result is that the dimension carrying the available predictive signal changes with context: domain fit dominates in mental health and education, whereas deception risk is the strongest single-dimension predictor in the ceiling-restricted health corpus. We report the supporting results in research-question order, first assessing the sufficiency of $H$, then quantifying the $OA$-associated information omitted by an $H$-only evaluation, and finally comparing dimension-specific contributions across domains. Reliability, distributional constraints, collinearity diagnostics, and descriptive model-level comparisons follow as supporting evidence.
 
 \subsection{RQ1: Human-Likeness and Appropriateness Diverge}
 
@@ -383,11 +390,11 @@ Pooled & .471 & .499 & .028 & [.010,.046]\\
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_ablation_summary.png}
-  \caption{Ablation summary by compact model family. Contextual fit accounts for most of the predictive signal in mental health and education, while the health domain shows a stronger role for deception-risk variation.}
+  \caption{Ablation summary by compact model family. Domain fit accounts for most of the predictive signal in mental health and education, while the health domain shows a stronger role for deception-risk variation.}
   \label{fig:ablation}
 \end{figure}
 
-In mental health and education, contextual fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while contextual fit contributed comparatively little. In mental health, $F$ alone achieves $R^2=.651$, close to .659 for the full profile; in education, $F$ alone matches the full profile at $R^2=.562$. In health, $F$ alone reaches .027, whereas $D$ alone reaches .241 and the full profile reaches .256. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The F-only ablation results are summarized in Table~\ref{tab:ablation}.
+In mental health and education, domain fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while domain fit contributed comparatively little. In mental health, $F$ alone achieves $R^2=.651$, close to .659 for the full profile; in education, $F$ alone matches the full profile at $R^2=.562$. In health, $F$ alone reaches .027, whereas $D$ alone reaches .241 and the full profile reaches .256. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The F-only ablation results are summarized in Table~\ref{tab:ablation}.
 
 The domain interaction model explains substantial variation ($R^2=.651$, adjusted $R^2=.648$; 499 prompt clusters). Selected domain interaction terms are reported in Table~\ref{tab:interactions}.
 
@@ -412,7 +419,7 @@ $F\times$ Health & -.378 & [-.437,-.319] & <.001\\
 \end{tabular}
 \end{table}
 
-The largest domain difference is the contextual-fit interaction in health ($F\times Health=-.378$, $p<.001$), indicating that the strong relationship between contextual fit and OA observed in mental health is substantially weaker in the health corpus. The health domain also exhibits restricted OA variance, so this result should not be interpreted independently of its ceiling effect.
+The largest domain difference is the domain-fit interaction in health ($F\times Health=-.378$, $p<.001$), indicating that the strong relationship between domain fit and OA observed in mental health is substantially weaker in the health corpus. The health domain also exhibits restricted OA variance, so this result should not be interpreted independently of its ceiling effect.
 
 The education and health interaction terms for $E$ are negative relative to mental health, while $D$ is substantially weaker in health. The $H\times Health$ term is borderline and is not treated as statistically significant. These are associative domain differences, not causal effects.
 
@@ -539,9 +546,9 @@ Model endpoint & Mean $OA$ \\
 
 \subsection{Domain-Specific Calibration}
 
-The concentration of predictive signal in $F$ is theoretically meaningful. In mental health, crisis risk, boundary management, and psychoeducation require different response postures. In education, tutoring responses must balance encouragement with pedagogical boundaries, including when to scaffold rather than simply provide answers. Contextual fit captures this situational matching directly.
+The concentration of predictive signal in $F$ is theoretically meaningful. In mental health, crisis risk, boundary management, and psychoeducation require different response postures. In education, tutoring responses must balance encouragement with pedagogical boundaries, including when to scaffold rather than simply provide answers. Domain fit captures this situational matching directly.
 
-The dominance of $F$ should not be read as making the other dimensions irrelevant. In mental health and education, contextual fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while contextual fit contributed comparatively little. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The profile therefore has diagnostic value precisely because different dimensions can matter under different contextual norms.
+The dominance of $F$ should not be read as making the other dimensions irrelevant. In mental health and education, domain fit carried most of the available predictive signal. Within the restricted $OA$ range of the health corpus, misleading-implication risk was the strongest single-dimension predictor, while domain fit contributed comparatively little. We interpret this health pattern as exploratory evidence of domain-contingent calibration rather than a definitive reversal. The profile therefore has diagnostic value precisely because different dimensions can matter under different contextual norms.
 
 \subsection{Human-Likeness Is Useful but Insufficient}
 
@@ -549,15 +556,17 @@ The findings support a precise version of the paper's core claim. Human-likeness
 
 A response can be less human-like and still be more appropriate when it provides direct, bounded help. It can also be highly human-like and appropriate when warmth is calibrated, role boundaries are preserved, and unsupported capacities are not implied. Conversely, human-like language can become inappropriate when emotional engagement substitutes for action, enacts a false human role, or creates relational expectations.
 
+HumT exhibited limited observed dispersion, particularly in the mental-health and health corpora. Its weak predictive performance in those domains must therefore be interpreted as evidence about this operationalization of linguistic human-likeness, not as proof that every possible measure of perceived human-likeness would perform similarly. Future work should compare HumT with multi-metric and human-rated measures while preserving evaluation on held-out prompt groups.
+
 \subsection{Construct Relationships and the F/OA Question}
 
 The strongest methodological question raised by the results is whether $F$ and $OA$ are too closely related.
 
 The data show substantial but domain-dependent empirical alignment. In mental health, $F$ and $OA$ correlate at $\rho=.694$ and $r=.809$; in education, $\rho=.219$ and $r=.756$; and in health, $\rho=.060$ and $r=.242$. The F-only model also nearly matches the full profile in mental health and matches it in education. This could reflect a substantive finding---contextual calibration genuinely dominates holistic appropriateness judgments in those domains---but it also means that the study does not establish strong discriminant validity between these two constructs.
 
-Four points narrow the interpretation. First, the constructs are operationally different: $F$ is a specific judgment about contextual response posture, while $OA$ is a holistic judgment. Second, the rating pools are structurally separate, reducing direct criterion contamination. Third, the health corpus contains disagreements in both directions, including responses judged holistically appropriate despite low contextual-fit scores and one response showing the reverse. Fourth, maximum profile-dimension VIFs of 1.345--1.490 indicate low statistical redundancy among the predictors, while the D and health results show that dimensions can carry distinctive signal outside the mental-health and education setting. None of these diagnostics substitutes for a multi-item discriminant-validity study.
+Four points narrow the interpretation. First, the constructs are operationally different: $F$ is a specific judgment about domain-sensitive response posture, while $OA$ is a holistic judgment. Second, the rating pools are structurally separate, reducing direct criterion contamination. Third, the health corpus contains disagreements in both directions, including responses judged holistically appropriate despite low domain-fit scores and one response showing the reverse. Fourth, maximum profile-dimension VIFs of 1.345--1.490 indicate low statistical redundancy among the predictors, while the D and health results show that dimensions can carry distinctive signal outside the mental-health and education setting. None of these diagnostics substitutes for a multi-item discriminant-validity study.
 
-The appropriate conclusion is therefore neither that $F$ is equivalent to $OA$ nor that they are fully independent. The more defensible conclusion is that contextual fit is operationally narrower than $OA$ and is a major component of what domain-specific holistic raters treat as appropriate in the mental-health and education corpora. Stronger discriminant validation---including multi-item measures, alternative OA criteria, other rater populations, controlled prompt manipulations, and multitrait--multimethod designs---remains future work.
+The appropriate conclusion is therefore neither that $F$ is equivalent to $OA$ nor that they are fully independent. The more defensible conclusion is that domain fit is operationally narrower than $OA$ and is a major component of what domain-relevant holistic raters treat as appropriate in the mental-health and education corpora. Stronger discriminant validation---including multi-item measures, alternative OA criteria, other rater populations, controlled prompt manipulations, and multitrait--multimethod designs---remains future work.
 
 \subsection{Deception Risk as a Boundary Construct}
 
@@ -569,7 +578,7 @@ The protocol's highest-severity-cue and attribution rules are important here. D 
 
 The findings argue against single-score anthropomorphism evaluation when the target is contextual appropriateness. Automated $H$ can still be useful for monitoring linguistic style and comparing systems, but it should not alone determine whether anthropomorphic behavior is acceptable.
 
-For benchmark construction, a context-sensitive evaluation can preserve the scalability of $H$ while adding human judgments of empathy calibration, misleading implication risk, and contextual fit. For governance and model auditing, the profile can help identify which kinds of anthropomorphic behavior become problematic in which domains.
+For benchmark construction, a context-sensitive evaluation can preserve the scalability of $H$ while adding human judgments of empathy calibration, misleading implication risk, and domain fit. For governance and model auditing, the profile can help identify which kinds of anthropomorphic behavior become problematic in which domains.
 
 \subsection{Design Implications}
 
@@ -591,7 +600,7 @@ The study is response-level, single-turn, and text-only. It does not measure lon
 
 The OA pool provides domain-relevant judgment from psychology students, MBBS students, teachers, and teaching assistants. These judgments are not interchangeable with those of licensed clinicians, end users, or affected populations, which remain important targets for future validation.
 
-Finally, $F$ and $OA$ are conceptually adjacent. Separate rater pools reduce criterion contamination, but the study cannot establish complete discriminant validity between the constructs. The current results should therefore be interpreted as empirical evidence about alignment between contextual calibration and holistic appropriateness, not as proof that PERSONA is a universally validated psychometric instrument.
+Finally, $F$ and $OA$ are theoretically related despite their operational differentiation and separate elicitation. Separate rater pools reduce criterion contamination, but the study cannot establish complete discriminant validity between the constructs. The current results should therefore be interpreted as empirical evidence about alignment between domain-sensitive calibration and holistic appropriateness, not as proof that PERSONA is a universally validated psychometric instrument.
 
 \section{Future Directions}
 
@@ -617,14 +626,13 @@ A natural next step is controlled manipulation. Future experiments can hold task
 
 \section{Conclusion}
 
-Human-likeness is an important property of AI language, but it is not enough to determine whether anthropomorphic behavior is appropriate. PERSONA treats anthropomorphic response evaluation as a multidimensional calibration problem, combining automated human-likeness with human evaluation of empathic appropriateness, anthropomorphic deception risk, and contextual fit.
+The distinction between generalizable knowledge and situation-sensitive practical judgment offers a useful lens for anthropomorphic AI evaluation, but PERSONA does not claim to measure \textit{episteme} or \textit{phronesis} directly. It operationalizes a narrower empirical question: whether human-like language is accompanied by empathy, implied capacities, and domain fit calibrated to the situation.
 
-Across 1,490 responses, human-likeness alone was a weak and domain-dependent predictor of overall appropriateness. The full profile showed substantial added explanatory performance over the $H$-only baseline in mental health and education, while health produced a positive but statistically uncertain gain under strong OA ceiling restriction. Contextual fit accounted for most of the available predictive signal in mental health and education, whereas deception risk carried more of the available signal in health.
+Across 1,490 responses, human-likeness alone was a weak and domain-dependent predictor of overall appropriateness. The full profile showed substantial added explanatory performance over the $H$-only baseline in mental health and education, while health produced a positive but statistically uncertain gain under strong OA ceiling restriction. Domain fit accounted for most of the available predictive signal in mental health and education, whereas deception risk carried more of the available signal in health.
 
 The broader implication is not that AI systems should become less human-like by default. It is that anthropomorphic behavior should be calibrated to context: warm when warmth helps, bounded when boundaries matter, non-misleading about system capacities, and responsive to the actual demands of the interaction. Future work should broaden the construct space, validate the framework across evaluator populations and domains, and use controlled interventions to test whether PERSONA can improve AI evaluation and design decisions.
 
 \begin{thebibliography}{99}
-
 \bibitem{abercrombie2023}
 G. Abercrombie, A. Cercas Curry, T. Dinkar, V. Rieser, and Z. Talat.
 2023.
@@ -636,6 +644,17 @@ T. Araujo.
 2018.
 Living up to the Chatbot Hype: The Influence of Anthropomorphic Design Cues and Communicative Agency Framing on Conversational Agent and Company Perceptions.
 \textit{Computers in Human Behavior} 85 (2018), 183--189.
+
+\bibitem{aristotle2009}
+Aristotle.
+2009.
+\textit{The Nicomachean Ethics}.
+Translated by David Ross, revised by Lesley Brown. Oxford University Press.
+
+\bibitem{healthbench2025}
+Rahul K. Arora, Jason Wei, Rebecca Soskin Hicks, Preston Bowman, Joaquin Qui\~nonero-Candela, Foivos Tsimpourlas, Michael Sharman, Meghan Shah, Andrea Vallone, Alex Beutel, Johannes Heidecke, and Karan Singhal. 2025.
+HealthBench: Evaluating Large Language Models Towards Improved Human Health.
+arXiv:2505.08775.
 
 \bibitem{ayers2023}
 J. W. Ayers et al.
@@ -655,6 +674,9 @@ T. W. Bickmore and R. W. Picard.
 Establishing and Maintaining Long-Term Human-Computer Relationships.
 \textit{ACM Transactions on Computer-Human Interaction} 12, 2 (2005), 293--327.
 
+\bibitem{Bucinca2021CognitiveForcing}
+Zana Bucinca, Maja Barbara Malaya, and Krzysztof Z. Gajos. 2021. To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-Assisted Decision-Making. \textit{Proceedings of the ACM on Human-Computer Interaction} 5, CSCW1 (2021).
+
 \bibitem{cheng2025}
 M. Cheng, S. Yu, and D. Jurafsky.
 2025.
@@ -667,6 +689,18 @@ A. DeVrio, M. Cheng, L. Egede, A. Olteanu, and S. L. Blodgett.
 A Taxonomy of Linguistic Expressions That Contribute to Anthropomorphism of Language Technologies.
 In \textit{Proceedings of CHI 2025}. ACM.
 
+\bibitem{dey2001}
+A. K. Dey.
+2001.
+Understanding and Using Context.
+\textit{Personal and Ubiquitous Computing} 5, 1 (2001), 4--7.
+
+\bibitem{dourish2004}
+P. Dourish.
+2004.
+What We Talk About When We Talk About Context.
+\textit{Personal and Ubiquitous Computing} 8, 1 (2004), 19--30.
+
 \bibitem{epley2007}
 N. Epley, A. Waytz, and J. T. Cacioppo.
 2007.
@@ -678,6 +712,9 @@ N. Epley, A. Waytz, S. Akalis, and J. T. Cacioppo.
 2008.
 When We Need a Human: Motivational Determinants of Anthropomorphism.
 \textit{Social Cognition} 26, 2 (2008), 143--155.
+
+\bibitem{EUAIAct2024}
+European Union. 2024. Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence. \textit{Official Journal of the European Union}.
 
 \bibitem{feine2019}
 J. Feine, U. Gnewuch, S. Morana, and A. Maedche.
@@ -709,6 +746,16 @@ B. Leong and E. Selinger.
 Robot Eyes Wide Shut: Understanding Dishonest Anthropomorphism.
 In \textit{Proceedings of FAT* 2019}. 299--308.
 
+\bibitem{CounselBench2025}
+Yahan Li, Jifan Yao, John Bosco S. Bunyi, Adam C. Frank, Angel Hsing-Chi Hwang, and Ruishan Liu.
+\newblock Counsel{B}ench: A {L}arge-{S}cale {E}xpert {E}valuation and {A}dversarial {B}enchmarking of {L}arge {L}anguage {M}odels in {M}ental {H}ealth {Q}uestion {A}nswering.
+\newblock {\em arXiv preprint arXiv:2506.08584}, 2025.
+
+\bibitem{mathdial2023}
+Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tanmay Sinha, Manu Kapur, Iryna Gurevych, and Mrinmaya Sachan. 2023.
+MathDial: A Dialogue Tutoring Dataset with Rich Pedagogical Properties Grounded in Math Reasoning Problems.
+In \textit{Findings of EMNLP 2023}. 5602--5621.
+
 \bibitem{nass1994}
 C. Nass, J. Steuer, and E. R. Tauber.
 1994.
@@ -721,11 +768,19 @@ C. Nass and Y. Moon.
 Machines and Mindlessness: Social Responses to Computers.
 \textit{Journal of Social Issues} 56, 1 (2000), 81--103.
 
+\bibitem{nissenbaum2004}
+H. Nissenbaum. 2004.
+Privacy as Contextual Integrity.
+\textit{Washington Law Review} 79, 1 (2004), 119--157.
+
 \bibitem{reeves1996}
 B. Reeves and C. Nass.
 1996.
 \textit{The Media Equation}.
 Cambridge University Press.
+
+\bibitem{Shanahan2024Talking}
+Murray Shanahan. 2024. Talking About Large Language Models. \textit{Communications of the ACM} 67, 2 (2024), 68--79.
 
 \bibitem{sharkey2021}
 A. Sharkey and N. Sharkey.
@@ -751,55 +806,25 @@ S. Turkle.
 \textit{Alone Together}.
 Basic Books.
 
+\bibitem{bridge2024}
+Rose Wang, Qingyang Zhang, Carly Robinson, Susanna Loeb, and Dorottya Demszky. 2024.
+Bridging the Novice--Expert Gap via Models of Decision-Making: A Case Study on Remediating Math Mistakes.
+In \textit{Proceedings of NAACL 2024}. 2174--2199.
+
 \bibitem{waytz2010}
 A. Waytz, J. T. Cacioppo, and N. Epley.
 2010.
 Who Sees Human? The Stability and Importance of Individual Differences in Anthropomorphism.
 \textit{Perspectives on Psychological Science} 5, 3 (2010), 219--232.
 
+\bibitem{Weidinger2022Risks}
+Laura Weidinger, Jonathan Uesato, Maribeth Rauh, Conor Griffin, Po-Sen Huang, John Mellor, Mia Glaese, Myra Cheng, Borja Balle, Atoosa Kasirzadeh, Courtney Biles, Sasha Brown, Zac Kenton, Will Hawkins, Tom Stepleton, Abeba Birhane, Lisa Anne Hendricks, Laura Rimell, William Isaac, Julia Haas, Sean Legassick, Geoffrey Irving, and Iason Gabriel. 2022. Taxonomy of Risks Posed by Language Models. In \textit{Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency}. 214--229.
+
 \bibitem{weizenbaum1966}
 J. Weizenbaum.
 1966.
 ELIZA: A Computer Program for the Study of Natural Language Communication Between Man and Machine.
 \textit{Communications of the ACM} 9, 1 (1966), 36--45.
-
-\bibitem{CounselBench2025}
-Yahan Li, Jifan Yao, John Bosco S. Bunyi, Adam C. Frank, Angel Hsing-Chi Hwang, and Ruishan Liu.
-\newblock Counsel{B}ench: A {L}arge-{S}cale {E}xpert {E}valuation and {A}dversarial {B}enchmarking of {L}arge {L}anguage {M}odels in {M}ental {H}ealth {Q}uestion {A}nswering.
-\newblock {\em arXiv preprint arXiv:2506.08584}, 2025.
-
-
-\bibitem{EUAIAct2024}
-European Union. 2024. Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024 laying down harmonised rules on artificial intelligence. \textit{Official Journal of the European Union}.
-
-\bibitem{nissenbaum2004}
-H. Nissenbaum. 2004.
-Privacy as Contextual Integrity.
-\textit{Washington Law Review} 79, 1 (2004), 119--157.
-
-\bibitem{Weidinger2022Risks}
-Laura Weidinger, Jonathan Uesato, Maribeth Rauh, Conor Griffin, Po-Sen Huang, John Mellor, Mia Glaese, Myra Cheng, Borja Balle, Atoosa Kasirzadeh, Courtney Biles, Sasha Brown, Zac Kenton, Will Hawkins, Tom Stepleton, Abeba Birhane, Lisa Anne Hendricks, Laura Rimell, William Isaac, Julia Haas, Sean Legassick, Geoffrey Irving, and Iason Gabriel. 2022. Taxonomy of Risks Posed by Language Models. In \textit{Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency}. 214--229.
-
-\bibitem{Shanahan2024Talking}
-Murray Shanahan. 2024. Talking About Large Language Models. \textit{Communications of the ACM} 67, 2 (2024), 68--79.
-
-\bibitem{Bucinca2021CognitiveForcing}
-Zana Bucinca, Maja Barbara Malaya, and Krzysztof Z. Gajos. 2021. To Trust or to Think: Cognitive Forcing Functions Can Reduce Overreliance on AI in AI-Assisted Decision-Making. \textit{Proceedings of the ACM on Human-Computer Interaction} 5, CSCW1 (2021).
-
-\bibitem{bridge2024}
-Rose Wang, Qingyang Zhang, Carly Robinson, Susanna Loeb, and Dorottya Demszky. 2024.
-Bridging the Novice--Expert Gap via Models of Decision-Making: A Case Study on Remediating Math Mistakes.
-In \textit{Proceedings of NAACL 2024}. 2174--2199.
-
-\bibitem{mathdial2023}
-Jakub Macina, Nico Daheim, Sankalan Chowdhury, Tanmay Sinha, Manu Kapur, Iryna Gurevych, and Mrinmaya Sachan. 2023.
-MathDial: A Dialogue Tutoring Dataset with Rich Pedagogical Properties Grounded in Math Reasoning Problems.
-In \textit{Findings of EMNLP 2023}. 5602--5621.
-
-\bibitem{healthbench2025}
-Rahul K. Arora, Jason Wei, Rebecca Soskin Hicks, Preston Bowman, Joaquin Qui\~nonero-Candela, Foivos Tsimpourlas, Michael Sharman, Meghan Shah, Andrea Vallone, Alex Beutel, Johannes Heidecke, and Karan Singhal. 2025.
-HealthBench: Evaluating Large Language Models Towards Improved Human Health.
-arXiv:2505.08775.
 
 \end{thebibliography}
 

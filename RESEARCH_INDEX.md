@@ -11,6 +11,12 @@ context?
 overall appropriateness `OA`. Definitions in
 [`docs/theory/CONSTRUCT_DEFINITIONS.md`](docs/theory/CONSTRUCT_DEFINITIONS.md).
 
+`F` is reported as **Domain Fit**: the situation-sensitive fit of content,
+action, tone, certainty, and role boundaries within a bounded domain. Annotators
+saw the original label Contextual Fit; the terminology update changed no rubric
+or rating. The Episteme--Phronesis distinction is used only as a conceptual lens,
+not as a direct measurement mapping.
+
 **Status: not validated.** Empirical evaluation is in progress. See
 [`docs/theory/CLAIMS_AND_BOUNDARIES.md`](docs/theory/CLAIMS_AND_BOUNDARIES.md)
 for the claim ledger.

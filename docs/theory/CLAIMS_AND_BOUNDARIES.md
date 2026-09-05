@@ -68,10 +68,11 @@ alongside every relationship they bear on.
 - A null result for `H` is a null for *this metric on this corpus*, not for
   human-likeness in general.
 
-## §F-OA — Construct overlap between F and OA
+## §F-OA — Construct overlap between Domain Fit and OA
 
-`F` (does tone, certainty, and role fit the situation) and `OA` (holistic
-suitability) are conceptually adjacent. A strong `F`-`OA` relationship is
+`F` (do content, action, tone, certainty, and role boundaries fit the
+domain-specific situation) and `OA` (holistic suitability) are theoretically
+related. A strong `F`-`OA` relationship is
 therefore partly predicted by the definitions and is **weaker evidence for the
 framework** than an equally strong `E`-`OA` or `D`-`OA` relationship would be.
 

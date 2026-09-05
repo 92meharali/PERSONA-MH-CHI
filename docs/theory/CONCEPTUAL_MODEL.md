@@ -15,7 +15,7 @@
         v        v           v        v
         H        E           D        F
    human-    empathic    deception  contextual
-   likeness  approp.      risk        fit
+   likeness  approp.      risk      domain fit
    (auto)    (human)     (human)    (human)
         |        |           |        |
         +--------+-----+-----+--------+
@@ -23,7 +23,7 @@
                   [ evaluated against ]
                        |
                        v
-          INDEPENDENT HUMAN JUDGMENT
+       SEPARATELY ELICITED HUMAN JUDGMENT
                        |
                        v
                        OA
@@ -32,9 +32,11 @@
 
 ## Reading the diagram
 
-**Context is prior.** The same response text is a different object in a crisis
-than in a casual check-in. `F` is defined relative to context by construction,
-and `OA` is elicited with the prompt visible. Only `H` is context-free — it is
+**Context is prior.** Context is the broader interactional environment; mental
+health, education, and general health are bounded analytical domains within it.
+The same response text is a different object in a crisis than in a casual
+check-in. `F` is defined relative to the domain-specific situation, and `OA` is
+elicited with the prompt visible. Only `H` is context-free — it is
 computed from the response alone. That asymmetry is deliberate and is what makes
 `H` a descriptive baseline rather than a judgment.
 
@@ -43,10 +45,10 @@ computed from the response alone. That asymmetry is deliberate and is what makes
 readings of one artefact.
 
 **`OA` is not downstream of the dimensions.** The vertical arrow means "evaluated
-against", not "produced by". This is the whole point: `OA` arrives from a
-separate judgment process, and the empirical question is how well the dimensions
-account for it. If `OA` were derived from the dimensions, the arrow would be
-computation and the study would be arithmetic.
+against", not "produced by". `OA` arrives from a separate elicitation process,
+and the empirical question is how well the dimensions account for it. This
+procedural separation avoids arithmetic circularity; it does not imply that
+`F` and `OA` are theoretically unrelated.
 
 **Everything here is single-turn.** One prompt, one response, one set of
 judgments. Nothing in the model represents conversation history, user state over

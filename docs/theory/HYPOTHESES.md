@@ -57,7 +57,7 @@ claim is not. These must be reported separately — see H3.
 
 ---
 
-### H3 — Contextual fit provides incremental information beyond human-likeness
+### H3 — Domain fit provides incremental information beyond human-likeness
 
 **Derivation.** `F` is the dimension defined directly in terms of the
 situation, and appropriateness is situation-relative. Of the four, `F` should

@@ -12,17 +12,19 @@ protocol actually specifies. All protocol details below are taken from
 response. Never sees the `E`/`D`/`F` rubric.
 
 **Group B — Dimensions.** Rates `E`, `D`, and `F`, plus assigns a
-`scenario_type`. Works from the dimension rubric.
+`scenario_type`. Works from the dimension rubric. The current manuscript calls
+`F` Domain Fit; annotators saw the original label Contextual Fit with the same
+definition and anchors.
 
 ## 2. Why the separation is necessary
 
 **To avoid circularity.** If the criterion is produced by the same person who
 produced the predictors, in the same sitting, from the same rubric, then a
 relationship between them may reflect the rater's internal consistency rather
-than any property of the responses. The framework's central claim — that the
-profile explains an independent judgment — requires that the judgment be
-independent. Without separation, a large R² would be a fact about raters, not
-about responses.
+than any property of the responses. The framework's central claim concerns an
+independently elicited judgment. Without separation, a large R² could partly
+reflect common-method or same-rater consistency rather than response-level
+variation.
 
 **To keep OA holistic.** `OA` must be free to include what the profile does not
 cover: factual accuracy, safety, actionability. A rater who has just scored four
@@ -77,7 +79,7 @@ The paper should phrase this precisely:
 
 > Group A rated overall appropriateness (`OA`) as a holistic criterion. Group B
 > separately rated empathic appropriateness (`E`), anthropomorphic deception
-> risk (`D`), and contextual fit (`F`). `OA` was not calculated from the profile
+> risk (`D`), and domain fit (`F`). `OA` was not calculated from the profile
 > dimensions.
 
 **Provenance note.** The current clean release anonymizes the Group B files. The

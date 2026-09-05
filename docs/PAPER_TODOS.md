@@ -9,5 +9,7 @@
 - [DONE: Audited F/OA construct relationships using rank and linear correlations, disagreement thresholds, and traceable examples; revised the manuscript and supporting claims to distinguish operational non-identity from complete psychometric discriminant validity on 2026-08-25.]
 - [DONE: Narrowed D to anthropomorphic self-presentation, aligned its scope with DeVrio et al., added a reproducible health cue-family sensitivity audit, and removed confirmed junk health annotator-note metadata without changing ratings on 2026-08-25.]
 - [DONE: Confirmed on 2026-09-01 that PERSONA is a sub-study under a broader university EIRB-approved project; recorded the 2026-02-12 approval date and the parent-project scope distinction without publishing the signed identifying letter.]
+- [DONE: Renamed F to Domain Fit across current paper-facing materials while preserving and documenting the original Contextual Fit annotation label, definition, anchors, and ratings.]
+- [DONE: Added context-aware-computing grounding and a bounded Episteme--Phronesis conceptual lens without equating HumT with factual knowledge or PERSONA with practical wisdom.]
 - [TODO: Add consenting annotators to the acknowledgments in the non-anonymous accepted version; verify final author list, affiliations, funding, and data-availability wording.]
 - [TODO: VERIFY whether the literature review needs more domain-specific education and general-health appropriateness citations beyond the current HCI/anthropomorphism/trust base.]

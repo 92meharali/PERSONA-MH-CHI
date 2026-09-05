@@ -7,6 +7,13 @@ from comparing them.
 
 ## 1. The theoretical claim
 
+**Context is broader than domain.** Following complementary operational and
+interactional accounts in context-aware computing, context includes the wider
+situation through which an interaction acquires meaning. Mental health,
+education, and general health are bounded analytical domains within that wider
+environment. Domain Fit applies a shared situation-sensitive construct within
+each domain rather than treating a domain label as the whole of context.
+
 **Different domains impose different expectations around warmth, boundaries,
 authority, certainty, and relational behaviour.**
 
@@ -42,6 +49,11 @@ appropriateness identically in both, the contextual thesis is weakened.
 Authority calibration and unsupported expertise belong primarily to `F` or
 `OA`. Under the final D scope clarification, professional language enters `D`
 only when it enacts false human identity, relationship, or continuity.
+
+The current name **Domain Fit** is a reporting clarification. Annotators rated
+the same content, action, tone, certainty, and role-boundary construct under the
+label **Contextual Fit**. No cross-domain comparison depends on a post hoc
+change to its anchors or scores.
 
 **Health versus mental health** is a narrower contrast: similar authority stakes,
 different emotional load. It functions as a partial control on the clinical-domain

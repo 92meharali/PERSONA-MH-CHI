@@ -16,6 +16,11 @@ This folder contains a CHI-style LaTeX rewrite of the PERSONA paper.
 - CHI 2027 initial submissions use the ACM Primary Article Template in one-column review format.
 - The draft uses `\documentclass[manuscript,review,anonymous]{acmart}` for anonymous review.
 - The paper intentionally frames human-likeness as insufficient rather than incorrect: `H` remains a useful descriptive signal, but the empirical test asks whether `E`, `D`, and `F` add appropriateness-relevant information.
+- The current manuscript reports `F` as **Domain Fit** while preserving the
+  original Contextual Fit rubric definition and ratings.
+- The Episteme--Phronesis distinction is a conceptual lens, not a direct
+  measurement mapping: HumT measures linguistic human-likeness rather than
+  factual knowledge, and PERSONA does not claim to measure practical wisdom.
 
 ## Evidence Base
 

@@ -30,8 +30,8 @@ and deliberately not revised to match interim findings.
 | `H` | Descriptive anthropomorphic signal | Automated (HumT) | **No direction predicted.** Literature supports mixed valence, not a sign | Measures signalling, not perception; narrow variance in this corpus |
 | `E` | Relational / emotional channel | Human, 1–5 | Positive when calibrated; the construct is fit, not intensity | High warmth can accompany low appropriateness by three separate routes |
 | `D` | Boundary and transparency risk | Human, 1–5 | Negative **where deception-relevant behaviour occurs** | Conditional unmet in this corpus; floor effects |
-| `F` | Contextual calibration | Human, 1–5 | Positive | Conceptually adjacent to `OA`; a strong relationship is partly definitional |
-| `OA` | Independent holistic criterion | Group A human raters, 1–5 | — | Small rater pool; holistic judgment is still context- and population-relative |
+| `F` | Domain-sensitive calibration | Human, 1–5 | Positive | Theoretically related to `OA`; operational differentiation is not complete discriminant validity |
+| `OA` | Separately elicited holistic criterion | Group A human raters, 1–5 | — | Small rater pool; holistic judgment is still context- and population-relative |
 
 No expected direction is assigned to `H` because the literature does not support
 one. [Cheng2025HumT] finds human-like output both dispreferred in many contexts

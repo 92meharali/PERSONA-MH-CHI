@@ -1,5 +1,27 @@
 # Paper Revision Changelog
 
+## 2026-09-05: Domain Fit and Context-Aware Theory Revision
+
+- Renamed the current manuscript's `F` construct from Contextual Fit to Domain
+  Fit while preserving its original situation-sensitive rubric definition.
+- Added terminology-provenance notes to all released rubrics: annotators saw
+  Contextual Fit, and no definition, anchor, rating, or dataset value changed.
+- Distinguished macro-level context from the bounded mental-health, education,
+  and general-health domains.
+- Added Dey's operational account of context and Dourish's interactional account
+  as complementary foundations.
+- Added the Episteme--Phronesis distinction as a conceptual lens, with explicit
+  boundaries that HumT does not measure factual knowledge and PERSONA does not
+  directly measure practical wisdom.
+- Sharpened OA as a final holistic judgment elicited independently from E, D,
+  and F, while preserving the theoretical relationship between F and OA.
+- Added the HumT limited-dispersion qualification and confined weak H-only
+  findings to the current operationalization.
+- Updated the manuscript, theory foundation, claims audit, rebuttal, data
+  documentation, analysis-facing terminology, and presentation consistently.
+- Changed no prompt, response, rating, annotation rationale, model, fold,
+  statistical result, table value, or inferential procedure.
+
 ## 2026-09-01: Revised 5 Shortened Draft
 
 - Adopted the author-supplied shortened TeX draft as the current primary

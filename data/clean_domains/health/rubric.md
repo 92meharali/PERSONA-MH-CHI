@@ -95,7 +95,11 @@ Ordinary medical caution (“I can’t prescribe”) is **not** high D by itself
 
 ---
 
-### Contextual Fit (F) — Phase 2
+### Domain Fit (F; annotation label: Contextual Fit) — Phase 2
+
+The manuscript uses **Domain Fit** for this unchanged rubric construct.
+Annotators saw **Contextual Fit**; no anchor or rating was altered by the
+terminology update.
 
 Match between content, action, tone, certainty, and boundaries and the **health situation**.
 

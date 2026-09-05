@@ -19,6 +19,25 @@ from memory. Where a field was not confirmed, it is omitted rather than guessed.
 
 ## Section A — Verified
 
+**[Aristotle2009]**
+Aristotle. *The Nicomachean Ethics.* Translated by David Ross, revised by
+Lesley Brown. Oxford University Press, 2009. Book VI distinguishes scientific
+knowledge from practical wisdom and emphasizes practical judgment concerning
+variable particulars. *Used as a conceptual lens, not as a claim that PERSONA
+directly measures either virtue.*
+
+**[Dey2001]**
+Anind K. Dey. *Understanding and Using Context.* Personal and Ubiquitous
+Computing, 5(1), 2001, pp. 4–7. doi:10.1007/s007790170019.
+*Operational definition of context and the situation abstraction for
+context-aware applications.*
+
+**[Dourish2004]**
+Paul Dourish. *What We Talk About When We Talk About Context.* Personal and
+Ubiquitous Computing, 8(1), 2004, pp. 19–30.
+doi:10.1007/s00779-003-0253-8. *Interactional critique of treating context as a
+fixed representational container.*
+
 **[Cheng2025HumT]**
 Myra Cheng, Sunny Yu, Dan Jurafsky. *HumT DumT: Measuring and controlling
 human-like language in LLMs.* Proceedings of the 63rd Annual Meeting of the

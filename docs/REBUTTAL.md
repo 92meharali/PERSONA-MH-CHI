@@ -104,9 +104,9 @@ as a stronger validation claim than the analysis supports.
    appropriateness?
 2. **RQ2: Diagnostic explanatory value.** What appropriateness-relevant
    information do empathic appropriateness, misleading-implication risk, and
-   contextual fit provide that human-likeness alone omits?
+   domain fit provide that human-likeness alone omits?
 3. **RQ3: Domain-specific calibration.** How do the relative contributions of
-   empathic appropriateness, misleading-implication risk, and contextual fit
+   empathic appropriateness, misleading-implication risk, and domain fit
    vary across mental health, education, and general health?
 
 ### Exact Manuscript Changes
@@ -253,11 +253,11 @@ source, Python syntax, LaTeX structure, citation, and stale-reference checks
 passed. Local PDF compilation remains pending because no LaTeX compiler is
 installed.
 
-## Critical Issue 4: Construct Validity, Contextual Fit Versus OA
+## Critical Issue 4: Construct Validity, Domain Fit Versus OA
 
 ### Concern
 
-Contextual fit (`F`) and overall appropriateness (`OA`) are conceptually
+Domain fit (`F`) and overall appropriateness (`OA`) are conceptually
 adjacent, and the strong F-only predictive results in mental health and
 education could be interpreted as definitional overlap. The prior manuscript
 described the distinction but did not present a direct, complete relationship
@@ -619,3 +619,55 @@ The supplied copy contained the superseded no-approval ethics sentence because
 it predated the EIRB update; the current approved parent-project statement was
 therefore retained. A missing final newline was also restored. No research data,
 analysis, or reported result changed.
+
+## Professor Follow-up: Domain Fit and Theory Foundation
+
+### Concern
+
+The manuscript needed to distinguish broad context from the three bounded
+domains, rename `F` as Domain Fit, sharpen the independently elicited OA
+criterion, add context-aware-computing foundations, and articulate an
+Episteme--Phronesis contribution. A further recommendation asked the paper to
+acknowledge limited HumT dispersion.
+
+### Implemented Changes
+
+- Renamed `F` to Domain Fit throughout current paper-facing documentation and
+  analysis labels.
+- Preserved the construct actually rated: content, action, tone, certainty, and
+  role boundaries matched to the primary situation within a domain.
+- Added provenance notes to every released rubric explaining that annotators saw
+  the label Contextual Fit and that the terminology update changed no anchor,
+  rating, or data value.
+- Defined context as the broader interactional environment and mental health,
+  education, and general health as bounded analytical domains.
+- Added Dey's operational account of context and Dourish's interactional account
+  as complementary foundations.
+- Defined OA as the final holistic judgment elicited independently by Group A,
+  while explicitly avoiding the false inference that procedural independence
+  proves theoretical or statistical independence from `F`.
+- Added Aristotle's distinction between *episteme* and *phronesis* as a
+  conceptual lens rather than a direct construct mapping.
+- Explicitly stated that HumT measures linguistic human-likeness, not factual or
+  scientific knowledge, and that PERSONA does not measure or confer practical
+  wisdom.
+- Added a discussion qualification that limited observed HumT dispersion may
+  constrain H-only prediction and that findings apply to the current
+  operationalization.
+- Kept the abstract below the venue's 150-word maximum.
+
+### Claim Boundaries Preserved
+
+- The paper does not claim that `H` operationalizes *episteme*.
+- The paper does not claim that `E`, `D`, and `F` operationalize or validate
+  *phronesis*.
+- Domain Fit and OA are operationally differentiated and independently elicited
+  but theoretically related.
+- No dataset, annotation, score, model, fold, confidence interval, table value,
+  or inferential result changed.
+
+### Status
+
+Implemented across the primary manuscript, theory foundation, claims audit,
+rubrics, analysis-facing language, repository summaries, and professor-facing
+materials on 2026-09-05.

@@ -224,7 +224,7 @@ def analyse_domain(label: str, frame: pd.DataFrame, extra_features: list[str]):
         "delta_ci_low": low, "delta_ci_high": high,
         "ci_excludes_zero": bool(low > 0 or high < 0),
     })
-    # and does anything beat contextual fit on its own?
+    # and does anything beat domain fit on its own?
     deltas = [r2(y[idx], oof_by_spec[FULL][idx]) - r2(y[idx], oof_by_spec["F_only"][idx])
               for idx in boot_indices]
     low, high = percentile_ci(deltas)

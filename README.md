@@ -17,11 +17,17 @@ P = (H, E, D, F)
 | `H` / HuMT | automated human-likeness |
 | `E` | empathic appropriateness |
 | `D` | anthropomorphic deception risk |
-| `F` | contextual fit |
+| `F` | domain fit: situation-sensitive content, action, tone, certainty, and role boundaries within a bounded domain |
 | `OA` | independent overall appropriateness target |
 
 `OA` is elicited as a holistic target judgment. It is not computed from `E`,
 `D`, or `F`.
+
+PERSONA uses the Aristotelian distinction between *episteme* (generalizable
+knowledge) and *phronesis* (practical judgment under particular circumstances)
+as a conceptual lens, not as a direct measurement claim. HumT-based `H`
+measures linguistic human-likeness, not factual knowledge; `E`, `D`, and `F`
+diagnose selected aspects of situation-sensitive response calibration.
 
 The optional secondary score is:
 
@@ -94,7 +100,7 @@ Generated reports:
 
 The strongest CHI framing is:
 
-> Human-likeness alone is insufficient for judging appropriateness. AI behavior in human-support settings should be evaluated as a contextual profile balancing empathy, deception risk, and fit.
+> Human-likeness alone is insufficient for judging appropriateness. AI behavior in human-support settings should be evaluated as a context-aware profile balancing empathy, deception risk, and domain fit.
 
 Mental health is the strongest empirical domain in the current archive. Education
 and health are domain-transfer evidence and should be interpreted with the

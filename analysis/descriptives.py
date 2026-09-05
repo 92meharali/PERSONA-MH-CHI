@@ -353,7 +353,7 @@ def main(n_boot: int = N_BOOT) -> None:
     figure_distributions(data)
     figure_correlation_matrix(data)
     figure_scatter(data, "H", "fig_h_vs_oa.png", "Human-likeness against independently rated appropriateness")
-    figure_scatter(data, "F", "fig_f_vs_oa.png", "Contextual fit against independently rated appropriateness")
+    figure_scatter(data, "F", "fig_f_vs_oa.png", "Domain fit against independently rated appropriateness")
 
     save_markdown(render(by_domain, by_model, ceiling, correlations, relationships,
                          disagreement, vif, condition), "descriptives")
@@ -442,7 +442,7 @@ def render(by_domain, by_model, ceiling, correlations, relationships, disagreeme
               "- `fig_distributions_by_domain.png` - consensus distributions for OA/E/D/F/H",
               "- `fig_correlation_matrix.png` - separability matrix per domain",
               "- `fig_h_vs_oa.png` - human-likeness against OA",
-              "- `fig_f_vs_oa.png` - contextual fit against OA", ""]
+              "- `fig_f_vs_oa.png` - domain fit against OA", ""]
     return "\n".join(lines)
 
 

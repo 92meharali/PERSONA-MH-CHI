@@ -112,12 +112,29 @@ fully satisfying Article 50, and then imply feeling, memory, and relationship
 throughout. The paper can position `D` as measuring what disclosure rules do not
 reach, provided it does not claim to be a compliance tool.
 
-## E. Contextual appropriateness
+## E. Context, domains, and situated appropriateness
 
-Appropriateness norms are context-relative. [Nissenbaum2004][NV] argues
-informational norms are specific to social contexts rather than universal — the
-closest available theoretical grounding for the claim that what is appropriate in
-education is not what is appropriate in crisis support.
+Context-aware computing offers complementary accounts. [Dey2001] provides an
+operational definition of context as information relevant to characterizing an
+entity's situation and introduces situation as a useful abstraction for
+context-aware applications. [Dourish2004] critiques treating context only as a
+stable representational container and emphasizes that it is produced through
+activity and interaction. PERSONA uses **context** for this broader environment
+and **domain** for the bounded analytical settings studied here.
+
+Appropriateness norms are context-relative. [Nissenbaum2004][NV] argues that
+informational norms are specific to social contexts rather than universal.
+PERSONA extends this situated logic to response behavior: a medical emergency
+and a tutoring exchange call for different actions, certainty, role boundaries,
+and interactional postures. `F` is therefore named **Domain Fit**, while its
+content remains faithful to the original situation-sensitive annotation rubric.
+
+The Aristotelian distinction between *episteme* and *phronesis* provides a
+second conceptual lens [Aristotle2009]. It distinguishes generalizable knowledge
+from practical judgment concerning variable particulars. PERSONA does not
+measure either virtue directly: HumT is not factual-knowledge assessment, and
+`E`, `D`, and `F` are diagnostics of selected response properties rather than a
+test of whether an AI possesses practical wisdom.
 
 High-stakes conversational systems bring domain-specific expectations.
 [CounselBench2025] evaluates LLM behaviour in single-turn mental health
